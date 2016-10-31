@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <title>车主商城</title>
+    <title>醉仙酒商城</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <?php include template('common_js_css'); ?>
