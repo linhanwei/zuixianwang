@@ -1,0 +1,6 @@
+﻿.git/
+nbproject/
+Uapp/Runtime/
+data/cache/
+data/session/
+.idea/

@@ -1,0 +1,249 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>0元购--商品详情</title>
+
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="stylesheet" href="../../../data/resource/amazeui/css/amazeui.min.css">
+    <link rel="stylesheet" href="../../../data/resource/amazeui/css/app.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../css/zero_detail.css">
+    
+    <!--[if lt IE 9]>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="../../../data/resource/amazeui/js/amazeui.ie8polyfill.min.js"></script>
+    <![endif]-->
+
+    <!--[if (gte IE 9)|!(IE)]>
+    <!-->
+    <script src="../../../data/resource/amazeui/js/jquery.min.js"></script>
+    <!--<![endif]-->
+    <script src="../../../data/resource/amazeui/js/amazeui.min.js"></script>
+<style>
+    .am-navbar-default .am-navbar-nav{background-color:#0da24f;}
+
+</style>
+  </head>
+  <body>
+        <div class="goods_detail">
+            
+        </div>
+        <!-- 底部导航 -->
+        <footer id="footer" style="display: none;">
+            <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+                 id="">
+                <ul class="am-navbar-nav am-cf am-avg-sm-4">
+                    <li >
+                        <a href="list.html" class="">
+                            <span class="am-icon-home"></span>
+                            <span class="am-navbar-label">首页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="order_list.html" class="">
+                            <span class="am-icon-list"></span>
+                            <span class="am-navbar-label">我的0元淘</span>
+                        </a>
+                    </li>
+                    <!-- <li data-am-navbar-qrcode>
+                        <a href="###" class="">
+                            <span class="am-icon-qrcode"></span>
+                            <span class="am-navbar-label">二维码</span>
+                        </a>
+                    </li>
+                    <li >
+                        <a href="https://github.com/allmobilize/amazeui" class="">
+                            <span class="am-icon-github"></span>
+                            <span class="am-navbar-label">GitHub</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </footer>
+        <!-- 地址弹窗开始 -->
+        <div class="am-popup"  id="my-address">
+            <input type="hidden" name="goods_id" id="goods_id">
+            <input type="hidden" name="payment_code" id="payment_code" value="predeposit" >
+            <div class="am-popup-inner">
+                <div class="am-popup-hd">
+                    <h5 class="am-popup-title">填写收货地址</h5>
+                    <span data-am-modal-close class="am-close">&times;</span>
+                </div>
+                <div class="am-popup-bd">
+                    <form class="am-form am-form-horizontal">
+                        <div class="am-form-group">
+                            <label for="prov_select" class="am-u-sm-3 am-form-label">省份：</label>
+                            <div class="am-u-sm-9">
+                                <select class="select-30" id="prov_select" name="prov">
+                                    <option value="">请选择...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="city_select" class="am-u-sm-3 am-form-label">城市：</label>
+                            <div class="am-u-sm-9">
+                                <select class="select-30" id="city_select" name="city">
+                                    <option value="">请选择...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="region_select" class="am-u-sm-3 am-form-label">区县：</label>
+                            <div class="am-u-sm-9">
+                                <select class="select-30" id="region_select" name="region">
+                                    <option value="">请选择...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="address" class="am-u-sm-3 am-form-label">详细地址：</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="input-30" id="address" name="address" placeholder="填写街道名称与门牌号">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="true_name" class="am-u-sm-3 am-form-label">收货人姓名：</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="input-30" id="true_name" name="true_name">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="mob_phone" class="am-u-sm-3 am-form-label">手机号码：</label>
+                            <div class="am-u-sm-9">
+                                <input type="number" class="input-30" id="mob_phone" name="mob_phone">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="goods_freight" class="am-u-sm-3 am-form-label">重量：</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="input-30" id="goods_weight" name="goods_weight" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="goods_freight" class="am-u-sm-3 am-form-label">运费：</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="input-30" id="goods_freight" name="goods_freight" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="goods_freight" class="am-u-sm-3 am-form-label">购买数量：</label>
+                            <div class="am-u-sm-9">
+                                <input type="number" min="1" max="100" class="input-10" id="goods_number" name="goods_number" value="1">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="error-tips"></div>
+                <div class="am-modal-footer">
+                    <button type="button" class="am-btn am-btn-primary am-radius add_address buy">确定购买</button>
+                </div>
+            </div>
+        </div>
+        <!-- 地址弹窗结束 -->
+  </body>
+  <script type="text/html" id="home_detail">
+    <% if(!error){%>
+      <!-- 图片轮播 -->      
+      <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}' >
+        <ul class="am-slides">
+          <%for(i=0;i<goods_detail.goods_image_list.length;i++){%>
+            <li>
+              <img src="<%=goods_detail.goods_image_list[i];%>">
+            </li>
+          <%}%> 
+        </ul>
+      </div>
+      <!-- 商品标题 -->      
+      <div class="am-container">
+        <div class="goods-title">
+          <%=goods_detail.goods_name;%>
+        </div>
+        <!-- 商品价格 -->      
+        <div class="goods_price clearfix">
+          <div class="price">
+            价格:￥ <del><%=goods_detail.goods_price;%></del>
+          </div>
+          
+        </div>
+        <!-- 进度条 -->      
+        <div class="process_detail">
+          <div class="process_tiao">
+            <div class="process_percent" style="width:<%=goods_detail.goods_progress;%>%;"></div>
+          </div>
+          <div class="process_num_detail">
+            <div class="process_num left">
+              <div class="num"><%=goods_detail.goods_join_num;%></div>
+              <div class="word">已参与</div>
+            </div>
+            <div class="process_num center">
+              <div class="num am-text-center"><%=goods_detail.goods_total_num;%></div>
+              <div class="word am-text-center">总需人次</div>
+            </div>
+            <div class="process_num right">
+              <div class="num am-text-right"><%=goods_detail.goods_surplus_num;%></div>
+              <div class="word am-text-right">剩余</div>
+            </div>
+          </div>
+        </div>
+		<!--提示-->
+		<div class="tips" style=" margin-top:20px">
+		   <p class="limit-price">初始邮费:<span class="font_color">￥<%=goods_detail.goods_freight;%></span><br />广东、广西、海南、贵州、安徽、湖北、江西、湖南、福建、四川、重庆、云南、山东、河南、江苏、陕西、上海、浙江、北京、天津、甘肃、西藏、宁夏、等地区超过<span class="font_color">500克</span>每<span class="font_color">500克</span>加收<span class="font_color">10元</span>运费<br />河北、山西、辽宁、吉林、青海、新疆、内蒙古、黑龙江等地区超过<span class="font_color">500克</span>每<span class="font_color">500克</span>加收<span class="font_color">17元</span>运费!</p>
+		</div>
+        <!-- 购买按钮 -->      
+        <div class="buy_button">
+          <button type="button" class="am-btn am-btn-warning am-radius" data-am-modal="{target: '#my-address'}" onclick="add_cart(<%=goods_detail.goods_id;%>,<%=goods_detail.goods_weight;%>,<%=goods_detail.goods_freight;%>)">立即购买</button>
+          <!-- <button type="button" class="am-btn am-btn-warning am-radius">加入购物车</button>
+        -->
+        </div>
+        <!-- 购买记录 -->      
+        <!-- <div class="bug_log">      
+        <button type="button" class="am-btn am-btn-default am-btn-block am-text-left">
+          <div class="button_content">所有购买记录</div> <i class="am-icon-angle-right am-icon-fw"></i>
+        </button>
+        </div>
+        -->
+        <div class="bug_log">
+          <section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }'>
+            <dl class="am-accordion-item am-active">
+              <dt class="am-accordion-title">图文详情</dt>
+              <dd class="am-accordion-bd am-collapse am-in">
+                <div class="am-accordion-content" id="detail_content">
+                  
+                </div>
+              </dd>
+            </dl>
+          </section>
+        </div>
+      </div>
+    <%
+       }else {
+    %>
+      <div class="no-record">
+          暂无记录
+      </div>
+    <%
+       }
+    %>
+  </script>
+    <!-- <script type="text/javascript" src="../../js/zepto.min.js"></script> -->
+    <script type="text/javascript" src="../../js/config.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="../../js/template.js"></script>
+    <!-- <script type="text/javascript" src="../../js/simple-plugin.js"></script> -->
+    <script type="text/javascript" src="../../js/tmpl/zero_detail.js"></script>
+  <script type="text/javascript" src="../../js/tmpl/zero_order.js"></script>
+   
+</html>

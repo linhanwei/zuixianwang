@@ -1,0 +1,181 @@
+/**
+ * function: 弹出框;
+ * author: ozil;
+ * date: 2015-01-06;
+ */
+
+/***********************************蒙层 start ***********************************/
+.u-h-shadow{
+    width:100%; pointer-events:auto;height:100%;position:fixed;z-index:999;
+    left:0px; top:0px; background: rgba(0, 0, 0, 0.4);
+}
+/***********************************蒙层 end ***********************************/
+
+/***********************************吐司 end ***********************************/
+/*主体*/
+.u-h-toast{
+  width:80%; pointer-events:auto;position:fixed;z-index:999;background: rgba(0, 0, 0, 0.7);
+  -webkit-border-radius: 6px; border-radius:6px;
+  -webkit-box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6); box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6)  
+}
+
+.u-h-toast.u_toast_show{
+  display: block;
+}
+
+.u-h-toast.u_toast_none {
+  display: none;
+  /*opacity: .0;*/
+}
+
+/*吐司内容*/
+.u-h-toast .u_toast_val{color: #fff; text-align: center;line-height: 3;}
+
+
+/***********************************吐司 end ***********************************/
+
+/***********************************对话框 start ***********************************/
+/*主体*/
+.u-h-alert{
+    position:fixed;pointer-events:auto;top:34%;width:640px;max-width: 80%;z-index:1000;
+    background: rgba(252, 249, 249, 0.9);-webkit-border-radius: 11px; border-radius:11px;
+    -webkit-box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6); box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/*顶部*/
+.h_alert_top {
+  font: 400 16px Helvetica, Arial, sans-serif;
+  color: #000;
+  text-align: center;
+  padding: 10px;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*内容层*/
+.h_alert_body {
+  position: relative;
+  display: table;
+  width: 100%;
+  text-align: center;
+}
+
+/*内容层-内容*/
+.h_alert_body_content {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 7px 20px 22px 20px;
+  font: 300 16px Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+/*底部*/
+.h_alert_bottom{
+  display: table;  
+  width: 100%;
+  text-align: center;
+  border-width: 1px 0 0 0;
+  border-top: 1px solid rgba(203, 187, 187, 0.8);
+  z-index: 9999;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+/***********************************对话框 end ***********************************/
+
+/***********************************动画效果 end ***********************************/
+
+/* Animation 弹框显示 */
+.u-h-shadow, .u-h-alert {
+  animation: fade .5s;
+  -webkit-animation: fade .5s;
+}
+@keyframes fade {
+  from { opacity:.5; }
+  to   { opacity: .99; }
+}
+@-webkit-keyframes fade {
+  from { opacity:.5; }
+  to   { opacity: .99; }
+}
+
+/* Animation 吐司渐变消失 */
+.u-h-toast.u_toast_hide {
+  animation: hide .7s;
+  -webkit-animation: hide .7s;
+}
+
+@keyframes hide {
+  from { opacity:.99; }
+  to   { opacity: .0; }
+}
+@-webkit-keyframes hide {
+  from { opacity:.99; }
+  to   { opacity: .0; }
+}
+
+/***********************************动画效果 end ***********************************/
+
+
+
+/*********************************** 特殊样式处理 ***********************************/
+
+/***********************************提示对话框 start ***********************************/
+/*按钮*/
+.h_alert_tips .h_alert_btn {
+  margin: 0 auto;
+  text-align: center;
+  padding: 13px 0;
+  font: 500 16px Helvetica, Arial, sans-serif;
+  width: 100%;
+  color: #007aff;
+  -webkit-border-radius: 0 0 11px 11px;
+  border-radius: 0 0 11px 11px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.h_alert_tips .h_alert_btn:hover,
+.h_alert_tips .h_alert_btn:active {
+  background: #d9d9d9;
+}
+/***********************************提示对话框 end ***********************************/
+
+
+/***********************************confirm对话框 end ***********************************/
+/*左边按钮*/
+.h_alert_confirm .h_alert_btn_l {
+  float: left;
+  text-align: center;
+  font: 500 16px Helvetica, Arial, sans-serif;
+  padding: 15px 0;
+  width: 50%;
+  background: -webkit-linear-gradient(top, #fff, #b9b9b9);
+  border-right: 1px solid #A2A2A2;
+  color: #007aff;
+  -webkit-border-radius: 0 0 0 11px;
+  border-radius: 0 0 0 11px;
+  -webkit-font-smoothing: antialiased;
+}
+/*右边按钮*/
+.h_alert_confirm .h_alert_btn_r {
+  float: right;
+  text-align: center;
+  font: 500 16px Helvetica, Arial, sans-serif;
+  padding: 15px 0;
+  width: 50%;
+  background: -webkit-linear-gradient(top, #fff, #b9b9b9);
+  color: #007aff;
+  -webkit-border-radius: 0 0 11px 0;
+  border-radius: 0 0 11px 0;
+}
+
+.h_alert_confirm .h_alert_btn_l:hover, .h_alert_confirm .h_alert_btn_r:hover,
+.h_alert_confirm .h_alert_btn_l:active, .h_alert_confirm .h_alert_btn_r:active {
+  background: #d9d9d9;
+}
+/***********************************confirm对话框 end ***********************************/

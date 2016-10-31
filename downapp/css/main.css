@@ -1,0 +1,47 @@
+html, body{
+	font: normal 95% "å¾®è½¯é›…é»‘", Arial, sans-serif;
+	color:#dbdbdb;
+	padding: 0;
+	margin: 0;
+	width:100%;
+	height: 100%;
+	background-color: #04626A;
+}
+
+#page {
+	margin: 0 auto;
+	width:100%;
+	height: 100%;
+	max-width: 500px;
+	max-height: 750px;
+	min-width: 265px;
+	min-height: 398px;
+	background-image: url('../images/bg.jpg?ver=111');
+	background-size:100% 100%
+;
+	position: relative;
+}
+
+#page img{
+	width:100%;
+	max-width: 165px;
+}
+
+#page .button{
+	position: absolute;
+	top: 50%;
+	width:45%;
+	text-align: center;
+}
+
+#page .L{
+	left: 4%;
+}
+
+#page .R{
+	left: 52%;
+}
+
+#page .button p{
+	margin: 0 0 2px 0;
+}

@@ -1,0 +1,572 @@
+﻿<!DOCTYPE HTML>
+<head>
+    <meta charset="utf-8" />
+    <title>车族宝</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no">
+    <link href="img/hcz.ico" rel="Shortcut Icon" type="image/x-icon" />
+    <link href="img/hcz.ico" rel="icon" type="image/x-icon" />
+    <script type="text/javascript">
+    var docEle = document.documentElement;
+    docEle.style.fontSize = parseInt(docEle.getBoundingClientRect().width) / 16 + 'px'; //设置HTML rem的父基点
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/slot_basic.css">
+    <link rel="stylesheet" type="text/css" href="css/hcz_alert.css">
+	<link href="css/download.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/download.js"></script>
+    <style type="text/css">
+    html,
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+    }
+    
+    .skip-top {
+        width: 100%;
+        height: 7.5rem;
+        background: url('img/skip_top.jpg') no-repeat center;
+        -webkit-background-size: 100% 100%;
+        background-size: 100% 100%;
+        margin-top:5px;
+    }
+    
+    .skip-bottom {
+        width: 100%;
+        height: 6rem;
+        background: url('img/skip_bottom.jpg') no-repeat center;
+        -webkit-background-size: 100% 100%;
+        background-size: 100% 100%;
+    }
+    
+    .skip-form {
+        margin-top: 0rem;
+    }
+    
+    .skip-form .u-control-label {
+        font-weight: normal;
+        font-size: 0.6rem;
+    }
+    
+    .skip-btn {
+        width: 100%;
+        color: #fff;
+        background-color: rgb(254, 155, 38);
+        border-color: rgb(254, 155, 38);
+        background-image: -webkit-linear-gradient(top, rgb(254, 155, 38) 0%, rgb(254, 155, 38) 100%);
+        background-image: linear-gradient(to bottom, rgb(254, 155, 38) 0%, rgb(254, 155, 38) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    .skip-btn.unUsed {
+        width: 100%;
+        color: #fff;
+        background-color: rgb(139, 139, 139);
+        border-color: rgb(139, 139, 139);
+        background-image: -webkit-linear-gradient(top, rgb(139, 139, 139) 0%, rgb(139, 139, 139) 100%);
+        background-image: linear-gradient(to bottom, rgb(139, 139, 139) 0%, rgb(139, 139, 139) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    .skip-section {
+        width: 96%;
+        margin: 20px auto;
+        text-align: center;
+        margin-bottom: 8rem;
+    }
+    
+    .col-mb-offset-half {
+        margin-left: 4.16666666665%;
+        margin-top: 10px;
+    }
+    
+    .u-btn.skip-ref-btn {
+        font-size: 0.5rem;
+        color: #fff;
+        background-color: rgb(245, 192, 80);
+        border-color: rgb(245, 192, 80);
+        background-image: -webkit-linear-gradient(top, rgb(245, 192, 80) 0%, rgb(245, 192, 80) 100%);
+        background-image: linear-gradient(to bottom, rgb(245, 192, 80) 0%, rgb(245, 192, 80) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    .skip-ref-btn.verWaitCls {
+        color: #fbfbfb;
+        background-color: rgb(148, 148, 148);
+        border-color: rgb(148, 148, 148);
+        background-image: -webkit-linear-gradient(top, rgb(148, 148, 148) 0%, rgb(148, 148, 148) 100%);
+        background-image: linear-gradient(to bottom, rgb(148, 148, 148) 0%, rgb(148, 148, 148) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    .skip-section .u-form-control {
+        font-size: 0.6rem;
+        line-height: 1.2;
+    }
+    
+    .waitLoading {
+        width: 32px;
+        height: 32px;
+        background: url(img/loadingmovie.gif) no-repeat;
+        position: fixed;
+        top: 470px;
+        left: 48%;
+        z-index: 9999;
+        background-size: contain;
+        display: none;
+    }
+    
+    .u-btn {
+        font-size: 0.7rem;
+    }
+    
+    .col-mb-offset-half .u-btn {
+        font-weight: bold;
+    }
+    
+    ::-webkit-input-placeholder {
+        /* WebKit browsers */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    :-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    .disnone {
+        display: none
+    }
+    </style>
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
+</head>
+
+<body>
+<div class="" id="show" onclick="hideTip();"></div>
+	<div class="pop_box clearfix" id="clear" style="display:none">
+			<div class="pop_cont clearfix" style="display:none" id="show1">
+			<h1>温馨提示</h1>
+					<ul class="tip_list">
+							<li class="list_one">
+									<em class="one"></em>
+									<span>点击右上角</span>
+							</li>
+							<li  class="list_two">
+									<em class="" id="a"></em>
+									<span>在浏览器中打开</span>
+							</li>
+							<li class="list_three">
+									<em class="four"></em>
+									<span>即可下载</span>
+							</li>
+
+					</ul>
+			</div>
+	</div>
+    <div class="waitLoading" id="loadingId"></div>
+    <div class="skip-top"></div>
+    <section class="skip-section">
+        <form class="u-form-horizontal skip-form">
+            <div id="formId">
+                <div class="u-form-group f-clearfix">
+                    <label for="phoneNumId" class="col-mb-3 u-control-label">手机号:</label>
+                    <div class="col-mb-8">
+                        <input type="number" class="u-form-control" id="phoneNumId" placeholder="请输入您的手机号">
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <label for="verifNumId" class="col-mb-3 u-control-label">验证码:</label>
+                    <div class="col-mb-5">
+                        <input type="number" class="u-form-control" id="verifNumId" placeholder="请输入手机号验证码">
+                    </div>
+                    <div class="col-mb-3">
+                        <a href="javascript:void(0);" class="u-btn skip-btn skip-ref-btn" id="getVerNumId">获取验证码</a>
+                    </div>
+                </div>
+				 <div class="u-form-group f-clearfix">
+                    <label for="verifNumId" class="col-mb-3 u-control-label">密码:</label>
+                    <div class="col-mb-5">
+                        <input type="text" class="u-form-control" id="passwordId" placeholder="请输入密码" value="">
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <label  class="col-mb-3 u-control-label">所在省：</label>
+                    <div  class="col-mb-8">
+                            <select class="u-form-control" id="prov_select" name="prov">
+
+                                <option value="">请选择...</option>
+
+                            </select>
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <label  class="col-mb-3 u-control-label">所在市：</label>
+                    <div class="col-mb-8">
+                        <select class="u-form-control" id="city_select" name="city">
+                            <option value="">请选择...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <label  class="col-mb-3 u-control-label">所在县/区：</label>
+                    <div class="col-mb-8">
+                        <select class="u-form-control" id="region_select" name="region">
+                            <option value="">请选择...</option>
+                        </select>
+                    </div>
+                </div>
+
+				<div class="u-form-group f-clearfix" id="inviter" style="display:none;">
+                    <label class="col-mb-3 u-control-label">推荐人:</label>
+                    <div class="col-mb-5">
+                        <input type="text" class="u-form-control" id="inviter_name" name="zmr" placeholder="" value="" readonly>
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <div class="col-mb-11 col-mb-offset-half">
+                        <a href="javascript:void(0);" id="goBtnId" class="u-btn skip-btn unUsed">点击注册</a>
+                    </div>
+					<div class="col-mb-11 col-mb-offset-half" style="display: none;">
+						 <a href="http://120.76.118.10/downapp/" class="u-btn skip-btn">下载APP</a>
+					</div>
+                </div>
+            </div>
+            <div id="form2Id" class="disnone">
+                <div class="u-form-group f-clearfix">
+                    <label for="phoneNumId" class="col-mb-3 u-control-label">用户名:</label>
+                    <div class="col-mb-8">
+                        <input type="text" class="u-form-control" id="usernameId" placeholder="请输入用户名" readonly>
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <label for="phoneNumId" class="col-mb-3 u-control-label">密码:</label>
+                    <div class="col-mb-8">
+                        <input type="text" class="u-form-control" id="passwordIdShow" placeholder="请输入密码" value="" readonly>
+                    </div>
+                </div>
+
+
+                <div class="u-form-group f-clearfix" style="display:none;">
+                    <div class="col-mb-11 col-mb-offset-half">
+                        <a href="javascript:void(0);" id="goBtn2Id" class="u-btn skip-btn">提交</a>
+                    </div>
+                </div>
+            </div>
+            <div id="form3Id" class="disnone">
+                <div class="u-form-group f-clearfix">
+                    <div class="col-mb-11 col-mb-offset-half">
+                        <a href="http://120.76.118.10/downapp/" class="u-btn skip-btn">注册成功, 下载APP</a>
+                    </div>
+					
+                </div>
+            </div>
+        </form>
+    </section>
+    <script type="text/javascript" src="js/slot_zepto.min.js"></script>
+    <script type="text/javascript" src="js/slot_haojs.js?ver=20150730"></script>
+    <script type="text/javascript" src="js/hcz_alert.js"></script>
+    <script type="text/javascript" src="js/insurevalidate.js"></script>
+<script type="text/javascript" src="js/address.js"></script>
+    <script type="text/javascript">
+    var pubEndflag = false; //倒计时结束
+    var countTokenNum = 0; //记录验证码错误次数
+    var bindFlag = true; //记录绑定
+    var timeoutFlag; //定时器标志
+
+    $(function() {
+
+        var rootPath = "../m/";
+
+        //  验证码路径
+        var getVerNumUrl = rootPath + 'index.php?act=login';
+
+        // 注册路径
+        var registerUrl = rootPath + 'index.php?act=login';
+            //var registerUrl = '/register'
+            //var registerUrl = 'http://192.168.1.88:9999/icore_aops_event/do/event/controller/callPortalInterface?iname=/points/autoRegisterAndRecommendConfirm.json';            
+		var inviterUrl  = rootPath + 'index.php?act=login';
+        //  灰度发布
+        var headers = {
+            requestSource: 'outsideHtml'
+        }; //请求来源
+
+        //  一些公共变量
+        var $goBtn = $('#goBtnId');
+        var $getVerNum = $('#getVerNumId');
+        var $phoneNum = $('#phoneNumId');
+        var $verifNum = $('#verifNumId');
+        var $loading = $('#loadingId');
+        var cache_key = '';
+
+        // 恢复验证码按钮初始状态
+        function btnResetclsAndAct() {
+            $getVerNum[0].innerHTML = '获取验证码';
+            $getVerNum.removeClass('verWaitCls'); //    删除点击后的cls
+            bindVerAction(); // 再次监听               
+        }
+
+        //  ***********请求验证码**************
+        function getVerAction(getVerNumFun) {
+            var tempCheckFlag = false;
+            var phoneStatus = InsureValidate.validateMobile($phoneNum.val());
+            haoJs.ajax({
+                type: 'post',
+                url: getVerNumUrl,
+                headers: headers,
+                beforeSend: function() {
+                    if (phoneStatus !== true) { //判断手机号格式
+                        haoJs.Toast.show(phoneStatus);
+                        return false;
+                    } else {
+                        $getVerNum.unbind('click', getVerNumFun); //    解除绑定
+                        $getVerNum.addClass('verWaitCls'); //   增加点击后的cls
+                        haoJs.countDownSixty($getVerNum[0], 60, function() {
+                            btnResetclsAndAct();
+                        });
+                        tempCheckFlag = true;
+                        return true;
+                    }
+                },
+                data: {
+                    mobile_phone: $phoneNum.val(),
+                    client_type: 'wap',
+                    op: 'check_phone'
+                },
+                success: function(result) {
+                    var tResult = result.datas;
+                    if (tResult.code == 'success' && tResult.msg) {
+                        cache_key = tResult.msg;
+                        bindAddCarBtn(); //开始绑定下载按钮
+                        countDown(); //开始倒计时 验证码两分钟有效
+                        countTokenNum = 0;
+                    } else if (tResult.code == 'exist') {
+                        haoJs.Toast.show('该手机号已经被注册！', function() {
+                            pubEndflag = true;
+                            btnResetclsAndAct();
+                        });
+                    } else {
+                        haoJs.Toast.show('验证码获取失败！', function() {
+                            pubEndflag = true;
+                            btnResetclsAndAct();
+                        });
+                    }
+                },
+                error: function() {
+                    if (tempCheckFlag) {
+                        haoJs.Toast.show('验证码获取失败！', function() {
+                            pubEndflag = true;
+                            btnResetclsAndAct();
+                        });
+                    }
+                }
+            })
+        }
+
+        //  绑定获得验证码按钮
+        function bindVerAction() {
+            $getVerNum.bind('click', function getVerNumFun() {
+                getVerAction(getVerNumFun);
+            });
+        }
+        bindVerAction();
+
+        function bindRegAction() {
+            //$('#form2Id').removeClass('disnone');
+
+            
+
+            $('#usernameId').val($phoneNum.val());
+            doRegAction(function() {
+                $loading.css('display', 'block')
+                haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度
+            }, function() {
+                $loading.css('display', 'none');
+            });
+            /*$('#goBtn2Id').bind('click', function getVerNumFun() {
+                $('#goBtn2Id').unbind('click', addClickFun);
+                doRegAction(function() {
+                    $loading.css('display', 'block')
+                    haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度  
+                }, function() {
+                    $loading.css('display', 'none');
+                });
+            });
+            */
+        }
+		/*
+		else if ($('#passwordId').val() != $('#repasswordId').val()) {
+                        haoJs.Toast.show('两次密码不一致');
+                        return false;
+                    } */
+        function doRegAction(ajaxBefore, ajaxAfter) {
+            var flagVal = false;
+            haoJs.ajax({
+                type: 'post',
+                url: registerUrl,
+                headers: headers,
+                beforeSend: function() {
+                    if ($('#usernameId').val() == '') {
+                        haoJs.Toast.show('请输入用户名');
+                        return false;
+                    } else if ($('#passwordId').val() == '') {
+                        haoJs.Toast.show('请输入密码');
+                        return false;
+                    } else if($('#region_select').val() == ''){
+                        haoJs.Toast.show('请选择所在地');
+                        return false;
+                    } else {
+						$('#formId').addClass('disnone');
+                        ajaxBefore();
+                        flagVal = true;
+						$('#passwordIdShow').val($('#passwordId').val());
+                        return true;
+                    }
+                },
+                data: {
+                    mobile_phone: $phoneNum.val(),
+                    username: $phoneNum.val(),
+                    password: $('#passwordId').val(),
+					password_confirm: $('#passwordId').val(),
+                    member_province:$('#prov_select').val(),
+                    member_city:$('#city_select').val(),
+                    member_region:$('#region_select').val(),
+					for_platform : 'inviter',
+                    invite_code: $('#inviter_name').val(),
+                    identifying_code:$('#verifNumId').val(),
+                    cache_key:cache_key,
+					client:'wap',
+					email:'',
+                    op: 'register'
+                },
+                success: function(dResult) {
+					var tResult = dResult;
+                    if (tResult.datas.error) {
+						haoJs.Toast.show(tResult.datas.error);
+						$('#formId').removeClass('disnone');
+                      }else{
+					    if(typeof(tResult.datas.username) != 'undefine'){
+							haoJs.Toast.show('注册成功');
+
+							$('#form3Id').removeClass('disnone');
+							$('#form2Id').removeClass('disnone');
+						}else{
+							haoJs.Toast.show('注册失败');
+							$('#formId').removeClass('disnone');
+						}
+                       
+                    }
+                },
+                complete: function() {
+                    ajaxAfter(); //loading去除
+                },
+                error: function() {
+                    if (flagVal) {
+                        haoJs.Toast.show('网络异常！');
+                    }
+                }
+            });
+        }
+
+        //  **********点击下载************
+        function downloadAction(ajaxBefore, ajaxAfter) {
+            var phoneStatus = InsureValidate.validateMobile($phoneNum.val());
+            if (phoneStatus !== true) {
+                haoJs.Toast.show(phoneStatus);
+                return false;
+            } else if (!haoJs.regverifNumber(haoJs.trim($verifNum.val()))) {
+                haoJs.Toast.show('请输入正确的验证码');
+                return false;
+            } else {
+                bindRegAction();
+                return true;
+			}
+        }
+
+        //  点击下载按钮
+        var carBtnFlag;
+
+        function bindAddCarBtn() {
+
+            $goBtn.removeClass('unUsed');
+            $goBtn.bind('click', addClickFun = function() {
+                //$goBtn.unbind('click', addClickFun);
+                downloadAction(function() {
+                    $loading.css('display', 'block')
+                    haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度  
+                }, function() {
+                    $loading.css('display', 'none')
+                    if (bindFlag) {
+                        if (carBtnFlag) {
+                            clearTimeout(carBtnFlag);
+                        }
+                        carBtnFlag = setTimeout(bindAddCarBtn, 1500);
+                    } else {
+                        $verifNum.val('');
+                        $goBtn.addClass('unUsed');
+                        bindFlag = true
+                        clearTimeout(timeoutFlag); //解除验证码定时器绑定
+                        countTokenNum = 0;
+                    }
+
+                });
+            });
+
+        }
+
+        //倒计时120秒
+        function countDown() {
+            if (timeoutFlag) {
+                clearTimeout(timeoutFlag);
+            }
+            timeoutFlag = setTimeout(function() {
+                countTokenNum = 4;
+            }, 120000);
+        }
+
+		haoJs.ajax({
+                type: 'post',
+                url: inviterUrl,
+                headers: headers,
+                beforeSend: function() {
+                    
+                },
+                data: {
+                    member_id: haoJs.getParams("i"),
+					client:'wap_inviter',
+					email:'',
+                    op: 'get_inviter'
+                },
+                success: function(dResult) {
+                   // console.log(dResult);
+					if(dResult.datas.inviter_name){
+					$('#inviter_name').val(dResult.datas.inviter_name);
+					 $('#inviter').show();
+					}
+				  
+                }
+            });
+    })
+    </script>
+</body>
+
+</html>

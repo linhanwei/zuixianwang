@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+.category-list-box{ background:#FFF}
+.item-one{ width:100%; margin-bottom:1rem}
+.item-one h1{ height:2.5rem; line-height:2.5rem; text-indent:1rem}
+.item-two{ width:100%; overflow:hidden} 
+.item-two .item{ display:block; width:calc(49% - 2px); border:1px solid #F5F5F5; float:left; margin-right:2%; margin-bottom:2%}
+.item-two .item:nth-child(2n){ margin-right:0}
+.item-two .item p{ height:1.5rem; line-height:1.5rem; text-align:center}

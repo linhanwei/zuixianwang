@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+.activity-header{ height:50px; line-height:50px; background:#000; position:relative; text-align:center; z-index:9997}
+.activity-header .go-history,.activity-header .cate-btn{ width:40px; height:40px; position:absolute; z-index:9998}
+.activity-header .go-history img,.activity-header .cate-btn img{ width:40px; height:40px; vertical-align:top}
+.activity-header .go-history{left:10px; top:5px;}
+.activity-header .cate-btn{right:10px; top:5px;}
+.activity-header .title{ height:50px; vertical-align:top}
+
+.activity-tips{ height:2rem; line-height:2rem; text-align:center; background:#FAFAFA; text-align:center}
+.activity-content-box{ width:100%; overflow:hidden}
+.activity-item-box{ width:calc(49% - 2px); border:1px solid #F5F5F5; margin-right:2%; margin-bottom:2%; float:left; overflow:hidden}
+.activity-item-box:nth-child(2n){ margin-right:0}
+.activity-item-box p{ background:#FFF; height:2rem; line-height:2rem; text-align:center;  overflow:hidden}

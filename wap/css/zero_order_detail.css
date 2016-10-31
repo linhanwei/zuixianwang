@@ -1,0 +1,110 @@
+.clearfix:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+img{
+    display: block;
+    width: 100%;
+}
+.am-modal.am-modal-active{
+    overflow: visible;
+}
+.am-modal-dialog{
+    width: 96%;
+}
+.am-form select{
+    font-size: 1.2rem;
+}
+.goods-title{
+    font-size: 1.6rem;
+    margin-top: 1rem;
+    line-height: 2.2rem;
+}
+[class*=am-u-] {
+    padding: 0;
+}
+.am-modal-footer .am-radius{
+    width: 33%;
+    display: block;
+    margin: 0 auto;
+}
+#my-address #goods_number{
+    width: 75px;
+    display: inline-block;
+}
+.goods-title span{
+    color: #E80000;
+}
+.goods_price{
+    margin-top: 1rem;
+}
+.goods_price .price{
+    float: left;
+    font-size: 1.2rem;
+    color: #a1a1a1;
+}
+.goods_price .limit_num{
+    color: #f60;
+    float: right;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+.process_detail{
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.process_detail .process_tiao{
+    height: 0.8rem;
+    width: 100%;
+    border-radius: 0.8rem;
+    background: #e7e7e7;
+}
+.process_tiao .process_percent{
+    background: #f60;
+    height: 0.8rem;
+    border-radius: 0.8rem;
+}
+.process_num_detail{
+    width: 100%;
+}
+.process_num_detail .process_num{
+    display: inline-block;
+    font-size: 1rem;
+    width:32%;
+    color: #AEADAD;
+}
+.left .num{
+    color: #F60;
+}
+.center .num{
+    color: #777;
+}
+.right .num{
+    color: #2AF;
+}
+.buy_button,.bug_log{
+    margin-top: 1rem;
+}
+.buy_button .am-btn{
+    width: 100%;
+}
+.am-btn-block{
+    padding-left: 1rem;
+    font-size: 1.4rem;
+}
+.am-icon-fw{
+    float: right;
+    font-size: 2rem;
+}
+.button_content{
+    float: left;
+    margin-top: 0.4rem;
+}
+.am-accordion-gapped{
+    margin: 0;
+}

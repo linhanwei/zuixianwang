@@ -1,0 +1,48 @@
+request body = <TemplateSMS>
+                    <to>13826472682</to> 
+                    <appId>8a216da855d8c5050155d9686608016a</appId>
+                    <templateId>100151</templateId>
+                    <datas><data>2016-07-13 09:51:57</data><data>充值，充值单号: 920521718669866265</data><data>1,000.00</data><data>0.00</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a48b5515350d1e2015378ae037940a2/SMS/TemplateSMS?sig=08FD395935F69405225CCBA88162B58F
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Response><statusCode>000000</statusCode><TemplateSMS><dateCreated>20160713095157</dateCreated><smsMessageSid>cf0a25800d054c3f8bd27fa4b46c58b6</smsMessageSid></TemplateSMS></Response>
+request body = <TemplateSMS>
+                    <to>18361311115</to> 
+                    <appId>8a216da855d8c5050155d9686608016a</appId>
+                    <templateId>100151</templateId>
+                    <datas><data>2016-07-13 10:28:36</data><data>充值，充值单号: 810521720898352000</data><data>1,000.00</data><data>0.00</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a48b5515350d1e2015378ae037940a2/SMS/TemplateSMS?sig=272E8DE6EDF7A3FB6BCDE15034DA2F51
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Response><statusCode>000000</statusCode><TemplateSMS><dateCreated>20160713102837</dateCreated><smsMessageSid>13feda2180df4063a092c0cd1952611a</smsMessageSid></TemplateSMS></Response>
+request body = <TemplateSMS>
+                    <to>13905278501</to> 
+                    <appId>8a216da855d8c5050155d9686608016a</appId>
+                    <templateId>100151</templateId>
+                    <datas><data>2016-07-13 12:36:33</data><data>充值，充值单号: 350521728578976000</data><data>1,000.00</data><data>0.00</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a48b5515350d1e2015378ae037940a2/SMS/TemplateSMS?sig=A11AA439613E92B8A971334F8BAC16CC
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Response><statusCode>000000</statusCode><TemplateSMS><dateCreated>20160713123633</dateCreated><smsMessageSid>39315dd85a6745ba8c97f88c02c12856</smsMessageSid></TemplateSMS></Response>
+request body = <TemplateSMS>
+                    <to>13418480082</to> 
+                    <appId>8a216da855d8c5050155d9686608016a</appId>
+                    <templateId>100151</templateId>
+                    <datas><data>2016-07-13 18:39:33</data><data>充值，充值单号: 790521750348058000</data><data>1,000.00</data><data>0.00</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a48b5515350d1e2015378ae037940a2/SMS/TemplateSMS?sig=9EBC7BD88CE27A49505CDEA5FEFC4B1C
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Response><statusCode>000000</statusCode><TemplateSMS><dateCreated>20160713183933</dateCreated><smsMessageSid>a12fe47c2de445a0ab298e8161bb8630</smsMessageSid></TemplateSMS></Response>
+request body = <TemplateSMS>
+                    <to>13510485930</to> 
+                    <appId>8a216da855d8c5050155d9686608016a</appId>
+                    <templateId>100151</templateId>
+                    <datas><data>2016-07-14 00:13:03</data><data>充值，充值单号: 730521770355762000</data><data>1,000.00</data><data>0.00</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a48b5515350d1e2015378ae037940a2/SMS/TemplateSMS?sig=2F6D130D6D497290643F6BE0E91D12A3
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Response><statusCode>000000</statusCode><TemplateSMS><dateCreated>20160714001304</dateCreated><smsMessageSid>d420460f392b4d14af495fb61a3e8b40</smsMessageSid></TemplateSMS></Response>
+request body = <TemplateSMS>
+                    <to>13826472682</to> 
+                    <appId>8a216da855d8c5050155d9686608016a</appId>
+                    <templateId>100151</templateId>
+                    <datas><data>2016-07-15 00:29:45</data><data>充值，充值单号: 390521857751362000</data><data>1.00</data><data>0.00</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a48b5515350d1e2015378ae037940a2/SMS/TemplateSMS?sig=D154C23C87CC03A2C424D071BA42826E
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Response><statusCode>000000</statusCode><TemplateSMS><dateCreated>20160715002945</dateCreated><smsMessageSid>18534353f12f439db544bda1b8f47658</smsMessageSid></TemplateSMS></Response>

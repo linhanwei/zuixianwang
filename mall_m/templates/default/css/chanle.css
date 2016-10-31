@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.car-brand-box{ width:100%; overflow:hidden; margin-top:1rem}
+.car-brand-box .title{ width:100%; text-indent:1rem; height:2rem; line-height:2rem;font-size:1.25rem; color:#000}
+.car-brand-box ul{ width:100%; overflow:hidden}
+.car-brand-box ul li{ width:calc(23.5% - 2px); border:1px solid #E9E9E9; float:left; margin-right:2%; margin-bottom:2%; overflow:hidden}
+.car-brand-box ul li:nth-child(4n){ margin-right:0}
+.car-brand-box ul li a{ display:block}
+.car-brand-box ul li img{ width:100%; height:100%}
+
+.car-hots-box{width:100%; overflow:hidden; margin-top:1rem}
+.car-hots-box .title{ height:2rem; line-height:2rem; font-size:1.25rem; width:100%; text-indent:1rem; color:#000}
+.car-hots-box ul{ width:100%; overflow:hidden}
+.car-hots-box ul li{ width:calc(49% - 2px); float:left; margin-right:2%; margin-bottom:2%; border:1px solid #E9E9E9; background:#FFF}
+.car-hots-box ul li:nth-child(2n){ margin-right:0}
+.car-hots-box ul li a{ display:block; padding:0.5rem}
+.car-hots-box ul li .title{ text-indent:0; height:1.5rem; line-height:1.5rem; overflow:hidden}
+.car-hots-box ul li .price num{ color:#000; font-size:1rem}
+
+.car-chanle-head{ height:40px; line-height:40px; background:url(../images/car-chanle/head-bg.jpg) repeat-x; border-bottom:1px solid #FFF; position:relative; margin-bottom:10px}
+.car-chanle-head .logo{ width:40px; height:40px; position:absolute; left:10px; top:5px}
+
+.car-list-box{ width:100%; overflow:hidden}
+.car-list-box ul{ width:100%; overflow:hidden}
+.car-list-box ul li{ width:calc(49% - 2px); float:left; margin-right:2%; margin-bottom:2%; border:1px solid #E9E9E9; background:#FFF}
+.car-list-box ul li:nth-child(2n){ margin-right:0}
+.car-list-box ul li a{ display:block; padding:0.5rem}
+.car-list-box ul li .title{ text-indent:0; height:1.5rem; line-height:1.5rem; overflow:hidden}
+.car-list-box ul li .price num{ color:#000; font-size:1rem}
+
+.nei-tuijian{ width:100%; background:none; overflow:hidden}
+.nei-tuijian .title{ width:100%}
+.nei-tuijian .title img{ width:100%}
+.nei-tuijian-list{ width:99%; margin:auto; overflow:hidden; clear:both}
+.nei-tuijian-list .nei-tuijian-item{ display:block; background:#FFF; width:calc(49% - 2px); border:1px solid #C4C4C4; float:left; margin:0.5%; }
+.nei-tuijian-list .nei-tuijian-item .img{height:0;padding-top:100%; overflow:hidden}
+.nei-tuijian-list .nei-tuijian-item img{ width:100%; margin-top:-100%; vertical-align:top} 
+.nei-tuijian-list .nei-tuijian-item p{width:90%;line-height:1.5rem; text-align:left;  margin:auto;}
+.nei-tuijian-list .nei-tuijian-item p.title{ height:3rem; overflow:hidden;color:#A5A5A5}
+.nei-tuijian-list .nei-tuijian-item p.price{ color:#3B3939}

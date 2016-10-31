@@ -1,0 +1,1 @@
+<?phpdefined('InSystem') or exit('Access Invalid!');$client_domain = 'http://www.chezubao.me/client';define('CLIENT_TEMPLATES_URL',$client_domain . '/templates/default');define('CLIENT_SITE_URL',$client_domain );define('RESOURCE_CLIENT_URL',$client_domain . '/resource');

@@ -1,0 +1,97 @@
+.pop_box{
+	width:86%;
+	height:auto;
+	position:fixed;
+	top:0px;
+	left:7%;
+	z-index:9999;
+	background: url(../images/download/pop_jt.png) top right no-repeat;
+	padding-top:132px;
+	background-size:97px 121px;
+	color: #666666;
+}
+
+.pop_cont{
+	width:100%;
+	height: 129px;
+	background:#fff;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	padding:12px 0px;
+	margin: 0;
+	line-height: 28px;
+}
+
+.pop_cont h1{
+	color:#303030;
+	font-size:20px;
+	line-height:32px;
+	text-align:center;
+	border-bottom:1px #e9e9e9 solid;
+	width:80%;
+	margin:0px auto;
+}
+
+.ly_shadow{
+	background:#000;
+	filter:alpha(Opacity=40);
+	-moz-opacity:0.7;
+	opacity: 0.7;
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:500;
+}
+
+.tip_list{ width:100%; display: block; /* padding-top:14px; */ padding-left: 0;}
+.tip_list li{
+	background:url(../images/download/step_jt.png) 0px 30px no-repeat;
+	background-size:17px 12px;
+	display:inline-block;
+	float:left;
+	font-size:12px;
+	width: 30%;
+	text-align:center;
+	padding-left: 8px;
+	padding-right: 4px;
+}
+.tip_list li.list_one{
+	background: none;
+	display:inline-block;
+	background-size:17px 12px;
+	margin-left:10px;}
+.tip_list li.list_two{
+	margin-left:-10px;}
+.tip_list li.list_three{margin-left:-10px;	}
+.tip_list li em{
+	width:59px;
+	height:59px;
+	margin:0px auto;}
+.tip_list li em.one{
+	background:url(../images/download/icon1.png) center center no-repeat;
+	background-size:59px 59px;
+	display:block;
+	}
+.tip_list li em.two{
+	background:url(../images/download/icon2.png) center center no-repeat;
+	background-size:59px 59px;
+	display:block;}
+.tip_list li em.two2{
+	background:url(../images/download/icon5.png) center center no-repeat;
+	background-size:59px 59px;
+	display:block;}
+.tip_list li em.three{
+	background:url(../images/download/icon4.png) center center no-repeat;
+	background-size:60px 60px;
+	display:block;
+	width:60px;
+	height:60px;}
+.tip_list li em.four{
+	background:url(../images/download/icon3.png) center center no-repeat;
+	background-size:60px 60px;
+	display:block;
+	width:60px;
+	height:60px;}

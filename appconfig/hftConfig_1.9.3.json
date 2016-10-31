@@ -1,0 +1,142 @@
+{
+
+    "sysVersion":"1.9.3",
+    "updateMsg":"发现新版本",
+    "updateUrl":"http://www.pgyer.com/7klJ",
+    "forceUpdate":"yes",
+    "fuelCardDiscount":0.95,
+    "shareImage":"http://o1wh05aeh.qnssl.com/image/view/app_icons/329119d24b09ceb86c4eccb84bba3282/120",
+    "shareTitle":"车族宝",
+    "shareDesc":"补贴会员的平台",
+    "SettingMenuForTable": [
+        {
+            "id": "1001",
+            "title": "我的二维码",
+            "icon": "qrcode",
+            "url": ""
+        },
+        {
+            "id": "1002",
+            "title": "修改登录密码",
+            "icon": "changeLoginPwd",
+            "url": ""
+        },
+        {
+            "id": "1003",
+            "title": "修改支付密码",
+            "icon": "changePayPwd",
+            "url": ""
+        },
+        {
+            "id": "1004",
+            "title": "修改手势密码",
+            "icon": "changeGusPwd",
+            "url": ""
+        },
+        
+        {
+            "id": "1006",
+            "title": "登出",
+            "icon": "logout",
+            "url": ""
+        }
+    ],
+    "SettingMenuArray": [
+        {
+            "id": "1001",
+            "title": "余额",
+            "icon": "bal",
+            "url": ""
+        },
+        {
+            "id": "1002",
+            "title": "会员积分",
+            "icon": "cloudCoin",
+            "url": ""
+        },
+        {
+            "id": "1003",
+            "title": "会员补贴",
+            "icon": "redeem",
+            "url": ""
+        },
+        {
+            "id": "1004",
+            "title": "银行卡",
+            "icon": "card",
+            "url": ""
+        },
+        {
+            "id": "1005",
+            "title": "会员升级",
+            "icon": "memberUpgrade",
+            "url": ""
+        },
+        {
+            "id": "1007",
+            "title": "商户中心",
+            "icon": "seller",
+            "url": ""
+        },
+        {
+            "id": "1006",
+            "title": "我的推荐",
+            "icon": "myRecommend",
+            "url": ""
+        },
+        {
+            "id": "1008",
+            "title": "分享奖励",
+            "icon": "commission",
+            "url": ""
+        },
+        {
+            "id": "1009",
+            "title": "奖励提取",
+            "icon": "commissionToCash",
+            "url": ""
+        },
+        {
+            "id": "1011",
+            "title": "我要加盟",
+            "icon": "commissionToCash",
+            "url": ""
+        }
+    ],
+    "MenuArray": [
+        {
+            "id": "1001",
+            "title": "充值",
+            "icon": "charge",
+            "url": ""
+        },
+        {
+            "id": "1002",
+            "title": "提现",
+            "icon": "cash",
+            "url": ""
+        },
+        {
+            "id": "1003",
+            "title": "账单",
+            "icon": "bill",
+            "url": ""
+        },
+        {
+            "id": "1005",
+            "title": "车主商城",
+            "icon": "shop",
+            "urlType":"2",
+            "url": "http://120.25.212.243/czb/wap/",
+            "urlbak":"http://abc153.cn/"
+        },
+         {
+            "id": "1004",
+            "title": "油卡充值",
+            "icon": "oil",
+            "urlType":"0",
+            "url": " "
+             
+        }
+    ]
+}

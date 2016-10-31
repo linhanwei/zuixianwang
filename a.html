@@ -1,0 +1,47 @@
+<form id="rechargeform" class="am-form transfer-form" action="" method="post">
+    <input type="hidden" name="form_submit" value="ok">
+    <input type="hidden" name="act" value="predeposit">
+    <input type="hidden" name="op" value="recharge_add">
+
+    <input type="hidden" name="newpageopen" value="1">
+    <input type="hidden" id="member_key" name="key" value="">
+    <div class="am-form-group">
+        <label for="money">充值金额： </label>
+        <label class="am-text-inline"><input type="number" class="" name="pdr_amount"  id="pdr_amount" placeholder="输入金额" min="0.01" max="99999" required /></label>
+    </div>
+    <div class="am-form-group">
+        <label>支付方式： </label>
+        <label class="am-radio-inline alipay_mobile" style="display:none;">
+            <input type="radio" checked value="alipay_mobile" name="payment_code" required> 支付宝
+        </label>
+    </div>
+    <a href="javascript:void(0);" class="l-btn-login mt10" id="rechargebtn">
+        支付
+    </a>
+</form>
+<script>
+//充值
+$('#rechargebtn').click(function(){//会员登陆
+var pdr_amount = $('#pdr_amount').val();
+var payment_code = $('[name="payment_code"]:checked').val();
+
+if(pdr_amount == '' || pdr_amount == 0){
+alert('请输入充值金额');
+$('#pdr_amount').focus();
+return false;
+}else{
+
+switch(payment_code){
+case 'alipay':
+case 'wxpay':
+$('#member_key').val(getcookie('key'));
+$('#rechargeform').attr('action',ApiUrl + '/index.php?newpageopen=1');
+setTimeout(function(){
+$('#rechargeform').submit();
+},500);
+break;
+}
+
+}
+});
+</script>
