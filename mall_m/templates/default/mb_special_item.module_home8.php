@@ -1,7 +1,7 @@
 <?php defined('InSystem') or exit('Access Invalid!'); ?>
 
 <?php if($v['home8'] && is_array($v['home8'])) { ?>
-    
+
     <section class="activity-box">
 
         <div class="activity-main">

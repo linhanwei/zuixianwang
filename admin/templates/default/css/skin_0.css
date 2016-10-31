@@ -1598,13 +1598,8 @@ td.trigger i:hover { color: #27A9E3;}
 .mb-item-box .home9 img{ width: 100%;}
 
 /* 模型版块布局J-显示 */
-.mb-item-box .home10 .content { font-size: 0; *word-spacing:-1px/*IE6、7*/; width: 640px;margin-top: 30px;}
-.mb-item-box .home10 .home2_2 { width:160;display: inline-block;}
-.mb-item-box .home10 .home2_2_1,.mb-item-box .home10 .home2_2_2 { width:100%;}
-.mb-item-box .home10 .home2_2_2{margin-top: 5px;}
-.mb-item-box .home10 .home2_2_1 .item,
-.mb-item-box .home10 .home2_2_2 .item{width: 80px;}
-.mb-item-box .home10 .home2_2_2 .item:first-child{margin-right: 3px;}
+.mb-item-box .home10 .content { font-size: 0; *word-spacing:-1px/*IE6、7*/; width: 320px;margin-top: 30px;}
+.mb-item-box .home10 .content .item{ width: 25%;display: inline-block;}
 .mb-item-box .home10 img{ width: 100%;}
 
 /* 模型版块布局K-显示 */
@@ -1669,7 +1664,8 @@ td.trigger i:hover { color: #27A9E3;}
 .mb-item-edit-content .search-goods h5 { font: 700 12px/20px "microsoft yahei"; color: #777; display: block; margin: 0 0 10px 0;}
 .mb-item-edit-content .item { background-color: #FFF; text-align: center; padding: 4px; border: dashed 1px #DDD; position: relative; z-index: 1;}
 .mb-item-edit-content .item:hover { border: solid 1px #19AEDE; box-shadow: 0 0 6px rgba(0,0,0,0.25);}
-.mb-item-edit-content .item a { color: #FFF; background-color: #19AEDE; display: none; padding: 4px 8px; position: absolute; z-index: 1; top: 4px; right: 4px; cursor: pointer;}
+.mb-item-edit-content .item a { color: #FFF;font-size: 12px; background-color: #19AEDE; display: none; padding: 4px 8px; position: absolute; z-index: 1; top: 4px; right: 4px; cursor: pointer;}
+.mb-item-edit-content .item a[nctype="btn_del_item_image"]{left: 0;text-align: left;width: 40px;}
 .mb-item-edit-content .item a i { font-size: 14px; margin-right: 4px;}
 .mb-item-edit-content .item:hover a { display: block;}
 .mb-item-edit-content .btn-add { font-size: 12px; margin: 10px;}
@@ -1750,13 +1746,8 @@ td.trigger i:hover { color: #27A9E3;}
 
 /* 块模型布局J-编辑 */
 .mb-item-edit-content .home10 { font-size: 0; *word-spacing:-1px/*IE6、7*/; width: 500px;}
-.mb-item-edit-content .home10 .home2_2 { font-size: 12px; vertical-align: top; letter-spacing: normal; display: inline-block; *display: inline/*IE7*/; width: 125px; height: 280px; *zoom:1/*IE7*/;}
-.mb-item-edit-content .home10 .home2_2_1,
-.mb-item-edit-content .home10 .home2_2_2 { display: block; height: 135px;}
-.mb-item-edit-content .home10 .home2_2_1 .item,
-.mb-item-edit-content .home10 .home2_2_2 .item { width: 125px; height: 125px;}
-.mb-item-edit-content .home10 .home2_2_1 img,
-.mb-item-edit-content .home10 .home2_2_2 img {width: 100%;}
+.mb-item-edit-content .home10 .item{ width: 23%;}
+.mb-item-edit-content .home10 .item img {width: 100%;}
 
 /* 块模型布局K-编辑 */
 .mb-item-edit-content .home11{ width: 695px;}

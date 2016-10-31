@@ -21,12 +21,12 @@ class indexControl extends mobileHomeControl{
         $data = $model_mb_special->getMbSpecialIndex();
 
         //推荐商品
-        $recommend_goods_list = $this->get_recommend_goods();
+        /*$recommend_goods_list = $this->get_recommend_goods();
         if($recommend_goods_list){
             $count = count($data);
             $data[$count]['recommend_goods']['item'] = $recommend_goods_list;
             $data[$count]['mb_type'] = 'recommend_goods';
-        }
+        }*/
 
         $this->_output_special($data, $_GET['type']);
 	}

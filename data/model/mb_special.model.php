@@ -196,17 +196,7 @@ class mb_specialModel extends Model{
                 $item_data['rectangle3_image'] = getMbSpecialImageUrl($item_data['rectangle3_image']);
                 $item_data['rectangle4_image'] = getMbSpecialImageUrl($item_data['rectangle4_image']);
                 break;
-            case 'home10':
-                $item_data['rectangle1_image'] = getMbSpecialImageUrl($item_data['rectangle1_image']);
-                $item_data['rectangle2_image'] = getMbSpecialImageUrl($item_data['rectangle2_image']);
-                $item_data['rectangle3_image'] = getMbSpecialImageUrl($item_data['rectangle3_image']);
-                $item_data['rectangle4_image'] = getMbSpecialImageUrl($item_data['rectangle4_image']);
-                $item_data['rectangle5_image'] = getMbSpecialImageUrl($item_data['rectangle5_image']);
-                $item_data['rectangle6_image'] = getMbSpecialImageUrl($item_data['rectangle6_image']);
-                $item_data['rectangle7_image'] = getMbSpecialImageUrl($item_data['rectangle7_image']);
-                $item_data['rectangle8_image'] = getMbSpecialImageUrl($item_data['rectangle8_image']);
 
-                break;
             case 'home12':
                 $item_data['image'] = getMbSpecialImageUrl($item_data['image']);
                 break;

@@ -80,7 +80,7 @@
         <input nctype="image_name" name="item_data[item][<%=image_name%>][image]" type="hidden" value="<%=image_name%>">
         <input nctype="image_type" name="item_data[item][<%=image_name%>][type]" type="hidden" value="<%=image_type%>">
         <input nctype="image_data" name="item_data[item][<%=image_name%>][data]" type="hidden" value="<%=image_data%>">
-        <a nctype="btn_del_item_image" href="javascript:;">删除</a>
+        <a nctype="btn_del_item_image" href="javascript:;"><i class="icon-trash"></i>删除</a>
     </div>
 </script> 
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery-ui/jquery.ui.js"></script> 

@@ -86,12 +86,14 @@
 
 <!--</section>-->
 
+<!--
 
 <div class="bottom-box">
 
     <img src="./new/images/index/bottom-ico.jpg">
 
 </div>
+-->
 
 <footer id="footer"></footer>
 
@@ -581,63 +583,15 @@
 <script type="text/html" id="home10">
 
     <section class="cuxiao">
-
         <div class="cybg-box cuxiao-item">
-
             <div class="cuxiao-list-box">
-
-                <div class="item">
-
-                    <a href="<%= rectangle1_url %>"><img src="<%= rectangle1_image %>"></a>
-
-                </div>
-
-                <div class="item">
-
-                    <a href="<%= rectangle3_url %>"><img src="<%= rectangle3_image %>"></a>
-
-                </div>
-
-                <div class="item">
-
-                    <a href="<%= rectangle5_url %>"><img src="<%= rectangle5_image %>"></a>
-
-                </div>
-
-                <div class="item">
-
-                    <a href="<%= rectangle7_url %>"><img src="<%= rectangle7_image %>"></a>
-
-                </div>
-
-                <div class="item">
-
-                    <a href="<%= rectangle2_url %>"><img src="<%= rectangle2_image %>"></a>
-
-                </div>
-
-                <div class="item">
-
-                    <a href="<%= rectangle4_url %>"><img src="<%= rectangle4_image %>"></a>
-
-                </div>
-
-                <div class="item">
-
-                    <a href="<%= rectangle6_url %>"><img src="<%= rectangle6_image %>"></a>
-
-                </div>
-
-                <div class="item">
-
-                    <a href="<%= rectangle8_url %>"><img src="<%= rectangle8_image %>"></a>
-
-                </div>
-
+                <% for (var i in item) { %>
+                    <div class="item">
+                        <a href="<%= item[i].url %>"><img src="<%= item[i].image %>"></a>
+                    </div>
+                <% } %>
             </div>
-
         </div>
-
     </section>
 
 </script>
