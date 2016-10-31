@@ -15,9 +15,9 @@ class couponsLogic {
     public function upgrade($member_id,$member_name){
         $batchflag = 'upgrade';
         $to_date = strtotime(date("Y-m-d",strtotime("+1 year")));
-        $denomination = 200;
+        $denomination = 600;
 
-        for($i=0;$i<6;$i++){
+        for($i=0;$i<2;$i++){
             $this->_add($member_id,$member_name,'U-',$denomination,$batchflag,$to_date);
         }
     }

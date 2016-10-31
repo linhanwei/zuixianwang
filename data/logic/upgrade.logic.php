@@ -17,6 +17,8 @@ class upgradeLogic {
         $model_member = Model('member');
         $edit_data['grade_id'] = $grade_info['grade_id'];
         $edit_data['grade_name'] = $grade_info['grade_name'];
+        $edit_data['upgrade_date'] = time();
+        $edit_data['upgrade_times'] = array('exp','upgrade_times+1');
 
         $model_member->editMember(array('member_id'=>$member_info['member_id']), $edit_data);
 
@@ -32,7 +34,7 @@ class upgradeLogic {
 
         //上级分成
 
-        $inviter_list = $this->_getInviter($member_info['member_id'],3);
+        $inviter_list = $this->_getInviter($member_info['inviter_id'],3);
 
         if($inviter_list){
             $i = 0;
@@ -54,85 +56,59 @@ class upgradeLogic {
         }
 
 
-
-        //俱乐部返现
+        $have_region = false;
+        $model_agent_commis = Model('agent_commis');
+        //区域代理返现
         //省
         if($member_info['member_provinceid'] > 0){
-            $province_condition['is_agent'] = 1;
-            $province_condition['agent_provinceid'] = $member_info['member_provinceid'];
-            $province_condition['agent_cityid'] = 0;
-            $province_condition['agent_areaid'] = 0;
-            $agent_list = Model('member')->getMemberList($province_condition);
 
 
-            if($agent_list){
-                foreach($agent_list as $agent){
-                    $data = array();
-                    $data['member_id'] = $agent['member_id'];
-                    $data['member_name'] = $agent['member_name'];
+        }
 
-                    $data['amount'] = UPGRADE_AGENT_PROVINCE;
-                    $head_price -= $data['amount'];
+        //区县
+        if($member_info['member_areaid'] > 0){
+            $agent = $this->_getAgentByArea($member_info,$member_info['member_cityid']);
 
-                    $data['pu_sn'] = $pay_sn;
-                    $data['lg_desc'] = '俱乐部[' . $member_info['member_name'] . '] 升级帐号,单号:'.$data['pu_sn'];
+            if($agent){
+                $data = array();
+                $data['member_id'] = $member_info['member_id'];
+                $data['member_name'] = $member_info['member_name'];
+                $data['agent_id'] = $agent['agent_id'];
+                $data['commis'] = UPGRADE_AGENT_AREA;
+                $data['commis_time'] = TIMESTAMP;
 
-                    $model_pd->changePd('club_upgrade',$data);
-                }
+                $head_price -= $data['commis'];
+
+                $data['sn'] = $pay_sn;
+                $model_agent_commis->saveCommisLog('upgrade',$data);
+                $have_region = true;
             }
 
         }
 
         //市
         if($member_info['member_cityid'] > 0){
-            $city_condition['is_agent'] = 1;
-            $city_condition['agent_cityid'] = $member_info['agent_cityid'];
-            $city_condition['agent_areaid'] = 0;
-            $agent_list = Model('member')->getMemberList($city_condition);
+            $model_agent = Model('agent');
+            $agent = $model_agent->getAgentInfo(array('city_id'=>$member_info['member_cityid'],'area_id'=>0));
+            if($agent){
+                $data = array();
+                $data['member_id'] = $member_info['member_id'];
+                $data['member_name'] = $member_info['member_name'];
+                $data['agent_id'] = $agent['agent_id'];
+                $data['commis'] = UPGRADE_AGENT_CITY;
+                $data['commis_time'] = TIMESTAMP;
 
-
-            if($agent_list){
-                foreach($agent_list as $agent){
-                    $data = array();
-                    $data['member_id'] = $agent['member_id'];
-                    $data['member_name'] = $agent['member_name'];
-
-                    $data['amount'] = UPGRADE_AGENT_CITY;
-                    $head_price -= $data['amount'];
-
-                    $data['pu_sn'] = $pay_sn;
-                    $data['lg_desc'] = '俱乐部[' . $member_info['member_name'] . '] 升级帐号,单号:'.$data['pu_sn'];
-
-                    $model_pd->changePd('club_upgrade',$data);
+                if($have_region == false){
+                    $data['commis'] += UPGRADE_AGENT_AREA;
                 }
+
+                $data['sn'] = $pay_sn;
+
+                $model_agent_commis->saveCommisLog('upgrade',$data);
             }
 
         }
 
-        //区县
-        if($member_info['member_areaid'] > 0){
-            $area_condition['is_agent'] = 1;
-            $area_condition['agent_areaid'] = $member_info['member_areaid'];
-            $agent_list = Model('member')->getMemberList($area_condition);
-
-
-            if($agent_list){
-                foreach($agent_list as $agent){
-                    $data = array();
-                    $data['member_id'] = $agent['member_id'];
-                    $data['member_name'] = $agent['member_name'];
-
-                    $data['amount'] = UPGRADE_AGENT_AREA;
-                    $head_price -= $data['amount'];
-
-                    $data['pu_sn'] = $pay_sn;
-                    $data['lg_desc'] = '俱乐部[' . $member_info['member_name'] . '] 升级帐号,单号:'.$data['pu_sn'];
-
-                    $model_pd->changePd('club_upgrade',$data);
-                }
-            }
-
-        }
 
         //总部
         if($head_price>0){
@@ -155,11 +131,18 @@ class upgradeLogic {
     }
 
 
-    private function _getInviter($member_id,$level = 3){
+
+    /**
+     *
+     * 获得上级会员列表
+     *
+     * @param $inviter_id
+     * @param int $level
+     * @return array
+     */
+    private function _getInviter($inviter_id,$level = 3){
         $inviterList = array();
         $model_member = Model('member');
-        $memberInfo= $model_member->getMemberInfoByID($member_id);
-        $inviter_id = $memberInfo['inviter_id'];
         for($i=0;$i<$level;$i++){
             if($inviter_id==0) break;
             $inviterMember = $model_member->getMemberInfoByID($inviter_id);
@@ -172,5 +155,58 @@ class upgradeLogic {
         }
 
         return $inviterList;
+    }
+
+    /**
+     * 获得上级最近区代理
+     * @param $member_info
+     * @param $city_id
+     * @return array|mixed
+     */
+    private function _getAgentByArea($member_info,$city_id){
+        $agent_info = array();
+        $model_member = Model('member');
+        $inviter_id = $member_info['inviter_id'];
+        while($inviter_id > 0){
+            $inviterMember = $model_member->getMemberInfoByID($inviter_id);
+            if($inviterMember){
+                $inviter_id = $inviterMember['inviter_id'];
+
+                $agent_info = $this->_getAgentInArea($inviterMember['member_id'],$city_id);
+                if($agent_info){
+                    break;
+                }
+            }else{
+                break;
+            }
+        }
+
+        return $agent_info;
+    }
+
+
+    /**
+     *
+     * 判断会员这个区/市的代理
+     * @param $member_id
+     * @param $city_id   地区ID
+     *
+     * @return mixed
+     */
+    private function _getAgentInArea($member_id,$city_id){
+        $model_agent_member = Model('agent_member');
+        $model_agent = Model('agent');
+
+        $agent_member = $model_agent_member->getAgentMemberInfo(array('member_id'=>$member_id));
+        if($agent_member){
+            $agent = $model_agent->getAgentInfo(array('agent_id'=>$agent_member['agent_id'],'city_id'=>$city_id,'area_id'=>array('gt',0)));
+            if($agent){
+                return $agent;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }

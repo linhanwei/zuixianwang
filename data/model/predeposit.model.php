@@ -591,16 +591,21 @@ class predepositModel extends Model {
                 $data_pd['yestoday_redeemable'] = $data['amount'];
                 $data_pd['last_redeemable'] = $data['last_redeemable'];
 
+                $data_msg['av_amount'] = 0;
+                /*
                 $data_msg['av_amount'] = $data['amount'];
                 $data_msg['freeze_amount'] = 0;
                 $data_msg['desc'] = $data_log['lg_desc'];
+                */
                 break;
             default:
                 throw new Exception('参数错误');
                 break;
         }
         $update = Model('member')->editMember(array('member_id'=>$data['member_id']),$data_pd);
-
+        //当前余额
+        $member_info = Model('member')->getMemberInfoByID($data['member_id']);
+        $data_log['lg_predeposit'] = $member_info['available_predeposit'];
         if (!$update) {
             throw new Exception('操作失败');
         }
@@ -616,8 +621,7 @@ class predepositModel extends Model {
             $param['member_id'] = $data['member_id'];
             $data_msg['av_amount'] = ncPriceFormat($data_msg['av_amount']);
             $data_msg['freeze_amount'] = ncPriceFormat($data_msg['freeze_amount']);
-            //当前余额
-            $member_info = Model('member')->getMemberInfoByID($data['member_id']);
+
             $data_msg['available_predeposit'] = $member_info['available_predeposit'];
             $param['param'] = $data_msg;
             QueueClient::push('sendMemberMsg', $param);

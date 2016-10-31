@@ -691,9 +691,7 @@ function newfunction(func) {
 }
 
 function evalscript(s) {
-    if(typeof(s) == 'string'){
-	   if(s.indexOf('<script') == -1) return s;
-    }
+	if(s.indexOf('<script') == -1) return s;
 	var p = /<script[^\>]*?>([^\x00]*?)<\/script>/ig;
 	var arr = [];
 	while(arr = p.exec(s)) {
@@ -819,9 +817,9 @@ function ajaxpost(formid, showid, waitid, showidclass, submitbtn, recall) {
 	var handleResult = function() {
 		var s = '';
 		var evaled = false;
-      
+
 //		showloading('none');
-		try {
+		try {	
 			s = $$(ajaxframeid).contentWindow.document.XMLDocument.text;
 		} catch(e) {
 			try {
@@ -834,11 +832,9 @@ function ajaxpost(formid, showid, waitid, showidclass, submitbtn, recall) {
 				}
 			}
 		}
-		if(typeof(s) == 'string') {
-            if(s.indexOf('ajaxerror') != -1){
-                evalscript(s);
-                evaled = true;
-            }
+		if( s != ''  && s.indexOf('ajaxerror') != -1) {
+			evalscript(s);
+			evaled = true;
 		}
 		if(showidclass) {
 			if(showidclass != 'onerror') {

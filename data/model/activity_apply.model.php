@@ -38,6 +38,23 @@ class activity_applyModel extends Model {
     public function getApplyCount($condition) {
         return $this->where($condition)->count();
     }
+    /**
+     * 总价
+     * @param array $condition
+     * @return int
+     */
+    public function getApplyAmount($condition) {
+        return $this->where($condition)->sum("apply_quantity * project_price");
+    }
+
+    /**
+     * 数量
+     * @param array $condition
+     * @return int
+     */
+    public function getApplyQuantity($condition) {
+        return $this->where($condition)->sum('apply_quantity');
+    }
 
 
     /**

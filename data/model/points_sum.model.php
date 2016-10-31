@@ -106,10 +106,11 @@ class points_sumModel extends Model{
      * @param string $page
      * @param string $limit
      * @param string $fields
+     * @param string $group
      * @return mixed
      */
-    public function getSumList($condition = array(), $page = '', $limit = '', $fields = '*') {
-		$result = $this->table('points_log_sum')->field($fields)->where($condition)->page($page)->limit($limit)->order('pd_pay desc')->select();
+    public function getSumList($condition = array(), $page = '', $limit = '', $fields = '*',$group = '') {
+		$result = $this->table('points_log_sum')->field($fields)->group($group)->where($condition)->page($page)->limit($limit)->order('pd_pay desc')->select();
 		return $result;
     }
 
@@ -121,5 +122,4 @@ class points_sumModel extends Model{
     public function getSumInfo($condition = array(), $fileds = '*') {
         return $this->table('points_log_sum')->where($condition)->field($fileds)->find();
     }
-
 }

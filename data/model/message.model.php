@@ -57,7 +57,7 @@ class messageModel extends Model {
         $param = array();
         $param['table'] = 'message';
         $param['where'] = $condition_str;
-        $param['field'] = ' count(message_id) as countnum ';
+        $param['field'] = ' count(*) as countnum ';
         $message_list = Db::select($param, $page);
         return $message_list[0]['countnum'];
     }
@@ -68,10 +68,10 @@ class messageModel extends Model {
     public function countNewMessage($member_id) {
         $condition_arr = array();
         $condition_arr['to_member_id'] = "$member_id";
-        $condition_arr['no_message_state'] = '2';
+        //$condition_arr['no_message_state'] = '2';
         $condition_arr['message_open_common'] = '0';
-        $condition_arr['no_del_member_id'] = "$member_id";
-        $condition_arr['no_read_member_id'] = "$member_id";
+        //$condition_arr['no_del_member_id'] = "$member_id";
+        //$condition_arr['no_read_member_id'] = "$member_id";
         $countnum = $this->countMessage($condition_arr);
         return $countnum;
     }
@@ -275,6 +275,7 @@ class messageModel extends Model {
                 $condition_sql .=" and message_id in({$condition_array['message_id_in']})";
             }
         }
+
         return $condition_sql;
     }
 
