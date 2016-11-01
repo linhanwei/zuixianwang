@@ -1,19 +1,35 @@
-$(function() {
+$(function () {
+
     var recommend_goods = getcookie('goods');
+    var html = '',
+        index_cache_key = 'index';
+
+    $("#main-container").html(getCache(index_cache_key));
+    //轮播图
+    var swiper = new Swiper('.swiper-container', {
+        //pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+
     $.ajax({
         url: ApiUrl + "/index.php?act=index",
         type: 'get',
-        data:{recommend_goods:recommend_goods},
+        data: {recommend_goods: recommend_goods},
         dataType: 'json',
-        success: function(result) {
+        success: function (result) {
             var data = result.datas;
-            var html = '';
             //console.log(data);
-            $.each(data, function(k, v) {
-                $.each(v, function(kk, vv) {
+            $.each(data, function (k, v) {
+                $.each(v, function (kk, vv) {
                     switch (kk) {
                         case 'adv_list':
-                            $.each(vv.item, function(ak, av) {
+                            $.each(vv.item, function (ak, av) {
                                 vv.item[ak].url = buildUrl(av.type, av.data);
                             });
                             break;
@@ -22,7 +38,7 @@ $(function() {
                             break;
                         case 'home2':
                         case 'home3':
-                            $.each(vv.item, function(k3, v3) {
+                            $.each(vv.item, function (k3, v3) {
                                 vv.item[k3].url = buildUrl(v3.type, v3.data);
                             });
                             break;
@@ -32,7 +48,7 @@ $(function() {
                             vv.rectangle2_url = buildUrl(vv.rectangle2_type, vv.rectangle2_data);
                             break;
                         case 'home5':
-                            $.each(vv.item, function(k5, v5) {
+                            $.each(vv.item, function (k5, v5) {
                                 vv.item[k5].url = buildUrl(v5.type, v5.data);
                             });
                             break;
@@ -73,24 +89,24 @@ $(function() {
                             vv.rectangle8_url = buildUrl(vv.rectangle8_type, vv.rectangle8_data);
                             break;
                         case 'home11':
-                            $.each(vv.item, function(k11, v11) {
+                            $.each(vv.item, function (k11, v11) {
                                 vv.item[k11].url = buildUrl(v11.type, v11.data);
                             });
                             break;
                         case 'recommend_goods':
-                            $.each(vv.item, function(gck, gcv) {
+                            $.each(vv.item, function (gck, gcv) {
                                 vv.item[gck].url = buildUrl('goods', gcv.goods_id);
                             });
                             break;
 
                     }
-                    console.log(kk,vv);
+                    console.log(kk, vv);
                     html += template.render(kk, vv);
                     //console.log('html',kk);
                     return false;
                 });
             });
-
+            setCache(index_cache_key, html);
             $("#main-container").html(html);
 
             //轮播图
@@ -111,9 +127,9 @@ $(function() {
         }
     });
 
-    $('.search-btn').click(function(){
+    $('.search-btn').click(function () {
         var keyword = encodeURIComponent($('#keyword').val());
-        location.href = SiteUrl+'/mall_m/index.php?act=goods&op=list&keyword='+keyword;
+        location.href = SiteUrl + '/mall_m/index.php?act=goods&op=list&keyword=' + keyword;
     });
 
 });

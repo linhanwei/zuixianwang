@@ -1,3 +1,40 @@
+//设置本地缓存
+function setCache(k,v){
+    if(window.localStorage) {
+        try {
+            localStorage.setItem(k, JSON.stringify(v));
+        } catch (oException) {
+            if (oException.name == 'QuotaExceededError') {
+                console.log('超出本地存储限额！');
+            }
+        }
+    }
+}
+
+//获取本地缓存
+function getCache(k){
+    if(window.localStorage) {
+        var localStorageVal = localStorage.getItem(k);
+        if(localStorageVal){
+            return JSON.parse(localStorageVal);
+        }
+    }
+}
+
+//删除某个本地缓存值
+function delCache(k){
+    if(window.localStorage) {
+        localStorage.removeItem(k);
+    }
+}
+
+//删除所有的本地缓存值
+function clearCache(){
+    if(window.localStorage) {
+        localStorage.clear();
+    }
+}
+
 //修改a链接增加key值
 function add_key(){
     $('a').each(function(k,v){
