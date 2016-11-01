@@ -175,7 +175,7 @@ class orderModel extends Model {
     public function getOrderCountCache($type, $id, $key) {
         if (!C('cache_open')) return array();
         $type = 'ordercount'.$type;
-        $ins = Cache::getInstance('cacheredis');
+        $ins = Cache::getInstance('redis');
         $order_info = $ins->hget($id,$type,$key);
         return !is_array($order_info) ? array($key => $order_info) : $order_info;
     }
@@ -188,7 +188,7 @@ class orderModel extends Model {
      */
     public function editOrderCountCache($type, $id, $data) {
         if (!C('cache_open') || empty($type) || !intval($id) || !is_array($data)) return ;
-        $ins = Cache::getInstance('cacheredis');
+        $ins = Cache::getInstance('redis');
         $type = 'ordercount'.$type;
         $ins->hset($id,$type,$data);
     }
@@ -225,7 +225,7 @@ class orderModel extends Model {
      */
     public function delOrderCountCache($type, $id) {
         if (!C('cache_open')) return true;
-        $ins = Cache::getInstance('cacheredis');
+        $ins = Cache::getInstance('redis');
         $type = 'ordercount'.$type;
         return $ins->hdel($id,$type);
     }

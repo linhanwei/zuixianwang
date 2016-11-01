@@ -50,7 +50,7 @@ class process{
 	 */
 	private static function init($type){
 		if (C('cache_open')){
-			self::$lock = Cache::getInstance('cacheredis');
+			self::$lock = Cache::getInstance('redis');
 		}else{
 			self::$lock = new lock();
 		}
