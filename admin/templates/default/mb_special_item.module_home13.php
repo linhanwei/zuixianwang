@@ -17,9 +17,9 @@
     </tbody>
   </table>
   <?php } ?>
-<div class="index_block home8">
+<div class="index_block home13">
       <?php if($item_edit_flag) { ?>
-  <h3>模型版块布局G</h3>
+  <h3>模型版块布局L</h3>
   <?php } ?>
   <!-- <div class="title">
     <?php if($item_edit_flag) { ?>
@@ -33,8 +33,8 @@
       <?php if($item_edit_flag) { ?>
     <h5>内容：</h5>
     <?php } ?>
-    <div class="home2_2">
-      <div class="home2_2_1 one">
+    <div class="home2_2  one">
+      <div class="home2_2_1">
         <div nctype="item_image" class="item"> <img nctype="image" src="<?php echo getMbSpecialImageUrl($item_data['rectangle1_image']);?>" alt="">
           <?php if($item_edit_flag) { ?>
           <input nctype="image_name" name="item_data[rectangle1_image]" type="hidden" value="<?php echo $item_data['rectangle1_image'];?>">
@@ -44,7 +44,7 @@
           <?php } ?>
         </div>
       </div>
-      <div class="home2_2_2 one">
+      <div class="home2_2_2">
         <div nctype="item_image" class="item"> <img nctype="image" src="<?php echo getMbSpecialImageUrl($item_data['rectangle2_image']);?>" alt="">
           <?php if($item_edit_flag) { ?>
           <input nctype="image_name" name="item_data[rectangle2_image]" type="hidden" value="<?php echo $item_data['rectangle2_image'];?>">
