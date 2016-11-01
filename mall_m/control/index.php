@@ -19,7 +19,6 @@ class indexControl extends mobileHomeControl{
 	public function indexOp() {
 
         $model_mb_special = Model('mb_special');
-
         $data = $model_mb_special->getMbSpecialIndex();
 
         //推荐商品

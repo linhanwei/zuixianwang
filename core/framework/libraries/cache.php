@@ -21,8 +21,8 @@ class Cache {
 	 */
 	public function connect($type,$args = array()){
 
-//		if($type == 'cacheredis') $type='redis';
-		if (empty($type)) $type = C('cache_open') ? 'redis' : 'file';
+		if (empty($type)) $type = C('cache_open') ? C('cache')['type'] : 'file';
+
 		$type = strtolower($type);
 		$class = 'Cache'.ucwords($type);
 		if (!class_exists($class)){
@@ -38,6 +38,7 @@ class Cache {
 	 */
 	public static function getInstance(){
 		$args = func_get_args();
+
 		return get_obj_instance(__CLASS__,'connect',$args);
 	}
 }
