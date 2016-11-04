@@ -449,8 +449,8 @@ class store_settingControl extends BaseSellerControl {
 		Language::read('member_layout');
         $menu_array = array(
             1=>array('menu_key'=>'store_setting','menu_name'=>Language::get('nc_member_path_store_config'),'menu_url'=>'index.php?act=store_setting&op=store_setting'),
-            4=>array('menu_key'=>'store_slide','menu_name'=>Language::get('nc_member_path_store_slide'),'menu_url'=>'index.php?act=store_setting&op=store_slide'),
-            5=>array('menu_key'=>'store_theme','menu_name'=>'店铺主题','menu_url'=>'index.php?act=store_setting&op=theme'),
+//            4=>array('menu_key'=>'store_slide','menu_name'=>Language::get('nc_member_path_store_slide'),'menu_url'=>'index.php?act=store_setting&op=store_slide'),
+//            5=>array('menu_key'=>'store_theme','menu_name'=>'店铺主题','menu_url'=>'index.php?act=store_setting&op=theme'),
         );
         Tpl::output('member_menu',$menu_array);
         Tpl::output('menu_key',$menu_key);

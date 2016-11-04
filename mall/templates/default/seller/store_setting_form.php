@@ -45,24 +45,24 @@
         <p class="hint"><?php echo $lang['store_setting_label_tip'];?></p>
       </dd>
     </dl>
-    <dl>
-      <dt><?php echo $lang['store_setting_change_banner'].$lang['nc_colon'];?> </dt>
+   <!-- <dl>
+      <dt><?php /*echo $lang['store_setting_change_banner'].$lang['nc_colon'];*/?> </dt>
       <dd>
         <div class="ncsc-upload-thumb store-banner">
-          <p><?php if(empty($output['store_info']['store_banner'])){?>
+          <p><?php /*if(empty($output['store_info']['store_banner'])){*/?>
           <i class="icon-picture"></i>
-          <?php }else{?>
-          <img src="<?php echo UPLOAD_SITE_URL.'/'.ATTACH_STORE.'/'.$output['store_info']['store_banner'];?>" nc_type="store_banner" />
-          <?php }?></p>
+          <?php /*}else{*/?>
+          <img src="<?php /*echo UPLOAD_SITE_URL.'/'.ATTACH_STORE.'/'.$output['store_info']['store_banner'];*/?>" nc_type="store_banner" />
+          <?php /*}*/?></p>
         </div>
         <div class="ncsc-upload-btn"> <a href="javascript:void(0);"><span>
           <input type="file" hidefocus="true" size="1" class="input-file" name="store_banner" id="storeBannerPic" nc_type="change_store_banner"/>
           </span>
           <p><i class="icon-upload-alt"></i>图片上传</p>
           </a> </div>
-        <p class="hint"><?php echo $lang['store_setting_banner_tip'];?></p>
+        <p class="hint"><?php /*echo $lang['store_setting_banner_tip'];*/?></p>
       </dd>
-    </dl>
+    </dl>-->
       <dl class="setup store-logo">
         <dt><?php echo $lang['store_setting_change_avatar'].$lang['nc_colon'];?> </dt>
         <dd>
