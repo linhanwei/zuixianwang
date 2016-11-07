@@ -560,7 +560,11 @@ a{ color:#666}
 
 .search-box-two .cate-btn img{ width:25px; height:25px; vertical-align:top}
 
-
+body{ background:#F0F0F0; padding-top:0.5rem; padding-bottom:0.5rem; max-width:640px; margin:auto}
+.head-main{ width:100%; height:0.5rem; line-height:0.5rem; position:fixed; top:0; left:0; background:#FFF; z-index:9999}
+.head-main .title-img{ height:100%; margin:auto}
+.head-main .head-right-btn{ display:block; width:0.5rem; height:0.5rem; overflow:hidden; position:absolute; top:0; right:0.1rem}
+.head-main .head-right-btn img{ width:100%; vertical-align:top}
 
 #cate-box{ width:100%; overflow:hidden; height:30px; line-height:30px; background:#FFF}
 

@@ -39,7 +39,7 @@ class goodsControl extends mobileHomeControl{
         $fieldstr .= ',is_virtual,is_presell,is_fcode,have_gift';
 
         //排序方式
-        $order = $this->_goods_list_order($_GET['key'], $_GET['order']);
+        $order = $this->_goods_list_order($_GET['sort_key'], $_GET['order']);
 
         //优先从全文索引库里查找
         list($indexer_ids,$indexer_count) = $model_search->indexerSearch($_GET,$this->page);
@@ -76,6 +76,7 @@ class goodsControl extends mobileHomeControl{
     public function goods_listOp() {
         $model_goods = Model('goods');
         $model_search = Model('search');
+        $this->page = 6;
 
         //查询条件
         $condition = array();
@@ -92,7 +93,7 @@ class goodsControl extends mobileHomeControl{
         $fieldstr .= ',is_virtual,is_presell,is_fcode,have_gift';
 
         //排序方式
-        $order = $this->_goods_list_order($_GET['key'], $_GET['order']);
+        $order = $this->_goods_list_order($_GET['sort_key'], $_GET['order']);
 
         //优先从全文索引库里查找
         list($indexer_ids,$indexer_count) = $model_search->indexerSearch($_GET,$this->page);

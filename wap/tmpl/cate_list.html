@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+          name="viewport">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes"/> <!-- apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <title>商品分类</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" type="text/css" href="../new/plug-ins/swiper/swiper-3.4.0.min.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="../new/css/common.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="../new/css/style.css" media="all"/>
+    <script type="text/javascript" src="../js/config.js"></script>
+    <script type="text/javascript" src="../js/template.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../new/js/jquery-3.1.1.min.js"></script>
+    <script src="../../data/resource/js/layer/layer.js"></script>
+    <script src="../new/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="../new/plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>
+    <script type="text/javascript" src="../new/js/main.js"></script>
+    <script type="text/javascript" src="../new/js/cate_list.js"></script>
+
+</head>
+
+<body class="bg-white">
+<section class="head-bar">
+    <span>产品分类</span>
+</section>
+<section class="all-search-box">
+    <div class="search-input-box">
+        <input name="search-keyword" id="keyword" type="text" placeholder="搜索商品" value="">
+        <span class="search-btn"></span>
+    </div>
+</section>
+<section class="cate-box">
+    <div id="cate-first" class="cate-first">
+
+    </div>
+    <div class="cate-price-points-box">
+        <div class="cate-price-points-show">
+            <a class="all action">全 部</a>
+            <a>1-49</a>
+            <a>50-99</a>
+            <a>100-199</a>
+            <a>200-299</a>
+            <a>300-499</a>
+            <a>500-999</a>
+            <a>1000-1999</a>
+            <a>2000-8000</a>
+        </div>
+    </div>
+    <div id="cate-second" class="cate-brand-box">
+
+    </div>
+</section>
+<script type="text/html" id="top-list">
+    <% if(top_list.length >0){%>
+        <% for (var i = 0;i<top_list.length;i++){%>
+            <% if(i == 0){%>
+                <a class="action" gc_id="<%=top_list[i].gc_id%>"><span><%=top_list[i].gc_name%></span></a>
+            <%}else{%>
+                <a><span><%=top_list[i].gc_name%></span></a>
+            <%}%>
+        <%}%>
+    <%}%>
+</script>
+<script type="text/html" id="child-list">
+    <% if(child_list.length >0){%>
+        <% for (var i = 0;i<child_list.length;i++){%>
+            <% if(child_list[i].image){%>
+                <a href="<%=child_list[i].gc_id%>">
+                    <div class="img"><img src="<%=child_list[i].image%>"></div>
+                    <p class="title"><%=child_list[i].gc_name%></p></a>
+            <%}else{%>
+                <a href="<%=child_list[i].gc_id%>">
+                    <div class="img"></div>
+                    <p class="title"><%=child_list[i].gc_name%></p></a>
+            <%}%>
+        <%}%>
+    <%}%>
+</script>
+
+<!--@尾部 start-->
+<footer class="footer">
+    <a class="home action"><span></span>
+        <p>首页</p></a>
+    <a class="cate"><span></span>
+        <p>分类</p></a>
+    <a class="middle"><img src="../new/images/ico/middle-ico.png"></a>
+    <a class="cart"><span></span>
+        <p>购物车</p></a>
+    <a class="member"><span></span>
+        <p>我的</p></a>
+</footer>
+<!--@尾部 start-->
+</body>
+</html>

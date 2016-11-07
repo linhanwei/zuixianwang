@@ -14,7 +14,7 @@ class goods_classControl extends mobileHomeControl{
         parent::__construct();
     }
 
-	public function indexOp() {
+    public function indexOp() {
 
         /* if(!empty($_GET['gc_id']) && intval($_GET['gc_id']) > 0) {
              $this->_get_class_list($_GET['gc_id']);
@@ -60,7 +60,28 @@ class goods_classControl extends mobileHomeControl{
         Tpl::output('child_list',$child_list);
         Tpl::showpage('goods_class.index');
 
-	}
+    }
+
+    //获取数据
+    public function ajax_dataOp(){
+
+        $gc_id = $_GET['gc_id'];
+        $is_ajax = $_GET['is_ajax'];
+
+        $model_goods_class = Model('goods_class');
+
+        //获取最顶级分类
+        $top_list = array();
+        if(!$is_ajax){
+            $top_list = $model_goods_class->getChildClass(0,false,false);
+            if(!$gc_id){
+                $gc_id = $top_list[0]['gc_id'];
+            }
+        }
+
+        $child_list = $this->_get_all_child($gc_id,$model_goods_class);
+        output_data(array('top_list'=>$top_list,'child_list'=>$child_list));
+    }
 
     /**
      * 获取顶级所有子分类
@@ -77,6 +98,7 @@ class goods_classControl extends mobileHomeControl{
                         $list[$ck]['image'] = UPLOAD_SITE_URL.DS.ATTACH_COMMON.DS.'category-pic-'.intval($cv['gc_id']).'.jpg';
                     }
                 }
+                $child_list[$k]['image'] = UPLOAD_SITE_URL.DS.ATTACH_COMMON.DS.'category-pic-'.intval($child['gc_id']).'.jpg';
                 $child_list[$k]['child'] = $list;
             }
         }
