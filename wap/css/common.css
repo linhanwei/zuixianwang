@@ -472,3 +472,7 @@ img,span,small,label{ vertical-align:middle}
 @media only screen and (min-width:359px) and (max-width:413px) {
 	 html,body{ font-size: 90px !important}
 }
+
+.layui-layer .layui-layer-btn{
+  font-size: 0.016rem;
+}

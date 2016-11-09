@@ -53,21 +53,26 @@ class member_cartControl extends mobileMemberControl {
     public function cart_listOp() {
         $model_cart = Model('cart');
 
+        $new_cart_list = array();
         $condition = array('buyer_id' => $this->member_info['member_id']);
         $cart_list	= $model_cart->listCart('db', $condition);
         $sum = 0;
-        foreach ($cart_list as $key => $value) {
-            $store_id = $value['store_id'];
-            $cart_list[$key]['goods_image_url'] = cthumb($value['goods_image'], $value['store_id']);
-            $cart_list[$key]['goods_sum'] = ncPriceFormat($value['goods_price'] * $value['goods_num']);
 
-            $sum += $value['goods_price'] * $value['goods_num'];
-            $cart_list[$key]['store_name'] = $cart_list[$key]['store_name'].'商城';
-            $new_cart_list[$store_id][] = $cart_list[$key];
+        if($cart_list){
+            foreach ($cart_list as $key => $value) {
+                $store_id = $value['store_id'];
+                $cart_list[$key]['goods_image_url'] = cthumb($value['goods_image'], $value['store_id']);
+                $cart_list[$key]['goods_sum'] = ncPriceFormat($value['goods_price'] * $value['goods_num']);
+
+                $sum += $value['goods_price'] * $value['goods_num'];
+                $cart_list[$key]['store_name'] = $cart_list[$key]['store_name'].'商城';
+                $new_cart_list[$store_id][] = $cart_list[$key];
+
+            }
 
         }
 
-        output_data(array('cart_list' => $cart_list, 'sum' => ncPriceFormat($sum)));
+        output_data(array('cart_list' => array_values($new_cart_list), 'sum' => ncPriceFormat($sum)));
     }
 
     /**

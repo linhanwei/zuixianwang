@@ -21,7 +21,7 @@
     <?php foreach($output['cart_list'] as $skey=>$store){ ?>
         <section class="cart-shop-item">
             <div class="cart-shop-item-head">
-                <span class="select-btn" id="shop-select-all-1" onClick="shopAllSelect(1)"><img src="./templates/default/images/cart/ico-789446.png"></span>
+                <span class="select-btn" id="shop-select-all-1" onClick="shopAllSelect(<?php echo $store[0]['store_id']; ?>)"><img src="./templates/default/images/cart/ico-789446.png"></span>
                 <span class="shop-btn"><a href="javascript:void(0)"><img src="./templates/default/images/cart/ico-4658794.png"><?php echo $store[0]['store_name']; ?><img src="./templates/default/images/cart/ico-4562255.png"></a></span>
                 <span class="edit-btn" data-shopid="1" data-status="1"><a href="javascript:void(0)">编辑</a></span>
             </div>

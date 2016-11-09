@@ -1,86 +1,105 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>购物车列表</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/child.css">
-    <!--<script type="text/javascript" src="../js/jquery.min.js"></script>-->
-    <script type="text/javascript" src="../js/zepto.min.js"></script>
-<script type="text/javascript" src="../js/config.js"></script>
-</head>
-<body>
-    <header id="header"></header>
-        <div class="cart-list-wp">
-            <div id="cart-list-wp"></div>
-            <script type="text/html" id="cart-list">
-            <% if(cart_list.length >0){%>
-                <ul class="cart-list">
-                    <% for (var i = 0;i<cart_list.length;i++){%>
-                        <li class="cart-list-item">
-                            <div class="cart-shop-name">
-                                店铺名称：<%=cart_list[i].store_name%>
-                            </div>
-                            <div class="cart-litem-wp clearfix">
-                                <a class="cart-litemw-imgwp" href="<%=SiteUrl%>/mall_m/index.php?act=goods&op=detail&goods_id=<%=cart_list[i].goods_id%>">
-                                    <img src="<%=cart_list[i].goods_image_url%>"/>
-                                </a>
-                                <div class="cart-litemw-cnt" cart_id="<%=cart_list[i].cart_id%>">
-                                    <a class="cart-litemwc-pdname" href="<%=WapSiteUrl%>/tmpl/product_detail.html?goods_id=<%=cart_list[i].goods_id%>">
-                                        <%=cart_list[i].goods_name%>
-                                    </a>
-                                    <p class="mt5">
-                                        商品单价：￥<%=cart_list[i].goods_price%>
-                                    </p>
-                                     <p class="mt5">
-                                        商品总价：￥<span class="goods-total-price"><%=cart_list[i].goods_sum%></span>
-                                    </p>
-                                    <p class="cart-litemwc-pdcount clearfix mt5">
-                                        <span class="minus-wp fleft">
-                                            <span class="i-minus"></span>
-                                        </span>
-                                        <input type="text" class="buy-num buynum fleft" value="<%=cart_list[i].goods_num%>"/>
-                                        <span class="add-wp fleft">
-                                            <span class="i-add"></span>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <span class="cart-list-del" cart_id="<%=cart_list[i].cart_id%>">
-                                <span class="i-del"></span>
-                            </span>
-                        </li>
-                    <%}%>
-                    <li class="cart-list-oitem mt10">
-                        商品总金额：<span class="clr-d94 total_price">￥<%=sum%></span>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" class="goto-settlement mt10">去结算</a>
-                    </li>
-                    <li>
-                        <a href="<%=WapSiteUrl%>/tmpl/product_list.html?gc_id=0" class="goto-shopping mt10">去逛逛</a>
-                    </li>
-                </ul>
-            <%}else{%>
-                <div class="no-record m10">
-                    暂无记录
-                </div>
-            <%}%>
-            </script>
-        </div>
-    </div>
-    <footer  id="footer"></footer>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>醉仙网首页</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" type="text/css" href="../plug-ins/swiper/swiper-3.4.0.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" /><script type="text/javascript" src="../js/config.js"></script>
     <script type="text/javascript" src="../js/template.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/simple-plugin.js"></script>
-    <script type="text/javascript" src="../js/tmpl/common-top.js"></script>
+    <script type="text/javascript" src="../js/app.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="../js/tmpl/footer.js"></script>
+    <script src="../../data/resource/js/layer/layer.js"></script>
+    <script src="../js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="../plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
     <script type="text/javascript" src="../js/tmpl/cart-list.js"></script>
+</head>
+
+<body class="cart-body">
+<section class="cart-head">
+    <span class="title">购物车</span>
+    <a href="#" class="info-btn"><img src="../images/cart/ico-1464645.png"></a>
+</section>
+<div id="cart-list-wp"></div>
+<script type="text/html" id="cart-list">
+<section class="cart-shop-item">
+    <% if(cart_list.length >0){%>
+    <% for (var i = 0;i<cart_list.length;i++){%>
+    <div class="cart-shop-item-head">
+        <span class="select-btn" id="shop-select-all-1" onClick="shopAllSelect(<%=cart_list[i][0].store_id%>)"><img src="../images/cart/ico-789446.png"></span>
+        <span class="shop-btn"><a href="javascript:void(0)"><img class="shop-ico" src="../images/cart/ico-4658794.png"><img  class="arrow-right" src="../images/cart/ico-4562255.png"><span><%=cart_list[i][0].store_name%></span></a></span>
+        <span class="edit-btn" data-shopid="<%=cart_list[i][0].store_id%>" data-status="1"><a href="javascript:void(0)">编辑</a></span>
+    </div>
+    <!--
+    <div class="cart-shop-item-tips">
+      满199可减10元,可跨店使用 <a href="#">去凑单></a>
+    </div>
+    -->
+    <div class="cart-shop-pro-list" id="shop-list-<%=cart_list[i][0].store_id%>" data-shopid="<%=cart_list[i][0].store_id%>">
+        <% for (var k = 0;k<cart_list[i].length;k++){%>
+        <div class="cart-shop-pro-item" id="pro-item-<%=cart_list[i][k].cart_id%>" data-price="<%=cart_list[i][k].goods_price%>" data-num="<%=cart_list[i][k].goods_num%>" data-proid="<%=cart_list[i][k].cart_id%>">
+            <div class="select" data-selected="0" onClick="cartSelectItem(<%=cart_list[i][k].cart_id%>)" >
+                <img src="../images/cart/ico-789446.png">
+            </div>
+            <div class="image">
+                <a href="<%=WapSiteUrl%>/tmpl/product_detail.html?goods_id=<%=cart_list[i][k].goods_id%>"><img src="<%=cart_list[i][k].goods_image_url%>"></a>
+            </div>
+            <div class="info">
+                <div class="title"><%=cart_list[i][k].goods_name%> </div>
+                <!--<div class="spec-item"><span>35度</span> <span>500ML</span> <span class="zhekou-ico"></span></div>-->
+                <div class="price" >￥<span id="price-show-<%=cart_list[i][k].cart_id%>"><%=cart_list[i][k].goods_price%></span></div>
+            </div>
+            <div class="num-box">
+                <small>X</small><span id="num-show-<%=cart_list[i][k].cart_id%>"><%=cart_list[i][k].goods_num%></span>
+            </div>
+            <div class="col">
+                <div class="left">
+                    <div class="num-col">
+                        <a class="minus" id="minus-<%=cart_list[i][k].cart_id%>" onClick="cartMinus(<%=cart_list[i][k].cart_id%>);">-</a>
+                        <input name="num" id="num-<%=cart_list[i][k].cart_id%>" value="<%=cart_list[i][k].goods_num%>">
+                        <a class="add" id="add-<%=cart_list[i][k].cart_id%>" onClick="cartAdd(<%=cart_list[i][k].cart_id%>);">+</a>
+                    </div>
+                </div>
+                <div class="right">
+                    <a href="javascript:void(0)" onClick="cartItemDel(<%=cart_list[i][k].cart_id%>);">删除</a>
+                </div>
+            </div>
+        </div>
+        <%}%>
+    </div>
+    <%}%>
+</section>
+
+<section class="cart-statement-box">
+    <a href="#" class="cart-statement-select-btn" id="cart-statement-select-btn"><span><img src="../images/cart/ico-789446.png"><small>全选</small></span></a>
+    <div class="cart-statement-info">
+        <div class="cart-statement-total-info">
+            <div class="total-box"><label>合计:</label><span class="total">￥<small id="total-show">0.00</small></span></div>
+            <div class="freight" id="freight">不含运费</div>
+        </div>
+        <div class="cart-statement-btn" id="cart-statement-btn">
+            结算(<span id="pro-num">0</span>)
+        </div>
+    </div>
+</section>
+<%}else{%>
+<div class="empty">
+    暂无记录
+</div>
+<%}%>
+</script>
+
 </body>
 </html>

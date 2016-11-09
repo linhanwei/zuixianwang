@@ -16,19 +16,19 @@ $(function(){
 	$("#cart-statement-select-btn").on('click',function(){
 		if($(this).hasClass('selected')){
 			$(".cart-shop-pro-item").find('.select').removeClass('selected');
-			$(".cart-shop-pro-item").find('.select').children('img').attr('src','./templates/default/images/cart/ico-789446.png');
+			$(".cart-shop-pro-item").find('.select').children('img').attr('src','../images/cart/ico-789446.png');
 			$(".select-btn").removeClass('selected');
-			$(".select-btn").find('img').attr('src','./templates/default/images/cart/ico-789446.png');
+			$(".select-btn").find('img').attr('src','../images/cart/ico-789446.png');
 
 			$(this).removeClass('selected');
-			$(this).find('span img').attr('src','./templates/default/images/cart/ico-789446.png');
+			$(this).find('span img').attr('src','../images/cart/ico-789446.png');
 		}else{
 			$(".cart-shop-pro-item").find('.select').addClass('selected');
-			$(".cart-shop-pro-item").find('.select').children('img').attr('src','./templates/default/images/cart/ico-789447.png');
+			$(".cart-shop-pro-item").find('.select').children('img').attr('src','../images/cart/ico-789447.png');
 			$(".select-btn").addClass('selected');
-			$(".select-btn").find('img').attr('src','./templates/default/images/cart/ico-789447.png');
+			$(".select-btn").find('img').attr('src','../images/cart/ico-789447.png');
 			$(this).addClass('selected');
-			$(this).find('span img').attr('src','./templates/default/images/cart/ico-789447.png');
+			$(this).find('span img').attr('src','../images/cart/ico-789447.png');
 		}
 		countTotal();
 	});
@@ -98,11 +98,11 @@ function cartItemDel(cart_id){
 function cartSelectItem(id){
 	var shopid =  $("#pro-item-"+id).parent('.cart-shop-pro-list').attr('data-shopid');
 	if(!$("#pro-item-"+id).find(".select").hasClass('selected')){
-		$("#pro-item-"+id).find(".select img").attr('src','./templates/default/images/cart/ico-789447.png');
+		$("#pro-item-"+id).find(".select img").attr('src','../images/cart/ico-789447.png');
 		$("#pro-item-"+id).find(".select").addClass('selected');
 		$("#pro-item-"+id).addClass('selected');
 	}else{
-		$("#pro-item-"+id).find(".select img").attr('src','./templates/default/images/cart/ico-789446.png');
+		$("#pro-item-"+id).find(".select img").attr('src','../images/cart/ico-789446.png');
 		$("#pro-item-"+id).find(".select").removeClass('selected');
 		$("#pro-item-"+id).removeClass('selected');
 	}
@@ -114,12 +114,12 @@ function cartSelectItem(id){
 	countTotal();
 	if(cl == sl){
 
-		$("#shop-select-all-"+shopid).find('img').attr('src','./templates/default/images/cart/ico-789447.png');
+		$("#shop-select-all-"+shopid).find('img').attr('src','../images/cart/ico-789447.png');
 		$("#shop-select-all-"+shopid).addClass('selected');
 
 	}else{
 
-		$("#shop-select-all-"+shopid).find('img').attr('src','./templates/default/images/cart/ico-789446.png');
+		$("#shop-select-all-"+shopid).find('img').attr('src','../images/cart/ico-789446.png');
 		$("#shop-select-all-"+shopid).removeClass('selected');
 
 	}
@@ -131,15 +131,15 @@ function cartSelectItem(id){
 function shopAllSelect(shopid){
 	if($("#shop-select-all-"+shopid).hasClass('selected')){
 		$("#shop-list-"+shopid).find(".select").removeClass('selected');
-		$("#shop-list-"+shopid).find(".select").children("img").attr('src','./templates/default/images/cart/ico-789446.png');
+		$("#shop-list-"+shopid).find(".select").children("img").attr('src','../images/cart/ico-789446.png');
 		$("#shop-select-all-"+shopid).removeClass('selected');
-		$("#shop-select-all-"+shopid).find('img').attr('src','./templates/default/images/cart/ico-789446.png');
+		$("#shop-select-all-"+shopid).find('img').attr('src','../images/cart/ico-789446.png');
 		$("#shop-list-"+shopid).children(".cart-shop-pro-item").removeClass('selected');
 	}else{
 		$("#shop-list-"+shopid).find(".select").addClass('selected');
-		$("#shop-list-"+shopid).find(".select").children("img").attr('src','./templates/default/images/cart/ico-789447.png');
+		$("#shop-list-"+shopid).find(".select").children("img").attr('src','../images/cart/ico-789447.png');
 		$("#shop-select-all-"+shopid).addClass('selected');
-		$("#shop-select-all-"+shopid).find('img').attr('src','./templates/default/images/cart/ico-789447.png');
+		$("#shop-select-all-"+shopid).find('img').attr('src','../images/cart/ico-789447.png');
 		$("#shop-list-"+shopid).children(".cart-shop-pro-item").addClass('selected');
 	}
 
