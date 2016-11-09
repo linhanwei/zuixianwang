@@ -24,7 +24,7 @@ $(function () {
         dataType: 'json',
         success: function (result) {
             var data = result.datas;
-            //console.log(data);
+
             $.each(data, function (k, v) {
                 $.each(v, function (kk, vv) {
                     switch (kk) {
@@ -100,9 +100,8 @@ $(function () {
                             break;
 
                     }
-                    console.log(kk, vv);
+                    //console.log(kk, vv);
                     html += template.render(kk, vv);
-                    //console.log('html',kk);
                     return false;
                 });
             });
@@ -121,15 +120,53 @@ $(function () {
                 autoplayDisableOnInteraction: false
             });
 
-            //修改a链接增加key值
-            add_key();
+            //左右转动
+            $(".tejia-box").width( (($(window).width()-30)/3 + 10) *$(".tejia-box").find(".item").length  );
+            $(".tejia-box").find(".item").width(($(window).width()-30)/3);
+            $("#index-tj-arrow-left").hide();
+            $("#index-tj-arrow-left").on('click',function(){
+                var tjl = $(".tejia-box").offset().left;
+                var il  = $(".tejia-box").find(".item").length;
+                var iw  = $(".tejia-box").find(".item").width();
+
+                if(tjl < 0 )
+                    $(".tejia-box").animate({marginLeft:(iw+10+tjl)+'px'});
+
+                if(tjl > -1*(iw+10)){
+                    $("#index-tj-arrow-left").hide();
+                }
+
+                if(tjl > -1*(iw+10)*(il-1)){
+                    $("#index-tj-arrow-right").show();
+                }
+            });
+            $("#index-tj-arrow-right").on('click',function(){
+                var tjl = $(".tejia-box").offset().left;
+                var il  = $(".tejia-box").find(".item").length;
+                var iw  = $(".tejia-box").find(".item").width();
+                if(tjl > -1*(iw+10)*(il-3))
+                    $(".tejia-box").animate({marginLeft:(-1*(iw+10)+tjl)+'px'});
+
+                if(tjl == 0){
+                    $("#index-tj-arrow-left").show();
+                }
+
+                if(tjl == -1*(iw+10)*(il-4)){
+                    $("#index-tj-arrow-right").hide();
+                }
+            });
 
         }
     });
 
-    $('.search-btn').click(function () {
-        var keyword = encodeURIComponent($('#keyword').val());
-        location.href = SiteUrl + '/mall_m/index.php?act=goods&op=list&keyword=' + keyword;
-    });
+    //搜索
+    var search_list = getCache('search_key_list');
+    if(search_list && search_list.length > 0){
+        var search_html = '';
+        for(var sea in search_list){
+            search_html += '<a href="'+WapSiteUrl+'/tmpl/product_list.html?keyword='+encodeURIComponent(search_list[sea])+'" class="search-hb">'+search_list[sea]+'</a>';
+        }
+        $('.search-history-box').html(search_html);
+    }
 
 });

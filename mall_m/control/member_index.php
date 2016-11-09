@@ -41,11 +41,15 @@ class member_indexControl extends mobileMemberControl {
         $member_info['point'] = number_format($this->member_info['member_points'],2);
         $member_info['predepoit'] = $this->member_info['available_predeposit'];
         $member_info['available_rc_balance'] = $this->member_info['available_rc_balance'];
-//        dump($member_info);
-        Tpl::output('member_info',$member_info);
-        Tpl::showpage('member.index');
 
-//        output_data(array('member_info' => $member_info));
+        //网站信息
+        $model_setting = Model('setting');
+        $list_setting = $model_setting->getListSetting();
+//        dump($member_info);
+//        Tpl::output('member_info',$member_info);
+//        Tpl::showpage('member.index');
+
+        output_data(array('member_info' => $member_info,'web_config'=>$list_setting));
 	}
 
 }

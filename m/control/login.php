@@ -130,7 +130,7 @@ class loginControl extends mobileHomeControl {
 
 
         //添加奖励会员积分invite_code
-        $invite_code = $_POST['invite_code'];
+        /*$invite_code = $_POST['invite_code'];
         if(empty($invite_code)){
             output_error('请填写推荐人');
         }else{
@@ -144,7 +144,7 @@ class loginControl extends mobileHomeControl {
             }else{
                 output_error('推荐人不存在');
             }
-        }
+        }*/
 
         $register_info['member_mobile'] = $_POST['mobile_phone'];
         $register_info['member_mobile_bind'] = 1;

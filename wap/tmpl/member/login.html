@@ -1,39 +1,51 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" type="text/css" href="../../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../css/member.css">
+<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>登录</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" type="text/css" href="http://120.25.212.243/jiu/mall_m/templates/default/static/css/common.css">
+<link rel="stylesheet" type="text/css" href="http://120.25.212.243/jiu/mall_m/templates/default/static/css/style.css">
+
 </head>
-<body>
-    <header id="header"></header>
-    <div class="login-form">
+<body class="login-body">
+    <div class="login-logo"><img src="http://120.25.212.243/jiu/mall_m/templates/default/static/images/login/logo.jpg"></div>
+    <div class="login-form login-box">
         <form action="" method ="">
-            <span>
-                <input type="text" placeholder="用户名" class="input-40" name="username" id="username"/>
-            </span>
-             <span>
-                <input type="password" placeholder="密码" class="input-40" name="pwd" id="userpwd"/>
-            </span>
+            <div class="input-group username">
+              <i></i>  <input type="text" placeholder="用户名" class="input-40" name="username" id="username" autocomplete="off"/>
+            </div>
+             <div class="input-group password">
+               <i></i> <input type="password" placeholder="密码" class="input-40" name="pwd" id="userpwd" autocomplete="off"/>
+            </div>
+           <div class="password-tips-row">
+              <span class="rember-pass-box action"><small>记住密码</small><i></i><input name="remember-pass" type="hidden"></span>
+              <a class="forget-pass">忘记密码</a>
+           </div>
             <!-- <span class="clearfix auto-login">
                 <i class="s-chk1 fleft mr5"></i>
                 <span>7天内免登录</span>
             </span> -->
             <div class="error-tips mt10"></div>
-            <a href="javascript:void(0);" class="l-btn-login mt10" id="loginbtn">
+            <div class="login-btn-box">
+            <a href="javascript:void(0);" class="login-btn" id="loginbtn">
                 登录
             </a>
+            <a href="../../../invite/" class="register-btn" id="registerbtn">
+                注册
+            </a>
+            </div>
         </form>
     </div>
-    <div class="footer" id="footer_nav"></div>
-    <footer id="footer"></footer>
+    <footer class="footer footer-nav" style="display: none;"></footer>
     <input type="hidden" name="referurl">
     <script type="text/javascript" src="../../js/config.js"></script>
     <script type="text/javascript" src="../../js/zepto.min.js"></script>

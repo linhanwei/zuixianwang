@@ -122,7 +122,7 @@ class mb_specialModel extends Model{
     public function getMbSpecialItemUsableListByID($special_id) {
         $prefix = 'mb_special';
 
-        $item_list = rcache($special_id, $prefix);
+//        $item_list = rcache($special_id, $prefix);
         //缓存有效
         if(!empty($item_list)) {
             return unserialize($item_list['special']);
@@ -200,7 +200,10 @@ class mb_specialModel extends Model{
             case 'home12':
                 $item_data['image'] = getMbSpecialImageUrl($item_data['image']);
                 break;
+            case 'home14':
+
             case 'goods':
+
 	                 // 33hao.com v3-10
 			  case 'goods1':
 			  case 'goods2':
@@ -283,8 +286,7 @@ class mb_specialModel extends Model{
     private function _initMbSpecialItemData($item_data, $item_type) {
         if(!empty($item_data)) {
             $item_data = unserialize($item_data);
-	    // 33hao.com v3-10
-            if($item_type == 'goods'||$item_type == 'goods1'||$item_type == 'goods2') {
+            if($item_type == 'home14'||$item_type == 'goods'||$item_type == 'goods1'||$item_type == 'goods2') {
                 $item_data = $this->_initMbSpecialItemGoodsData($item_data, $item_type);
             }
         } else {
@@ -485,7 +487,7 @@ class mb_specialModel extends Model{
         $module_list['home9'] = array('name' => 'home9' , 'desc' => '模型版块布局H');
         $module_list['home10'] = array('name' => 'home10' , 'desc' => '模型版块布局J');
         $module_list['home11'] = array('name' => 'home11' , 'desc' => '模型版块布局K');
-        $module_list['home13'] = array('name' => 'home13' , 'desc' => '模型版块布局L');
+//        $module_list['home13'] = array('name' => 'home13' , 'desc' => '模型版块布局L');
         $module_list['home14'] = array('name' => 'home14' , 'desc' => '模型版块布局M');
 
         $module_list['goods'] = array('name' => 'goods' , 'desc' => '商品版块');

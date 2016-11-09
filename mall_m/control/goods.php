@@ -77,6 +77,7 @@ class goodsControl extends mobileHomeControl{
         $model_goods = Model('goods');
         $model_search = Model('search');
         $this->page = 6;
+        $price = $_GET['price'];
 
         //查询条件
         $condition = array();
@@ -84,6 +85,13 @@ class goodsControl extends mobileHomeControl{
             $condition['gc_id'] = $_GET['gc_id'];
         } elseif (!empty($_GET['keyword'])) {
             $condition['goods_name|goods_jingle'] = array('like', '%' . $_GET['keyword'] . '%');
+        }
+
+        if(!empty($price)){
+            if(stripos($price,'-')){
+                $price_exp = explode('-',$price);
+                $condition['goods_price'] = array('between', array($price_exp[0],$price_exp[1]));
+            }
         }
 
         //所需字段
@@ -292,6 +300,7 @@ class goodsControl extends mobileHomeControl{
         }
         $goods_detail['goods_commend_list'] = $goods_commend_list;
         $store_info = $model_store->getStoreInfoByID($goods_detail['goods_info']['store_id']);
+
         $goods_detail['store_info']['store_id'] = $store_info['store_id'];
         $goods_detail['store_info']['store_name'] = $store_info['store_name'];
         $goods_detail['store_info']['member_id'] = $store_info['member_id'];
@@ -299,11 +308,29 @@ class goodsControl extends mobileHomeControl{
         $goods_detail['store_info']['store_ww'] = $store_info['store_ww'];
         $goods_detail['store_info']['store_phone'] = $store_info['store_phone'];
         $goods_detail['store_info']['member_name'] = $store_info['member_name'];
-        $goods_detail['store_info']['avatar'] = getMemberAvatarForID($store_info['member_id']);
+        $goods_detail['store_info']['logo'] = getStoreLogo($store_info['store_label'],'store_logo');
+        $goods_detail['store_info']['avatar'] = getStoreLogo($store_info['store_avatar'],'store_avatar');
 
         //商品详细信息处理
         $goods_detail = $this->_goods_detail_extend($goods_detail);
 
+        //商品属性处理
+        $attr_list = $goods_detail['goods_info']['goods_attr'];
+        if($attr_list){
+            foreach($attr_list as $aval){
+                foreach($aval as $ak=>$av){
+                    if($ak == 'name'){
+                        $aname = $av;
+                    }else{
+                        $avalue = $av;
+                    }
+                }
+                $goods_detail['attr_list'][] = array('name'=>$aname,'value'=>$avalue);
+            }
+        }
+
+        //商品规格值处理
+        $goods_detail['spec_val_list'] = array_values($goods_detail['goods_info']['goods_spec']);
 
 		$goods_info=$goods_detail['goods_info'];
 		//print_r($goods_info);

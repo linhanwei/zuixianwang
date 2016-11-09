@@ -14,6 +14,7 @@ $(function () {
                     if (checklogin(result.login)) {
                         if (!result.datas.error) {
                             var rData = result.datas;
+                            console.log(rData);
                             rData.WapSiteUrl = WapSiteUrl;
                             var html = template.render('cart-list', rData);
                             $("#cart-list-wp").html(html);
@@ -26,13 +27,49 @@ $(function () {
                             //去结算
                             $(".goto-settlement").click(goSettlement);
                             $(".buynum").blur(buyNumer);
+
+                            //新页面
+                            $(function () {
+                                $(".edit-btn").on('click', function () {
+                                    var shopid = $(this).attr('data-shopid');
+                                    var status = $(this).attr('data-status');
+                                    if (status == 1) {
+                                        $("#shop-list-" + shopid).find(".info").hide();
+                                        $("#shop-list-" + shopid).find(".num-box").hide();
+                                        $("#shop-list-" + shopid).find(".col").show();
+                                        $(this).attr('data-status', 0);
+                                    } else {
+                                        $("#shop-list-" + shopid).find(".info").show();
+                                        $("#shop-list-" + shopid).find(".num-box").show();
+                                        $("#shop-list-" + shopid).find(".col").hide();
+                                        $(this).attr('data-status', 1);
+                                    }
+                                })
+
+                                $("#cart-statement-select-btn").on('click', function () {
+                                    if ($(this).hasClass('selected')) {
+                                        $(".cart-shop-pro-item").find('.select').removeClass('selected');
+                                        $(".cart-shop-pro-item").find('.select').children('img').attr('src', '../images/cart/ico-789446.png');
+                                        $(".select-btn").removeClass('selected');
+                                        $(".select-btn").find('img').attr('src', '../images/cart/ico-789446.png');
+
+                                        $(this).removeClass('selected');
+                                        $(this).find('span img').attr('src', '../images/cart/ico-789446.png');
+                                    } else {
+                                        $(".cart-shop-pro-item").find('.select').addClass('selected');
+                                        $(".cart-shop-pro-item").find('.select').children('img').attr('src', '../images/cart/ico-789447.png');
+                                        $(".select-btn").addClass('selected');
+                                        $(".select-btn").find('img').attr('src', '../images/cart/ico-789447.png');
+                                        $(this).addClass('selected');
+                                        $(this).find('span img').attr('src', '../images/cart/ico-789447.png');
+                                    }
+                                    countTotal();
+                                })
+                            })
                         } else {
-                            alert(result.datas.error);
+                            layer.alert(result.datas.error);
                         }
                     }
-
-                    //修改a链接增加key值
-                    add_key();
                 }
             });
         }
@@ -138,31 +175,106 @@ $(function () {
             window.location.href = WapSiteUrl + "/tmpl/order/buy_step1.html?ifcart=1&cart_id=" + cart_id;
         }
 
-        //验证
-        $.sValid.init({
-            rules: {
-                buynum: "digits"
-            },
-            messages: {
-                buynum: "请输入正确的数字"
-            },
-            callback: function (eId, eMsg, eRules) {
-                if (eId.length > 0) {
-                    var errorHtml = "";
-                    $.map(eMsg, function (idx, item) {
-                        errorHtml += "<p>" + idx + "</p>";
-                    });
-                    $.sDialog({
-                        skin: "red",
-                        content: errorHtml,
-                        okBtn: false,
-                        cancelBtn: false
-                    });
-                }
-            }
-        });
         function buyNumer() {
             $.sValid();
         }
     }
 });
+
+
+//新页面
+function cartMinus(id) {
+    var num = parseInt($("#num-" + id).val());
+    var limitNum = 1;
+    if (num > limitNum) {
+        num--;
+        $("#num-" + id).val(num);
+        $("#num-show-" + id).html(num);
+        $("#pro-item-" + id).attr("data-num", num);
+    }
+
+    countTotal();
+}
+
+function cartAdd(id) {
+    var num = parseInt($("#num-" + id).val());
+    var limitNum = 999;
+    if (num < limitNum) {
+        num++;
+        $("#num-" + id).val(num);
+        $("#num-show-" + id).html(num);
+        $("#pro-item-" + id).attr("data-num", num);
+    }
+
+    countTotal();
+}
+
+function cartItemDel(id) {
+    $("#pro-item-" + id).remove();
+    countTotal();
+}
+
+function cartSelectItem(id) {
+    var shopid = $("#pro-item-" + id).parent('.cart-shop-pro-list').attr('data-shopid');
+    if (!$("#pro-item-" + id).find(".select").hasClass('selected')) {
+        $("#pro-item-" + id).find(".select img").attr('src', '../images/cart/ico-789447.png');
+        $("#pro-item-" + id).find(".select").addClass('selected');
+        $("#pro-item-" + id).addClass('selected');
+    } else {
+        $("#pro-item-" + id).find(".select img").attr('src', '../images/cart/ico-789446.png');
+        $("#pro-item-" + id).find(".select").removeClass('selected');
+        $("#pro-item-" + id).removeClass('selected');
+    }
+
+
+    var cl = $("#pro-item-" + id).parent(".cart-shop-pro-list").children('.cart-shop-pro-item').length;
+    var sl = $("#pro-item-" + id).parent(".cart-shop-pro-list").children('.selected').length;
+
+    countTotal();
+    if (cl == sl) {
+
+        $("#shop-select-all-" + shopid).find('img').attr('src', '../images/cart/ico-789447.png');
+        $("#shop-select-all-" + shopid).addClass('selected');
+
+    } else {
+
+        $("#shop-select-all-" + shopid).find('img').attr('src', '../images/cart/ico-789446.png');
+        $("#shop-select-all-" + shopid).removeClass('selected');
+
+    }
+
+
+}
+
+function shopAllSelect(shopid) {
+    if ($("#shop-select-all-" + shopid).hasClass('selected')) {
+        $("#shop-list-" + shopid).find(".select").removeClass('selected');
+        $("#shop-list-" + shopid).find(".select").children("img").attr('src', '../images/cart/ico-789446.png');
+        $("#shop-select-all-" + shopid).removeClass('selected');
+        $("#shop-select-all-" + shopid).find('img').attr('src', '../images/cart/ico-789446.png');
+        $("#shop-list-" + shopid).children(".cart-shop-pro-item").removeClass('selected');
+    } else {
+        $("#shop-list-" + shopid).find(".select").addClass('selected');
+        $("#shop-list-" + shopid).find(".select").children("img").attr('src', '../images/cart/ico-789447.png');
+        $("#shop-select-all-" + shopid).addClass('selected');
+        $("#shop-select-all-" + shopid).find('img').attr('src', '../images/cart/ico-789447.png');
+        $("#shop-list-" + shopid).children(".cart-shop-pro-item").addClass('selected');
+    }
+
+    countTotal();
+}
+
+function countTotal() {
+    var totalNum = 0;
+    var totalMoney = 0;
+    $(".cart-shop-pro-list").each(function (i) {
+        $(this).eq(i).children('.cart-shop-pro-item').each(function (j) {
+            if ($(this).find('.select').hasClass('selected')) {
+                totalNum++;
+                totalMoney += parseInt($(this).attr("data-price")) * parseInt($(this).attr("data-num"));
+            }
+        });
+    });
+    $("#pro-num").html(totalNum);
+    $("#total-show").html(totalMoney);
+}

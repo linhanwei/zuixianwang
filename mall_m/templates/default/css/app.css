@@ -464,6 +464,12 @@ a{ color:#666}
 
 .ov{ overflow:hidden;}
 
+body{ background:#F0F0F0; padding-top:0.5rem; padding-bottom:0.5rem; max-width:640px; margin:auto}
+.head-main{ width:100%; height:0.5rem; line-height:0.5rem; position:fixed; top:0; left:0; background:#FFF; z-index:9999}
+.head-main .title-img{ height:100%; margin:auto}
+.head-main .head-right-btn{ display:block; width:0.5rem; height:0.5rem; overflow:hidden; position:absolute; top:0; right:0.1rem}
+.head-main .head-right-btn img{ width:100%; vertical-align:top}
+
 .swipe ul,.swipe li{margin:0;padding:0;list-style:none;overflow:hidden}
 
 .swipe img{width:100%;height:auto;display:block}
@@ -521,6 +527,22 @@ a{ color:#666}
         align-items: center;
 
 }
+
+/**@特价模块开始**/
+.tejia-main{ width:100%; overflow:hidden; position:relative; margin-top:0.1rem}
+.tejia-main .arrow{ display:block; width:0.3rem; position:absolute; top:30%; z-index:100}
+.tejia-main .arrow img{ width:100%; vertical-align:top}
+.tejia-main .arrow.arrow-left{ left: 0;}
+.tejia-main .arrow.arrow-right{ right: 0;}
+.tejia-box{}
+.tejia-box .item{ display:block; width:1rem; float:left; overflow:hidden; padding:5px; background:#FFF; color:#666; text-decoration:none}
+.tejia-box .item .pro-box{position:relative; z-index:1}
+.tejia-box .item .pro-box img{ width:100%}
+.tejia-box .item .pro-box .title{ height:0.3rem; line-height:0.15rem; font-size:0.12rem; text-align:center}
+.tejia-box .item .pro-box .price{ height:0.2rem; font-size:0.12rem; text-align:center}
+.tejia-box .item .pro-box .ico{ position:absolute; top:0; left:0; width:0.2rem; z-index:2}
+.tejia-box .item .pro-box .line{ display:block; width:1px; background:#000; height:60%; position:absolute; right:0; top:20%; z-index:2}
+/**@特价模块结束**/
 
 .search-box{ height:40px; line-height:40px; background:#000000; position:relative}
 

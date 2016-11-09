@@ -60,7 +60,7 @@ function product_list(curpage){
 		    				+'<span class="i-cart"></span>'
 		    				+'<p>购物车</p>'
 		    			+'</a>'
-		    			+'<a href="'+WapSiteUrl+'/tmpl/member/member.html?act=member" class="quarter">'
+		    			+'<a href="'+WapSiteUrl+'/tmpl/member/member2.html?act=member" class="quarter">'
 		    				+'<span class="i-mine"></span>'
 		    				+'<p>我的商城</p>'
 		    			+'</a>'

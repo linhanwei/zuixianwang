@@ -30,7 +30,7 @@ $(function(){
 							cancelBtn:false
 						});
                         setTimeout(function(){
-                            window.location.href = WapSiteUrl + '/tmpl/member/member.html';
+                            window.location.href = WapSiteUrl + '/tmpl/member/member2.html';
                         }, 3000);
                     }else{
 						 $.sDialog({

@@ -53,7 +53,7 @@ $(function(){
 						}else{
 							addcookie('username',result.datas.username);
 							addcookie('key',result.datas.key);
-							location.href = WapSiteUrl+'/tmpl/member/member.html';
+							location.href = WapSiteUrl+'/tmpl/member/member2.html';
 						}
 						$(".error-tips").hide();
 					}else{
