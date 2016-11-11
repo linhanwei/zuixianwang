@@ -1,162 +1,239 @@
-$(function(){
-	var key = getcookie('key');
-	if(key==''){
-		window.location.href = WapSiteUrl+'/tmpl/member/login.html';
-	}
-	var page = pagesize;
-	var curpage = 1;
-	var hasMore = true;
-
-    var readytopay = false;
-
-	function initPage(page,curpage){
-        var state = GetQueryString('state');
-        var refund = GetQueryString('refund');
-        state = state ? state : '';
-        refund = refund ? refund : '';
-		$.ajax({
-			type:'post',
-            url:ApiUrl+"/index.php?act=member_order&op=order_list&page="+page+"&curpage="+curpage+"&getpayment=true&refund="+refund+'&state='+state,
-			data:{key:key},
-			dataType:'json',
-			success:function(result){
-				checklogin(result.login);//检测是否登录了
-				var data = result.datas;
-				data.hasmore = result.hasmore;//是不是可以用下一页的功能，传到页面里去判断下一页是否可以用
-				data.WapSiteUrl = WapSiteUrl;//页面地址
-				data.curpage = curpage;//当前页，判断是否上一页的disabled是否显示
-				data.ApiUrl = ApiUrl;
-				data.key = getcookie('key');
-				template.helper('$getLocalTime', function (nS) {
-                    var d = new Date(parseInt(nS) * 1000);
-                    var s = '';
-                    s += d.getFullYear() + '年';
-                    s += (d.getMonth() + 1) + '月';
-                    s += d.getDate() + '日 ';
-                    s += d.getHours() + ':';
-                    s += d.getMinutes();
-                    return s;
-				});
-                template.helper('p2f', function(s) {
-                    return (parseFloat(s) || 0).toFixed(2);
-                });
-				var html = template.render('order-list-tmpl', data);
-				$("#order-list").html(html);
-				//取消订单
-				$(".cancel-order").click(cancelOrder);
-				//下一页
-				$(".next-page").click(nextPage);
-				//上一页
-				$(".pre-page").click(prePage);
-				//确认订单
-				$(".sure-order").click(sureOrder);
-
-                $('.viewdelivery-order').click(viewOrderDelivery);
-
-                $('.check-payment').click(function() {
-                    if (!readytopay) {
-                        $.sDialog({
-                            skin:"red",
-                            content:'暂无可用的支付方式',
-                            okBtn:false,
-                            cancelBtn:false
-                        });
-                        return false;
-                    }
-                });
-
-                $(window).scrollTop(0);
-			}
-		});
-
-        $.ajax({
-            type:'get',
-            url:ApiUrl+"/index.php?act=member_payment&op=payment_list",
-            data:{key:key},
-            dataType:'json',
-            success:function(result){
-                $.each((result && result.datas && result.datas.payment_list) || [], function(k, v) {
-                    // console.log(v);
-                    if (v != '') {
-                        readytopay = true;
-                        return false;
-                    }
-                });
-            }
-        });
-	}
-	//初始化页面
-	initPage(page,curpage);
-
-	//下一页
-	function nextPage (){
-		var self = $(this);
-		var hasMore = self.attr("has_more");
-		if(hasMore == "true"){
-			curpage = curpage+1;
-			initPage(page,curpage);
-		}
-	}
-	//上一页
-	function prePage (){
-		var self = $(this);
-		if(curpage >1){
-			self.removeClass("disabled");
-			curpage = curpage-1;
-			initPage(page,curpage);
-		}
-	}
-
-    //取消订单
-    function cancelOrder(){
-        var order_id = $(this).attr("order_id");
-
-        $.sDialog({
-            content: '确定取消订单？',
-            okFn: function() { cancelOrderId(order_id); }
-        });
+var page = pagesize;
+var curpage = 1;
+var hasMore = true;
+var footer = false;
+var reset = true;
+var orderKey = "";
+$(function() {
+    var e = getcookie("key");
+    if (!e) {
+        window.location.href = WapSiteUrl + "/tmpl/member/login.html"
     }
-
-    function cancelOrderId(order_id) {
+    if (GetQueryString("data-state") != "") {
+        $("#filtrate_ul").find("li").has('a[data-state="' + GetQueryString("data-state") + '"]').addClass("selected").siblings().removeClass("selected")
+    }
+    $("#search_btn").click(function() {
+        reset = true;
+        t()
+    });
+    $("#fixed_nav").waypoint(function() {
+        $("#fixed_nav").toggleClass("fixed")
+    },
+    {
+        offset: "50"
+    });
+    function t() {
+        if (reset) {
+            curpage = 1;
+            hasMore = true
+        }
+        $(".loading").remove();
+        if (!hasMore) {
+            return false
+        }
+        hasMore = false;
+        //var t = $("#filtrate_ul").find(".selected").find("a").attr("data-state");
+        var t = GetQueryString('state_type');;
+        var r = $("#order_key").val();
         $.ajax({
-            type:"post",
-            url:ApiUrl+"/index.php?act=member_order&op=order_cancel",
-            data:{order_id:order_id,key:key},
-            dataType:"json",
-            success:function(result){
-                if(result.datas && result.datas == 1){
-                    initPage(page,curpage);
+            type: "post",
+            url: ApiUrl + "/index.php?act=member_order&op=order_list&page=" + page + "&curpage=" + curpage,
+            data: {
+                key: e,
+                state_type: t,
+                order_key: r,
+                bug:1
+            },
+            dataType: "json",
+            success: function(e) {
+                checklogin(e.login);
+                curpage++;
+                hasMore = e.hasmore;
+                if (!hasMore) {
+                    get_footer()
+                }
+                if (e.datas.order_group_list.length <= 0) {
+                    $("#footer").addClass("posa")
+                } else {
+                    $("#footer").removeClass("posa")
+                }
+                var t = e;
+                t.WapSiteUrl = WapSiteUrl;
+                t.ApiUrl = ApiUrl;
+                t.key = getcookie("key");
+                template.helper("$getLocalTime",
+                function(e) {
+                    var t = new Date(parseInt(e) * 1e3);
+                    var r = "";
+                    r += t.getFullYear() + "年";
+                    r += t.getMonth() + 1 + "月";
+                    r += t.getDate() + "日 ";
+                    r += t.getHours() + ":";
+                    r += t.getMinutes();
+                    return r
+                });
+                template.helper("p2f",
+                function(e) {
+                    return (parseFloat(e) || 0).toFixed(2)
+                });
+                template.helper("parseInt",
+                function(e) {
+                    return parseInt(e)
+                });
+
+                var r = template.render("order-list-tmpl", t);
+                if (reset) {
+                    reset = false;
+                    $("#order-list").html(r)
+                } else {
+                    $("#order-list").append(r)
                 }
             }
-        });
+        })
     }
-
-    //确认订单
-    function sureOrder(){
-        var order_id = $(this).attr("order_id");
-
+    $("#order-list").on("click", ".cancel-order", r);
+    $("#order-list").on("click", ".delete-order", o);
+    $("#order-list").on("click", ".sure-order", n);
+    $("#order-list").on("click", ".evaluation-order", l);
+    $("#order-list").on("click", ".evaluation-again-order", d);
+    $("#order-list").on("click", ".viewdelivery-order", c);
+    $("#order-list").on("click", ".check-payment",
+    function() {
+        var e = $(this).attr("data-paySn");
+        toPay(e, "member_buy", "pay");
+        return false
+    });
+    function r() {
+        var e = $(this).attr("order_id");
         $.sDialog({
-            content: '确定确认订单？',
-            okFn: function() { sureOrderId(order_id); }
-        });
+            content: "确定取消订单？",
+            okFn: function() {
+                a(e)
+            }
+        })
     }
-
-    function sureOrderId(order_id) {
+    function a(r) {
         $.ajax({
-            type:"post",
-            url:ApiUrl+"/index.php?act=member_order&op=order_receive",
-            data:{order_id:order_id,key:key},
-            dataType:"json",
-            success:function(result){
-                if(result.datas && result.datas == 1){
-                    initPage(page,curpage);
+            type: "post",
+            url: ApiUrl + "/index.php?act=member_order&op=order_cancel",
+            data: {
+                order_id: r,
+                key: e
+            },
+            dataType: "json",
+            success: function(e) {
+                if (e.datas && e.datas == 1) {
+                    reset = true;
+                    t()
+                } else {
+                    $.sDialog({
+                        skin: "red",
+                        content: e.datas.error,
+                        okBtn: false,
+                        cancelBtn: false
+                    })
                 }
             }
-        });
+        })
     }
-
-    function viewOrderDelivery() {
-        var orderId = $(this).attr('order_id');
-        location.href = WapSiteUrl + '/tmpl/member/order_delivery.html?order_id=' + orderId;
+    function o() {
+        var e = $(this).attr("order_id");
+        $.sDialog({
+            content: "是否移除订单？<h6>电脑端订单回收站可找回订单！</h6>",
+            okFn: function() {
+                i(e)
+            }
+        })
     }
+    function i(r) {
+        $.ajax({
+            type: "post",
+            url: ApiUrl + "/index.php?act=member_order&op=order_delete",
+            data: {
+                order_id: r,
+                key: e
+            },
+            dataType: "json",
+            success: function(e) {
+                if (e.datas && e.datas == 1) {
+                    reset = true;
+                    t()
+                } else {
+                    $.sDialog({
+                        skin: "red",
+                        content: e.datas.error,
+                        okBtn: false,
+                        cancelBtn: false
+                    })
+                }
+            }
+        })
+    }
+    function n() {
+        var e = $(this).attr("order_id");
+        $.sDialog({
+            content: "确定收到了货物吗？",
+            okFn: function() {
+                s(e)
+            }
+        })
+    }
+    function s(r) {
+        $.ajax({
+            type: "post",
+            url: ApiUrl + "/index.php?act=member_order&op=order_receive",
+            data: {
+                order_id: r,
+                key: e
+            },
+            dataType: "json",
+            success: function(e) {
+                if (e.datas && e.datas == 1) {
+                    reset = true;
+                    t()
+                } else {
+                    $.sDialog({
+                        skin: "red",
+                        content: e.datas.error,
+                        okBtn: false,
+                        cancelBtn: false
+                    })
+                }
+            }
+        })
+    }
+    function l() {
+        var e = $(this).attr("order_id");
+        location.href = WapSiteUrl + "/tmpl/member/member_evaluation.html?order_id=" + e
+    }
+    function d() {
+        var e = $(this).attr("order_id");
+        location.href = WapSiteUrl + "/tmpl/member/member_evaluation_again.html?order_id=" + e
+    }
+    function c() {
+        var e = $(this).attr("order_id");
+        location.href = WapSiteUrl + "/tmpl/member/order_delivery.html?order_id=" + e
+    }
+    $("#filtrate_ul").find("a").click(function() {
+        $("#filtrate_ul").find("li").removeClass("selected");
+        $(this).parent().addClass("selected").siblings().removeClass("selected");
+        reset = true;
+        window.scrollTo(0, 0);
+        t()
+    });
+    t();
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() > $(document).height() - 1) {
+            t()
+        }
+    })
 });
+function get_footer() {
+    if (!footer) {
+        footer = true;
+        $.ajax({
+            url: WapSiteUrl + "/js/tmpl/footer.js",
+            dataType: "script"
+        })
+    }
+}

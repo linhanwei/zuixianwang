@@ -37,5 +37,23 @@ $(document).ready(function () {
 
 		location.href = WapSiteUrl+'/tmpl/product_list.html?keyword='+keyword;
 	});
+	
+    $("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
+	
+	
+	function loadingcss3_open(){
+		$('<div id="loadingcss3" class="fixedloading loadingcss3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fixedloadingbg"></div>').appendTo(body);
+		$(".fixedloading").addClass("loadingcss3");
+		$(".fixedloading").fadeIn(300);
+		$(".fixedloadingbg").fadeIn(300);
+	}
+	
+	function loadingcss3_close(){
+		$(".fixedloading").removeClass("loadingcss3");
+		$(".fixedloading").fadeOut(300);
+		$(".fixedloadingbg").fadeOut(300);
+		$(".fixedloadingbg").remove();
+		$("#loadingcss3").remove();
+	}	
 
 })

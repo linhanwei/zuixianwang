@@ -109,3 +109,53 @@ function buildUrl(type, data) {
     }
     return WapSiteUrl;
 }
+
+if(typeof($) != "undefined"){
+    $.fn.ajaxUploadImage = function(e) {
+    var t = {
+        url: "",
+        data: {},
+        start: function() {},
+        success: function() {}
+    };
+    var e = $.extend({},
+        t, e);
+    var a;
+    function n() {
+        if (a === null || a === undefined) {
+            alert("请选择您要上传的文件！");
+            return false
+        }
+        return true
+    }
+    return this.each(function() {
+        $(this).on("change",
+            function() {
+                var t = $(this);
+                e.start.call("start", t);
+                a = t.prop("files")[0];
+                if (!n) return false;
+                try {
+                    var r = new XMLHttpRequest;
+                    r.open("post", e.url, true);
+                    r.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+                    r.onreadystatechange = function() {
+                        if (r.readyState == 4) {
+                            returnDate = $.parseJSON(r.responseText);
+                            e.success.call("success", t, returnDate)
+                        }
+                    };
+                    var i = new FormData;
+                    for (k in e.data) {
+                        i.append(k, e.data[k])
+                    }
+                    i.append(t.attr("name"), a);
+                    result = r.send(i)
+                } catch(o) {
+                    console.log(o);
+                    alert(o)
+                }
+            })
+    })
+};
+}

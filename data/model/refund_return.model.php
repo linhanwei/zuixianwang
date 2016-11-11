@@ -539,4 +539,14 @@ class refund_returnModel extends Model{
         return Model('store')->getStoreMemberIDList($store_ids, $field);
 	}
 
+	/**
+	 * 退款详细记录
+	 *
+	 * @param
+	 * @return array
+	 */
+	public function getDetailInfo($condition = array(), $fields = '*') {
+		return $this->table('refund_detail')->where($condition)->field($fields)->find();
+	}
+
 }
