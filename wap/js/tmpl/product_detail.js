@@ -1,3 +1,5 @@
+
+var goods_id = GetQueryString("goods_id");
 $(function () {
     $("body").on('click', "#add-cart", function () {
         specsShow();
@@ -23,7 +25,6 @@ $(function () {
         layer.alert('敬请期待');
         $('.layui-layer').css('left',document.body.clientWidth/5);
     });
-
 
     var unixTimeToDateString = function (ts, ex) {
         ts = parseFloat(ts) || 0;
@@ -67,7 +68,6 @@ $(function () {
         });
     }
 
-    var goods_id = GetQueryString("goods_id");
     var goods_cache_key = 'goods_'+goods_id;
     //渲染页面
     $("#product_detail_wp").html(getCache(goods_cache_key));
@@ -93,6 +93,7 @@ $(function () {
                         var goods_specs = {};
                         goods_specs["goods_spec_id"] = i;
                         goods_specs['goods_spec_name'] = v;
+                        goods_specs['goods_spec_value'] = [];
                         if (data.goods_info.spec_value) {
                             $.map(data.goods_info.spec_value, function (vv, vi) {
                                 if (i == vi) {
@@ -315,22 +316,43 @@ $(function () {
             AddView();
         }
 
-
-    });
+});
     //点击商品规格，获取新的商品
     function arrowClick(self, myData) {
         $(self).addClass("checked").siblings().removeClass("checked");
         //拼接属性
         var curEle = $(".sku-control").find("label.checked");
         var curSpec = [];
+        var goods_spec_value_list_html = '';
         $.each(curEle, function (i, v) {
             curSpec.push($(v).attr("specs_value_id"));
+            goods_spec_value_list_html += '<span>'+$(v).html()+'</span>';
         });
         var spec_string = curSpec.sort().join("|");
         //获取商品ID
         var spec_goods_id = myData.spec_list[spec_string];
 
-        window.location.href = "product_detail.html?goods_id=" + spec_goods_id;
+        $.ajax({
+            url: ApiUrl + "/index.php?act=goods&op=ajax_detail",
+            type: "get",
+            dataType: "json",
+            data:{goods_id:spec_goods_id},
+            success: function (result) {
+                if (!result.datas.error) {
+                    var goods_info = result.datas;
+                    $('#goods_spec_img').attr('src',goods_info.goods_image_url);
+                    $('#goods_spec_price').html('￥'+goods_info.goods_promotion_price);
+                    $('#stock').html(goods_info.goods_storage);
+                    $('#goods_spec_value_list').html(goods_spec_value_list_html);
+                    goods_id = goods_info.goods_id;
+                } else {
+                    layer.alert(result.datas.error, {title: '信息提示'});
+                }
+
+                return false;
+            }
+        });
+        //window.location.href = "product_detail.html?goods_id=" + spec_goods_id;
     }
 
     function AddView() {//增加浏览记录

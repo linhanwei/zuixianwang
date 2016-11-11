@@ -107,6 +107,7 @@ $(function () {
             });
             setCache(index_cache_key, html);
             $("#main-container").html(html);
+			$("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
 
             //轮播图
             var swiper = new Swiper('.swiper-container', {

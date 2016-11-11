@@ -315,6 +315,7 @@ class goodsControl extends mobileHomeControl{
         $goods_detail = $this->_goods_detail_extend($goods_detail);
 
         //商品属性处理
+        $goods_detail['attr_list'] = array();
         $attr_list = $goods_detail['goods_info']['goods_attr'];
         if($attr_list){
             foreach($attr_list as $aval){
@@ -330,13 +331,13 @@ class goodsControl extends mobileHomeControl{
         }
 
         //商品规格值处理
-        $goods_detail['spec_val_list'] = array_values($goods_detail['goods_info']['goods_spec']);
+        $goods_detail['spec_val_list'] = $goods_detail['goods_info']['goods_spec'] ? array_values($goods_detail['goods_info']['goods_spec']) : array();
+        $goods_detail["goods_info"]["spec_value"] = $goods_detail["goods_info"]["spec_value"] ? $goods_detail["goods_info"]["spec_value"] :array();
 
 		$goods_info=$goods_detail['goods_info'];
 		//print_r($goods_info);
 		$IsHaveBuy=0;
-		if(!empty($_COOKIE['username']))
-		{
+		if(!empty($_COOKIE['username'])){
 		   $model_member = Model('member');
 		   $member_info= $model_member->getMemberInfo(array('member_name'=>$_COOKIE['username']));
 		   $buyer_id=$member_info['member_id'];
@@ -373,10 +374,6 @@ class goodsControl extends mobileHomeControl{
 		  }
 		}
 		$goods_detail['IsHaveBuy']=$IsHaveBuy;
-		//v3-b11 end
-
-
-
 
         output_data($goods_detail);
     }

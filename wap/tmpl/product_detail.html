@@ -146,23 +146,19 @@
             <div class="sku-control">
                 <ul>
                     <% if(goods_map_spec.length>0){%>
-                    <% for(var i =0;i
-                    <goods_map_spec.length
-                    ;i++){%>
-                    <li>
-                        <h2 spec_id="<%=goods_map_spec[i].id%>"><%=goods_map_spec[i].goods_spec_name%>：</h2>
-                        <div class="items">
-                            <%for(var j = 0;j
-                            <goods_map_spec
-                            [i].goods_spec_value.length;j++){%>
-                            <label class="<%if (goods_info.goods_spec[goods_map_spec[i].goods_spec_value[j].specs_value_id]){%> checked <%}%> spec_items_value"
-                                   specs_value_id="<%=goods_map_spec[i].goods_spec_value[j].specs_value_id%>">
-                                <%=goods_map_spec[i].goods_spec_value[j].specs_value_name%>
-                            </label>
-                            <%}%>
-                        </div>
-                    </li>
-                    <%}%>
+                        <% for(var i =0;i<goods_map_spec.length;i++){%>
+                            <li>
+                                <h2 spec_id="<%=goods_map_spec[i].id%>"><%=goods_map_spec[i].goods_spec_name%>：</h2>
+                                <div class="items">
+                                    <%for(var j = 0;j<goods_map_spec[i].goods_spec_value.length;j++){%>
+                                        <label class="<%if (goods_info.goods_spec[goods_map_spec[i].goods_spec_value[j].specs_value_id]){%> checked <%}%> spec_items_value"
+                                               specs_value_id="<%=goods_map_spec[i].goods_spec_value[j].specs_value_id%>">
+                                            <%=goods_map_spec[i].goods_spec_value[j].specs_value_name%>
+                                        </label>
+                                    <%}%>
+                                </div>
+                            </li>
+                        <%}%>
                     <%}%>
                 </ul>
             </div>
