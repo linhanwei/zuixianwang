@@ -70,6 +70,7 @@ $(function () {
     var goods_id = GetQueryString("goods_id");
     var goods_cache_key = 'goods_'+goods_id;
     //渲染页面
+    $("#product_detail_wp").html(getCache(goods_cache_key));
 
     $.ajax({
         url: ApiUrl + "/index.php?act=goods&op=goods_detail",
@@ -126,7 +127,7 @@ $(function () {
 
                 //渲染模板
                 var html = template.render('product_detail', data);
-                setCache('');
+                setCache(goods_cache_key,html);
                 $("#product_detail_wp").html(html);
 
                 // @add 手机端详情
