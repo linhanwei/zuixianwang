@@ -37,9 +37,10 @@ $(function() {
     $("."+footer_class_name).html(html);
 
     //显示底部导航
-    if(client == 'wechat' || GetQueryString('bug')){
+    if(!(client == 'ios' || client == 'android') || GetQueryString('bug')){
         $("."+footer_class_name).css('display','block');
     }
+    console.log(client,111);
 
     $('#logoutbtn').click(function() {
         var username = getcookie('username');

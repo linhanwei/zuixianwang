@@ -1,66 +1,326 @@
-﻿<!doctype html>
-<html>
+﻿<!DOCTYPE HTML>
 <head>
-    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
-          name="viewport">
-    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
-    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
-    <meta content="no-cache" http-equiv="pragma">
-    <meta content="0" http-equiv="expires">
-    <meta content="telephone=no, address=no" name="format-detection">
-    <meta name="apple-mobile-web-app-capable" content="yes"/> <!-- apple devices fullscreen -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta charset="utf-8" />
     <title>注册</title>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no">
+    <link href="img/hcz.ico" rel="Shortcut Icon" type="image/x-icon" />
+    <link href="img/hcz.ico" rel="icon" type="image/x-icon" />
+    <script type="text/javascript">
+    var docEle = document.documentElement;
+    docEle.style.fontSize = parseInt(docEle.getBoundingClientRect().width) / 16 + 'px'; //设置HTML rem的父基点
+    </script>
     <link rel="stylesheet" type="text/css" href="css/slot_basic.css">
     <link rel="stylesheet" type="text/css" href="css/hcz_alert.css">
-    <link href="css/download.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../wap/plug-ins/swiper/swiper-3.4.0.min.css" media="all"/>
-    <link rel="stylesheet" type="text/css" href="../wap/css/common.css" media="all"/>
-    <link rel="stylesheet" type="text/css" href="../wap/css/style.css" media="all"/>
-    <!--<script type="text/javascript" src="../wap/js/jquery-3.1.1.min.js"></script>-->
-    <!--<script type="text/javascript" src="../wap/plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>-->
-    <!--<script type="text/javascript" src="../wap/js/main.js"></script>-->
-    <style>
-        .u-h-toast{background-color: #fff;}
-        .u-h-toast .u_toast_val{color: #000;}
+	<link href="css/download.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/download.js"></script>
+    <style type="text/css">
+    html,
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+    }
+
+    .skip-top img{width: 100%;}
+    
+    .skip-bottom {
+        width: 100%;
+        height: 6rem;
+        background: url('img/skip_bottom.jpg') no-repeat center;
+        -webkit-background-size: 100% 100%;
+        background-size: 100% 100%;
+    }
+    
+    .skip-form {
+        margin-top: 0rem;
+    }
+    
+    .skip-form .u-control-label {
+        font-weight: normal;
+        font-size: 0.6rem;
+    }
+    
+    .skip-btn {
+        width: 100%;
+        color: #fff;
+        background-color: rgb(254, 155, 38);
+        border-color: rgb(254, 155, 38);
+        background-image: -webkit-linear-gradient(top, rgb(254, 155, 38) 0%, rgb(254, 155, 38) 100%);
+        background-image: linear-gradient(to bottom, rgb(254, 155, 38) 0%, rgb(254, 155, 38) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    .skip-btn.unUsed {
+        width: 100%;
+        color: #fff;
+        background-color: rgb(139, 139, 139);
+        border-color: rgb(139, 139, 139);
+        background-image: -webkit-linear-gradient(top, rgb(139, 139, 139) 0%, rgb(139, 139, 139) 100%);
+        background-image: linear-gradient(to bottom, rgb(139, 139, 139) 0%, rgb(139, 139, 139) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    .skip-section {
+        width: 96%;
+        margin: 20px auto;
+        text-align: center;
+        margin-bottom: 8rem;
+    }
+    
+    .col-mb-offset-half {
+        margin-left: 4.16666666665%;
+        margin-top: 10px;
+    }
+    
+    .u-btn.skip-ref-btn {
+        font-size: 0.5rem;
+        color: #fff;
+        background-color: rgb(245, 192, 80);
+        border-color: rgb(245, 192, 80);
+        background-image: -webkit-linear-gradient(top, rgb(245, 192, 80) 0%, rgb(245, 192, 80) 100%);
+        background-image: linear-gradient(to bottom, rgb(245, 192, 80) 0%, rgb(245, 192, 80) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    .skip-ref-btn.verWaitCls {
+        color: #fbfbfb;
+        background-color: rgb(148, 148, 148);
+        border-color: rgb(148, 148, 148);
+        background-image: -webkit-linear-gradient(top, rgb(148, 148, 148) 0%, rgb(148, 148, 148) 100%);
+        background-image: linear-gradient(to bottom, rgb(148, 148, 148) 0%, rgb(148, 148, 148) 100%);
+        background-repeat: repeat-x;
+    }
+    
+    
+    .waitLoading {
+        width: 32px;
+        height: 32px;
+        background: url(img/loadingmovie.gif) no-repeat;
+        position: fixed;
+        top: 470px;
+        left: 48%;
+        z-index: 9999;
+        background-size: contain;
+        display: none;
+    }
+    
+    .u-btn {
+        font-size: 0.7rem;
+    }
+    
+    .col-mb-offset-half .u-btn {
+        font-weight: bold;
+    }
+    
+    ::-webkit-input-placeholder {
+        /* WebKit browsers */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    :-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        
+        font-size: 0.5rem;
+        line-height: 1.4;
+    }
+    
+    .disnone {
+        display: none
+    }
+    /*新的css*/
+    .skip-top {
+        width: 60%;
+        -webkit-background-size: 100% 100%;
+        background-size: 100% 100%;
+        margin:50px auto;
+        margin-top: 100px;
+    }
+    .u-form-group{margin: 0;}
+    #formId{width: 84%;margin: 0 auto;}
+  .u-form-group .col-mb-8,.u-form-group .col-mb-5{
+      width: 100%;
+      background: #4C4C4C;
+      border: 1px solid #D4342C;
+      height:50px;
+      line-height:50px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom:10px;
+  }
+    .u-form-group .col-mb-5{width: 50%;}
+    .u-form-group .col-mb-8  input,.u-form-group .col-mb-5 input{
+        height:30px;
+        line-height: 30px;
+        width: 100%;
+        margin-left: 10px;
+		margin-top:10px;
+        border: none;
+        color: #FFF;
+        font-size:14px;
+        background: none;
+		padding:0;
+		vertical-align:middle
+    }
+    .u-form-group .code{
+        background: none;
+        border:0;
+    }
+    #getVerNumId{
+        width: 100%;
+        line-height: 50px;
+        height: 50px;
+        color: #FFF;
+        background: #DA251E;
+        border: 1px solid #DA251E;
+        text-align: center;
+        border-radius: 3px;
+        padding: 0;
+        font-size:14px;
+    }
+    .u-form-group .col-mb-offset-half{
+        width: 80%;
+        margin: 0px auto;
+        margin-top: 80px;
+        text-align: center;
+        font-size:20px;
+        overflow: hidden;
+        padding: 0;
+    }
+    #goBtnId{
+        background: #DA251E;
+        color: #FFF;
+        font-size: 24px;
+        border-radius: 3px;
+    }
+    .u-form-horizontal .u-form-group{margin: 0;}
+    .u-h-toast{background: #fff;}
+    .u-h-toast .u_toast_val{color: #000;}
+    .u-form-group .login-btn{margin-top: 20px;}
+    .login{background: none;color: #333;
+        font-size: 16px;
+        margin-top: 20px;
+        border: 0;
+    }
+	input::-webkit-input-placeholder{ line-height:30px; color:#FFF}
+	input::-moz-placeholder{line-height:30px; color:#FFF}
+	input::-ms-input-placeholder{line-height:30px; color:#FFF}
     </style>
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
 </head>
 
-<body class="login-body">
-<div class="login-logo"><img src="../wap/images/login/logo.jpg"></div>
+<body>
+<div class="" id="show" onclick="hideTip();"></div>
+	<div class="pop_box clearfix" id="clear" style="display:none">
+			<div class="pop_cont clearfix" style="display:none" id="show1">
+			<h1>温馨提示</h1>
+					<ul class="tip_list">
+							<li class="list_one">
+									<em class="one"></em>
+									<span>点击右上角</span>
+							</li>
+							<li  class="list_two">
+									<em class="" id="a"></em>
+									<span>在浏览器中打开</span>
+							</li>
+							<li class="list_three">
+									<em class="four"></em>
+									<span>即可下载</span>
+							</li>
 
-<div class="register-box">
-    <div class="input-group username">
-        <input name="username" type="text" id="phoneNumId" placeholder="请输入手机号" value="">
-    </div>
-    <div class="input-group password">
-        <input name="password" type="password" id="passwordId" placeholder="输入密码" value="">
-    </div>
-    <div class="input-group cpassword">
-        <input name="cpassword" type="password" id="repasswordId" placeholder="确认密码" value="">
-    </div>
-    <div class="input-group-two code">
-        <div class="input-box"><input name="code" type="text" id="verifNumId" placeholder="输入验证码" value=""></div>
-        <a id="getVerNumId">获取验证码</a>
-    </div>
-</div>
+					</ul>
+			</div>
+	</div>
+    <div class="waitLoading" id="loadingId"></div>
+    <div class="skip-top"><img src="../wap/images/login/logo.jpg" alt=""></div>
+    <section class="skip-section">
+        <form class="u-form-horizontal skip-form">
+            <div id="formId">
+                <div class="u-form-group f-clearfix">
+                    <div class="col-mb-8">
+                        <input type="number" class="u-form-control" id="phoneNumId" placeholder="请输入您的手机号">
+                    </div>
+                </div>
+				 <div class="u-form-group f-clearfix">
+                    <div class="col-mb-8">
+                        <input type="password" class="u-form-control" id="passwordId" placeholder="请输入密码" value="">
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <div class="col-mb-8">
+                        <input type="password" class="u-form-control" id="repasswordId" placeholder="请输入确认密码" value="">
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <div class="col-mb-5">
+                        <input type="number" class="u-form-control" id="verifNumId" placeholder="请输入验证码">
+                    </div>
+                    <div class="col-mb-5 code">
+                        <a href="javascript:void(0);" class="u-btn skip-btn skip-ref-btn" id="getVerNumId">获取验证码</a>
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <div class="commit col-mb-offset-half">
+                        <a href="javascript:void(0);" id="goBtnId" class="u-btn skip-btn unUsed">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+                    </div>
+					<div class="login-btn col-mb-offset-half">
+						 <a href="../wap/tmpl/member/login.html" class="u-btn skip-btn login">登录</a>
+					</div>
+                </div>
+            </div>
+            <div id="form2Id" class="disnone">
+                <div class="u-form-group f-clearfix">
+                    <label for="phoneNumId" class="col-mb-3 u-control-label">用户名:</label>
+                    <div class="col-mb-8">
+                        <input type="text" class="u-form-control" id="usernameId" placeholder="请输入用户名" readonly>
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix">
+                    <label for="phoneNumId" class="col-mb-3 u-control-label">密码:</label>
+                    <div class="col-mb-8">
+                        <input type="text" class="u-form-control" id="passwordIdShow" placeholder="请输入密码" value="" readonly>
+                    </div>
+                </div>
+                <div class="u-form-group f-clearfix" style="display:none;">
+                    <div class="col-mb-10 col-mb-offset-half">
+                        <a href="javascript:void(0);" id="goBtn2Id" class="u-btn skip-btn">提交</a>
+                    </div>
+                </div>
+            </div>
+            <!--<div id="form3Id" class="disnone">
+                <div class="u-form-group f-clearfix">
+                    <div class="col-mb-11 col-mb-offset-half">
+                        <a href="http://120.76.118.10/downapp/" class="u-btn skip-btn">注册成功, 下载APP</a>
+                    </div>
 
-<div class="register-btn-box">
-    <a class="register-btn" id="goBtnId">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</a>
-    <a href="../wap/tmpl/member/login.html" class="login-btn">登录</a>
-</div>
-<script type="text/javascript">
-    var docEle = document.documentElement;
-</script>
-<script type="text/javascript" src="js/download.js"></script>
-<script type="text/javascript" src="js/slot_zepto.min.js"></script>
-<script type="text/javascript" src="js/slot_haojs.js?ver=20150730"></script>
-<script type="text/javascript" src="js/hcz_alert.js"></script>
-<script type="text/javascript" src="js/insurevalidate.js"></script>
+                </div>
+            </div>-->
+        </form>
+    </section>
+    <script type="text/javascript" src="js/slot_zepto.min.js"></script>
+    <script type="text/javascript" src="js/slot_haojs.js?ver=20150730"></script>
+    <script type="text/javascript" src="js/hcz_alert.js"></script>
+    <script type="text/javascript" src="js/insurevalidate.js"></script>
 <script type="text/javascript" src="js/address.js"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
     var pubEndflag = false; //倒计时结束
     var countTokenNum = 0; //记录验证码错误次数
     var bindFlag = true; //记录绑定
@@ -75,9 +335,9 @@
 
         // 注册路径
         var registerUrl = rootPath + 'index.php?act=login';
-        //var registerUrl = '/register'
-        //var registerUrl = 'http://192.168.1.88:9999/icore_aops_event/do/event/controller/callPortalInterface?iname=/points/autoRegisterAndRecommendConfirm.json';
-        var inviterUrl  = rootPath + 'index.php?act=login';
+            //var registerUrl = '/register'
+            //var registerUrl = 'http://192.168.1.88:9999/icore_aops_event/do/event/controller/callPortalInterface?iname=/points/autoRegisterAndRecommendConfirm.json';            
+		var inviterUrl  = rootPath + 'index.php?act=login';
         //  灰度发布
         var headers = {
             requestSource: 'outsideHtml'
@@ -95,7 +355,7 @@
         function btnResetclsAndAct() {
             $getVerNum[0].innerHTML = '获取验证码';
             $getVerNum.removeClass('verWaitCls'); //    删除点击后的cls
-            bindVerAction(); // 再次监听
+            bindVerAction(); // 再次监听               
         }
 
         //  ***********请求验证码**************
@@ -166,25 +426,25 @@
         function bindRegAction() {
             //$('#form2Id').removeClass('disnone');
 
-
+            
 
             $('#usernameId').val($phoneNum.val());
             doRegAction(function() {
                 $loading.css('display', 'block')
-//                haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度
+                haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度
             }, function() {
                 $loading.css('display', 'none');
             });
             /*$('#goBtn2Id').bind('click', function getVerNumFun() {
-             $('#goBtn2Id').unbind('click', addClickFun);
-             doRegAction(function() {
-             $loading.css('display', 'block')
-             haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度
-             }, function() {
-             $loading.css('display', 'none');
-             });
-             });
-             */
+                $('#goBtn2Id').unbind('click', addClickFun);
+                doRegAction(function() {
+                    $loading.css('display', 'block')
+                    haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度  
+                }, function() {
+                    $loading.css('display', 'none');
+                });
+            });
+            */
         }
 
         function doRegAction(ajaxBefore, ajaxAfter) {
@@ -206,11 +466,11 @@
                     }else if ($('#passwordId').val() != $('#repasswordId').val()) {
                         haoJs.Toast.show('两次密码不一致');
                         return false;
-                    }  else {
-                        $('#formId').addClass('disnone');
+                    }else {
+						$('#formId').addClass('disnone');
                         ajaxBefore();
                         flagVal = true;
-                        $('#passwordIdShow').val($('#passwordId').val());
+						$('#passwordIdShow').val($('#passwordId').val());
                         return true;
                     }
                 },
@@ -218,34 +478,34 @@
                     mobile_phone: $phoneNum.val(),
                     username: $phoneNum.val(),
                     password: $('#passwordId').val(),
-                    password_confirm: $('#passwordId').val(),
+					password_confirm: $('#passwordId').val(),
                     member_province:$('#prov_select').val(),
                     member_city:$('#city_select').val(),
                     member_region:$('#region_select').val(),
-                    for_platform : 'inviter',
+					for_platform : 'inviter',
                     invite_code: $('#inviter_name').val(),
                     identifying_code:$('#verifNumId').val(),
                     cache_key:cache_key,
-                    client:'wap',
-                    email:'',
+					client:'wap',
+					email:'',
                     op: 'register'
                 },
                 success: function(dResult) {
-                    var tResult = dResult;
+					var tResult = dResult;
                     if (tResult.datas.error) {
-                        haoJs.Toast.show(tResult.datas.error);
-                        $('#formId').removeClass('disnone');
-                    }else{
-                        if(typeof(tResult.datas.username) != 'undefine'){
-                            haoJs.Toast.show('注册成功');
+						haoJs.Toast.show(tResult.datas.error);
+						$('#formId').removeClass('disnone');
+                      }else{
+					    if(typeof(tResult.datas.username) != 'undefine'){
+							haoJs.Toast.show('注册成功');
 
-                            $('#form3Id').removeClass('disnone');
-                            $('#form2Id').removeClass('disnone');
-                        }else{
-                            haoJs.Toast.show('注册失败');
-                            $('#formId').removeClass('disnone');
-                        }
-
+							$('#form3Id').removeClass('disnone');
+							$('#form2Id').removeClass('disnone');
+						}else{
+							haoJs.Toast.show('注册失败');
+							$('#formId').removeClass('disnone');
+						}
+                       
                     }
                 },
                 complete: function() {
@@ -271,7 +531,7 @@
             } else {
                 bindRegAction();
                 return true;
-            }
+			}
         }
 
         //  点击下载按钮
@@ -284,7 +544,7 @@
                 //$goBtn.unbind('click', addClickFun);
                 downloadAction(function() {
                     $loading.css('display', 'block')
-//                    haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度
+                    haoJs.centerWindow($loading.get(0)); // loading居中 只有在display为block才能获得宽度  
                 }, function() {
                     $loading.css('display', 'none')
                     if (bindFlag) {
@@ -315,29 +575,30 @@
             }, 120000);
         }
 
-        haoJs.ajax({
-            type: 'post',
-            url: inviterUrl,
-            headers: headers,
-            beforeSend: function() {
-
-            },
-            data: {
-                member_id: haoJs.getParams("i"),
-                client:'wap_inviter',
-                email:'',
-                op: 'get_inviter'
-            },
-            success: function(dResult) {
-                // console.log(dResult);
-                if(dResult.datas.inviter_name){
-                    $('#inviter_name').val(dResult.datas.inviter_name);
-                    $('#inviter').show();
+		haoJs.ajax({
+                type: 'post',
+                url: inviterUrl,
+                headers: headers,
+                beforeSend: function() {
+                    
+                },
+                data: {
+                    member_id: haoJs.getParams("i"),
+					client:'wap_inviter',
+					email:'',
+                    op: 'get_inviter'
+                },
+                success: function(dResult) {
+                   // console.log(dResult);
+					if(dResult.datas.inviter_name){
+					$('#inviter_name').val(dResult.datas.inviter_name);
+					 $('#inviter').show();
+					}
+				  
                 }
-
-            }
-        });
+            });
     })
-</script>
+    </script>
 </body>
+
 </html>
