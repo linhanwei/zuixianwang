@@ -94,3 +94,11 @@ function getUserKeyCallback(data) {
     addcookie('username', data.name);
     addcookie('key', data.key);
 }
+
+//获取登录key值
+function getLoginKey(){
+    var loginKey = getcookie('key');
+    if(!loginKey) loginKey = null;
+    return loginKey;
+}
+
