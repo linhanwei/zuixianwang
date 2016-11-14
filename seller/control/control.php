@@ -351,7 +351,7 @@ class BaseMemberControl extends Control {
 
         // 面包屑
         $nav_link = array();
-        $nav_link[] = array('title' => L('homepage'), 'link'=>MALL_SITE_URL);
+        $nav_link[] = array('title' => L('homepage'), 'link'=>SELLER_SITE_URL);
         if ($nav == '') {
             $nav_link[] = array('title' => '我的商城');
         } else {
@@ -507,7 +507,7 @@ class BaseMemberControl2 extends Control {
 
         // 面包屑
         $nav_link = array();
-        $nav_link[] = array('title' => L('homepage'), 'link'=>MALL_SITE_URL);
+        $nav_link[] = array('title' => L('homepage'), 'link'=>SELLER_SITE_URL);
         if ($nav == '') {
             $nav_link[] = array('title' => '我的商城');
         } else {

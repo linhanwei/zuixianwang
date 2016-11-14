@@ -199,7 +199,7 @@
 	    if (ap_ids != '') {
     		$.ajax({
     			type: "GET",
-    			url: MALL_SITE_URL+'/index.php?act=adv&op=get_adv_list'+ap_ids,
+    			url: SELLER_SITE_URL+'/index.php?act=adv&op=get_adv_list'+ap_ids,
     			dataType:"jsonp",
     			async: true,
     		    success: function(adv_list){
@@ -290,7 +290,7 @@ $(function(){
                     }
                 }); 
                 if(_arr.length){
-                    $('.nav_Sidebar a').eq(_arr[_arr.length-1]).css({'backgroundImage':'url('+MALL_SITE_URL+'/templates/default/images/home-nav-icon-hover.png)'}).addClass('current').siblings().css({'backgroundImage':'url('+MALL_SITE_URL+'/templates/default/images/home-nav-icon.png)'}).removeClass('current');
+                    $('.nav_Sidebar a').eq(_arr[_arr.length-1]).css({'backgroundImage':'url('+SELLER_SITE_URL+'/templates/default/images/home-nav-icon-hover.png)'}).addClass('current').siblings().css({'backgroundImage':'url('+SELLER_SITE_URL+'/templates/default/images/home-nav-icon.png)'}).removeClass('current');
                     _arr = [];
                 }
             }
@@ -301,13 +301,13 @@ $(function(){
                     if($(this).hasClass('current')){
                         return;
                     }else{
-                        $(this).css({'backgroundImage':'url('+MALL_SITE_URL+'/templates/default/images/home-nav-icon-hover2.png)'});
+                        $(this).css({'backgroundImage':'url('+SELLER_SITE_URL+'/templates/default/images/home-nav-icon-hover2.png)'});
                     }
                 }).mouseout(function(){
                     if($(this).hasClass('current')){
                         return;
                     }else{
-                        $(this).css({'backgroundImage':'url('+MALL_SITE_URL+'/templates/default/images/home-nav-icon.png)'});
+                        $(this).css({'backgroundImage':'url('+SELLER_SITE_URL+'/templates/default/images/home-nav-icon.png)'});
                     }
                 });
             });

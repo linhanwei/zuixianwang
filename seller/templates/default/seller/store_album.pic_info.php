@@ -158,7 +158,7 @@
 
 function ajax_change_imgmessage(url){
 
-	$.getJSON("<?php echo MALL_SITE_URL; ?>/index.php?act=store_album&op=ajax_change_imgmessage", {'url':url}, function(data){
+	$.getJSON("<?php echo SELLER_SITE_URL; ?>/index.php?act=store_album&op=ajax_change_imgmessage", {'url':url}, function(data){
 		$("#img_name").html(data.img_name);
 		$("#upload_time").html('<b><?php echo $lang['album_pinfo_upload_time'].$lang['nc_colon'];?></b>'+data.upload_time);
 		$("#default_size").html('<b><?php echo $lang['album_pinfo_original_size'].$lang['nc_colon'];?></b>'+data.default_size+'KB');

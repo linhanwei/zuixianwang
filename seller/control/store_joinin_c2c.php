@@ -56,12 +56,12 @@ class store_joinin_c2cControl extends BaseHomeControl {
                     break;
                 case STORE_JOIN_STATE_VERIFY_FAIL:
                     if(!in_array($_GET['op'], array('step1', 'step2', 'step3', 'step4'))) {
-                        $this->show_join_message('审核失败:'.$joinin_detail['joinin_message'], MALL_SITE_URL.DS.'index.php?act=store_joinin_c2c&op=step1');
+                        $this->show_join_message('审核失败:'.$joinin_detail['joinin_message'], SELLER_SITE_URL.DS.'index.php?act=store_joinin_c2c&op=step1');
                     }
                     break;
                 case STORE_JOIN_STATE_PAY_FAIL:
                     if(!in_array($_GET['op'], array('pay', 'pay_save'))) {
-                        $this->show_join_message('付款审核失败:'.$joinin_detail['joinin_message'], MALL_SITE_URL.DS.'index.php?act=store_joinin_c2c&op=pay');
+                        $this->show_join_message('付款审核失败:'.$joinin_detail['joinin_message'], SELLER_SITE_URL.DS.'index.php?act=store_joinin_c2c&op=pay');
                     }
                     break;
                 case STORE_JOIN_STATE_FINAL:

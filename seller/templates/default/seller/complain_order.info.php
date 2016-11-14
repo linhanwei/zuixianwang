@@ -25,7 +25,7 @@
     </dl>
     <dl class="line">
       <dt><?php echo $lang['order_sn'].$lang['nc_colon'];?></dt>
-      <dd><a href="<?php echo MALL_SITE_URL;?>/index.php?act=store_order&op=show_order&order_id=<?php echo $output['order']['order_id'];?>" target="_blank"> <?php echo $output['order']['order_sn'];?> </a><a href="javascript:void(0);" class="a">更多<i class="icon-angle-down"></i>
+      <dd><a href="<?php echo SELLER_SITE_URL;?>/index.php?act=store_order&op=show_order&order_id=<?php echo $output['order']['order_id'];?>" target="_blank"> <?php echo $output['order']['order_sn'];?> </a><a href="javascript:void(0);" class="a">更多<i class="icon-angle-down"></i>
         <div class="more"> <span class="arrow"></span>
           <ul>
             <?php if($output['order']['payment_code'] != 'offline' && !in_array($output['order']['order_state'],array(ORDER_STATE_CANCEL,ORDER_STATE_NEW))) { ?>

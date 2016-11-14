@@ -58,22 +58,22 @@ $(function(){
 	$('a[class="J_Delete ncsc-btn-mini"]').click(function(){
 		var id = $(this).attr('data-id');
 		if(typeof(id) == 'undefined') return false;
-		get_confirm('<?php echo $lang['transport_del_confirm'];?>','<?php echo MALL_SITE_URL;?>/index.php?act=store_transport&op=delete&type=<?php echo $_GET['type'];?>&id='+id);
-//		$(this).attr('href','<?php echo MALL_SITE_URL;?>/index.php?act=transport&op=delete&type=<?php echo $_GET['type'];?>&id='+id);
+		get_confirm('<?php echo $lang['transport_del_confirm'];?>','<?php echo SELLER_SITE_URL;?>/index.php?act=store_transport&op=delete&type=<?php echo $_GET['type'];?>&id='+id);
+//		$(this).attr('href','<?php echo SELLER_SITE_URL;?>/index.php?act=transport&op=delete&type=<?php echo $_GET['type'];?>&id='+id);
 //		return true;
 	});
 
 	$('a[class="J_Modify ncsc-btn-mini"]').click(function(){
 		var id = $(this).attr('data-id');
 		if(typeof(id) == 'undefined') return false;
-		$(this).attr('href','<?php echo MALL_SITE_URL;?>/index.php?act=store_transport&op=edit&type=<?php echo $_GET['type'];?>&id='+id);
+		$(this).attr('href','<?php echo SELLER_SITE_URL;?>/index.php?act=store_transport&op=edit&type=<?php echo $_GET['type'];?>&id='+id);
 		return true;
 	});
 	
 	$('a[class="J_Clone ncsc-btn-mini"]').click(function(){
 		var id = $(this).attr('data-id');
 		if(typeof(id) == 'undefined') return false;
-		$(this).attr('href','<?php echo MALL_SITE_URL;?>/index.php?act=store_transport&op=clone&type=<?php echo $_GET['type'];?>&id='+id);
+		$(this).attr('href','<?php echo SELLER_SITE_URL;?>/index.php?act=store_transport&op=clone&type=<?php echo $_GET['type'];?>&id='+id);
 		return true;
 	});
 	$('a[class="ml5 ncsc-btn-mini ncsc-btn-orange"]').click(function(){

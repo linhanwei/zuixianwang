@@ -148,7 +148,7 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.Jcrop/jquery.Jcrop.js"></script>
 <link href="<?php echo RESOURCE_SITE_URL;?>/js/jquery.Jcrop/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" id="cssfile2" />
 <script type="text/javascript">
-var SITEURL = "<?php echo MALL_SITE_URL; ?>";
+var SITEURL = "<?php echo SELLER_SITE_URL; ?>";
 //裁剪图片后返回接收函数
 function call_back(picname){
 	$('#store_avatar').val(picname);

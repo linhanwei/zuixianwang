@@ -9,7 +9,7 @@
                             echo $lang['complain_pic_none'];
                         }
                         else {
-                            $pic_link = MALL_SITE_URL.'/index.php?act=show_pics&type=complain&pics=';
+                            $pic_link = SELLER_SITE_URL.'/index.php?act=show_pics&type=complain&pics=';
                             if(!empty($output['complain_info']['appeal_pic1'])) {
                                 $pic_link .= $output['complain_info']['appeal_pic1'].'|';
                             }

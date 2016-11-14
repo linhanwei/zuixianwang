@@ -61,7 +61,7 @@
 <!-- 引入幻灯片JS --> 
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.flexslider-min.js"></script> 
 <script type="text/javascript">
-var SITEURL = "<?php echo MALL_SITE_URL;?>";
+var SITEURL = "<?php echo SELLER_SITE_URL;?>";
 var MALL_TEMPLATES_URL = '<?php echo MALL_TEMPLATES_URL;?>';
 var UPLOAD_SITE_URL = '<?php echo UPLOAD_SITE_URL;?>';
 var ATTACH_COMMON = '<?php echo ATTACH_COMMON;?>';

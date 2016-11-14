@@ -29,7 +29,7 @@
 </div>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/common_select.js" charset="utf-8"></script> 
 <script type="text/javascript">
-var SITEURL = "<?php echo MALL_SITE_URL; ?>";
+var SITEURL = "<?php echo SELLER_SITE_URL; ?>";
 $(function(){
 	$('#my_store_form').validate({
     	submitHandler:function(form){

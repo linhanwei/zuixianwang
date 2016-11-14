@@ -138,7 +138,7 @@ $(function() {
     $('input[nctype="replace_image"]').each(function(){
         $(this).fileupload({
             dataType: 'json',
-            url: '<?php echo MALL_SITE_URL;?>/index.php?act=store_album&op=replace_image_upload&id=' + $(this).attr('id'),
+            url: '<?php echo SELLER_SITE_URL;?>/index.php?act=store_album&op=replace_image_upload&id=' + $(this).attr('id'),
             done: function (e,data) {
                 var param = data.result;
                 if(param.state == 'true'){
@@ -155,7 +155,7 @@ $(function() {
     var upload_num = 0; // 上传图片成功数量
     $('#fileupload').fileupload({
         dataType: 'json',
-        url: '<?php echo MALL_SITE_URL;?>/index.php?act=store_album&op=image_upload',
+        url: '<?php echo SELLER_SITE_URL;?>/index.php?act=store_album&op=image_upload',
         add: function (e,data) {
         	$.each(data.files, function (index, file) {
                 $('<div nctype=' + file.name.replace(/\./g, '_') + '><p>'+ file.name +'</p><p class="loading"></p></div>').appendTo('div[nctype="file_loading"]');
@@ -258,7 +258,7 @@ function submit_form(type){
 	if(type=='move'){
 		$('#checkboxform').append('<input type="hidden" name="form_submit" value="ok" /><input type="hidden" name="cid" value="'+$('#cid').val()+'" />');
 	}
-	$('#checkboxform').attr('action','<?php echo MALL_SITE_URL?>/index.php?act=store_album&op=album_pic_'+type);
+	$('#checkboxform').attr('action','<?php echo SELLER_SITE_URL?>/index.php?act=store_album&op=album_pic_'+type);
 	ajaxpost('checkboxform', '', '', 'onerror');
 }
 // 相册封面

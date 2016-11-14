@@ -36,7 +36,7 @@ body {
 <body>
 <div id="append_parent"></div>
 <div id="ajaxwaitid"></div>
-<form id="spec_form" method="post" action="<?php echo MALL_SITE_URL;?>/index.php?act=store_spec&op=save_spec">
+<form id="spec_form" method="post" action="<?php echo SELLER_SITE_URL;?>/index.php?act=store_spec&op=save_spec">
   <input type="hidden" name="form_submit" value="ok" />
   <input type="hidden" name="sp_id" value="<?php echo $output['sp_info']['sp_id'];?>" />
   <input type="hidden" name="gc_id" value="<?php echo $output['gc_info']['gc_id'];?>" />
@@ -96,7 +96,7 @@ body {
 </body>
 </html>
 <script>
-var SITEURL = "<?php echo MALL_SITE_URL;?>";
+var SITEURL = "<?php echo SELLER_SITE_URL;?>";
 </script>
 <script src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.js"></script>
 <script src="<?php echo RESOURCE_SITE_URL;?>/js/jquery-ui/jquery.ui.js"></script>
@@ -118,7 +118,7 @@ $(function(){
             }
         });
         if (_submit) {
-            ajaxpost('spec_form', '<?php echo MALL_SITE_URL;?>/index.php?act=store_spec&op=save_spec', '', 'onerror');
+            ajaxpost('spec_form', '<?php echo SELLER_SITE_URL;?>/index.php?act=store_spec&op=save_spec', '', 'onerror');
         }
     });
 

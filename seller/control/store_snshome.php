@@ -53,14 +53,14 @@ class store_snshomeControl extends BaseStoreSnsControl{
 						}
 					}
 					$content = $model_stracelog->spellingStyle($val['strace_type'], $val['strace_goodsdata']);
-					$strace_array[$key]['strace_content'] = str_replace("%siteurl%", MALL_SITE_URL.DS, $content);
+					$strace_array[$key]['strace_content'] = str_replace("%siteurl%", SELLER_SITE_URL.DS, $content);
 				}
 			}
 		}
 		Tpl::output('strace_array', $strace_array);
 
 		//验证码
-		Tpl::output('hash',substr(md5(MALL_SITE_URL.$_GET['act'].$_GET['op']),0,8));
+		Tpl::output('hash',substr(md5(SELLER_SITE_URL.$_GET['act'].$_GET['op']),0,8));
 		//允许插入新记录的最大条数
 		Tpl::output('max_recordnum',self::MAX_RECORDNUM);
 		Tpl::output('show_page',$model_stracelog->showpage(2));
@@ -109,7 +109,7 @@ class store_snshomeControl extends BaseStoreSnsControl{
 		Tpl::output('stid',$stid);
 
 		//验证码
-		Tpl::output('hash',substr(md5(MALL_SITE_URL.$_GET['act'].$_GET['op']),0,8));
+		Tpl::output('hash',substr(md5(SELLER_SITE_URL.$_GET['act'].$_GET['op']),0,8));
 
 		//允许插入新记录的最大条数
 		Tpl::output('max_recordnum',self::MAX_RECORDNUM);
@@ -145,7 +145,7 @@ class store_snshomeControl extends BaseStoreSnsControl{
 		Tpl::output('showtype','0');//页面展示类型 0表示分页 1表示显示前几条
 
 		//验证码
-		Tpl::output('hash',substr(md5(MALL_SITE_URL.$_GET['act'].$_GET['op']),0,8));
+		Tpl::output('hash',substr(md5(SELLER_SITE_URL.$_GET['act'].$_GET['op']),0,8));
 
 		//允许插入新记录的最大条数
 		Tpl::output('max_recordnum',self::MAX_RECORDNUM);
@@ -363,12 +363,12 @@ class store_snshomeControl extends BaseStoreSnsControl{
 		if(!empty($strace_info)){
 			if($strace_info['strace_content'] == ''){
 				$content = $model_stracelog->spellingStyle($strace_info['strace_type'], json_decode($strace_info['strace_goodsdata'],true));
-				$strace_info['strace_content'] = str_replace("%siteurl%", MALL_SITE_URL.DS, $content);
+				$strace_info['strace_content'] = str_replace("%siteurl%", SELLER_SITE_URL.DS, $content);
 			}
 		}
 		Tpl::output('strace_info', $strace_info);
 		//验证码
-		Tpl::output('hash',substr(md5(MALL_SITE_URL.$_GET['act'].$_GET['op']),0,8));
+		Tpl::output('hash',substr(md5(SELLER_SITE_URL.$_GET['act'].$_GET['op']),0,8));
 		Tpl::showpage('store_snstraceinfo');
 	}
 	/**

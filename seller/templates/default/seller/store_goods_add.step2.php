@@ -774,7 +774,7 @@
   </form>
 </div>
 <script type="text/javascript">
-var SITEURL = "<?php echo MALL_SITE_URL; ?>";
+var SITEURL = "<?php echo SELLER_SITE_URL; ?>";
 var DEFAULT_GOODS_IMAGE = "<?php echo thumb(array(), 60);?>";
 var MALL_RESOURCE_SITE_URL = "<?php echo MALL_RESOURCE_SITE_URL;?>";
 

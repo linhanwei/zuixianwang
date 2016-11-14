@@ -56,7 +56,7 @@
 </div>
 <script src="<?php echo RESOURCE_SITE_URL;?>/js/common_select.js"></script> 
 <script>
-var SITEURL = "<?php echo MALL_SITE_URL; ?>";
+var SITEURL = "<?php echo SELLER_SITE_URL; ?>";
 $(document).ready(function(){
 	regionInit("region");
 	$('input[nctype="address_add_submit" ]').click(function(){

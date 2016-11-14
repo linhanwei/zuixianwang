@@ -26,7 +26,7 @@ body, .header-wrap { background-color: #FAFAFA;}
 .msg { font: 100 36px/48px arial,"microsoft yahei"; color: #555; background-color: #FFF; text-align: center; width: 100%; border: solid 1px #E6E6E6; margin-bottom: 10px; padding: 120px 0;}
 .msg i { font-size: 48px; vertical-align: middle; margin-right: 10px;}
 </style>
-<script>var COOKIE_PRE = '<?php echo COOKIE_PRE;?>';var _CHARSET = '<?php echo strtolower(CHARSET);?>';var SITEURL = '<?php echo MALL_SITE_URL;?>';var MALL_RESOURCE_SITE_URL = '<?php echo MALL_RESOURCE_SITE_URL;?>';var RESOURCE_SITE_URL = '<?php echo RESOURCE_SITE_URL;?>';var MALL_TEMPLATES_URL = '<?php echo MALL_TEMPLATES_URL;?>';</script>
+<script>var COOKIE_PRE = '<?php echo COOKIE_PRE;?>';var _CHARSET = '<?php echo strtolower(CHARSET);?>';var SITEURL = '<?php echo SELLER_SITE_URL;?>';var MALL_RESOURCE_SITE_URL = '<?php echo MALL_RESOURCE_SITE_URL;?>';var RESOURCE_SITE_URL = '<?php echo RESOURCE_SITE_URL;?>';var MALL_TEMPLATES_URL = '<?php echo MALL_TEMPLATES_URL;?>';</script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/common.js"></script>
 <script type="text/javascript">
@@ -46,7 +46,7 @@ $(function(){
 <?php //require_once template('layout/layout_top');?>
 <!--<div class="header-wrap">
     <header class="public-head-layout wrapper">
-        <h1 class="site-logo"><a href="<?php echo MALL_SITE_URL;?>"><img src="<?php echo UPLOAD_SITE_URL.DS.ATTACH_COMMON.DS.$output['setting_config']['site_logo']; ?>" class="pngFix"></a></h1></header>
+        <h1 class="site-logo"><a href="<?php echo SELLER_SITE_URL;?>"><img src="<?php echo UPLOAD_SITE_URL.DS.ATTACH_COMMON.DS.$output['setting_config']['site_logo']; ?>" class="pngFix"></a></h1></header>
 </div>-->
 <div class="msg">
       <?php if($output['msg_type'] == 'error'){ ?>

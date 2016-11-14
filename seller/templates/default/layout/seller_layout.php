@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<?php echo MALL_RESOURCE_SITE_URL;?>/font/font-awesome/css/font-awesome-ie7.min.css">
 <![endif]-->
 <script>
-var COOKIE_PRE = '<?php echo COOKIE_PRE;?>';var _CHARSET = '<?php echo strtolower(CHARSET);?>';var SITEURL = '<?php echo MALL_SITE_URL;?>';var RESOURCE_SITE_URL = '<?php echo RESOURCE_SITE_URL;?>';var MALL_RESOURCE_SITE_URL = '<?php echo MALL_RESOURCE_SITE_URL;?>';var MALL_TEMPLATES_URL = '<?php echo MALL_TEMPLATES_URL;?>';</script>
+var COOKIE_PRE = '<?php echo COOKIE_PRE;?>';var _CHARSET = '<?php echo strtolower(CHARSET);?>';var SITEURL = '<?php echo SELLER_SITE_URL;?>';var RESOURCE_SITE_URL = '<?php echo RESOURCE_SITE_URL;?>';var MALL_RESOURCE_SITE_URL = '<?php echo MALL_RESOURCE_SITE_URL;?>';var MALL_TEMPLATES_URL = '<?php echo MALL_TEMPLATES_URL;?>';</script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.js"></script>
 <script type="text/javascript" src="<?php echo MALL_RESOURCE_SITE_URL;?>/js/seller.js"></script>
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/waypoints.js"></script>
@@ -68,7 +68,7 @@ catch(e){}
       </dl>
       <div class="ncsc-admin-function"><a href="<?php echo urlShop('show_store', 'index', array('store_id'=>$_SESSION['store_id']), $output['store_info']['store_domain']);?>" title="前往店铺" ><i class="icon-home"></i></a><a href="<?php echo urlShop('member_security', 'auth',array('type'=>'modify_pwd'));?>" title="修改密码" target="_blank"><i class="icon-wrench"></i></a><a href="<?php echo urlShop('seller_logout', 'logout');;?>" title="安全退出"><i class="icon-signout"></i></a></div>
     </div>
-    <div class="center-logo"> <a href="<?php echo MALL_SITE_URL;?>" target="_blank"><img src="<?php echo UPLOAD_SITE_URL.'/'.ATTACH_COMMON.DS.C('seller_center_logo');?>" class="pngFix" alt=""/></a>
+    <div class="center-logo"> <a href="<?php echo SELLER_SITE_URL;?>" target="_blank"><img src="<?php echo UPLOAD_SITE_URL.'/'.ATTACH_COMMON.DS.C('seller_center_logo');?>" class="pngFix" alt=""/></a>
       <h1>商家中心</h1>
     </div>
     <div class="index-search-container">

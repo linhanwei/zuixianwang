@@ -123,7 +123,7 @@ function editSpecValue(o) {
     $('div[nctype="spec_iframe"]').html('');
     var data_str = '';
     eval('data_str =' + o.attr('data-param'));
-    $_iframe = $('<iframe id="iframepage" name="iframepage" frameBorder=0 scrolling=no width="100%" height="630px" src="<?php echo MALL_SITE_URL;?>/index.php?act=store_spec&op=add_spec&spid=' + data_str.spid + '&gcid=' + data_str.gcid + '" ></iframe>');
+    $_iframe = $('<iframe id="iframepage" name="iframepage" frameBorder=0 scrolling=no width="100%" height="630px" src="<?php echo SELLER_SITE_URL;?>/index.php?act=store_spec&op=add_spec&spid=' + data_str.spid + '&gcid=' + data_str.gcid + '" ></iframe>');
     $('div[nctype="spec_iframe"]').append($_iframe);
 }
 

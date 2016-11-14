@@ -79,7 +79,7 @@
 <script src="<?php echo RESOURCE_SITE_URL;?>/js/jquery.ajaxContent.pack.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo MALL_RESOURCE_SITE_URL;?>/js/store_goods_add.step3.js" charset="utf-8"></script>
 <script>
-var SITEURL = "<?php echo MALL_SITE_URL; ?>";
+var SITEURL = "<?php echo SELLER_SITE_URL; ?>";
 var DEFAULT_GOODS_IMAGE = "<?php echo UPLOAD_SITE_URL.DS.defaultGoodsImage(240);?>";
 var MALL_RESOURCE_SITE_URL = "<?php echo MALL_RESOURCE_SITE_URL;?>";
 $(function(){
