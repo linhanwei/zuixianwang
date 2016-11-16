@@ -9,31 +9,31 @@
 <meta content="telephone=no, address=no" name="format-detection">
 <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<title>登录</title>
+<title>忘记密码</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link rel="stylesheet" type="text/css" href="http://120.25.212.243/jiu/mall_m/templates/default/static/css/common.css">
-<link rel="stylesheet" type="text/css" href="http://120.25.212.243/jiu/mall_m/templates/default/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/style.css">
 
 </head>
 <body class="login-body">
-    <div class="login-logo"><img src="http://120.25.212.243/jiu/mall_m/templates/default/static/images/login/logo.jpg"></div>
+    <div class="login-logo"><img src="../../images/login/logo.jpg"></div>
     <div class="login-form login-box">
         <form action="" method ="">
             <div class="input-group username">
-              <i></i>  <input type="text" placeholder="用户名" class="input-40" name="username" id="username" autocomplete="off"/>
+              <i></i>  <input type="text" placeholder="请填写注册时的手机号码" class="input-40" name="username" id="username" maxlength="11" autocomplete="off"/>
             </div>
-             <div class="input-group password">
-               <i></i> <input type="password" placeholder="密码" class="input-40" name="pwd" id="userpwd" autocomplete="off"/>
+            <div class="input-group getCodegroup">
+              <div class="cl-5"><input type="text" placeholder="手机验证码" maxlength="6" name="code" id="code" autocomplete="off"></div>
+              <div class="cl-5"><a id="getCode" class="getCode">获取手机验证码</a></div>
             </div>
-           <div class="password-tips-row">
-              <span class="rember-pass-box action"><small>记住密码</small><i></i><input name="remember-pass" type="hidden"></span>
-              <a href="./forget.html" class="forget-pass">忘记密码</a>
-           </div>
-            <!-- <span class="clearfix auto-login">
-                <i class="s-chk1 fleft mr5"></i>
-                <span>7天内免登录</span>
-            </span> -->
+            
+            <div class="input-group getPassword">
+              <a class="getPasswordBtn">取回密码</a>
+            </div>
+            <input type="hidden" name="cache_key" id="cache_key" value="">
+         
+
             <div class="error-tips mt10"></div>
             <div class="login-btn-box">
             <a href="javascript:void(0);" class="login-btn" id="loginbtn">
@@ -54,7 +54,7 @@
     <script type="text/javascript" src="../../js/app.js"></script>
     <script type="text/javascript" src="../../js/tmpl/common-top.js"></script>
     <script type="text/javascript" src="../../js/simple-plugin.js"></script>
-    <script type="text/javascript" src="../../js/tmpl/login.js"></script>
+    <script type="text/javascript" src="../../js/tmpl/forget.js"></script>
     <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
 </body>
 </html>

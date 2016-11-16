@@ -7,13 +7,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" type="text/css" href="../../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../../css/member.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 <body>
-    <header id="header"></header>
+    <header class="head">
+      <a class="arrow-left" onClick="history.go(-1)"><img src="../../images/setup/arrow-left.png"></a> <span>我的收藏</span> <a class="arrow-right txt"></a>
+    </header>
     <div class="favorites-list" id="favorites_list"></div>
     <footer id="footer"></footer>
     <script type="text/html" id="sfavorites_list">
@@ -21,7 +21,7 @@
 		 <ul>
 			<%for(var i=0;i<favorites_list.length;i++){%>
             <li>
-                <a href="<%=SiteUrl%>/mall_m/index.php?act=goods&op=detail&goods_id=<%=favorites_list[i].fav_id %>" class="mf-item clearfix">
+                <a href="<%=WapSiteUrl%>/tmpl/product_detail.html?goods_id=<%=favorites_list[i].fav_id %>" class="mf-item clearfix">
                     <span class="mf-pic">
                         <img src="<%=favorites_list[i].goods_image_url %>"/>
                     </span>
@@ -29,7 +29,7 @@
                         <p class="mf-pd-name"><%=favorites_list[i].goods_name %></p>
                         <p class="mf-pd-price">￥<%=favorites_list[i].goods_price %></p>
                         <p class="mf-pd-comment">&nbsp;</p>
-                        <span class="i-del" goods_id="<%=favorites_list[i].fav_id %>"></span>
+                        <span class="i-del" goods_id="<%=favorites_list[i].fav_id %>">删除</span>
                     </div>
                 </a>
             </li>

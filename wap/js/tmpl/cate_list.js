@@ -38,6 +38,7 @@ function ajax_data(data,is_add){
                 $("#cate-first").html(top_html);
             }
             if(data.child_list.length > 0) {
+                data.WapSiteUrl = WapSiteUrl;
                 var　child_html = template.render('child-list',data);
                 $("#cate-second").html(child_html);
             }else{

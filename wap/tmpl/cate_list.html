@@ -66,11 +66,11 @@
     <% if(child_list.length >0){%>
         <% for (var i = 0;i<child_list.length;i++){%>
             <% if(child_list[i].image){%>
-                <a href="<%=child_list[i].gc_id%>">
+                <a href="<%=WapSiteUrl%>/tmpl/product_list.html?gc_id=<%=child_list[i].gc_id%>">
                     <div class="img"><img src="<%=child_list[i].image%>"></div>
                     <p class="title"><%=child_list[i].gc_name%></p></a>
             <%}else{%>
-                <a href="<%=child_list[i].gc_id%>">
+                <a href="<%=WapSiteUrl%>/tmpl/product_list.html?gc_id=<%=child_list[i].gc_id%>">
                     <div class="img"></div>
                     <p class="title"><%=child_list[i].gc_name%></p></a>
             <%}%>

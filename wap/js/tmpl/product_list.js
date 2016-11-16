@@ -82,9 +82,11 @@ function ajax_data(data,is_add,is_first){
 		success: function(result) {
 			var data = result.datas;
 			//console.log(gc_id,data);
+			var exit_goods_count = $('.good-list-show-box .item').length;
+
 			page_count = result.page_total;
 			data.SiteUrl = SiteUrl;
-			if(data.goods_list.length > 0){
+			if(data.goods_list.length > 0 && exit_goods_count != 0){
 				var goods_list_html = template.render('goods-list', data);
 
 				if(is_add){
@@ -95,7 +97,8 @@ function ajax_data(data,is_add,is_first){
 				}else{
 					$('#good-list-show-box').append(goods_list_html);
 				}
-			}else{
+			}
+			if(data.goods_list.length == 0 && exit_goods_count == 0){
 				$('#good-list-show-box').html('<div style="height: 100px;width: 100%;line-height: 100px;text-align: center;font-size: 0.16rem;">暂时没有相关商品</div>');
 			}
 			$("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});

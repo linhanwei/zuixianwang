@@ -807,6 +807,17 @@ $(function() {
 
 
     $('#buy_step2').click(function(){//提交订单step2
+		var new_address_button = $('#new-address-button:checked').val();
+		if(new_address_button == 0){
+			$.sDialog({
+				skin:"red",
+				content:'请保存收货地址！',
+				okBtn:false,
+				cancelBtn:false
+			});
+			return false;
+		}
+
     	var data = {};
 
         if (isFCode) {

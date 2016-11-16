@@ -3,11 +3,13 @@ $(function() {
     var memberHtml = '';
     var act = GetQueryString("act");
     var url = location.href;
+    var icon_img
     var index_action = '',
         cate_list_action = '',
         product_list_action = '',
         cart_list_action = '',
-        member_action = '';
+        member_action = '',
+        product_list_img = '/wap/images/ico/middle-ico.png';;
 
     if(url.indexOf('/wap/index.html') > 0){
         index_action='action';
@@ -17,6 +19,7 @@ $(function() {
     }
     if(url.indexOf('/tmpl/product_list.html') > 0){
         product_list_action='action';
+        product_list_img = '/wap/images/ico/middle-ico-1.png';
     }
     if(url.indexOf('/tmpl/cart_list.html') > 0){
         cart_list_action='action';
@@ -27,7 +30,7 @@ $(function() {
 
     var html = '<a href="' + SiteUrl + '/wap/index.html" class="home '+index_action+'" ><span></span><p>首页</p></a>'+
                 '<a href="' + SiteUrl + '/wap/tmpl/cate_list.html" class="cate '+cate_list_action+'" ><span></span><p>分类</p></a>'+
-                '<a href="' + SiteUrl + '/wap/tmpl/product_list.html" class="middle '+product_list_action+'"><img src="' + SiteUrl + '/wap/images/ico/middle-ico.png"></a>'+
+                '<a href="' + SiteUrl + '/wap/tmpl/product_list.html" class="middle '+product_list_action+'"><img src="' + SiteUrl + product_list_img+'"></a>'+
                 '<a href="' + SiteUrl + '/wap/tmpl/cart_list.html" class="cart '+cart_list_action+'" ><span></span><p>购物车</p></a>'+
                 '<a href="' + SiteUrl + '/wap/tmpl/member/member.html" class="member '+member_action+'" ><span></span><p>我的</p></a>';
 

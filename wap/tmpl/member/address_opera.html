@@ -7,28 +7,28 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" type="text/css" href="../../css/reset.css">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../../css/member.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
     
 </head>
 <body>
-    <header id="header"></header>
+    <header class="head">
+      <a class="arrow-left" onClick="history.go(-1)"><img src="../../images/setup/arrow-left.png"></a> <span>添加地址</span> <a class="arrow-right txt"></a>
+    </header>
     <div class="address-opera">
         <div class="address-ocnt">
             <div class="address-octlt">收货人信息</div>
             <p>姓名：<span class="opera-tips">(*必填)</span></p>
             <p>
-                <input type="text" id="true_name" class="input-30" name="true_name"/>
+                <input type="text" id="true_name" class="input-30" placeholder="请填写姓名" name="true_name"/>
             </p>
             <p>手机号码：<span class="opera-tips">(*必填)</span></p>
             <p>
-                <input type="text" id="mob_phone" class="input-30" name="mob_phone"/>
+                <input type="text" id="mob_phone" class="input-30" placeholder="请填写手机号码" name="mob_phone"/>
             </p>
             <p>电话号码：</p>
             <p>
-                <input type="text"  class="input-30" name="tel_phone"/>
+                <input type="text"  class="input-30" placeholder="请填写电话号码" name="tel_phone"/>
             </p>
             <div class="address-octlt">地址信息</div>
             <p>省份：<span class="opera-tips">(*必填)</span></p>
@@ -51,7 +51,7 @@
             </div>
             <p>街道：<span class="opera-tips">(*必填)</span></p>
             <p>
-                <input type="text" class="input-30" id="address" name="address">
+                <input type="text" class="input-30" placeholder="请填写详细街道地址" id="address" name="address">
             </p>
         </div>
         <div class="error-tips"></div>

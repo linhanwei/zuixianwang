@@ -500,3 +500,41 @@ body.bg-white{ background:#FFF}
 .btn-box{ text-align:center; font-size:0.16rem; padding:0.12rem 0}
 .btn-box .btn{ padding:0.12rem 0.25rem; background:#DA251D; color:#FFF; border-radius:3px; font-size:0.16rem}
 
+/**@地址管理**/
+#address_list{ width:100%; font-size:0.16rem; margin-top:0.12rem}
+#address_list li{ background:#FFF; margin-bottom:0.12rem}
+#address_list li p{ text-indent:0.12rem; height:0.4rem; line-height:0.4rem;overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	-webkit-text-overflow:ellipsis;
+	-moz-text-overflow:ellipsis;
+	white-space:nowrap;}
+#address_list li p a{ border:1px solid #DA251D; border-radius:3px; padding:0.05rem 0.08rem; margin-right:0.05rem}
+.add_address{ display:block; padding:0.12rem; text-align:center; background:#DA251D; border-radius:3px; color:#FFF; font-size:0.14rem; margin-top:0.2rem}
+#address_list li p a:hover{ background:#DA251D; color:#FFF}
+
+.address-opera{width:100%; font-size:0.16rem; margin-bottom:0.12rem; background:#FFF}
+.address-ocnt p{ height:0.4rem; line-height:0.4rem; padding-left:0.12rem}
+.address-octlt{ height:0.5rem; line-height:0.5rem;padding-left:0.12rem; font-size:0.16rem; color:#000; font-weight:600}
+.input-30{ width:100%; background:none; border:none; height:0.4rem; line-height:0.4rem; border-bottom:1px solid #7F7F7F}
+.input-30::-moz-placeholder { color: #7C7C7C; }
+.input-30::-webkit-input-placeholder { color:#7C7C7C; }
+.input-30::-ms-input-placeholder { color:#7C7C7C; }
+.btn-prink-s{ border:1px solid #DA251D; border-radius:3px; padding:0.05rem 0.08rem; margin-right:0.05rem}
+.btn-prink-s:hover{ background:#DA251D; color:#FFF}
+.new-select-wp{ padding-left:0.12rem }
+.select-30 { background:none; border:none; font-size:0.14rem }
+.select-30 option{padding:0.1rem 0.2rem; font-size:0.14rem}
+#area{ margin-bottom:0.2rem}
+
+/**@我的收藏**/
+.favorites-list{ width:100%; background:#FFF; overflow:hidden}
+.favorites-list li{ margin-bottom:0.12rem}
+.mf-item{ display:block; overflow:hidden; width:96%; margin:auto; position:relative}
+.mf-item .mf-pic{ display:block; width:1rem; height:1rem; overflow:hidden; float:left; margin-right:0.12rem}
+.mf-item .mf-pic img{ width:100%}
+.mf-infor{ font-size:0.16rem}
+.mf-infor p{ height:0.3rem; line-height:0.3rem; font-size:0.14rem}
+.mf-infor .i-del{ border:1px solid #D21A25; border-radius:3px; position:absolute; bottom:0; right:0.12rem; padding:0.06rem 0.12rem; color:#F00}
+.no-record{ position:fixed; top:40%; left:50%; font-size:0.24rem; color:#F00; border:1px solid #DA251D; padding:0.2rem 0.5rem; transform:translate(-50%,-50%); border-radius:5px;}
+
