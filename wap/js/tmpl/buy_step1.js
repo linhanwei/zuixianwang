@@ -905,16 +905,16 @@ $(function() {
             	data.password = passwd;
             }else{
             	//以后需要删除
-            	alert('请选择使用预存款支付!');
-        		return false;
+            	//alert('请选择使用预存款支付!');
+                //return false;
 
             	var pd_pay = 0;
             	data.pd_pay = pd_pay;
             }
         }else{
         	//以后需要删除
-        	alert('您的账户余额不足,请先进行充值再购买!');
-        	return false;
+        	//alert('您的账户余额不足,请先进行充值再购买!');
+			//return false;
 
         	var pd_pay = 0;
         	data.pd_pay = pd_pay;
@@ -945,9 +945,13 @@ $(function() {
                     });
                     return false;
                 }
+				console.log(result.datas);
+				if(pd_pay != 1){
+					appPay(result.datas.data);//调用支付
+				}
+        		if(result.datas.pay_sn != ''){
 
-        		if(result.datas.pay_sn.pay_sn != ''){
-        			location.href = WapSiteUrl+'/tmpl/member/order_list.html';
+					//location.href = WapSiteUrl+'/tmpl/member/order_list.html';
         		}
         		return false;
         	}

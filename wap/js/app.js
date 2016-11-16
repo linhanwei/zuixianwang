@@ -82,7 +82,8 @@ if (client == 'ios') {
         x5.commandQueue = [];
         return json;
     };
-    x5.exec("demoid", "executeJSCode_JSDict_", [{"1": "getUserKey", "2": {"success": "getUserKeyCallback"}}]);
+    //x5.exec("demoid", "executeJSCode_JSDict_", [{"1": "getUserKey", "2": {"success": "getUserKeyCallback",'aaaa':1111}}]);
+
 }
 
 //自动登录
@@ -100,5 +101,16 @@ function getLoginKey(){
     var loginKey = getcookie('key');
     if(!loginKey) loginKey = null;
     return loginKey;
+    //x5.exec("demoid", "executeJSCode_JSDict_", [{"1": "setLoginKey", "2": {'loginKey':loginKey}}]);
 }
 
+function appPay(datas){
+    datas.loginKey = getLoginKey();
+    x5.exec("demoid", "executeJSCode_JSDict_", [{"1": "appPay", "2": {"api":"mall_m/index.php?act=member_payment&op=pay&pay_sn="+datas.pay_sn,"params":datas,"success": "doing"}}]);
+
+}
+
+function doing(){
+    alert('支付成功!');
+    location.href = WapSiteUrl+'/tmpl/member/order_list.html';
+}

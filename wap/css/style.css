@@ -184,12 +184,12 @@ body.bg-white{ background:#FFF}
    .spec-box .summary{ width:100%; min-height:78px; position:absolute; left:0; top:0; padding:0.1rem}
    .spec-box .summary .img{ width:100px; height:100px; position:relative; top:-32px; float:left; background:#FFF; border:1px solid #DDD; text-align:center; padding:2px; display:-webkit-box; border-radius:4px; margin-right:10px; overflow:hidden}
    .spec-box .summary .img img{ height:100%; width:100%;}
-   .spec-box .summary .main .price-container{ height:0.2rem; font-size:0.16rem; color:#F00}
-   .spec-box .summary .main .stock-control{ height:0.2rem; font-size:0.075rem}
-   .spec-box .summary .main .stock-control span,.spec-box .summary .main .stock-control label,.spec-box .summary .main .stock-control small{ vertical-align:middle; font-size:0.075rem}
-   .spec-box .summary .main .sku-tips { line-height:0.2rem}
-   .spec-box .summary .main .sku-tips label{ font-size:0.1rem; vertical-align:top; float:left}
-   .spec-box .summary .main .sku-tips span{ font-size:0.1rem; padding-right:0.05rem; vertical-align:top; word-break:break-all;float:left}
+   .spec-box .summary .summary-main .price-container{ height:0.2rem; font-size:0.16rem; color:#F00}
+   .spec-box .summary .summary-main .stock-control{ height:0.2rem; font-size:0.075rem}
+   .spec-box .summary .summary-main .stock-control span,.spec-box .summary .summary-main .stock-control label,.spec-box .summary .summary-main .stock-control small{ vertical-align:middle; font-size:0.075rem}
+   .spec-box .summary .summary-main .sku-tips { line-height:0.2rem}
+   .spec-box .summary .summary-main .sku-tips label{ font-size:0.1rem; vertical-align:top; float:left}
+   .spec-box .summary .summary-main .sku-tips span{ font-size:0.1rem; padding-right:0.05rem; vertical-align:top; word-break:break-all;float:left}
    .spec-box .summary .close{position:absolute; right:0.25rem; top:0.05rem; z-index:999999; font-size:0.14rem; padding:0.05rem 0.1rem; border:1px solid #DEDEDE; border-radius:2px}
    .ok-btn{ height:48px; line-height:48px; text-align:center; font-size:15px; color:#FFF; background:#D4342C; position:absolute; bottom:0; left:0; width:100%}
    .spec-box .body{ border-top:1px solid #DDD; position:absolute; top:100px; bottom:48px; left:0; right:0; z-index:99999; overflow-x:hidden; overflow:-y:scroll}
@@ -351,6 +351,15 @@ body.bg-white{ background:#FFF}
 .rember-pass-box.action i{background:url(../images/login/rm-no.png) center center no-repeat;background-size:0.2rem;}
 .password-tips-row a{ color:#D4342C; float:right}
 
+.login-box .input-group.getCodegroup{ margin-top:0.12rem}
+.login-box .input-group .cl-5{ width:50%; float:left; overflow:hidden}
+.login-box .input-group .cl-5 input{ width:98%; float:left; margin-left:0; height:0.2rem; line-height:0.2rem; margin-top:0.15rem; text-indent:0.12rem}
+.login-box .input-group .cl-5 a{ display:block; float:right; width:98%; height:100%; background:#D4342C; color:#FFF; text-align:center; font-size:0.16rem; border-radius:3px}
+
+.login-box .input-group.getPassword{margin-top:0.12rem;}
+.login-box .input-group.getPassword a{ display:block; width:100%; height:100%; line-height:0.5rem;background:#D4342C; color:#FFF; font-size:0.14rem; text-align:center}
+
+
 .login-btn-box{ width:80%; margin:0.8rem auto; text-align:center; font-size:0.2rem; overflow:hidden}
 .login-btn-box a{ display:inline-block; width:40%; border:1px solid #D4342C; padding:0.1rem 0; border-radius:0.03rem; font-size:0.2rem}
 .login-btn-box a.register-btn{background:#FFF; border-color:#9D9D9D; color:#9D9D9D; float:right}
@@ -455,4 +464,39 @@ body.bg-white{ background:#FFF}
 .go-top img{ width:50px; height:50px}
 /**首页模块样式**/
 
+/**@设置模块**/
+
+.head{ height:0.5rem; line-height:0.5rem; width:100%; position:fixed; top:0; left:0; background:#FFF; text-align:center; font-size:0.2rem; color:#D4342C; font-weight:600}
+.head a{ display:block; position:absolute; width:0.3rem; height:0.3rem; line-height:0.3rem}
+.head a.arrow-left{ top:0.1rem; left:0.1rem;}
+.head a.arrow-right{ top:0.1rem; right: 0.1rem}
+.head a.arrow-right.txt{ width:0.4rem; font-size:0.16rem; color:#D4342C}
+
+.main{ width:100%; overflow:hidden}
+.main .setup-item{ display:block; border:1px solid #D4342C; background:#FFF; border-bottom:none; overflow:hidden; font-size:0.12rem; padding:0.15rem 0; position:relative}
+.main .setup-item span{ font-size:0.14rem; margin-left:0.12rem}
+.main .setup-item i.arrow-right{ display:block; width:0.16rem; height:0.16rem; background:url(../images/setup/arrow-right.png) center center no-repeat; background-size:0.16rem; float:right; position:absolute; top:50%; right:0.12rem; transform:translateY(-50%)}
+
+.main .setup-item.avatar{ height:0.6rem; line-height:0.6rem; padding:0.06rem 0}
+.main .setup-item.avatar img{ width:0.6rem; height:0.6rem; float:right; margin-right:0.28rem}
+.main .setup-item.updatepass{ border-bottom:1px solid #D4342C;}
+.main .setup-item.login-out{ border-bottom:1px solid #D4342C; margin-top:0.4rem}
+.main .setup-item.nickname span.nickname-value{ float:right; margin-right:0.12rem}
+.main .setup-item.sex{ line-height:0.45rem; height:0.45rem; padding:0}
+.sex-set-box{ height:0.45rem; line-height:0.45rem; float:right}
+.sex-set-box i{ display:inline-block; float:left; width:0.45rem; height:0.45rem; margin-left:0.06rem}
+.sex-set-box i.man{ background:url(../images/setup/man-1.png) center center no-repeat; background-size:0.45rem;}
+.sex-set-box i.woman{ background:url(../images/setup/woman-1.png) center center no-repeat; background-size:0.45rem;}
+.sex-set-box i.man.action{ background:url(../images/setup/man-2.png) center center no-repeat; background-size:0.45rem;}
+.sex-set-box i.woman.action{ background:url(../images/setup/woman-2.png) center center no-repeat; background-size:0.45rem;}
+
+.set-news-pass-body{ background:#FCFCFC}
+.set-news-pass{ width:100%; height:100%; background:#FCFCFC; padding-top:0.4rem}
+.set-news-pass .input-group{ width:70%;height:0.4rem; border:1px solid #D4342C; margin:0.2rem auto}
+.set-news-pass .input-group input{ background:none; border:none; width:100%; height:0.4rem; line-height:0.4rem; font-size:0.14rem; vertical-align:top; margin-top:-1px; text-indent:0.12rem}
+.set-news-pass .input-group input::-moz-placeholder { color: #7C7C7C; }
+.set-news-pass .input-group input::-webkit-input-placeholder { color:#7C7C7C; }
+.set-news-pass .input-group input::-ms-input-placeholder { color:#7C7C7C; }
+.btn-box{ text-align:center; font-size:0.16rem; padding:0.12rem 0}
+.btn-box .btn{ padding:0.12rem 0.25rem; background:#DA251D; color:#FFF; border-radius:3px; font-size:0.16rem}
 
