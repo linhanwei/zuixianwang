@@ -1,10 +1,5 @@
-$(function () {
-
-    var recommend_goods = getcookie('goods');
-    var html = '',
-        index_cache_key = 'index';
-
-    $("#main-container").html(getCache(index_cache_key));
+function completed(){
+    $("img.lazy").lazyload({effect: "fadeIn",threshold:200});
     //轮播图
     var swiper = new Swiper('.swiper-container', {
         //pagination: '.swiper-pagination',
@@ -16,6 +11,55 @@ $(function () {
         autoplay: 2500,
         autoplayDisableOnInteraction: false
     });
+
+    //左右转动
+    $(".tejia-box").width( (($(window).width()-30)/3 + 10) *$(".tejia-box").find(".item").length  );
+    $(".tejia-box").find(".item").width(($(window).width()-30)/3);
+    $("#index-tj-arrow-left").hide();
+    $("#index-tj-arrow-left").on('click',function(){
+        var tjl = $(".tejia-box").offset().left;
+        var il  = $(".tejia-box").find(".item").length;
+        var iw  = $(".tejia-box").find(".item").width();
+
+        if(tjl < 0 )
+            $(".tejia-box").animate({marginLeft:(iw+10+tjl)+'px'});
+
+        if(tjl > -1*(iw+10)){
+            $("#index-tj-arrow-left").hide();
+        }
+
+        if(tjl > -1*(iw+10)*(il-1)){
+            $("#index-tj-arrow-right").show();
+        }
+    });
+    $("#index-tj-arrow-right").on('click',function(){
+        var tjl = $(".tejia-box").offset().left;
+        var il  = $(".tejia-box").find(".item").length;
+        var iw  = $(".tejia-box").find(".item").width();
+        if(tjl > -1*(iw+10)*(il-3))
+            $(".tejia-box").animate({marginLeft:(-1*(iw+10)+tjl)+'px'});
+
+        if(tjl == 0){
+            $("#index-tj-arrow-left").show();
+        }
+
+        if(tjl == -1*(iw+10)*(il-4)){
+            $("#index-tj-arrow-right").hide();
+        }
+    });
+}
+$(function () {
+
+    var recommend_goods = getcookie('goods');
+    var html = '',
+        index_cache_key = 'index';
+    var index_content = getCache(index_cache_key);
+
+    if(index_content){
+        $("#main-container").html(index_content);
+        completed();
+    }
+
 
     $.ajax({
         url: ApiUrl + "/index.php?act=index",
@@ -105,69 +149,17 @@ $(function () {
                     return false;
                 });
             });
-            setCache(index_cache_key, html);
-            $("#main-container").html(html);
-			$("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
+            if(index_content != html){
+                setCache(index_cache_key, html);
+                $("#main-container").html(html);
+                completed();
+            }
 
-            //轮播图
-            var swiper = new Swiper('.swiper-container', {
-                //pagination: '.swiper-pagination',
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                paginationClickable: true,
-                spaceBetween: 30,
-                centeredSlides: true,
-                autoplay: 2500,
-                autoplayDisableOnInteraction: false
-            });
-
-            //左右转动
-            $(".tejia-box").width( (($(window).width()-30)/3 + 10) *$(".tejia-box").find(".item").length  );
-            $(".tejia-box").find(".item").width(($(window).width()-30)/3);
-            $("#index-tj-arrow-left").hide();
-            $("#index-tj-arrow-left").on('click',function(){
-                var tjl = $(".tejia-box").offset().left;
-                var il  = $(".tejia-box").find(".item").length;
-                var iw  = $(".tejia-box").find(".item").width();
-
-                if(tjl < 0 )
-                    $(".tejia-box").animate({marginLeft:(iw+10+tjl)+'px'});
-
-                if(tjl > -1*(iw+10)){
-                    $("#index-tj-arrow-left").hide();
-                }
-
-                if(tjl > -1*(iw+10)*(il-1)){
-                    $("#index-tj-arrow-right").show();
-                }
-            });
-            $("#index-tj-arrow-right").on('click',function(){
-                var tjl = $(".tejia-box").offset().left;
-                var il  = $(".tejia-box").find(".item").length;
-                var iw  = $(".tejia-box").find(".item").width();
-                if(tjl > -1*(iw+10)*(il-3))
-                    $(".tejia-box").animate({marginLeft:(-1*(iw+10)+tjl)+'px'});
-
-                if(tjl == 0){
-                    $("#index-tj-arrow-left").show();
-                }
-
-                if(tjl == -1*(iw+10)*(il-4)){
-                    $("#index-tj-arrow-right").hide();
-                }
-            });
+            html = null;
 
         }
     });
 
-    //搜索
-    var search_list = getCache('search_key_list');
-    if(search_list && search_list.length > 0){
-        var search_html = '';
-        for(var sea in search_list){
-            search_html += '<a href="'+WapSiteUrl+'/tmpl/product_list.html?keyword='+encodeURIComponent(search_list[sea])+'" class="search-hb">'+search_list[sea]+'</a>';
-        }
-        $('.search-history-box').html(search_html);
-    }
+
 
 });

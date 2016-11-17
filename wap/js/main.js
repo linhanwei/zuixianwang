@@ -39,8 +39,15 @@ $(document).ready(function () {
 	});
 	
     $("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
-	
-	
+
+
+	//返回顶部按钮
+	$("#go-top").click(function(){
+
+		$('body,html').animate({scrollTop:0},500);
+		return false;
+	});
+
 	function loadingcss3_open(){
 		$('<div id="loadingcss3" class="fixedloading loadingcss3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fixedloadingbg"></div>').appendTo(body);
 		$(".fixedloading").addClass("loadingcss3");

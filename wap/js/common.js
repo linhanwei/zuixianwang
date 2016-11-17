@@ -1,9 +1,3 @@
-//清除manifest缓存
-if(GetQueryString('bug')){
-    console.log('清除manifest缓存成功!');
-    window.applicationCache.update();
-}
-
 //设置本地缓存
 function setCache(k,v){
     if(window.localStorage) {
@@ -39,6 +33,31 @@ function clearCache(){
     if(window.localStorage) {
         localStorage.clear();
     }
+}
+
+//修改a链接增加key值
+function add_key(){
+    $('a').each(function(k,v){
+        var key = getcookie('key'),
+            a_href = $(v).attr('href'),
+            new_href = '';
+
+        if(a_href && a_href.indexOf("javascript") < 0){
+            var key_index = a_href.indexOf("?");
+            if(key_index >= 0){
+                if(a_href.indexOf("=") >= 0){
+                    new_href = a_href+'&key='+key;
+                }else{
+                    new_href = a_href+'key='+key;
+                }
+            }else{
+                new_href = a_href+'?key='+key;
+            }
+
+            $(v).attr('href',new_href);
+            //console.log(key,key_index,k,a_href,111);
+        }
+    });
 }
 
 function GetQueryString(name){
@@ -100,62 +119,61 @@ function buildUrl(type, data) {
             return WapSiteUrl + '/tmpl/product_list.html?keyword=' + encodeURIComponent(data);
         case 'special':
             return SiteUrl + '/mall_m/index.php?act=mb_special&op=index&sp_id=' + data;
-        //return WapSiteUrl + '/special.html?special_id=' + data;
+            //return WapSiteUrl + '/special.html?special_id=' + data;
         case 'goods':
             return SiteUrl + '/mall_m/index.php?act=goods&op=detail&goods_id=' + data;
-        //return WapSiteUrl + '/tmpl/product_detail.html?goods_id=' + data;
+            //return WapSiteUrl + '/tmpl/product_detail.html?goods_id=' + data;
         case 'url':
             return data;
     }
     return WapSiteUrl;
 }
 
-if(typeof($) != "undefined"){
-    $.fn.ajaxUploadImage = function(e) {
-    var t = {
-        url: "",
-        data: {},
-        start: function() {},
-        success: function() {}
-    };
-    var e = $.extend({},
-        t, e);
-    var a;
-    function n() {
-        if (a === null || a === undefined) {
-            alert("请选择您要上传的文件！");
-            return false
-        }
-        return true
-    }
-    return this.each(function() {
-        $(this).on("change",
-            function() {
-                var t = $(this);
-                e.start.call("start", t);
-                a = t.prop("files")[0];
-                if (!n) return false;
-                try {
-                    var r = new XMLHttpRequest;
-                    r.open("post", e.url, true);
-                    r.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-                    r.onreadystatechange = function() {
-                        if (r.readyState == 4) {
-                            returnDate = $.parseJSON(r.responseText);
-                            e.success.call("success", t, returnDate)
-                        }
-                    };
-                    var i = new FormData;
-                    for (k in e.data) {
-                        i.append(k, e.data[k])
-                    }
-                    i.append(t.attr("name"), a);
-                    result = r.send(i)
-                } catch(o) {
-                    console.log(o);
-                    alert(o)
+
+/**
+ * 声明获取图片的方法
+ * @param {Object} picUrl 图片的网络地址
+ * @param {Object} defaultPic 默认图片
+ * @param {Object} element 图片源元素
+ */
+function fetchImage(picUrl, defaultPic, element) {
+    if(typeof(plus)=='undefined'){
+        element.setAttribute("src", picUrl);
+    }else{
+        //将图片网络地址进行md5摘要。
+        var filename = hex_md5(picUrl);
+        element.setAttribute("src", defaultPic);
+        //尝试加载本地图片
+        plus.io.resolveLocalFileSystemURL("_downloads/" + filename, function(entry) {
+            // 加载本地图片成功
+            entry.file( function(file){
+                if(file.size==0){
+                    //console.log("2.1图片为空显示默认");
+                    element.setAttribute("src", defaultPic);
+                }else{
+                    var path = plus.io.convertLocalFileSystemURL("_downloads/" + filename);
+                    //console.log("2.1加载本地图片"+path);
+                    element.setAttribute("src", path);
                 }
-            })
-    })
-};
+            });
+        }, function(e) {
+            //加载本地图片失败，本地没有该图片，尝试从网络下载图片并保存本地，保存文件名为url摘要md5值
+            var dtask = plus.downloader.createDownload(picUrl, {filename:filename}, function(d, status) {
+                // 下载完成
+                if (status == 200) {
+                    if(d.downloadedSize==0){
+                        //console.log("2.2图片为空显示默认");
+                        element.setAttribute("src", defaultPic);
+                    }else{
+                        //console.log("2.2下载网络文件成功"+d.url);
+                        element.setAttribute("src", d.url);
+                    }
+                }
+            });
+            dtask.start();
+        });
+    }
+
+
 }
+
