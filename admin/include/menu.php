@@ -172,7 +172,7 @@ $arr['left'][] = array(
     'list' => array(
         array('args' => 'index_edit,mb_special,mobile', 'text' => '首页编辑'),
         array('args' => 'index,banner,mobile', 'text' => 'banner管理'),
-     array('args'=>'special_list,mb_special,mobile',				'text'=>'专题设置'),
+//     array('args'=>'special_list,mb_special,mobile',				'text'=>'专题设置'),
      array('args'=>'upload_apk,mb_index,mobile',				'text'=>'apk上传'),
         /* array('args'=>'mb_category_list,mb_category,mobile',	'text'=>$lang['nc_mobile_catepic']),
          array('args'=>'mb_app,mb_app,mobile',				'text'=>'下载设置'),

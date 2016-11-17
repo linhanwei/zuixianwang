@@ -218,12 +218,23 @@ class mb_specialControl extends SystemControl
     public function special_item_delOp()
     {
         $model_mb_special = Model('mb_special');
-
+        $item_id = $_POST['item_id'];
         $condition = array();
-        $condition['item_id'] = $_POST['item_id'];
+        $condition['item_id'] = $item_id;
+
+        $item_info = $model_mb_special->getMbSpecialItemInfoByID($item_id);
 
         $result = $model_mb_special->delMbSpecialItem($condition, $_POST['special_id']);
         if ($result) {
+            //删除图片
+            if($item_info['item_data']){
+                $item_list = $item_info['item_data']['item'];
+                foreach($item_list as $item){
+                    if($item['image']){
+                        $this->del_special_imageOp($item_info['special_id'],$item['image'],true);
+                    }
+                }
+            }
             echo json_encode(array('message' => '删除成功'));
             die;
         } else {
@@ -323,6 +334,35 @@ class mb_specialControl extends SystemControl
             $data['image_url'] = getMbSpecialImageUrl($data['image_name']);
         }
         echo json_encode($data);
+    }
+
+    //删除图片
+    public function del_special_imageOp($special_id='',$img_name='',$is_more=false){
+            $return = array('status'=>0,'msg'=>'');
+            $special_id = $special_id >=0 ? $special_id : $_POST['item_id'];
+            $img_name = $img_name ? $img_name : $_POST['img_name'];
+
+            $prefix = 's' . $special_id;
+            $img_dir = BASE_DATA_PATH .DS.'upload'.DS.ATTACH_MOBILE . DS . 'special' . DS . $prefix. DS.$img_name;
+            if(file_exists($img_dir)){
+                if(unlink($img_dir)){
+                    $return['status'] = 1;
+                    $return['msg'] = '删除图片成功!';
+                }else{
+                    $return['msg'] = '删除图片失败!';
+                }
+            }else{
+                $return['msg'] = '图片不存在!';
+            }
+            $return['dir'] =$img_dir;
+
+            if($is_more){
+                return $return;
+            }else{
+                echo json_encode($return);
+                exit();
+            }
+
     }
 
     /**

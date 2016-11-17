@@ -91,8 +91,10 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/template.min.js" charset="utf-8"></script> 
 <script type="text/javascript">
     var url_upload_image = '<?php echo urlAdmin('mb_special', 'special_image_upload');?>';
+    var url_del_image = '<?php echo urlAdmin('mb_special', 'del_special_image');?>';
 
     $(document).ready(function(){
+        var edit_old_img = '';
         var $current_content = null;
         var $current_image = null;
         var $current_image_name = null;
@@ -116,7 +118,8 @@
             $current_image_name = $item_image.find('[nctype="image_name"]');
             $current_image_type = $item_image.find('[nctype="image_type"]');
             $current_image_data = $item_image.find('[nctype="image_data"]');
-
+            edit_old_img = $current_image_name.val();
+            console.log(edit_old_img,11111);
             $('#dialog_item_image').attr('src', $current_image.attr('src'));
             $('#dialog_item_image_name').val($current_image_name.val());
             $('#dialog_item_image_type').val($current_image_type.val());
@@ -146,6 +149,8 @@
 
         //删除图片
         $('#item_edit_content').on('click', '[nctype="btn_del_item_image"]', function() {
+            var item_image_name = $(this).parents('[nctype="item_image"]').find('[nctype="image_name"]').val();
+            del_item_image(special_id,item_image_name);
             $(this).parents('[nctype="item_image"]').remove();
         });
 
@@ -155,6 +160,7 @@
             url: url_upload_image,
             formData: {special_id: special_id},
             add: function(e, data) {
+
                 old_image = $dialog_item_image.attr('src');
                 $dialog_item_image.attr('src', LOADING_IMAGE);
                 data.submit();
@@ -165,6 +171,8 @@
                     $dialog_item_image.attr('src', result.image_url);
                     $dialog_item_image.show();
                     $dialog_item_image_name.val(result.image_name);
+
+                    del_item_image(special_id,edit_old_img);
                 } else {
                     $dialog_item_image.attr('src',old_image);
                     showError(result.error);
@@ -201,6 +209,22 @@
             item.image_type = $('#dialog_item_image_type').val();
             item.image_data = $('#dialog_item_image_data').val();
             $current_content.append(template.render('item_image_template', item));
+        }
+
+        function del_item_image(item_id,img_name) {
+            $.ajax({
+                url: url_del_image,
+                type: 'post',
+                data:{item_id:item_id,img_name:img_name},
+                dataType: 'json',
+                beforeSend:function(){
+
+                },
+                success: function(result) {
+
+                    console.log(result,'del_img');
+                }
+            });
         }
 
 

@@ -42,7 +42,7 @@
                         <input nctype="image_data" name="item_data[item][<?php echo $item_key; ?>][data]" type="hidden"
                                value="<?php echo $item_value['data']; ?>">
                         <a nctype="btn_del_item_image" href="javascript:;"><i class="icon-trash"></i>删除</a>
-                        <a nctype="btn_edit_item_image" data-desc="640*130" href="javascript:;"><i
+                        <a nctype="btn_edit_item_image" data-desc="640*250" href="javascript:;"><i
                                 class="icon-edit"></i>编辑</a>
                     <?php } ?>
                 </div>
@@ -50,6 +50,6 @@
         <?php } ?>
     </div>
     <?php if ($item_edit_flag) { ?>
-        <a nctype="btn_add_item_image" class="btn-add" data-desc="640*240" href="javascript:;">添加新的广告条</a>
+        <a nctype="btn_add_item_image" class="btn-add" data-desc="640*250" href="javascript:;">添加新的广告条</a>
     <?php } ?>
 </div>

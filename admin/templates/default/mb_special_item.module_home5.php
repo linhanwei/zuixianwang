@@ -51,7 +51,7 @@
                                value="<?php echo $item_value['data']; ?>">
 
                         <a nctype="btn_del_item_image" href="javascript:;"><i class="icon-trash"></i>删除</a>
-                        <a nctype="btn_edit_item_image" data-desc="320*130" href="javascript:;"><i
+                        <a nctype="btn_edit_item_image" data-desc="210*85" href="javascript:;"><i
                                 class="icon-edit"></i>编辑</a>
                     <?php } ?>
                 </div>
@@ -60,7 +60,7 @@
     </div>
     <?php if ($item_edit_flag) { ?>
         <?php if (count($item_data['item']) < 6) { ?>
-            <a nctype="btn_add_item_image" class="btn-add" data-desc="320*85" href="javascript:;">添加新的块内容</a>
+            <a nctype="btn_add_item_image" class="btn-add" data-desc="210*85" href="javascript:;">添加新的块内容</a>
         <?php } ?>
     <?php } ?>
 </div>
