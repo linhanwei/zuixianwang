@@ -1,24 +1,5 @@
 $(function(){
 
-    var key = getcookie('key');
-	$('#logoutbtn').click(function(){
-		var username = getcookie('username');
-		var key = getcookie('key');
-		var client = 'wap';
-		$.ajax({
-			type:'get',
-			url:ApiUrl+'/index.php?act=logout',
-			data:{username:username,key:key,client:client},
-			success:function(result){
-				if(result){
-					delCookie('username');
-					delCookie('key');
-					location.href = WapSiteUrl+'/tmpl/member/login.html';
-				}
-			}
-		});
-	});	
-	
 	var referurl = document.referrer;//上级网址
 	$("input[name=referurl]").val(referurl);
 	$.sValid.init({

@@ -278,6 +278,9 @@ class memberModel extends Model {
     }
 
     /**
+	 *  member_sex  //1:为男性,2:女性
+	 *
+	 *
      * 会员详细信息（查库）
      * @param array $condition
      * @param string $field
@@ -290,7 +293,7 @@ class memberModel extends Model {
             if(!@fopen($member_info['member_avatar'],'r')){
                 $member_info['member_avatar'] =  UPLOAD_SITE_URL.'/'.ATTACH_COMMON.DS.'default_user_avatar.png';
             }else{
-                $member_info['member_avatar'] .= '?r=' . time();
+                $member_info['member_avatar'] = UPLOAD_SITE_URL.DS.ATTACH_AVATAR.DS.$member_info['member_avatar'].'?r=' . time();
             }
             if($member_info['inviter_id'] > 0){
                 $inviter_member = $this->table('member')->field('*')->where(array('member_id'=>$member_info['inviter_id']))->master(true)->find();

@@ -80,7 +80,11 @@ function addcookie(name,value,expireHours){
 }
 
 function getcookie(name){
-    return getCache(name);
+    var loginKey = getCache(name);
+    if(loginKey == undefined){
+        loginKey = '';
+    }
+    return loginKey;
     /*
     var strcookie=document.cookie;
     var arrcookie=strcookie.split("; ");

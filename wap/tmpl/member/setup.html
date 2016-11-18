@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+<head>
+<meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>设置</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" type="text/css" href="../../css/common.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../css/style.css" media="all" />
+
+</head>
+
+<body class="setup-body">
+ <header class="head">
+   <a class="arrow-left"><img src="../../images/setup/arrow-left.png"></a> <span>设置</span> <a class="arrow-right txt" id="edit_submit">保存</a>
+ </header>
+ <section class="main">
+   <a class="setup-item avatar" id="avatar"><span>头像</span> <i class="arrow-right"></i> <img id="avatar_img_url" src="../../images/setup/avatar-default-ico.png"> </a>
+   <a class="setup-item nickname"><span>昵称</span> <span class="nickname-value">请输入昵称</span></a>
+   <a class="setup-item sex"><span>性别</span> <div class="sex-set-box"><i class="action man" data-value="1"></i><i class="woman" data-value="2"></i></div></div>
+   <a class="setup-item birthday"><span>生日</span> <span class="birthday-value"></span> <i class="arrow-right"></i></a>
+   <a href="updatepass.html" class="setup-item updatepass"><span>修改密码</span> <i class="arrow-right"></i></a>
+   <a class="setup-item login-out" id="logoutbtn"><span>退出</span></a>
+   <input type="hidden" id="avatar_img" name="avatar_img" value="">
+ </section>
+ <section id="avatar-uploads-box">
+   <header class="head">
+     <a class="arrow-left" id="avatar-hide"><img src="../../images/setup/arrow-left.png"></a> <span>上传头像</span> <a class="arrow-right txt"></a>
+   </header>
+   <div class="container">
+        <div class="imageBox">
+            <div class="thumbBox">
+            </div>
+            <div class="spinner" style="display: none">
+                Loading...</div>
+        </div>
+        <div class="action">
+            <a class="btn btn-block selectFiles"><input type="file" id="file"><label>选择图片</label></a>
+            <a class="btn btn-block" id="btnCrop">裁剪图片</a>
+            <a class="btn btn-block" id="btnZoomIn">放大图片</a>
+            <a class="btn btn-block" id="btnZoomOut">缩小图片</a>
+        </div>
+        <div class="cropped">
+        </div>
+   </div>
+ </section>
+ <style>
+  #avatar-uploads-box{ display:block; position:absolute; left:0; top:0; width:100%; height:100%; background:#FFF;z-index:10000; transform:translateX(100%)}
+  #avatar-uploads-box.action{ transform:translateX(0); transition:all ease 0.3s}
+  #avatar-uploads-box.remove-action{ transform:translateX(100%); transition:all ease 0.3s}
+  .container{ width:100%; margin-top:0.5rem; overflow:hidden; position:relative}
+  .imageBox{position: relative;height: 300px;width: 300px;border:1px solid #aaa;background: #fff;overflow: hidden;background-repeat: no-repeat;cursor:move;margin:auto}
+  .imageBox .thumbBox{ position: absolute;top: 50%;left: 50%;width: 200px;height: 200px;margin-top: -100px;margin-left: -100px;box-sizing: border-box;
+  border: 1px solid rgb(102, 102, 102);box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);background: none repeat scroll 0% 0% transparent;}
+  .imageBox .spinner{position: absolute; top: 0;left: 0;bottom: 0;right: 0;text-align: center;line-height: 300px;background: rgba(0,0,0,0.7);}
+  .btn{ background:#DA251D; color:#FFF; text-align:center; font-size:0.16rem; margin-top:0.1rem}
+  .btn input{ display:block; width:100%; height:0.4rem; line-height:0.4rem; background:none; border:none; text-indent:-9999px}
+  .btn-block{ display:block; width:100%; height:0.4rem; line-height:0.4rem; overflow:hidden}
+  .selectFiles { position:relative}
+  .selectFiles input{ display:block; width:10000px; height:0.4rem; line-height:0.4rem; font-size:0; text-align:left; z-index:2; position:absolute; left:-5000px; top:0}
+  .selectFiles label{ display:block; position:absolute; top:0; left:0; height:100%; width:100%;background:#DA251D; color:#FFF; text-align:center; z-index:1}
+ </style>
+ <script type="text/javascript" src="../../js/jquery-1.11.1.min.js"></script>
+ <script type="text/javascript" src="../../js/config.js"></script>
+ <script type="text/javascript" src="../../js/common.js"></script>
+ <script type="text/javascript" src="../../js/app.js"></script>
+ <script type="text/javascript" src="../../plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>
+ <script type="text/javascript" src="../../../data/resource/js/layer/layer.js"></script>
+ <script type="text/javascript" src="../../js/jquery.lazyload.js"></script>
+ <script type="text/javascript" src="../../js/main.js"></script>
+ <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
+ <script type="text/javascript" src="../../plug-ins/jquery-cropbox/cropbox.js"></script>
+ <script>
+     var key = getcookie('key');
+     if(key==''){
+         location.href = 'login.html';
+     }
+
+     $.ajax({
+         type:'post',
+         url:ApiUrl+"/index.php?act=member_index&op=index",
+         data:{key:key},
+         dataType:'json',
+         //jsonp:'callback',
+         success:function(result){
+             var datas = result.datas;
+             var member_info = datas.member_info;
+
+             $('#avatar_img_url').attr('src',member_info.avator);
+             $('.nickname-value').text(member_info.nickname);
+             $('.sex-set-box i').removeClass('action');
+             $('.birthday-value').text(member_info.birthday);
+
+             if(member_info.sex == 1){
+                 $('.sex-set-box .man').addClass('action');
+             }else{
+                 $('.sex-set-box .woman').addClass('action');
+             }
+
+             return false;
+         }
+     });
+
+    //退出
+     $('#logoutbtn').click(function(){
+         var username = getcookie('username');
+         var key = getcookie('key');
+         var client = 'wap';
+         $.ajax({
+             type:'get',
+             url:ApiUrl+'/index.php?act=logout',
+             data:{username:username,key:key,client:client},
+             success:function(result){
+                 if(result){
+                     delCookie('username');
+                     delCookie('key');
+                     location.href = WapSiteUrl+'/tmpl/member/login.html';
+                 }
+             }
+         });
+     });
+
+     $("#avatar").on('click',function(){
+	  if($(this).hasClass("action")){
+		  return false;
+	  }else{
+		   $("#avatar-uploads-box").addClass("action");
+		   $("#avatar-uploads-box").removeClass("remove-action");
+	  }
+  })
+  
+  $("#avatar-hide").on('click',function(){
+	  if($("#avatar-uploads-box").hasClass("action")){
+		  $("#avatar-uploads-box").addClass("remove-action");
+		  $("#avatar-uploads-box").removeClass("action");
+	  }else{
+		  $("#avatar-uploads-box").removeClass("remove-action");
+		  $("#avatar-uploads-box").addClass("action");
+	  }
+  });
+
+  $(".sex-set-box i").on('click',function(){
+	  var v = $(this).attr("data-value");
+	  if($(this).hasClass('action')){
+		  return false;  
+	  }else{
+		  $(".sex-set-box i").removeClass("action");
+		  $(this).addClass("action");
+	  } 
+  });
+  
+  $(".setup-item.nickname").on('click',function(){
+	  if(!$(this).hasClass("action")){
+		  $(this).addClass("action");
+		  var ns = $(this).find(".nickname-value").html();
+          var inps = "<input id='nickname-value-inp' name='nickname-value-inp' value='' placeholder='"+ns+"'/>";
+		  $(this).find(".nickname-value").html(inps);
+		  $("#nickname-value-inp").change(function(){
+			 var inpsv = $("#nickname-value-inp").val();
+			 $(".setup-item.nickname").find(".nickname-value").html(inpsv);
+			 $(".setup-item.nickname").removeClass("action");
+		  });
+	  }
+   });
+
+  $(".setup-item.birthday").on('click',function(){
+      if(!$(this).hasClass("action")){
+          $(this).addClass("action");
+          var ns = $(this).find(".birthday-value").html();
+          var inps = "<input id='birthday-value-inp' name='birthday-value-inp' value='' placeholder='"+ns+"'/>";
+          $(this).find(".birthday-value").html(inps);
+          $("#birthday-value-inp").change(function(){
+              var inpsv = $("#birthday-value-inp").val();
+              $(".setup-item.birthday").find(".birthday-value").html(inpsv);
+              $(".setup-item.birthday").removeClass("action");
+          });
+      }
+  });
+
+  $("#edit_submit").on('click',function(){
+
+        var nickname = $('.setup-item .nickname-value').text();
+        var sex = $('.sex-set-box .action').attr('data-value'); //1:为男性,2:女性
+        var birthday = $('.setup-item .birthday-value').text();
+        var avatar_img = $('#avatar_img').val();
+        if(nickname == undefined){
+            nickname = '';
+        }
+        if(birthday == undefined){
+            birthday = '';
+        }
+
+        if(key==''){
+          location.href = 'login.html';
+        }
+
+        $.ajax({
+          type:'post',
+          url:ApiUrl+"/index.php?act=member_index&op=edit_member_info",
+          data:{key:key,nickname:nickname,sex:sex,birthday:birthday,avatar_img:avatar_img},
+          dataType:'json',
+          //jsonp:'callback',
+          success:function(result){
+              var datas = result.datas;
+
+              layer.alert(datas.msg);
+              $('.layui-layer').css('left',document.body.clientWidth/5);
+              return false;
+          }
+      });
+  });
+ </script>
+ <script type="text/javascript">
+   $(window).load(function () {
+        var options =
+        {
+            thumbBox: '.thumbBox',
+            spinner: '.spinner',
+            imgSrc: '../../images/setup/avatar-default-ico.png'
+        }
+            var cropper = $('.imageBox').cropbox(options);
+            $('#file').on('change', function () {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    options.imgSrc = e.target.result;
+                    cropper = $('.imageBox').cropbox(options);
+                }
+                reader.readAsDataURL(this.files[0]);
+//                this.files = [];
+            })
+            $('#btnCrop').on('click', function () {
+                var img = cropper.getDataURL();
+                var key = getcookie('key');
+                if(key==''){
+                    location.href = 'login.html';
+                }
+
+                $.ajax({
+                    type:'post',
+                    url:ApiUrl+"/index.php?act=member_index&op=upload_avatar",
+                    data:{key:key,imgBase64:img},
+                    dataType:'json',
+                    //jsonp:'callback',
+                    success:function(result){
+                        var datas = result.datas;
+                        if(datas.status == 0){
+                            layer.alert(datas.msg);
+                            $('.layui-layer').css('left',document.body.clientWidth/5);
+                            return false;
+                        }
+
+                        $('#avatar-uploads-box').removeClass('action').addClass('remove-action');
+                        $('#avatar_img_url').attr('src',datas.data.img_url);
+                        $('#avatar_img').val(datas.data.img_name);
+                        return false;
+                    }
+                });
+
+            })
+            $('#btnZoomIn').on('click', function () {
+                cropper.zoomIn();
+            })
+            $('#btnZoomOut').on('click', function () {
+                cropper.zoomOut();
+            })
+        });
+</script>
+</body>
+</html>

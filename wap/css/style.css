@@ -490,11 +490,18 @@ body.bg-white{ background:#FFF}
 .main .setup-item i.arrow-right{ display:block; width:0.16rem; height:0.16rem; background:url(../images/setup/arrow-right.png) center center no-repeat; background-size:0.16rem; float:right; position:absolute; top:50%; right:0.12rem; transform:translateY(-50%)}
 
 .main .setup-item.avatar{ height:0.6rem; line-height:0.6rem; padding:0.06rem 0}
-.main .setup-item.avatar img{ width:0.6rem; height:0.6rem; float:right; margin-right:0.28rem}
+.main .setup-item.avatar img{ width:0.6rem; height:0.6rem; float:right; margin-right:0.28rem;border-radius: 0.6rem;}
 .main .setup-item.updatepass{ border-bottom:1px solid #D4342C;}
 .main .setup-item.login-out{ border-bottom:1px solid #D4342C; margin-top:0.4rem}
 .main .setup-item.nickname span.nickname-value{ float:right; margin-right:0.12rem}
 #nickname-value-inp{ border:none; background:none}
+#nickname-value-inp::-moz-placeholder { color: #333; }
+#nickname-value-inp::-webkit-input-placeholder { color:#333; }
+#nickname-value-inp::-ms-input-placeholder { color:#333; }
+#birthday-value-inp{ border:none; background:none}
+#birthday-value-inp::-moz-placeholder { color: #333; }
+#birthday-value-inp::-webkit-input-placeholder { color:#333; }
+#birthday-value-inp::-ms-input-placeholder { color:#333; }
 .main .setup-item.birthday span.birthday-value{ float:right; margin-right:0.3rem; margin-top:2px}
 .main .setup-item.sex{ line-height:0.45rem; height:0.45rem; padding:0}
 

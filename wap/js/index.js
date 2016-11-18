@@ -1,4 +1,5 @@
 function completed(){
+    bind_openwebview();
     $("img.lazy").lazyload({effect: "fadeIn",threshold:200});
     //轮播图
     var swiper = new Swiper('.swiper-container', {
@@ -159,7 +160,6 @@ $(function () {
 
         }
     });
-
 
 
 });

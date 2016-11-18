@@ -48,6 +48,16 @@ $(document).ready(function () {
 		return false;
 	});
 
+	$(document).scroll(function() {
+		var top_height = $(document).scrollTop();
+		if(top_height > 150){
+			$("#go-top").css('display','block');
+		}else{
+			$("#go-top").css('display','none');
+		}
+
+	});
+
 	function loadingcss3_open(){
 		$('<div id="loadingcss3" class="fixedloading loadingcss3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fixedloadingbg"></div>').appendTo(body);
 		$(".fixedloading").addClass("loadingcss3");

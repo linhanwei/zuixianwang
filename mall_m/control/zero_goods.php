@@ -13,6 +13,15 @@ class zero_goodsControl extends mobileHomeControl {
         parent::__construct();
     }
 
+    function testOp(){
+        header("Content-Type:text/html;Charset=utf-8");
+
+        $logic_payment = Logic('payment');
+        //重新计算所需支付金额
+        $result = $logic_payment->getRealOrderInfo(460532543596069005,5);
+        dump($result);
+    }
+
     /**
      * 商品列表
      */
