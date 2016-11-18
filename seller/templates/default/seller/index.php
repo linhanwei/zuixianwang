@@ -13,7 +13,7 @@
           <a href="<?php echo urlShop('store_setting', 'store_setting');?>"><i class="icon-edit"></i>编辑店铺设置</a> </dd>
         <dd class="seller-permission">管理权限：<strong><?php echo $_SESSION['seller_group_name'];?></strong></dd>
         <dd class="seller-last-login">最后登录：<strong><?php echo $_SESSION['seller_last_login_time'];?></strong> </dd>
-        <dd class="store-name"><?php echo $lang['store_name'].$lang['nc_colon'];?><a href="<?php echo urlShop('show_store', 'index', array('store_id' => $_SESSION['store_id']), $output['store_info']['store_domain']);?>" ><?php echo $output['store_info']['store_name'];?></a></dd>
+        <dd class="store-name"><?php echo $lang['store_name'].$lang['nc_colon'];?><?php echo $output['store_info']['store_name'];?></dd>
         <dd class="store-grade"><?php echo $lang['store_store_grade'].$lang['nc_colon'];?><strong><?php echo $output['store_info']['grade_name']; ?></strong></dd>
         <dd class="store-validity"><?php echo $lang['store_validity'].$lang['nc_colon'];?><strong><?php echo $output['store_info']['store_end_time_text'];?>
           <?php if ($output['store_info']['reopen_tip']) {?>
@@ -89,12 +89,12 @@
       </div>
     </div>
     <div class="container type-b">
-      <div class="hd">
+      <div class="hd" style="display: none;">
         <h3>商家帮助</h3>
         <h5></h5>
       </div>
       <div class="content">
-        <ul>
+        <ul style="display:none;">
           <?php
 			if(is_array($output['help_list']) && !empty($output['help_list'])) {
 				foreach($output['help_list'] as $val) {
