@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html  manifest="../../app.manifest">
 <head>
 <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
@@ -78,10 +78,19 @@
  <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
  <script type="text/javascript" src="../../plug-ins/jquery-cropbox/cropbox.js"></script>
  <script>
+     var  cache_key = 'member_info';
+     var member_info = getCache(cache_key);
      var key = getcookie('key');
      if(key==''){
          location.href = 'login.html';
      }
+
+    if(member_info){
+        $('#avatar_img_url').attr('src',member_info.avator);
+        $('.nickname-value').text(member_info.nickname);
+        $('.sex-set-box i').removeClass('action');
+        $('.birthday-value').text(member_info.birthday);
+    }
 
      $.ajax({
          type:'post',
@@ -92,6 +101,7 @@
          success:function(result){
              var datas = result.datas;
              var member_info = datas.member_info;
+             setCache(cache_key,member_info);
 
              $('#avatar_img_url').attr('src',member_info.avator);
              $('.nickname-value').text(member_info.nickname);
@@ -121,6 +131,7 @@
                  if(result){
                      delCookie('username');
                      delCookie('key');
+                     delCache(cache_key);
                      location.href = WapSiteUrl+'/tmpl/member/login.html';
                  }
              }
