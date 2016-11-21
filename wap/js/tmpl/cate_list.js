@@ -11,9 +11,12 @@ $(function(){
     });
 
     //选择价格
-    $('body').on('click' , '.cate-price-points-show a' , function(){
+    /*$('body').on('click' , '.cate-price-points-show a' , function(){
         var price = $(this).html();
-        document,location.href = SiteUrl+'/wap/tmpl/product_list.html?price='+price;
+        document.location.href = WapSiteUrl+'/tmpl/product_list.html?price='+price;
+    });*/
+    $('.cate-price-points-show a').each(function(){
+        $(this).attr('href',WapSiteUrl+'/tmpl/product_list.html?price='+$(this).text());
     });
 
 });
@@ -38,7 +41,6 @@ function ajax_data(data,is_add){
                 $("#cate-first").html(top_html);
             }
             if(data.child_list.length > 0) {
-                data.WapSiteUrl = WapSiteUrl;
                 var　child_html = template.render('child-list',data);
                 $("#cate-second").html(child_html);
             }else{

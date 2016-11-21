@@ -817,7 +817,7 @@ $(function() {
 			});
 			return false;
 		}
-
+		
     	var data = {};
 
         if (isFCode) {

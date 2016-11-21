@@ -55,7 +55,7 @@ $(document).ready(function () {
 		}else{
 			$("#go-top").css('display','none');
 		}
-
+		
 	});
 
 	function loadingcss3_open(){
