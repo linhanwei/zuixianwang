@@ -958,7 +958,13 @@ $(function() {
                 }
 				console.log(result.datas);
 				if(pd_pay != 1){
-					appPay(result.datas.data);//调用支付
+					//appPay(result.datas.data);//调用支付
+					if(typeof(app_interface)=='object'){
+						app_interface.pay(SiteUrl+'/m/index.php?act=member_payment&op=payment_list',{
+							'aa':'11',
+							'bb':22
+						});
+					};
 				}
         		if(result.datas.pay_sn != ''){
 

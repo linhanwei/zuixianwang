@@ -35,7 +35,7 @@ function ajax_data(data,is_add){
         },
         success: function(result) {
             var data = result.datas;
-
+            data.WapSiteUrl = WapSiteUrl;
             if(data.top_list.length > 0) {
                 var top_html = template.render('top-list', data);
                 $("#cate-first").html(top_html);
