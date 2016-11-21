@@ -27,6 +27,10 @@ $(function(){
 				$(this).find('.fleft').removeClass('asc').addClass('desc');
 			}
 		}
+		
+		if(sort_key == 6){
+		  $(".siftings-box").addClass("action");
+		}
 
 		var data = {gc_id:gc_id,sort_key:sort_key,order:order,keyword:keyword,is_ajax:1};
 		ajax_data(data,true);
@@ -48,6 +52,7 @@ $(function(){
 		if(key == 3 && __current.find('.fleft').hasClass("asc")){
 			order = 1;
 		}
+		
 
 		var bot = 50,//bot是底部距离的高度
 			data = {gc_id:gc_id,key:key,order:order,keyword:keyword,curpage:window.curpage,is_ajax:1};

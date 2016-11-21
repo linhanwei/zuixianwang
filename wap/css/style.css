@@ -100,12 +100,29 @@ body.bg-white{ background:#FFF}
 
 /**@商品列表页面**/
 .good-list-box{ width:100%; background:#FFF}
-.condition-box{ width:100%;}
+.condition-box{ width:100%; position:relative}
 .condition-box a{ color:#666; font-size:0.14rem; display:block; float:left; width:25%; padding:0.1rem 0; text-align:center}
 .condition-box a.action{ color:#D4342C; border-bottom:2px solid #D4342C}
 .condition-box a span{ display:block; width:100%; height:0.16rem; line-height:0.16rem; font-size:0.14rem; border-right:1px solid #DEDEDE}
 .condition-box a.price span{ background:url(../images/ico/price.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
 .condition-box a.seals span{ background:url(../images/ico/price-1.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
+.siftings-box{ position:relative; transform:translateY(-100%); width:100%; float:left; display:none}
+.siftings-box.action{ display:block;transform:translateY(0); transition:all ease 0.3s}
+.siftings-box .cate-price-points-show a{display: block;
+    font-size: 0.16rem;
+    width: 30%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    margin: 0 1.5%;
+    margin-bottom: 5%;
+    float: left;
+    text-align: center;
+    background: #F6F6F6;
+    color: #7C7C7C;
+    letter-spacing: 0.01rem;
+	padding:0
+}
+.siftings-box .cate-price-points-show a.action{background: #D4342C;color: #FFF; border-bottom:none}
 
 .good-list-show{ width:100%; height:100%; overflow:hidden}
 .good-list-show-box{ border:1px solid #DEDEDE; overflow:hidden; width:calc(98% - 2px); margin:1%; margin-top:4%}

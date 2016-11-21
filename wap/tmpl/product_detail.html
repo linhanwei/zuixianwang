@@ -120,12 +120,14 @@
                     <span class="limit-tips"></span>
                 </div>
                 <div class="sku-tips">
-                    <label>已选择：</label>
-            <span id="goods_spec_value_list">
-                <% for(var i =0;i<spec_val_list.length;i++){　%>
-                    <span><%=spec_val_list[i]%></span>
-                <%}%>
-            </span>
+                    <% if(spec_val_list.length > 0){　%>
+                        <label>已选择：</label>
+                        <span id="goods_spec_value_list">
+                            <% for(var i =0;i<spec_val_list.length;i++){　%>
+                                <span><%=spec_val_list[i]%></span>
+                            <%}%>
+                        </span>
+                    <%}%>
                 </div>
             </div>
             <div class="close">返回</div>
