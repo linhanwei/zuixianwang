@@ -362,11 +362,11 @@ class store_transportControl extends BaseSellerControl {
 				1=>array('menu_key'=>'transport',	'menu_name'=>Language::get('nc_member_path_postage'),		'menu_url'=>'index.php?act=store_transport'),
 				);
                 //if (checkPlatformStore()) {
-                    $menu_array[] = array(
+                    /*$menu_array[] = array(
                         'menu_key' => 'offpay_area',
                         'menu_name' => '配送地区',
                         'menu_url' => 'index.php?act=store_transport&op=offpay_area'
-                    );
+                    );*/
                 //}
                 break;
 		}

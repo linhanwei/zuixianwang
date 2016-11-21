@@ -117,6 +117,7 @@ class store_goods_addControl extends BaseSellerControl {
 
         // 获取类型相关数据
         $typeinfo = Model('type')->getAttr($goods_class['type_id'], $_SESSION['store_id'], $gc_id);
+
         list($spec_json, $spec_list, $attr_list, $brand_list) = $typeinfo;
         Tpl::output('sign_i', count($spec_list));
         Tpl::output('spec_list', $spec_list);
@@ -214,13 +215,14 @@ class store_goods_addControl extends BaseSellerControl {
             }
             $common_array['store_id']           = $_SESSION['store_id'];
             $common_array['store_name']         = $_SESSION['store_name'];
-            $common_array['spec_name']          = is_array($_POST['spec']) ? serialize($_POST['sp_name']) : serialize(null);
-            $common_array['spec_value']         = is_array($_POST['spec']) ? serialize($_POST['sp_val']) : serialize(null);
+            $common_array['spec_name']          = is_array($_POST['sp_name']) ? serialize($_POST['sp_name']) : serialize(null);
+            $common_array['spec_value']         = is_array($_POST['sp_val']) ? serialize($_POST['sp_val']) : serialize(null);
             $common_array['goods_vat']          = intval($_POST['g_vat']);
             $common_array['areaid_1']           = intval($_POST['province_id']);
             $common_array['areaid_2']           = intval($_POST['city_id']);
             $common_array['transport_id']       = ($_POST['freight'] == '0') ? '0' : intval($_POST['transport_id']); // 运费模板
             $common_array['transport_title']    = $_POST['transport_title'];
+
 //                        dump($common_array['transport_title']);die;
             $common_array['goods_freight']      = floatval($_POST['g_freight']);
             //查询店铺商品分类

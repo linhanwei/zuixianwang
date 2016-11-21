@@ -889,14 +889,14 @@ class store_albumControl extends BaseSellerControl {
 				$menu_array	= array(
 				1=>array('menu_key'=>'album','menu_name'=>Language::get('nc_member_path_my_album'),'menu_url'=>'index.php?act=store_album'),
 				2=>array('menu_key'=>'pic_list','menu_name'=>Language::get('nc_member_path_album_pic_list'),'menu_url'=>'index.php?act=store_album&op=album_pic_list&id='.intval($_GET['id'])),
-				3=>array('menu_key'=>'watermark','menu_name'=>Language::get('nc_member_path_watermark'),'menu_url'=>'index.php?act=store_album&op=store_watermark')
+//				3=>array('menu_key'=>'watermark','menu_name'=>Language::get('nc_member_path_watermark'),'menu_url'=>'index.php?act=store_album&op=store_watermark')
 				);
 				break;
 			case 'album_pic_info':
 				$menu_array	= array(
 				1=>array('menu_key'=>'album','menu_name'=>Language::get('nc_member_path_my_album'),'menu_url'=>'index.php?act=store_album'),
 				2=>array('menu_key'=>'pic_info','menu_name'=>Language::get('nc_member_path_album_pic_info'),'menu_url'=>'index.php?act=store_album&op=album_pic_info&id='.intval($_GET['id']).'&class_id='.intval($_GET['class_id'])),
-				3=>array('menu_key'=>'watermark','menu_name'=>Language::get('nc_member_path_watermark'),'menu_url'=>'index.php?act=store_album&op=store_watermark')
+//				3=>array('menu_key'=>'watermark','menu_name'=>Language::get('nc_member_path_watermark'),'menu_url'=>'index.php?act=store_album&op=store_watermark')
 				);
 				break;
 		}
