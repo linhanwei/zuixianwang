@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>车族宝</title>
+    <title>醉仙网</title>
     <script>
     COOKIE_PRE = '<?php echo COOKIE_PRE;?>';
     _CHARSET = '<?php echo strtolower(CHARSET);?>';

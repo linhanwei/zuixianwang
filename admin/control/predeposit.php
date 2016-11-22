@@ -665,7 +665,7 @@ class predepositControl extends SystemControl{
                 $tmp = array();
                 $tmp[] = array('data'=>$no++);
                 $tmp[] = array('data'=>'31001234567890123456');
-                $tmp[] = array('data'=>'车族宝');
+                $tmp[] = array('data'=>'醉仙网');
                 $tmp[] = array('data'=>'01');
                 $tmp[] = array('data'=>$v['pdc_bank_no']);
                 $tmp[] = array('data'=>$v['pdc_bank_user']);
