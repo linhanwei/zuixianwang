@@ -1,4 +1,10 @@
 $(function(){
+	var data = {
+		reg_url:SiteUrl+'/invite/',
+		login_url:WapSiteUrl+'/tmpl/member/login.html'
+	};
+	var forget_html = template.render('forget_html', data);
+	$('#content_main').html(forget_html);
 
 	var timeoutFlag; //定时器标志
 	var countTokenNum = 0; //记录验证码错误次数

@@ -17,6 +17,8 @@
 
 </head>
 <body class="login-body">
+<div id="content_main"></div>
+<script type="text/html" id="forget_html">
     <div class="login-logo"><img src="../../images/login/logo.jpg"></div>
     <div class="login-form login-box">
         <form action="" method ="">
@@ -36,15 +38,16 @@
 
             <div class="error-tips mt10"></div>
             <div class="login-btn-box">
-            <a href="javascript:void(0);" class="login-btn" id="loginbtn">
+            <a href="<%=login_url%>" class="login-btn" id="loginbtn">
                 登录
             </a>
-            <a href="../../../invite/" class="register-btn" id="registerbtn">
+            <a href="<%=reg_url%>" class="register-btn" id="registerbtn">
                 注册
             </a>
             </div>
         </form>
     </div>
+    </script>
     <footer class="footer footer-nav" style="display: none;"></footer>
     <input type="hidden" name="referurl">
     <script type="text/javascript" src="../../js/zepto.min.js"></script>
