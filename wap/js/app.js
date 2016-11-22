@@ -18,7 +18,7 @@ function bind_openwebview(){
             $('a').each(function(){
                 $(this).click(function(){
                     var $this = $(this);
-                    if($this.attr('href') != '' && $this.attr('href') != 'javascript:history.go(-1);'){
+                    if($this.attr('href') != '' && $this.attr('href') != 'javascript:history.go(-1);' && $this.attr('href') != 'javascript:void(0);'){
                         if($this.attr('href').indexOf('http') == 0){
                             app_interface.openWebView($this.attr('href'),1);
                         }else{

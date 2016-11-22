@@ -21,17 +21,19 @@
 
 <body>
 <!--@个人中心 头部-->
+<div id="content_main"></div>
+<script type="text/html" id="member_center">
 <section class="member-head">
     <div class="go-history"><a href="javascript:history.go(-1);"><img src="../../images/ico/fh.png"></a></div>
     <div class="member-head-bg"></div>
-    <div class="member-head-avatar"><a href="./setup.html"><img src="../../images/member-avatar-default.jpg" id="avatar"></a></div>
+    <div class="member-head-avatar"><a href="<%=WapSiteUrl%>/tmpl/member/setup.html"><img src="<%=member_info.avator%>" id="avatar"></a></div>
 </section>
 <section class="member-collect">
     <a class="mc-item" href="javascript:void(0);" id="member_integrate">
         <div class="img"><img src="../../images/ico/wdjf.png"></div>
         <p class="title">我的积分</p>
     </a>
-    <a class="mc-item" href="favorites.html">
+    <a class="mc-item" href="<%=WapSiteUrl%>/tmpl/member/favorites.html">
         <div class="img"><img src="../../images/ico/wdsc.png"></div>
         <p class="title">我的收藏</p>
     </a>
@@ -45,13 +47,13 @@
 <!--@订单 -->
 <section class="member-order-box">
     <div class="member-order-head">
-        <span>我的订单</span> <a href="order_list.html">查看全部订单</a>
+        <span>我的订单</span> <a href="<%=WapSiteUrl%>/tmpl/member/order_list.html">查看全部订单</a>
     </div>
     <div class="member-order-itemlist">
-        <a class="item" href="order_list.html?state_type=state_new"><img src="../../images/ico/dfk.png"><p>待付款</p></a>
-        <a class="item" href="order_list.html?state_type=state_send"><img src="../../images/ico/dfh.png"><p>待发货</p></a>
-        <a class="item" href="order_list.html?state_type=state_notakes"><img src="../../images/ico/dsh.png"><p>待收货</p></a>
-        <a class="item" href="member_refund.html"><img src="../../images/ico/thh.png"><p>退/换货</p></a>
+        <a class="item" href="<%=WapSiteUrl%>/tmpl/member/order_list.html?state_type=state_new"><img src="../../images/ico/dfk.png"><p>待付款</p></a>
+        <a class="item" href="<%=WapSiteUrl%>/tmpl/member/order_list.html?state_type=state_send"><img src="../../images/ico/dfh.png"><p>待发货</p></a>
+        <a class="item" href="<%=WapSiteUrl%>/tmpl/member/order_list.html?state_type=state_notakes"><img src="../../images/ico/dsh.png"><p>待收货</p></a>
+        <a class="item" href="<%=WapSiteUrl%>/tmpl/member/member_refund.html"><img src="../../images/ico/thh.png"><p>退/换货</p></a>
     </div>
 </section>
 <!--@订单 -->
@@ -61,18 +63,16 @@
     <ul class="member-list-ul">
         <li class="member-list-item" style="display: none;"><a><span>售后列表</span> <i class="arrow"></i></a></li>
         <li class="member-list-item" style="display: none;"><a><span>讯息反馈</span> <i class="arrow"></i></a></li>
-        <li class="member-list-item"><a href="address_list.html"><span>地址管理</span> <i class="arrow"></i></a></li>
-        <li class="member-list-item"><a id="member_server" href=""><span>客服电话</span> </a></li>
+        <li class="member-list-item"><a href="<%=WapSiteUrl%>/tmpl/member/address_list.html"><span>地址管理</span> <i class="arrow"></i></a></li>
+        <li class="member-list-item"><a id="member_server" href="tel:<%=web_config.site_tel400%>"><span>客服电话</span> </a></li>
     </ul>
 </section>
 <!--@列表 -->
-
+</script>
 
 
 <!--@尾部 start-->
-<footer class="footer" style="display: none;">
-
-</footer>
+<footer class="footer" style="display: none;"></footer>
 <!--@尾部 start-->
 </body>
 <script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script>
