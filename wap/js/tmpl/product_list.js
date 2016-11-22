@@ -75,7 +75,8 @@ $(function(){
 });
 
 function ajax_data(data,is_add,is_first){
-
+	data.gc_id = data.gc_id ? data.gc_id : GetQueryString('gc_id');
+	data.keyword = data.keyword ? data.keyword : GetQueryString('keyword');
 	data.bug = GetQueryString('bug');
 	data.price = data.price ? data.price : GetQueryString('price');
 
@@ -84,7 +85,7 @@ function ajax_data(data,is_add,is_first){
 	var layer_index = layer.msg('醉仙网加载中...', {
 		icon: 16,
 		time:0,
-		shade:[0.5,'#000']
+		shade:false
 	});
 
 	if(is_first == 1) {
@@ -127,6 +128,7 @@ function ajax_data(data,is_add,is_first){
 			window.page_scrolling = false;
 			window.page_hasmore = !result.hasmore;
 			window.curpage++;
+			bind_openwebview();
 		}
 	});
 }

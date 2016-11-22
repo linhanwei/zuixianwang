@@ -49,7 +49,7 @@ function completed(){
         }
     });
 }
-$(function () {
+$(document).ready(function () {
 
     var recommend_goods = getcookie('goods');
     var html = '',
@@ -151,6 +151,7 @@ $(function () {
                 });
             });
             if(index_content != html){
+                alert('update');
                 setCache(index_cache_key, html);
                 $("#main-container").html(html);
                 completed();
