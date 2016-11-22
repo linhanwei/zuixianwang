@@ -77,9 +77,9 @@ body.bg-white{ background:#FFF}
 .search-box{ background:#DA251F; opacity:1; width:100%;overflow:hidden;position:absolute; top:0; left:0;  z-index:2}
 .search-input-box{ border-radius:0.05rem; width:96%; height:0.4rem; line-height:0.4rem; position:relative;  overflow:hidden;  margin:0.08rem auto}
 .search-input-box input{ width:100%; height:0.4rem; line-height:0.4rem; text-align:center; font-size:0.16rem;border:none; background:#FFF; color:#383838; position:absolute; top:0; left:0; z-index:2}
-.search-input-box input::-moz-placeholder { color: #333; }
-.search-input-box input::-webkit-input-placeholder { color:#333; }
-.search-input-box input:-ms-input-placeholder { color:#333; }
+.search-input-box input::-moz-placeholder { color:#CCC; }
+.search-input-box input::-webkit-input-placeholder { color:#CCC; }
+.search-input-box input:-ms-input-placeholder { color:#CCC; }
 .search-input-box span{ display:block; width:0.3rem; height:0.3rem; background:url(../images/ico/search-btn-ico.png) center center no-repeat;background-size:0.3rem 0.3rem; position:absolute; top:0.05rem; right:0.1rem; z-index:3}
 .search-history-box{ width:100%; height:100%; position:absolute; left:0; top:0.56rem; z-index:2; overflow:hidden}
 .search-history-box a.search-hb{ margin:0.2rem 0.1rem; padding:0.05rem 0.1rem; border:1px solid #000; font-size:0.12rem; background:#FFF; border-radius:0.02rem; display:block; float:left}
@@ -157,7 +157,7 @@ body.bg-white{ background:#FFF}
 .cate-brand-box{ width:96%; margin:auto}
 .cate-brand-box a{ display:block;  width:33.3333333%; float:left; margin-bottom:0.1rem;overflow:hidden;}
 .cate-brand-box a .img{ width:100%; text-align:center; overflow:hidden}
-.cate-brand-box a .img img{ max-width:90%}
+.cate-brand-box a .img img{ max-width:100%}
 .cate-brand-box a .title{ height:0.3rem; line-height:0.3rem; font-size:0.14rem; text-align:center; color:#666}
 /**@分类页面**/
 
@@ -233,7 +233,7 @@ body.bg-white{ background:#FFF}
 
 /**@购物车模块样式 开始**/
 .cart-body{ background:#FFF}
-.cart-head{ height:0.5rem; line-height:0.5rem; text-align:center; background:#FFF; font-size:0.24rem; color:#D4342C; position:relative; margin-top:-0.5rem}
+.cart-head{ height:0.5rem; line-height:0.5rem; text-align:center; background:#FFF; font-size:0.24rem; color:#D4342C; position:fixed; top:0; left:0; width:100%; z-index:9999}
 .cart-head .info-btn{ position:absolute; display:none; width:40px; height:40px; overflow:hidden; right:10px; top:10px}
 .cart-head .info-btn img{ vertical-align:top}
 
@@ -576,4 +576,6 @@ body.bg-white{ background:#FFF}
 .mf-infor p{ height:0.3rem; line-height:0.3rem; font-size:0.14rem}
 .mf-infor .i-del{ border:1px solid #D21A25; border-radius:3px; position:absolute; bottom:0; right:0.12rem; padding:0.06rem 0.12rem; color:#F00}
 .no-record{ position:fixed; top:40%; left:50%; font-size:0.24rem; color:#F00; border:1px solid #DA251D; padding:0.2rem 0.5rem; transform:translate(-50%,-50%); border-radius:5px;}
+
+us:5px;}
 

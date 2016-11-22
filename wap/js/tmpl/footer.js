@@ -44,4 +44,6 @@ $(function() {
         bind_openwebview();
     }
 
+    if(client == "ios"){ $(".footer").hide()};
+
 });

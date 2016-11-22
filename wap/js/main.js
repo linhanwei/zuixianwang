@@ -57,6 +57,12 @@ $(document).ready(function () {
 		}
 		
 	});
+	
+	$("input").focus(function(){
+	  $(this).attr("placeholder","");	
+	});
+	
+
 
 	function loadingcss3_open(){
 		$('<div id="loadingcss3" class="fixedloading loadingcss3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fixedloadingbg"></div>').appendTo(body);

@@ -34,7 +34,7 @@
     <div id="cate-first" class="cate-first">
 
     </div>
-    <div class="cate-price-points-box">
+    <!--<div class="cate-price-points-box">
         <div class="cate-price-points-show">
             <a class="all action">全 部</a>
             <a>1-49</a>
@@ -46,20 +46,27 @@
             <a>1000-1999</a>
             <a>2000-8000</a>
         </div>
-    </div>
+    </div>-->
     <div id="cate-second" class="cate-brand-box">
 
     </div>
 </section>
+<style>
+#cate-first .swiper-slide{ padding:0; width:1rem; font-size:0.16rem}
+#cate-first .swiper-slide a{ display:inline-block; width:100%; padding:0.1rem 0; text-align:center; border-bottom:2px solid #FFF}
+#cate-first .swiper-slide.action a{ color:#D4342C; border-bottom-color:#D4342C}
+</style>
 <script type="text/html" id="top-list">
-    <% if(top_list.length >0){%>
-        <% for (var i = 0;i<top_list.length;i++){%>
-            <% if(i == 0){%>
-                <a class="action" gc_id="<%=top_list[i].gc_id%>"><span><%=top_list[i].gc_name%></span></a>
-            <%}else{%>
-                <a><span><%=top_list[i].gc_name%></span></a>
-            <%}%>
-        <%}%>
+	<% if(top_list.length >0){%>
+	  <div class="swiper-wrapper">
+	        <% for (var i = 0;i<top_list.length;i++){%>
+				  <% if(i == 0){%>
+					 <div class="swiper-slide action" gc_id="<%=top_list[i].gc_id%>"> <a><span><%=top_list[i].gc_name%></span></a></div>
+				  <%}else{%>
+					 <div class="swiper-slide"> <a><span><%=top_list[i].gc_name%></span></a></div>
+				  <%}%>
+			<%}%>
+      </div>
     <%}%>
 </script>
 <script type="text/html" id="child-list">

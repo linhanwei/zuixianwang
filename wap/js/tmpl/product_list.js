@@ -40,6 +40,7 @@ $(function(){
 
 	//价格搜索
 	$('.cate-price-points-show a').click(function(e){
+			$(this).addClass('action').siblings().removeClass('action');
 			var search_price = $(this).text();
 			var data = {price:search_price};
 			ajax_data(data,true);
