@@ -35,12 +35,12 @@ $arr = array(
         7 => array(
             'args' => 'operation',
             'text' => $lang['nc_operation']),
-        8 => array(
+       /* 8 => array(
             'args' => 'zero_buy',
-            'text' => '0元淘'),
-        9 => array(
+            'text' => '0元淘'),*/
+      /*  9 => array(
             'args' => 'activity_project',
-            'text' => '活动'),
+            'text' => '活动'),*/
     ),
     'left' => array(
         0 => array(
@@ -89,7 +89,7 @@ $arr = array(
             'text' => $lang['nc_store'],
             'list' => array(
                 array('args' => 'store,store,store', 'text' => $lang['nc_store_manage']),
-                array('args' => 'store,store_lbs,store', 'text' => '车主服务商'),
+//                array('args' => 'store,store_lbs,store', 'text' => '车主服务商'),
             )
         ),
         4 => array(
@@ -112,8 +112,8 @@ $arr = array(
                 array('args' => 'index,invite,member', 'text' => '推荐人统计'),
                 array('args' => 'predeposit,predeposit,member', 'text' => $lang['nc_member_predepositmanage']),
                 array('args' => 'feedback,agent,member', 'text' => '加盟申请'),
-                array('args' => 'card_list,oil,member', 'text' => '油卡管理'),
-                array('args' => 'recharge,oil,member', 'text' => '油卡充值')
+//                array('args' => 'card_list,oil,member', 'text' => '油卡管理'),
+//                array('args' => 'recharge,oil,member', 'text' => '油卡充值')
             )
         ),
         6 => array(
