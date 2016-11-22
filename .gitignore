@@ -5,3 +5,9 @@ data/cache/
 data/session/
 .idea/
 data/resource/phpqrcode/*.txt
+/invite/*.DS_Store
+/seller/*.DS_Store
+/seller/control/*.DS_Store
+/seller/api/*.DS_Store
+/seller/templates/*.DS_Store
+/seller/templates/default/*.DS_Store
