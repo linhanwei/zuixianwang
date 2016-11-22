@@ -6,6 +6,59 @@
  */
 defined('InSystem') or exit('Access Invalid!');
 class paymentLogic {
+
+    /**
+     * 取得实物订单所需支付金额等信息
+     * @param int $pay_sn
+     * @param int $member_id
+     * @return array
+     */
+    public function getRealOrderInfo($pay_sn, $member_id = null) {
+
+        //验证订单信息
+        $model_order = Model('order');
+        $condition = array();
+        $condition['pay_sn'] = $pay_sn;
+        if (!empty($member_id)) {
+            $condition['buyer_id'] = $member_id;
+        }
+        $order_pay_info = $model_order->getOrderPayInfo($condition);
+        if(empty($order_pay_info)){
+            return callback(false,'该支付单不存在');
+        }
+
+        $order_pay_info['subject'] = '实物订单_'.$order_pay_info['pay_sn'];
+        $order_pay_info['order_type'] = 'real_order';
+
+        $condition = array();
+        $condition['pay_sn'] = $pay_sn;
+        $order_list = $model_order->getNormalOrderList($condition);
+
+        //计算本次需要在线支付的订单总金额
+        $pay_amount = 0;
+        if (!empty($order_list)) {
+            foreach ($order_list as $order_info) {
+                //修复 第三方支付时 货到付款及充值卡没算在内BUG 33 hao .com 好 商城V3
+                $payed_amount = floatval($order_info['rcb_amount'])+floatval($order_info['pd_amount']);
+                if ($order_info['payment_code'] != 'offline' and $order_info['order_state']>0) {
+                    if ($order_info['order_state'] == ORDER_STATE_NEW) {
+                        $pay_amount_online += floatval($order_info['order_amount'])-$payed_amount;
+
+                    }
+                    $pay_amount += floatval($order_info['order_amount']) - $payed_amount;
+                } else {
+                    $pay_amount_offline += floatval($order_info['order_amount']);
+                }
+            }
+            $pay_amount_online += ncPriceFormat($pay_amount_online);
+        }
+
+        $order_pay_info['api_pay_amount'] = $pay_amount;
+        $order_pay_info['order_list'] = $order_list;
+
+        return callback(true,'',$order_pay_info);
+    }
+
     /**
      * 取得升级单所需支付金额等信息
      * @param int $pdr_sn

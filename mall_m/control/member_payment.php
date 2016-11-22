@@ -16,7 +16,8 @@ class member_paymentControl extends mobileMemberControl {
 
 	public function __construct() {
 		parent::__construct();
-        $this->payment_code = isset($_GET['payment_code']) && trim($_GET['payment_code']) != '' ? trim($_GET['payment_code']) :'alipay';
+//        $this->payment_code = isset($_GET['payment_code']) && trim($_GET['payment_code']) != '' ? trim($_GET['payment_code']) :'alipay';
+        $this->payment_code = isset($_POST['payment_code']) != '' ? trim($_POST['payment_code']) :'alipay';
 	}
 
     /**
@@ -25,13 +26,14 @@ class member_paymentControl extends mobileMemberControl {
     public function payOp() {
 	    $pay_sn = $_GET['pay_sn'];
 
-        $model_mb_payment = Model('mb_payment');
+        $model_payment = Model('payment');
         $logic_payment = Logic('payment');
 
         $condition = array();
         $condition['payment_code'] = $this->payment_code;
-        $mb_payment_info = $model_mb_payment->getMbPaymentOpenInfo($condition);
-        if(!$mb_payment_info) {
+        $payment_info = $model_payment->getPaymentOpenInfo($condition);
+
+        if(!$payment_info) {
             output_error('系统不支持选定的支付方式');
         }
 
@@ -42,8 +44,30 @@ class member_paymentControl extends mobileMemberControl {
             output_error($result['msg']);
         }
 
+        switch($this->payment_code){
+            case 'wxpay':
+                $notify_url = BASE_SITE_URL .DＳ .'mall_m/api/payment/wxpay/notify_url.php';
+                break;
+            case 'alipay':
+                $notify_url = BASE_SITE_URL .DＳ.'mall_m/api/payment/alipay/notify_url.php';
+                break;
+        }
+
+        $goods_name_list = array();
+        foreach($result['data']['goods_list'] as $gval){
+            $goods_name_list[] = $gval['goods_name'];
+        }
+        $return_data['pay_sn'] = $result['data']['pay_sn'];
+        $return_data['pay_money_acount'] = array_sum($result['data']['store_final_order_total']);
+        $return_data['title'] = $result['data']['goods_list'][0]['goods_name'];
+        $return_data['desp'] = implode(',',$goods_name_list);
+        $return_data['notify_url'] = $notify_url;
+        $return_data['payment_info'] = $payment_info['payment_config'];
+
+        output_data($return_data);
+
         //第三方API支付
-        $this->_api_pay($result['data'], $mb_payment_info);
+//        $this->_api_pay($result['data'], $payment_info);
     }
 
     /**

@@ -104,8 +104,17 @@ class member_buyControl extends mobileMemberControl {
         if(!$result['state']) {
             output_error($result['msg']);
         }
+        $goods_name_list = array();
+        foreach($result['data']['goods_list'] as $gval){
+            $goods_name_list[] = $gval['goods_name'];
+        }
+        //计算支付总金额
+        $return_data['data']['pay_sn'] = $result['data']['pay_sn'];
+        $return_data['data']['pay_money_acount'] = array_sum($result['data']['store_final_order_total']);
+        $return_data['data']['title'] = $result['data']['goods_list'][0]['goods_name'];
+        $return_data['data']['desp'] = implode(',',$goods_name_list);
 
-        output_data(array('pay_sn' => $result['data']['pay_sn']));
+        output_data($return_data);
     }
 
     /**
