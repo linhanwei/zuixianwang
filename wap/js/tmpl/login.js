@@ -1,6 +1,13 @@
 $(function(){
+    var data = {
+            reg_url:SiteUrl+'/invite/',
+            forget_pass_url:WapSiteUrl+'/tmpl/member/forget.html'
+        };
+    var login_html = template.render('login_html', data);
+    $('#content_main').html(login_html);
 
 	var referurl = document.referrer;//上级网址
+
 	$("input[name=referurl]").val(referurl);
 	$.sValid.init({
         rules:{

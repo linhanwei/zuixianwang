@@ -12,12 +12,14 @@
 <title>登录</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link rel="stylesheet" type="text/css" href="http://120.25.212.243/jiu/mall_m/templates/default/static/css/common.css">
-<link rel="stylesheet" type="text/css" href="http://120.25.212.243/jiu/mall_m/templates/default/static/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/style.css">
 
 </head>
 <body class="login-body">
-    <div class="login-logo"><img src="http://120.25.212.243/jiu/mall_m/templates/default/static/images/login/logo.jpg"></div>
+    <div id="content_main"></div>
+    <script type="text/html" id="login_html">
+    <div class="login-logo"><img src="../../images/login/logo.jpg"></div>
     <div class="login-form login-box">
         <form action="" method ="">
             <div class="input-group username">
@@ -28,7 +30,7 @@
             </div>
            <div class="password-tips-row">
               <span class="rember-pass-box action"><small>记住密码</small><i></i><input name="remember-pass" type="hidden"></span>
-              <a href="./forget.html" class="forget-pass">忘记密码</a>
+              <a href="<%=forget_pass_url%>" class="forget-pass">忘记密码</a>
            </div>
             <!-- <span class="clearfix auto-login">
                 <i class="s-chk1 fleft mr5"></i>
@@ -39,14 +41,15 @@
             <a href="javascript:void(0);" class="login-btn" id="loginbtn">
                 登录
             </a>
-            <a href="../../../invite/" class="register-btn" id="registerbtn">
+            <a href="<%=reg_url%>" class="register-btn" id="registerbtn">
                 注册
             </a>
             </div>
         </form>
     </div>
+    </script>
     <footer class="footer footer-nav" style="display: none;"></footer>
-    <input type="hidden" name="referurl">
+    <input type="hidden" name="referurl" value="">
     <script type="text/javascript" src="../../js/zepto.min.js"></script>
     <script type="text/javascript" src="../../js/config.js"></script>
     <script type="text/javascript" src="../../js/template.js"></script>

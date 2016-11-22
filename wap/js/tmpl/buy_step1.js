@@ -931,9 +931,6 @@ $(function() {
         	data.pd_pay = pd_pay;
         }
 
-        //显示遮罩层
-		$('#notice_msg_bg,#notice_msg').css('display','block');
-
         $.ajax({
         	type:'post',
         	url:ApiUrl+'/index.php?act=member_buy&op=buy_step2',
@@ -956,13 +953,17 @@ $(function() {
                     });
                     return false;
                 }
+
+				//显示遮罩层
+				$('#notice_msg_bg,#notice_msg').css('display','block');
+
 				console.log(result.datas);
 				if(pd_pay != 1){
 					//appPay(result.datas.data);//调用支付
 					if(typeof(app_interface)=='object'){
 						app_interface.pay(SiteUrl+'/m/index.php?act=member_payment&op=payment_list',{
-							'aa':'11',
-							'bb':22
+							aa:'11',
+							bb:22
 						});
 					};
 				}
