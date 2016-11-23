@@ -223,11 +223,26 @@
 	input::-webkit-input-placeholder{ line-height:30px; color:#FFF}
 	input::-moz-placeholder{line-height:30px; color:#FFF}
 	input::-ms-input-placeholder{line-height:30px; color:#FFF}
+    .head  .arrow-left{
+        height: 30px;
+        line-height: 30px;
+        width: 30px;
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+    .head  .arrow-left img{width: 100%;}
     </style>
     <meta http-equiv="Cache-Control" content="max-age=3600" />
 </head>
 
 <body>
+<header class="head">
+    <a href="javascript:history.go(-1);" class="arrow-left">
+        <img src="../wap/images/setup/arrow-left.png">
+    </a>
+</header>
 <div id="content_main"></div>
 <script type="text/html" id="invite_html">
     <div class="" id="show" onclick="hideTip();"></div>
