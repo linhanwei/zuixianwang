@@ -7,8 +7,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="email=no">
-    <link href="img/hcz.ico" rel="Shortcut Icon" type="image/x-icon" />
-    <link href="img/hcz.ico" rel="icon" type="image/x-icon" />
+    <!--<link href="img/hcz.ico" rel="Shortcut Icon" type="image/x-icon" />-->
+    <!--<link href="img/hcz.ico" rel="icon" type="image/x-icon" />-->
     <script type="text/javascript">
     var docEle = document.documentElement;
     docEle.style.fontSize = parseInt(docEle.getBoundingClientRect().width) / 16 + 'px'; //设置HTML rem的父基点
@@ -228,7 +228,9 @@
 </head>
 
 <body>
-<div class="" id="show" onclick="hideTip();"></div>
+<div id="content_main"></div>
+<script type="text/html" id="invite_html">
+    <div class="" id="show" onclick="hideTip();"></div>
 	<div class="pop_box clearfix" id="clear" style="display:none">
 			<div class="pop_cont clearfix" style="display:none" id="show1">
 			<h1>温馨提示</h1>
@@ -282,7 +284,7 @@
                         <a href="javascript:void(0);" id="goBtnId" class="u-btn skip-btn unUsed">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</a>
                     </div>
 					<div class="login-btn col-mb-offset-half">
-						 <a href="../wap/tmpl/member/login.html" class="u-btn skip-btn login">登录</a>
+						 <a href="<%=login_url%>" class="u-btn skip-btn login">登录</a>
 					</div>
                 </div>
             </div>
@@ -315,12 +317,21 @@
             </div>-->
         </form>
     </section>
+    </script>
     <script type="text/javascript" src="js/slot_zepto.min.js"></script>
+    <script type="text/javascript" src="../wap/js/config.js"></script>
+    <script type="text/javascript" src="../wap/js/template.js"></script>
+    <script type="text/javascript" src="../wap/js/common.js"></script>
     <script type="text/javascript" src="js/slot_haojs.js?ver=20150730"></script>
     <script type="text/javascript" src="js/hcz_alert.js"></script>
     <script type="text/javascript" src="js/insurevalidate.js"></script>
-<script type="text/javascript" src="js/address.js"></script>
+    <script type="text/javascript" src="js/address.js"></script>
     <script type="text/javascript">
+        var data = {
+            login_url:WapSiteUrl+'/tmpl/member/login.html'
+        };
+        var invite_html = template.render('invite_html', data);
+        $('#content_main').html(invite_html);
     var pubEndflag = false; //倒计时结束
     var countTokenNum = 0; //记录验证码错误次数
     var bindFlag = true; //记录绑定
@@ -599,6 +610,7 @@
             });
     })
     </script>
+    <script type="text/javascript" src="../wap/js/app.js"></script>
 </body>
 
 </html>
