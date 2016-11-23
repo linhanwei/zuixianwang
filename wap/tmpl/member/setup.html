@@ -30,7 +30,7 @@
    <a class="setup-item login-out" id="logoutbtn"><span>退出</span></a>
    <input type="hidden" id="avatar_img" name="avatar_img" value="">
  </section>
- <section id="avatar-uploads-box">
+ <section id="avatar-uploads-box" style="display:none;">
    <header class="head">
      <a class="arrow-left" id="avatar-hide"><img src="../../images/setup/arrow-left.png"></a> <span>上传头像</span> <a class="arrow-right txt"></a>
    </header>
@@ -139,13 +139,14 @@
      });
 
      $("#avatar").on('click',function(){
-	  if($(this).hasClass("action")){
-		  return false;
-	  }else{
-		   $("#avatar-uploads-box").addClass("action");
-		   $("#avatar-uploads-box").removeClass("remove-action");
-	  }
-  })
+         $('#avatar-uploads-box').css('display','block');
+          if($(this).hasClass("action")){
+              return false;
+          }else{
+               $("#avatar-uploads-box").addClass("action");
+               $("#avatar-uploads-box").removeClass("remove-action");
+          }
+      })
   
   $("#avatar-hide").on('click',function(){
 	  if($("#avatar-uploads-box").hasClass("action")){

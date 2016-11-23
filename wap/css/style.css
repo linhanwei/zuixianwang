@@ -566,6 +566,19 @@ body.bg-white{ background:#FFF}
 .select-30 option{padding:0.1rem 0.2rem; font-size:0.14rem}
 #area{ margin-bottom:0.2rem}
 
+/**@2016-11-23新增样式**/
+.index-row-style1{ width:100%; border-bottom:1px solid #F8F8F8; display:table}
+.index-row-style1 .cl img{ width:100%}
+.index-row-style1 .c1{ width:calc(40% - 3px); float:left}
+.index-row-style1 .c2{ width:20%; float:left; border-left:1px solid #F8F8F8}
+
+.news-header{ width:100%; height:0.5rem; line-height:0.5rem; position:fixed; top:0; left:0; background:#FFF}
+.news-header .search-input-box{ height:0.4rem; line-height:0.4rem; margin:0.05rem 0.5rem; border:1px solid #D4342C; border-radius:3px; width:auto}
+.news-header .search-input-box input{ display:block; height:0.3rem; line-height:0.3rem; border:none; background:none; text-align:center; margin:0.05rem auto; vertical-align:middle}
+.news-header .go-history{ display:block; width:0.3rem; height:0.3rem; background:url(../images/ico/fh.png) center center no-repeat; background-size:0.3rem; position:absolute; left:0.1rem; top:0.1rem;}
+.news-header .search-btn{ display:block; width:0.3rem; height:0.3rem; background:url(../images/ico/search-btn-ico.png) center center no-repeat; background-size:0.3rem; position:absolute;right:0.1rem; top:0.1rem;}
+
+
 /**@我的收藏**/
 .favorites-list{ width:100%; background:#FFF; overflow:hidden}
 .favorites-list li{ margin-bottom:0.12rem}

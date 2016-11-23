@@ -1,0 +1,87 @@
+<!doctype html>
+<html  manifest="../app.manifest">
+<head>
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>醉仙商城</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" type="text/css" href="../plug-ins/swiper/swiper-3.4.0.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="all" />
+
+
+</head>
+<body>
+<section class="news-header">
+    <a href="javascript:history.go(-1);" class="go-history"></a>
+    <div class="search-input-box">
+        <input name="search-keyword" id="keyword" type="text" placeholder="搜索商品" value="">
+    </div>
+    <span class="search-btn"></span>
+</section>
+
+<section class="good-list-box">
+    <div class="condition-box">
+        <a class="condit default fleft action" sort_key="4"><span class="fleft">默认</span></a>
+        <a class="condit price" sort_key="3"><span class="fleft desc">价格</span></a>
+        <a class="condit seals" sort_key="1"><span class="fleft desc">销量</span></a>
+        <a class="condit siftings" sort_key="6"><span class="fleft">筛选</span></a>
+        <div class="siftings-box">
+            <div class="cate-price-points-show">
+                <a class="all action">全 部</a>
+                <a>1-49</a>
+                <a>50-99</a>
+                <a>100-199</a>
+                <a>200-299</a>
+                <a>300-499</a>
+                <a>500-999</a>
+                <a>1000-1999</a>
+                <a>2000-8000</a>
+            </div>
+        </div>
+    </div>
+    <div class="good-list-show" >
+        <div class="good-list-show-box" id="good-list-show-box">
+
+        </div>
+    </div>
+</section>
+<footer class="footer" style="display: none;"></footer>
+<script type="text/html" id="goods-list">
+    <% if(goods_list.length >0){%>
+    <%for(i=0;i<goods_list.length;i++){%>
+    <a href="<%= SiteUrl %>/wap/tmpl/product_detail.html?goods_id=<%=goods_list[i].goods_id;%>" class="item">
+        <div class="img">
+            <img src="<%=goods_list[i].goods_image_url;%>">
+        </div>
+        <div class="title">
+            <%=goods_list[i].goods_name;%>
+        </div>
+        <div class="price">
+            <span class="now">￥<%=goods_list[i].goods_price;%></span>
+            <span class="market">￥<%=goods_list[i].goods_marketprice;%></span>
+        </div>
+    </a>
+    <% }%>
+    <% }%>
+</script>
+</body>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../js/config.js"></script>
+<script type="text/javascript" src="../js/template.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript" src="../js/tmpl/footer.js"></script>
+<script src="../../data/resource/js/layer/layer.js"></script>
+<script src="../js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="../js/tmpl/search_list.js"></script>
+</html>
