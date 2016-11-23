@@ -263,7 +263,8 @@ class member_orderControl extends mobileMemberControl {
             $order_info['goods_count'] = count($order_info['goods_list']) + 1;
         }
 
-        $order_info['real_pay_amount'] = $order_info['order_amount']+$order_info['shipping_fee'];
+//        $order_info['real_pay_amount'] = $order_info['order_amount']+$order_info['shipping_fee'];
+        $order_info['real_pay_amount'] = $order_info['order_amount'];
         //取得其它订单类型的信息000--------------------------------
 
         //$model_order->getOrderExtendInfo($order_info);
