@@ -2,11 +2,7 @@ $(function(){
     var key = getcookie('key');
 
     if(key==undefined || key == ''){
-        if(typeof(app_interface) == 'undefined') {
             location.href = 'login.html';
-        }else {
-            app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',4);
-        }
     }else{
         $.ajax({
             type:'post',

@@ -66,7 +66,8 @@ $(function(){
                                 setCache('user_password','');
                             }
 
-							location.href = referurl;
+							//location.href = referurl;
+                            history.back();
 						}
 						$(".error-tips").hide();
 					}else{

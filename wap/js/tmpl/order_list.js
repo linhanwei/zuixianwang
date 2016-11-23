@@ -5,6 +5,15 @@ var footer = false;
 var reset = true;
 var orderKey = "";
 $(function() {
+    //随便逛逛
+    $('body').on('click','.go_index',function(){
+        if(typeof(app_interface)=='object'){
+            app_interface.switchTab('0',1);
+        }else{
+            location.href = WapSiteUrl+'/index.html';
+        }
+    });
+
     var e = getcookie("key");
     if (!e) {
         window.location.href = WapSiteUrl + "/tmpl/member/login.html"
@@ -81,7 +90,9 @@ $(function() {
                     return parseInt(e)
                 });
 
+                t.datas.order_group_list = [];
                 var r = template.render("order-list-tmpl", t);
+
                 if (reset) {
                     reset = false;
                     $("#order-list").html(r)
