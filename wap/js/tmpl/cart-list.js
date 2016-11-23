@@ -1,7 +1,19 @@
 $(function () {
     var key = getcookie('key');
     if (key == '') {
-        window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+        $('#cart-list-wp').html('<div style="height: 100px;width: 100%;line-height: 100px;text-align: center;font-size: 0.16rem;">登录后可同步电脑与手机购物车 <input type="button" value="登录" id="open_login"> </div>');
+
+        if(client == 'wechat'){
+            window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+        }else{
+            bind_login();
+        }
+
+        var t = setInterval(function(){
+            if(getcookie('key')){
+                document.location.href = document.location.href;
+            }
+        },500);
     } else {
         //初始化页面数据
         $.ajax({

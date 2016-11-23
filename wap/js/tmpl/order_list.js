@@ -5,15 +5,6 @@ var footer = false;
 var reset = true;
 var orderKey = "";
 $(function() {
-    //随便逛逛
-    $('body').on('click','.go_index',function(){
-        if(typeof(app_interface)=='object'){
-            app_interface.switchTab('0',1);
-        }else{
-            location.href = WapSiteUrl+'/index.html';
-        }
-    });
-
     var e = getcookie("key");
     if (!e) {
         window.location.href = WapSiteUrl + "/tmpl/member/login.html"
@@ -25,6 +16,7 @@ $(function() {
         reset = true;
         t()
     });
+    bind_openwebview();
     $("#fixed_nav").waypoint(function() {
         $("#fixed_nav").toggleClass("fixed")
     },
@@ -42,7 +34,7 @@ $(function() {
         }
         hasMore = false;
         //var t = $("#filtrate_ul").find(".selected").find("a").attr("data-state");
-        var t = GetQueryString('state_type');;
+        var t = GetQueryString('state_type');
         var r = $("#order_key").val();
         $.ajax({
             type: "post",
@@ -58,9 +50,6 @@ $(function() {
                 checklogin(e.login);
                 curpage++;
                 hasMore = e.hasmore;
-                if (!hasMore) {
-                    get_footer()
-                }
                 if (e.datas.order_group_list.length <= 0) {
                     $("#footer").addClass("posa")
                 } else {
@@ -90,7 +79,7 @@ $(function() {
                     return parseInt(e)
                 });
 
-                t.datas.order_group_list = [];
+                //t.datas.order_group_list = [];
                 var r = template.render("order-list-tmpl", t);
 
                 if (reset) {
@@ -239,12 +228,3 @@ $(function() {
         }
     })
 });
-function get_footer() {
-    if (!footer) {
-        footer = true;
-        $.ajax({
-            url: WapSiteUrl + "/js/tmpl/footer.js",
-            dataType: "script"
-        })
-    }
-}

@@ -17,17 +17,20 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css" media="all"/>
 
-
+<style>
+    body{padding-top:0px;}
+</style>
 </head>
 
 <body class="bg-white">
+<!--
 <section class="head-bar">
     <span>产品分类</span>
-</section>
+</section>-->
 <section class="all-search-box">
     <div class="search-input-box">
-        <input name="search-keyword" id="keyword" type="text" placeholder="搜索商品" value="">
-        <span class="search-btn"></span>
+        <input name="search-keyword" class="open_search_btn" id="keyword" type="text" placeholder="搜索商品" value="">
+        <span class="search-btn open_search_btn"></span>
     </div>
 </section>
 <section class="cate-box">
@@ -73,11 +76,11 @@
     <% if(child_list.length >0){%>
         <% for (var i = 0;i<child_list.length;i++){%>
             <% if(child_list[i].image){%>
-                <a href="<%=WapSiteUrl%>/tmpl/product_list.html?gc_id=<%=child_list[i].gc_id%>">
+                <a href="<%=WapSiteUrl%>/tmpl/search_list.html?gc_id=<%=child_list[i].gc_id%>" to-tab="3">
                     <div class="img"><img src="<%=child_list[i].image%>"></div>
                     <p class="title"><%=child_list[i].gc_name%></p></a>
             <%}else{%>
-                <a href="<%=WapSiteUrl%>/tmpl/product_list.html?gc_id=<%=child_list[i].gc_id%>">
+                <a href="<%=WapSiteUrl%>/tmpl/search_list.html?gc_id=<%=child_list[i].gc_id%>" to-tab="3">
                     <div class="img"></div>
                     <p class="title"><%=child_list[i].gc_name%></p></a>
             <%}%>
@@ -94,8 +97,8 @@
 <script type="text/javascript" src="../js/template.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/app.js"></script>
-<script src="../../data/resource/js/layer/layer.js"></script>
-<script src="../js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../../data/resource/js/layer/layer.js"></script>
+<script type="text/javascript" src="../js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="../plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/tmpl/cate_list.js"></script>

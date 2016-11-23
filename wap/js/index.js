@@ -3,7 +3,7 @@ function completed(){
     $("img.lazy").lazyload({effect: "fadeIn",threshold:200});
     //轮播图
     var swiper = new Swiper('.swiper-container', {
-        //pagination: '.swiper-pagination',
+        pagination: '.swiper-pagination', //是否显示小圆点
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         paginationClickable: true,

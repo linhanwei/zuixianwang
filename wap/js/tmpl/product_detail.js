@@ -1,6 +1,7 @@
 
 var goods_id = GetQueryString("goods_id");
 $(function () {
+    bind_openwebview();
     $("body").on('click', "#add-cart", function () {
         specsShow();
     });
@@ -10,8 +11,8 @@ $(function () {
     });
 
     function specsShow() {
-        $(".cover-bg").show();
-        $("#spec-box").show();
+        $(".cover-bg").show(10);
+        $("#spec-box").show(10);
         $("#spec-box").css({'transform': 'translateY(0)'});
     }
 

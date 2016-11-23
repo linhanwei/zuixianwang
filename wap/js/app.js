@@ -13,24 +13,33 @@ if (/iphone|ipad|ipod/.test(ua)) {
 }
 
 function bind_openwebview(){
-    setTimeout(function(){
-        if(typeof(app_interface)=='object'){
-            $('a').each(function(){
-                $(this).click(function(){
-                    var $this = $(this);
-                    if($this.attr('href') != '' && $this.attr('href') != 'javascript:history.go(-1);' && $this.attr('href') != 'javascript:void(0);'){
-                        if($this.attr('href').indexOf('http') == 0){
-                            app_interface.openWebView($this.attr('href'),1);
-                        }else{
-                            app_interface.openWebView(WapSiteUrl + '/' + $this.attr('href'),1);
+    if(client != 'wechat'){
+        $('a').each(function(){
+            $(this).click(function(){
+                var $this = $(this);
+                if($this.attr('href') != undefined && $this.attr('href') != 'javascript:void(0);') {
+                    if ($this.attr('href') != '' && $this.attr('href') != 'javascript:history.go(-1);') {
+                        if ($this.attr('href').indexOf('http') == 0) {
+                            app_interface.openWebView($this.attr('href'), 1); return false;
+                        } else if ($this.attr('href').indexOf('tmpl') >= 0) {
+                            app_interface.openWebView(WapSiteUrl + '/' + $this.attr('href'), 1); return false;
                         }
 
-                    }else if($this.attr('href') == 'javascript:history.go(-1);'){
-                        app_interface.closeWebView(2);
+                    } else if ($this.attr('href') == 'javascript:history.go(-1);') {
+                        app_interface.closeWebView(2); return false;
                     }
-                    return false;
-                });
-            })
-        }
-    },500);
+
+                }
+            });
+        })
+
+    }else{
+        $(".footer").show();
+    }
+}
+
+function bind_login(){
+    $('#open_login').click(function(){
+        app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',8);
+    });
 }

@@ -10,7 +10,9 @@
     <link href="css/common.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="plug-ins/swiper/swiper-3.4.0.min.css" rel="stylesheet">
-
+    <style>
+        .swiper-pagination-bullet{margin-left: 5px;}
+    </style>
 </head>
 <body id="home">
 <!--@头部 start-->
@@ -23,18 +25,7 @@
 <!--@头部 end-->
 
 <div id="main-container"></div>
-<div class="index-row-style1">
-    <div class="cl c1"><img src="./images/index-csh/csh_img01.jpg"></div>
-    <div class="cl c2"><img src="./images/index-csh/csh_img02.jpg"></div>
-    <div class="cl c2"><img src="./images/index-csh/csh_img03.jpg"></div>
-    <div class="cl c2"><img src="./images/index-csh/csh_img04.jpg"></div>
-</div>
-<div class="index-row-style1">
-    <div class="cl c1"><img src="./images/index-csh/csh_img05.jpg"></div>
-    <div class="cl c2"><img src="./images/index-csh/csh_img06.jpg"></div>
-    <div class="cl c2"><img src="./images/index-csh/csh_img07.jpg"></div>
-    <div class="cl c2"><img src="./images/index-csh/csh_img08.jpg"></div>
-</div>
+
 <footer class="footer footer-nav" style="display: none;"></footer>
 <div class="go-top" id="go-top" style="display: none;;">
     <img src="./images/go-top.png">
@@ -52,7 +43,7 @@
                 <% } %>
             </div>
             <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
+            <div class="swiper-pagination" style="bottom:10px;"></div>
             <!-- Add Arrows
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
