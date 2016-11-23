@@ -21,7 +21,7 @@
 <header class="head">
     <a href="javascript:history.go(-1);" class="arrow-left"></a>
     <div class="head-search-box"><i class="search-ico"></i><input type="text" id="keyword" class="search-input" placeholder="搜索商品"/></div>
-    <a class="arrow-right txt search-btn">搜索</a>
+    <a class="arrow-right txt search-btn" target="search_list" href="javascript:void(0);">搜索</a>
 </header>
 <section class="search-main">
     <!--<div class="search-item-box">
@@ -56,7 +56,8 @@
     if (search_list && search_list.length > 0) {
         var search_html = '';
         for (var sea in search_list) {
-            search_html += '<a href="' + WapSiteUrl + '/tmpl/product_list.html?keyword=' + encodeURIComponent(search_list[sea]) + '" class="search-hb">' + search_list[sea] + '</a>';
+            if(search_list[sea])
+                search_html += '<a href="' + WapSiteUrl + '/tmpl/search_list.html?keyword=' + encodeURIComponent(search_list[sea]) + '" class="search-hb">' + search_list[sea] + '</a>';
         }
         $('#search-history-box').html(search_html);
     }else{
@@ -68,6 +69,7 @@
         delCache('search_key_list');
         $('#search-history-box').html(empty_html);
     });
-
+    $('#keyword').focus();
+    bind_openwebview();
 </script>
 </html>

@@ -19,14 +19,11 @@
 
 </head>
 <body>
-<section class="news-header">
-    <a href="javascript:history.go(-1);" class="go-history"></a>
-    <div class="search-input-box">
-        <input name="search-keyword" id="keyword" type="text" placeholder="搜索商品" value="">
-    </div>
-    <span class="search-btn"></span>
-</section>
-
+<header class="head">
+    <a href="javascript:history.go(-1);" class="arrow-left"></a>
+    <div class="head-search-box"><i class="search-ico"></i><input type="text" id="keyword" class="search-input" placeholder="搜索商品"/></div>
+    <a class="arrow-right txt search-btn" target="search_list" href="javascript:void(0);">搜索</a>
+</header>
 <section class="good-list-box">
     <div class="condition-box">
         <a class="condit default fleft action" sort_key="4"><span class="fleft">默认</span></a>
