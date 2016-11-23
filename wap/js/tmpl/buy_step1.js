@@ -202,7 +202,7 @@ $(function() {
 											+'</div>'
 										+'</div>';
 						});
-						htmldata+= '<div class="shop-total"><p>运费：￥<span id="store'+k+'"></span></p>';
+						htmldata+= '<div class="shop-total"><p>运费：￥<span id="store'+k+'">0.00</span></p>';
 						if(v.store_mansong_rule_list != null){
 							htmldata+= '<p>满即送-'+v.store_mansong_rule_list.desc+':-'+v.store_mansong_rule_list.discount+'</p>';
 						}
