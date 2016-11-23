@@ -151,7 +151,7 @@ $(document).ready(function () {
                 });
             });
             if(index_content != html){
-                alert('update');
+
                 setCache(index_cache_key, html);
                 $("#main-container").html(html);
                 completed();

@@ -599,7 +599,7 @@ $(function() {
                     $('input[name=offpay_hash]').val(result.datas.offpay_hash);
                     $('input[name=offpay_hash_batch]').val(result.datas.offpay_hash_batch);
 
-        			return false;
+					return false;
         		}
         	});
         }else{//保存地址
@@ -807,17 +807,7 @@ $(function() {
 
 
     $('#buy_step2').click(function(){//提交订单step2
-		var new_address_button = $('#new-address-button:checked').val();
-		if(new_address_button == 0){
-			$.sDialog({
-				skin:"red",
-				content:'请保存收货地址！',
-				okBtn:false,
-				cancelBtn:false
-			});
-			return false;
-		}
-		
+
     	var data = {};
 
         if (isFCode) {
@@ -842,7 +832,18 @@ $(function() {
     	var address_id = $('input[name=address_id]').val();
     	data.address_id = address_id;
 
-    	var vat_hash = $('input[name=vat_hash]').val();
+		if(address_id == '' || address_id == undefined){
+			$.sDialog({
+				skin:"red",
+				content:'请选择收货地址！',
+				okBtn:false,
+				cancelBtn:false
+			});
+			return false;
+		}
+
+
+		var vat_hash = $('input[name=vat_hash]').val();
     	data.vat_hash = vat_hash;
 
     	var offpay_hash = $('input[name=offpay_hash]').val();
@@ -966,11 +967,12 @@ $(function() {
 							bb:22
 						});
 					};
+				}else{
+					if(result.datas.data.pay_sn != ''){
+						location.href = WapSiteUrl+'/tmpl/member/order_list.html';
+					}
 				}
-        		if(result.datas.pay_sn != ''){
 
-					//location.href = WapSiteUrl+'/tmpl/member/order_list.html';
-        		}
         		return false;
         	}
         });
