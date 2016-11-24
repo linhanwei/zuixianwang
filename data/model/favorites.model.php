@@ -117,10 +117,14 @@ class favoritesModel extends Model{
 	 */
 	public function checkFavorites($fav_id,$fav_type,$member_id){
 		if (intval($fav_id) == 0 || empty($fav_type) || intval($member_id) == 0){
-			return true;
+			return false;
 		}
-		$result = self::getOneFavorites($fav_id,$fav_type,$member_id);
-		if ($result['member_id'] == $member_id){
+		$condition['fav_id'] = $fav_id;
+		$condition['fav_type'] = $fav_type;
+		$condition['member_id'] = $member_id;
+
+		$result = $this->where($condition)->count();
+		if ($result > 0){
 			return true;
 		}else {
 			return false;

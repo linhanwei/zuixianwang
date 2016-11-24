@@ -1,4 +1,4 @@
-
+var key = getcookie('key');//登录标记
 var goods_id = GetQueryString("goods_id");
 $(function () {
     bind_openwebview();
@@ -170,9 +170,24 @@ $(function () {
                     $('.add-wp').hide();
                     $(".buy-num").attr('readOnly', true);
                 }
+
+                //判断商品是否已经被收藏
+                $.ajax({
+                    url: ApiUrl + "/index.php?act=member_favorites&op=is_favorites_goods",
+                    type: "post",
+                    dataType: "json",
+                    data: {goods_id: goods_id, key: key},
+                    success: function (result) {
+
+                        if(result.datas == 1){
+
+                            $('.pd-collect img').attr('src','../images/ico/nosc.png');
+                        }
+                    }
+                });
                 //收藏
                 $(".pd-collect").click(function () {
-                    var key = getcookie('key');//登录标记
+
                     if (key == '') {
                         window.location.href = WapSiteUrl + '/tmpl/member/login.html';
                     } else {
@@ -231,7 +246,12 @@ $(function () {
                     $(".buy-now").click(function () {
                         var key = getcookie('key');//登录标记
                         if (key == '') {
-                            window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+                            if(client != 'wechat'){
+                                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html', 1);
+                            }else{
+                                window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+                            }
+
                             return false;
                         }
 
@@ -266,7 +286,11 @@ $(function () {
                                 if (result.datas.error) {
                                     layer.msg(result.datas.error);
                                 } else {
-                                    location.href = WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum;
+                                    if(client != 'wechat'){
+                                        app_interface.openWebView(WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum, 1);
+                                    }else{
+                                        window.location.href = WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum;
+                                    }
                                 }
                             }
                         });
@@ -275,7 +299,13 @@ $(function () {
                     $(".buy-now").click(function () {
                         var key = getcookie('key');//登录标记
                         if (key == '') {
-                            window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+
+                            if(client != 'wechat'){
+                                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html', 1);
+                            }else{
+                                window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+                            }
+                            return false;
                         } else {
                             var buynum = $('.buy-num').val();
 
@@ -301,7 +331,14 @@ $(function () {
                                     if (result.datas.error) {
                                         layer.msg(result.datas.error);
                                     } else {
-                                        location.href = WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum;
+
+                                        if(client != 'wechat'){
+                                            app_interface.openWebView(WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum, 1);
+                                        }else{
+                                            location.href = WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum;
+                                        }
+                                        return false;
+
                                     }
                                 }
                             });

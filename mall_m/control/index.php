@@ -19,7 +19,12 @@ class indexControl extends mobileHomeControl{
 	public function indexOp() {
 
         $model_mb_special = Model('mb_special');
-        $data = $model_mb_special->getMbSpecialIndex();
+        $data = rkcache('index_mb_special');
+        if(empty($data)){
+            $data = $model_mb_special->getMbSpecialIndex();
+            wkcache('index_data',$data);
+        }
+
 
         //推荐商品
         /*$recommend_goods_list = $this->get_recommend_goods();

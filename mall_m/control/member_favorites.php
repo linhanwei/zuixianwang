@@ -42,6 +42,24 @@ class member_favoritesControl extends mobileMemberControl {
     }
 
     /**
+     * 判断会员是否收藏了商品
+     */
+    public function is_favorites_goodsOp(){
+        $is_true = 0;
+        $goods_id =  $_POST['goods_id'];
+        $member_id = $this->member_info['member_id'];
+        $favorites_model = Model('favorites');
+        $result = $favorites_model->checkFavorites($goods_id,'goods',$member_id);
+
+        if($result){
+            $is_true = 1;
+        }
+
+        output_data($is_true);
+
+    }
+
+    /**
      * 添加收藏
      */
     public function favorites_addOp() {

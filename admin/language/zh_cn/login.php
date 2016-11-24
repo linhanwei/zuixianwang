@@ -3,7 +3,7 @@ defined('InSystem') or exit('Access Invalid!');
 /**
  * index
  */
-$lang['login_index_title_01']					= '车族宝全返电商系统';
+$lang['login_index_title_01']					= '电商系统';
 $lang['login_index_title_02']					= '平台管理中心';
 $lang['login_index_title_03']					= '资讯一手掌握';
 $lang['login_index_username_null']				= '用户名不能为空';

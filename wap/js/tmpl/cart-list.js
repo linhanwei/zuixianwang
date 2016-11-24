@@ -1,4 +1,8 @@
 $(function () {
+    var is_exit = GetQueryString('is_exit');
+    if(is_exit){
+        $('.head .arrow-left').css('display','block');
+    }
     var key = getcookie('key');
     if (key == '') {
         $('#cart-list-wp').html('<div style="height: 100px;width: 100%;line-height: 100px;text-align: center;font-size: 0.16rem;">登录后可同步电脑与手机购物车 <input type="button" value="登录" id="open_login"> </div>');
@@ -29,7 +33,7 @@ $(function () {
 
                         var html = template.render('cart-list', rData);
                         $("#cart-list-wp").html(html);
-
+                        bind_openwebview();
                         //去结算
                         $('#cart-statement-btn').click(function () {
                             var total_money = parseInt($(this).find('#pro-num').text());

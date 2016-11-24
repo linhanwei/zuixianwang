@@ -129,7 +129,8 @@
 				<%if (orderlist[j].ownshop){%>
 				<a class="store"><i class="icon"></i><%=orderlist[j].store_name%></a>
 				<%}else{%>
-				<a href="<%=WapSiteUrl%>/tmpl/store.html?store_id=<%=orderlist[j].store_id%>" class="store"><i class="icon"></i><%=orderlist[j].store_name%><i class="arrow-r"></i></a>
+				<!--<a href="<%=WapSiteUrl%>/tmpl/store.html?store_id=<%=orderlist[j].store_id%>" class="store"><i class="icon"></i><%=orderlist[j].store_name%><i class="arrow-r"></i></a>-->
+				<a  class="store"><i class="icon"></i><%=orderlist[j].store_name%><i class="arrow-r"></i></a>
 				<%}%>
 						<span class="state">
 							<%
@@ -223,9 +224,7 @@
 		<div class="norecord-ico"><i></i></div>
 		<dl>
 			<dt>您还没有相关的订单</dt>
-			<dd>可以去看看哪些想要买的</dd>
 		</dl>
-		<a  class="btn go_index">随便逛逛</a>
 	</div>
 	<%}%>
 </script>

@@ -190,7 +190,6 @@ class member_returnControl extends mobileMemberControl {
         $condition['buyer_id'] = $member_id;
         $condition['refund_id'] = intval($_GET['return_id']);
         $refund_info = $model_refund->getRefundReturnInfo($condition);
-
         if(!empty($refund_info) && is_array($refund_info)) {
             $seller_state = $model_refund->getRefundStateArray('seller');
             $admin_state = $model_refund->getRefundStateArray('admin');
@@ -241,7 +240,7 @@ class member_returnControl extends mobileMemberControl {
                     }
                 }
             }
-            /*
+            
             $detail_info = $model_refund->getDetailInfo(array('refund_id'=> $refund_info['refund_id']));
             $detail_array = array();
             if(!empty($detail_info) && $detail_info['refund_state'] == 2) {
@@ -250,10 +249,7 @@ class member_returnControl extends mobileMemberControl {
                 $detail_array['pd_amount'] = ncPriceFormat($detail_info['pd_amount']);
                 $detail_array['rcb_amount'] = ncPriceFormat($detail_info['rcb_amount']);
             }
-             output_data(array('return_info' => $refund,'pic_list' => $pic_list,'detail_array' => $detail_array));
-            */
-
-            output_data(array('return_info' => $refund,'pic_list' => $pic_list));
+            output_data(array('return_info' => $refund,'pic_list' => $pic_list,'detail_array' => $detail_array));
         } else {
             output_error('参数错误');
         }
