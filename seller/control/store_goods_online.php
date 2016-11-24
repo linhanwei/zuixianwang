@@ -690,6 +690,7 @@ class store_goods_onlineControl extends BaseSellerControl
         $image_list = array_under_reset($image_list, 'color_id', 2);
 
         $img_array = $model_goods->getGoodsList(array('goods_commonid' => $common_id), 'color_id,goods_image', 'color_id');
+
         // 整理，更具id查询颜色名称
         if (!empty($img_array)) {
             foreach ($img_array as $val) {
@@ -704,9 +705,10 @@ class store_goods_onlineControl extends BaseSellerControl
         }
         Tpl::output('img', $image_array);
 
-
         $model_spec = Model('spec');
-        $value_array = $model_spec->getSpecValueList(array('sp_value_id' => array('in', $colorid_array), 'store_id' => $_SESSION['store_id']), 'sp_value_id,sp_value_name');
+        $spec_condition['sp_value_id'] = array('in', $colorid_array);
+//        $spec_condition['store_id'] = $_SESSION['store_id'];
+        $value_array = $model_spec->getSpecValueList($spec_condition, 'sp_value_id,sp_value_name');
         if (empty($value_array)) {
             $value_array[] = array('sp_value_id' => '0', 'sp_value_name' => '无颜色');
         }
