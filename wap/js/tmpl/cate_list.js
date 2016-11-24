@@ -1,5 +1,9 @@
 $(function(){
-
+    $('.open_search_btn').each(function() {
+        $(this).click(function(){
+            app_interface.openWebView(WapSiteUrl + '/tmpl/search.html', 1);
+        });
+    });
     ajax_data({},true);
 	
 
@@ -29,16 +33,16 @@ $(function(){
     /*$('body').on('click' , '.cate-price-points-show a' , function(){
         var price = $(this).html();
         document.location.href = WapSiteUrl+'/tmpl/product_list.html?price='+price;
-    });*/
+    });
     $('.cate-price-points-show a').each(function(){
         $(this).attr('href',WapSiteUrl+'/tmpl/product_list.html?price='+$(this).text());
-    });
+    });*/
 
 });
 
 function ajax_data(data,is_add){
     //加载进度
-    var layer_index = layer.load(0, {shade:false});
+    var layer_index = layer.load(2);
 
     $.ajax({
         url: SiteUrl + "/mall_m/index.php?act=goods_class&op=ajax_data",
@@ -69,6 +73,7 @@ function ajax_data(data,is_add){
             }
             $("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
             layer.close(layer_index);
+            bind_openwebview();
         }
     });
 }

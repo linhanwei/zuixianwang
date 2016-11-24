@@ -82,11 +82,7 @@ function ajax_data(data,is_add,is_first){
 
 	//加载进度
 	//var layer_index = layer.load(0, {shade:false});
-	var layer_index = layer.msg('', {
-		icon: 16,
-		time:0,
-		shade:false
-	});
+	var layer_index = layer.load(2);
 
 	if(is_first == 1) {
 		$('#good-list-show-box').html(getCache('goods_list'));
