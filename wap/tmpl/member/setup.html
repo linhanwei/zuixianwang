@@ -16,17 +16,18 @@
 <link rel="stylesheet" type="text/css" href="../../css/style.css" media="all" />
 
 </head>
-
 <body class="setup-body">
+<div id="content_main"></div>
+<script type="text/html" id="setup_html">
  <header class="head">
-   <a href="javascript:history.go(-1)" class="arrow-left"><img src="../../images/setup/arrow-left.png"></a> <span>设置</span> <a class="arrow-right txt" id="edit_submit">保存</a>
+   <a href="javascript:history.go(-1);" class="arrow-left"><img src="../../images/setup/arrow-left.png"></a> <span>设置</span> <a class="arrow-right txt" id="edit_submit">保存</a>
  </header>
  <section class="main">
    <a class="setup-item avatar" id="avatar"><span>头像</span> <i class="arrow-right"></i> <img id="avatar_img_url" src="../../images/setup/avatar-default-ico.png"> </a>
    <a class="setup-item nickname"><span>昵称</span> <span class="nickname-value">请输入昵称</span></a>
    <a class="setup-item sex"><span>性别</span> <div class="sex-set-box"><i class="action man" data-value="1"></i><i class="woman" data-value="2"></i></div></div>
    <a class="setup-item birthday"><span>生日</span> <span class="birthday-value"></span> <i class="arrow-right"></i></a>
-   <a href="updatepass.html" class="setup-item updatepass"><span>修改密码</span> <i class="arrow-right"></i></a>
+   <a href="<%=updatepass_url%>" class="setup-item updatepass"><span>修改密码</span> <i class="arrow-right"></i></a>
    <a class="setup-item login-out" id="logoutbtn"><span>退出</span></a>
    <input type="hidden" id="avatar_img" name="avatar_img" value="">
  </section>
@@ -51,6 +52,7 @@
         </div>
    </div>
  </section>
+ </script>
  <style>
   #avatar-uploads-box{ display:block; position:absolute; left:0; top:0; width:100%; height:100%; background:#FFF;z-index:10000; transform:translateX(100%)}
   #avatar-uploads-box.action{ transform:translateX(0); transition:all ease 0.3s}
@@ -70,6 +72,7 @@
  <script type="text/javascript" src="../../js/jquery-1.11.1.min.js"></script>
  <script type="text/javascript" src="../../js/config.js"></script>
  <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/template.js"></script>
  <script type="text/javascript" src="../../js/app.js"></script>
  <script type="text/javascript" src="../../plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>
  <script type="text/javascript" src="../../../data/resource/js/layer/layer.js"></script>
@@ -78,6 +81,10 @@
  <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
  <script type="text/javascript" src="../../plug-ins/jquery-cropbox/cropbox.js"></script>
  <script>
+     var data = {updatepass_url:WapSiteUrl+'/tmpl/member/updatepass.html'};
+     var setup_html = template.render('setup_html', data);
+     $('#content_main').html(setup_html);
+     bind_openwebview();
      var  cache_key = 'member_info';
      var member_info = getCache(cache_key);
      var key = getcookie('key');

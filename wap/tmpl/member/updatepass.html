@@ -41,6 +41,7 @@
 <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
 <script type="text/javascript">
     $(function(){
+        bind_openwebview();
         $('body').on('click','#subBtn',function(){
             var key = getcookie('key');
             var old_pass = $('#old-pass').val();
