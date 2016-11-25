@@ -277,6 +277,7 @@ class goodsControl extends mobileHomeControl{
      */
     public function goods_detailOp() {
         $goods_id = intval($_GET ['goods_id']);
+        $key = $_GET['key'];
 
         // 商品详细信息
         $model_goods = Model('goods');
@@ -284,6 +285,20 @@ class goodsControl extends mobileHomeControl{
         $goods_detail = $model_goods->getGoodsDetail($goods_id);
         if (empty($goods_detail)) {
             output_error('商品不存在');
+        }
+
+        //判断是否收藏商品
+        $goods_detail['is_favorites'] = 0;
+        if($key){
+            $model_mb_user_token = Model('mb_user_token');
+            $mb_user_token_info = $model_mb_user_token->getMbUserTokenInfoByToken($key);
+            $member_id = $mb_user_token_info['member_id'];
+
+            $favorites_model = Model('favorites');
+            $result = $favorites_model->checkFavorites($goods_id,'goods',$member_id);
+            if($result){
+                $goods_detail['is_favorites'] = 1;
+            }
         }
 
         //推荐商品

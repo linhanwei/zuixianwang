@@ -81,6 +81,11 @@ $(function () {
         success: function (result) {
             var data = result.datas;
             if (!data.error) {
+
+                data.favorites_img_url = '../images/ico/nosc.png';
+                if(result.datas.is_favorites == 1){
+                    data.favorites_img_url = '../images/ico/shoucang.png';
+                }
                 //商品图片格式化数据
                 if (data.goods_image) {
                     var goods_image = data.goods_image.split(",");
@@ -171,18 +176,6 @@ $(function () {
                     $(".buy-num").attr('readOnly', true);
                 }
 
-                //判断商品是否已经被收藏
-                $.ajax({
-                    url: ApiUrl + "/index.php?act=member_favorites&op=is_favorites_goods",
-                    type: "post",
-                    dataType: "json",
-                    data: {goods_id: goods_id, key: key},
-                    success: function (result) {
-                        if(result.datas == 1){
-                            $('.pd-collect img').attr('src','../images/ico/shoucang.png');
-                        }
-                    }
-                });
                 //收藏
                 $(".pd-collect").click(function () {
 
@@ -197,8 +190,11 @@ $(function () {
                             success: function (fData) {
                                 if (checklogin(fData.login)) {
                                     if (!fData.datas.error) {
-                                        $('.pd-collect img').attr('src','../images/ico/shoucang.png');
-                                        layer.msg("收藏成功!");
+                                        if(fData.datas == 1){
+                                            $('.pd-collect img').attr('src','../images/ico/shoucang.png');
+                                        }else{
+                                            $('.pd-collect img').attr('src','../images/ico/nosc.png');
+                                        }
                                     } else {
                                         layer.msg(fData.datas.error);
                                     }

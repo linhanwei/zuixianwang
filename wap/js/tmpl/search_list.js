@@ -11,6 +11,8 @@ $(function(){
 
 	//商品排序
 	$('body').on('click','.condition-box .condit',function(e){
+		$(this).siblings().find('.fleft').removeClass('desc').removeClass('asc');
+
 		var sort_key = parseInt($(this).attr('sort_key')),
 			gc_id = GetQueryString('gc_id'),
 			keyword = GetQueryString('keyword'),

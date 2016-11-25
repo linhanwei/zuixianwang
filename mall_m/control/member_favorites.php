@@ -73,7 +73,12 @@ class member_favoritesControl extends mobileMemberControl {
 		//判断是否已经收藏
         $favorites_info = $favorites_model->getOneFavorites(array('fav_id'=>$goods_id,'fav_type'=>'goods','member_id'=>$this->member_info['member_id']));
 		if(!empty($favorites_info)) {
-            output_error('您已经收藏了该商品');
+            $condition = array();
+            $condition['fav_id'] = $goods_id;
+            $condition['fav_type'] = 'goods';
+            $condition['member_id'] = $this->member_info['member_id'];
+            $favorites_model->delFavorites($condition);
+            output_data('2');
 		}
 
 		//判断商品是否为当前会员所有
