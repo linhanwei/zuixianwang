@@ -5,7 +5,7 @@ $(function(){
         };
     var login_html = template.render('login_html', data);
     $('#content_main').html(login_html);
-
+    bind_openwebview();
 	var referurl = document.referrer;//上级网址
 
 	$("input[name=referurl]").val(referurl);
@@ -66,8 +66,11 @@ $(function(){
                                 setCache('user_password','');
                             }
 
-							//location.href = referurl;
-                            history.back();
+                            if(typeof(app_interface) == 'undefined'){
+                                location.href = referurl;
+                            }else{
+                                app_interface.closeWebView(8);return;
+                            }
 						}
 						$(".error-tips").hide();
 					}else{

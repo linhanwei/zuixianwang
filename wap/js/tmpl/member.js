@@ -2,7 +2,22 @@ $(function(){
     var key = getcookie('key');
 
     if(key==undefined || key == ''){
-            location.href = 'login.html';
+        var data = {};
+        data.WapSiteUrl = WapSiteUrl;
+        var html = template.render('member_center', data);
+        $('#content_main').html(html);
+        $('a').each(function(){
+            $(this).click(function(){
+                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',8);
+                return false;
+            });
+        });
+
+        var t = setInterval(function(){
+            if(getcookie('key')){
+                document.location.href = document.location.href;
+            }
+        },500);
     }else{
         $.ajax({
             type:'post',
@@ -15,6 +30,7 @@ $(function(){
                 data.WapSiteUrl = WapSiteUrl;
                 var html = template.render('member_center', data);
                 $('#content_main').html(html);
+                bind_openwebview();
                 //$('#username').html(result.datas.member_info.user_name);
                 //$('#point').html(Number(result.datas.member_info.point).toFixed(2));
                 //$('#predepoit').html(result.datas.member_info.predepoit);

@@ -1,4 +1,5 @@
 $(function () {
+    bind_openwebview();
     var e = getcookie("key");
     var r = GetQueryString("refund_id");
     $.getJSON(ApiUrl + "/index.php?act=member_return&op=ship_form", {key: e, return_id: r}, function (a) {

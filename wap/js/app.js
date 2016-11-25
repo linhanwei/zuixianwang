@@ -43,3 +43,4 @@ function bind_login(){
 }
 
 bind_openwebview();
+

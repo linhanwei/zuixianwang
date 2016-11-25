@@ -104,7 +104,7 @@ $(function() {
                 address_id: e
             },
             success: function(e) {
-                checkLogin(e.login);
+                //checkLogin(e.login);
                 if (e.datas.error) {
                     $.sDialog({
                         skin: "red",
@@ -117,6 +117,7 @@ $(function() {
                 e.datas.WapSiteUrl = WapSiteUrl;
                 var i = template.render("goods_list", e.datas);
                 $("#deposit").html(i);
+                bind_openwebview();
                 if (fcode == "") {
                     for (var t in e.datas.store_cart_list) {
                         if (e.datas.store_cart_list[t].goods_list[0].is_fcode == "1") {
@@ -346,7 +347,7 @@ $(function() {
             },
             dataType: "json",
             success: function(e) {
-                checkLogin(e.login);
+                //checkLogin(e.login);
                 var a = e.datas;
                 var i = "";
                 $.each(a.invoice_content_list,
@@ -463,7 +464,7 @@ $(function() {
             },
             dataType: "json",
             success: function(e) {
-                checkLogin(e.login);
+                //checkLogin(e.login);
                 if (e.datas.error) {
                     $.sDialog({
                         skin: "red",

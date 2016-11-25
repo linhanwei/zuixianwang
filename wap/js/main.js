@@ -34,36 +34,13 @@ $(document).ready(function () {
 			search_list.push(keyword_val);
 			setCache(cache_key,search_list);
 		}
-
-		location.href = WapSiteUrl+'/tmpl/product_list.html?keyword='+keyword;
+        var target = $(this).attr('target');
+		location.href = WapSiteUrl+'/tmpl/' + target + '.html?keyword='+keyword;
 	});
 	
     $("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
-
-
-	//返回顶部按钮
-	$("#go-top").click(function(){
-
-		$('body,html').animate({scrollTop:0},500);
-		return false;
-	});
-
-	$(document).scroll(function() {
-		var top_height = $(document).scrollTop();
-		if(top_height > 150){
-			$("#go-top").css('display','block');
-		}else{
-			$("#go-top").css('display','none');
-		}
-		
-	});
 	
-	$("input").focus(function(){
-	  $(this).attr("placeholder","");	
-	});
 	
-
-
 	function loadingcss3_open(){
 		$('<div id="loadingcss3" class="fixedloading loadingcss3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="fixedloadingbg"></div>').appendTo(body);
 		$(".fixedloading").addClass("loadingcss3");

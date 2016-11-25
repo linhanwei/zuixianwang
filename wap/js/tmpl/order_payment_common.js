@@ -1,5 +1,5 @@
-var key = getcookie("key");
-var password, rcb_pay, pd_pay, payment_code;
+var key = getCookie("key");
+var password, rcb_pay, pd_pay, payment_code,pay_amount;
 function toPay(a, e, p) {
     $.ajax({
         type: "post",
@@ -10,7 +10,8 @@ function toPay(a, e, p) {
         },
         dataType: "json",
         success: function(p) {
-            checklogin(p.login);
+
+            checkLogin(p.login);
             if (p.datas.error) {
                 $.sDialog({
                     skin: "red",
@@ -20,14 +21,11 @@ function toPay(a, e, p) {
                 });
                 return false
             }
-            $.animationUp({
-                valve: "",
-                scroll: ""
-            });
+            // 从下到上动态显示隐藏内容
+            $.animationUp({valve:'',scroll:''});
             $("#onlineTotal").html(p.datas.pay_info.pay_amount);
-            if (!p.datas.pay_info.member_paypwd) {
-                $("#wrapperPaymentPassword").find(".input-box-help").show()
-            }
+            pay_amount = p.datas.pay_info.pay_amount;
+
             var s = false;
             if (parseFloat(p.datas.pay_info.payed_amount) <= 0) {
                 if (parseFloat(p.datas.pay_info.member_available_pd) == 0 && parseFloat(p.datas.pay_info.member_available_rcb) == 0) {
@@ -52,9 +50,9 @@ function toPay(a, e, p) {
             }
             password = "";
             $("#paymentPassword").on("change",
-            function() {
-                password = $(this).val()
-            });
+                function() {
+                    password = $(this).val()
+                });
             rcb_pay = 0;
             $("#useRCBpay").click(function() {
                 if ($(this).prop("checked")) {
@@ -108,7 +106,7 @@ function toPay(a, e, p) {
                             $("#" + i).attr("checked", true).parents("label").addClass("checked")
                         }
                     }
-                    if (i == "wxpay_jsapi" && t) {
+                    if (i == "wxpay" && t) {
                         $("#" + i).parents("label").show();
                         if (payment_code == "") {
                             payment_code = i;
@@ -120,8 +118,8 @@ function toPay(a, e, p) {
             $("#alipay").click(function() {
                 payment_code = "alipay"
             });
-            $("#wxpay_jsapi").click(function() {
-                payment_code = "wxpay_jsapi"
+            $("#wxpay").click(function() {
+                payment_code = "wxpay"
             });
             $("#toPay").click(function() {
                 if (payment_code == "") {
@@ -172,5 +170,10 @@ function toPay(a, e, p) {
     })
 }
 function goToPayment(a, e) {
-    location.href = ApiUrl + "/index.php?act=member_payment&op=" + e + "&key=" + key + "&pay_sn=" + a + "&password=" + password + "&rcb_pay=" + rcb_pay + "&pd_pay=" + pd_pay + "&payment_code=" + payment_code
+    //处理app支付
+    if(typeof(app_interface) == 'object'){
+        app_interface.pay(ApiUrl + "/index.php?act=member_payment&op=app_order_pay",payment_code,{'key':' + key + ','pay_sn':' + a + ','payment_code':' + payment_code + '});
+    }else{
+        location.href = ApiUrl + "/index.php?act=member_payment&op=" + e + "&key=" + key + "&pay_sn=" + a + "&password=" + password + "&rcb_pay=" + rcb_pay + "&pd_pay=" + pd_pay + "&payment_code=" + payment_code
+    }
 }

@@ -35,15 +35,5 @@ $(function() {
 
     // console.log(url);  //url.indexOf('zero/list.html') > 0
 
-
-    //显示底部导航
-    if(typeof(app_interface)=='undefined'){
-        $(".footer").html(html);
-        $(".footer").show();
-    }else{
-        bind_openwebview();
-    }
-
-    if(client == "ios"){ $(".footer").hide()};
-
+    $(".footer").html(html);
 });

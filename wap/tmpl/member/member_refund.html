@@ -11,18 +11,18 @@
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1" />
 <title>退款列表</title>
-<link rel="stylesheet" type="text/css" href="../../css/base.css">
-<link rel="stylesheet" type="text/css" href="../../css/nctouch_member.css">
+<link rel="stylesheet" type="text/css" href="../../css/touch/base.css">
+<link rel="stylesheet" type="text/css" href="../../css/touch/member.css">
 </head>
 <body>
 <header id="header">
   <div class="header-wrap">
-    <div class="header-l"> <a href="member.html"> <i class="back"></i> </a> </div>
+    <div class="header-l"> <a href="javascript:history.go(-1);"> <i class="back"></i> </a> </div>
     <span class="header-tab"><a href="javascript:void(0);" class="cur">退款列表</a><a href="member_return.html">退货列表</a></span>
     <div class="header-r" style="display: none;"> <a id="header-nav" href="javascript:void(0);"><i class="more"></i><sup></sup></a> </div>
   </div>
-  <div class="nctouch-nav-layout">
-    <div class="nctouch-nav-menu"> <span class="arrow"></span>
+  <div class="nav-layout">
+    <div class="nav-menu"> <span class="arrow"></span>
       <ul>
         <li><a href="../../index.html"><i class="home"></i>首页</a></li>
         <li><a href="../search.html"><i class="search"></i>搜索</a></li>
@@ -34,8 +34,8 @@
     </div>
   </div>
 </header>
-<div class="nctouch-main-layout">
-  <div class="nctouch-order-list">
+<div class="main-layout">
+  <div class="order-list">
     <ul id="refund-list">
     </ul>
   </div>
@@ -49,11 +49,11 @@
 	<% for(var i = 0;i<refund_list.length;i++){
 	%>
 		<li class=" <%if(i>0){%>mt10<%}%>">
-			<div class="nctouch-order-item">
-				<div class="nctouch-order-item-head">
+			<div class="order-item">
+				<div class="order-item-head">
 					<a href="<%=WapSiteUrl%>/tmpl/member/member_refund_info.html?refund_id=<%=refund_list[i].refund_id%>" class="store"><i class="icon"></i><%=refund_list[i].store_name%></a><span class="state"><%=refund_list[i].seller_state%></span>
 				</div>
-				<div class="nctouch-order-item-con">
+				<div class="order-item-con">
 				<% for(var j = 0;j<refund_list[i].goods_list.length;j++){
 					var goods_list = refund_list[i].goods_list[j];
 				%>
@@ -70,7 +70,7 @@
 					</div>
 				<%}%>
 				</div>
-				<div class="nctouch-order-item-footer">
+				<div class="order-item-footer">
 					<div class="store-totle">
 					<time class="refund-time"><%=refund_list[i].add_time%></time>
 					<span class="refund-sum">退款金额：<em>￥<%=refund_list[i].refund_amount%></em></span>
@@ -86,7 +86,7 @@
 	<li class="loading"><div class="spinner"><i></i></div>订单数据读取中...</li>
 	<% } %>
 <%}else {%>
-	<div class="nctouch-norecord refund">
+	<div class="norecord refund">
 		<div class="norecord-ico"><i></i></div>
 		<dl>
 			<dt>您还没有退款信息</dt>
@@ -98,11 +98,10 @@
 <script type="text/javascript" src="../../js/zepto.min.js"></script> 
 <script type="text/javascript" src="../../js/template.js"></script> 
 <script type="text/javascript" src="../../js/config.js"></script> 
-<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/touch/common.js"></script>
 <script type="text/javascript" src="../../js/app.js"></script>
 <script type="text/javascript" src="../../js/simple-plugin.js"></script> 
-<script type="text/javascript" src="../../js/ncscroll-load.js"></script> 
+<script type="text/javascript" src="../../js/scroll-load.js"></script>
 <script type="text/javascript" src="../../js/tmpl/member_refund.js"></script>
-<script type="text/javascript" src="../../js/tmpl/footer.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 $(function() {
+    bind_openwebview();
     var e = getcookie("key");
     var r = GetQueryString("refund_id");
     template.helper("isEmpty",

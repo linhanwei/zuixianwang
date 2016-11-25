@@ -27,7 +27,7 @@
    <div class="input-group"><input type="password" name="new-pass" id="new-pass" placeholder="请输入新密码"></div>
    <div class="input-group"><input type="password" name="confirm-pass" id="confirm-pass" placeholder="请输入确认新密码"></div>
    
-   <div class="btn-box"><a class="btn" id="subBtn">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存</a></div>
+   <div class="btn-box"><button class="btn" id="subBtn">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存</button></div>
  </section>
 </body>
 <script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script>
@@ -41,7 +41,7 @@
 <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
 <script type="text/javascript">
     $(function(){
-        bind_openwebview();
+//        bind_openwebview();
         $('body').on('click','#subBtn',function(){
             var key = getcookie('key');
             var old_pass = $('#old-pass').val();

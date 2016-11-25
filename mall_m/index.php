@@ -4,7 +4,6 @@
  *
  *
  */
-session_start();
 define('APP_ID','mall_m');
 define('IGNORE_EXCEPTION', true);
 define('BASE_PATH',str_replace('\\','/',dirname(__FILE__)));

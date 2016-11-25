@@ -39,4 +39,5 @@ $(function(){
 		});
 		return false;
 	}
+    bind_openwebview();
 });

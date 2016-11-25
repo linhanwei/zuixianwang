@@ -1,7 +1,13 @@
 $(function(){
     $('.open_search_btn').each(function() {
         $(this).click(function(){
-            app_interface.openWebView(WapSiteUrl + '/tmpl/search.html', 1);
+            var search_url = WapSiteUrl + '/tmpl/search.html';
+            if(typeof(app_interface) == 'object'){
+                app_interface.openWebView(search_url, 1);return;
+            }else{
+                document.location.href = search_url;
+            }
+
         });
     });
     ajax_data({},true);
@@ -42,7 +48,7 @@ $(function(){
 
 function ajax_data(data,is_add){
     //加载进度
-    var layer_index = layer.load(2);
+    var layer_index = layer.load(0, {shade:false});
 
     $.ajax({
         url: SiteUrl + "/mall_m/index.php?act=goods_class&op=ajax_data",

@@ -1,16 +1,15 @@
 var page = pagesize;
 var curpage = 1;
 var hasMore = true;
-var footer = false;
 var reset = true;
 var orderKey = "";
 $(function() {
-    var e = getcookie("key");
+    var e = getCookie("key");
     if (!e) {
         window.location.href = WapSiteUrl + "/tmpl/member/login.html"
     }
-    if (GetQueryString("data-state") != "") {
-        $("#filtrate_ul").find("li").has('a[data-state="' + GetQueryString("data-state") + '"]').addClass("selected").siblings().removeClass("selected")
+    if (getQueryString("data-state") != "") {
+        $("#filtrate_ul").find("li").has('a[data-state="' + getQueryString("data-state") + '"]').addClass("selected").siblings().removeClass("selected")
     }
     $("#search_btn").click(function() {
         reset = true;
@@ -34,7 +33,7 @@ $(function() {
         }
         hasMore = false;
         //var t = $("#filtrate_ul").find(".selected").find("a").attr("data-state");
-        var t = GetQueryString('state_type');
+        var t = getQueryString('state_type');
         var r = $("#order_key").val();
         $.ajax({
             type: "post",
@@ -47,18 +46,14 @@ $(function() {
             },
             dataType: "json",
             success: function(e) {
-                checklogin(e.login);
+                checkLogin(e.login);
                 curpage++;
                 hasMore = e.hasmore;
-                if (e.datas.order_group_list.length <= 0) {
-                    $("#footer").addClass("posa")
-                } else {
-                    $("#footer").removeClass("posa")
-                }
+
                 var t = e;
                 t.WapSiteUrl = WapSiteUrl;
                 t.ApiUrl = ApiUrl;
-                t.key = getcookie("key");
+                t.key = getCookie("key");
                 template.helper("$getLocalTime",
                 function(e) {
                     var t = new Date(parseInt(e) * 1e3);

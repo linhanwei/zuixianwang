@@ -1,4 +1,4 @@
-$(function(){
+$(function(){bind_openwebview();
 		var key = getcookie('key');
 		if(key==''){
 			location.href = 'login.html';
@@ -41,4 +41,5 @@ $(function(){
 				}
 			});
 		}
+
 });
