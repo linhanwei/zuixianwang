@@ -179,7 +179,7 @@
 	  if(!$(this).hasClass("action")){
 		  $(this).addClass("action");
 		  var ns = $(this).find(".nickname-value").html();
-          var inps = "<input id='nickname-value-inp' name='nickname-value-inp' value='' placeholder='"+ns+"'/>";
+          var inps = "<input id='nickname-value-inp' name='nickname-value-inp' value='"+ns+"' placeholder='"+ns+"'/>";
 		  $(this).find(".nickname-value").html(inps);
 		  $("#nickname-value-inp").change(function(){
 			 var inpsv = $("#nickname-value-inp").val();
@@ -193,7 +193,7 @@
       if(!$(this).hasClass("action")){
           $(this).addClass("action");
           var ns = $(this).find(".birthday-value").html();
-          var inps = "<input id='birthday-value-inp' name='birthday-value-inp' value='' placeholder='"+ns+"'/>";
+          var inps = "<input id='birthday-value-inp' name='birthday-value-inp' value='"+ns+"' placeholder='"+ns+"'/>";
           $(this).find(".birthday-value").html(inps);
           $("#birthday-value-inp").change(function(){
               var inpsv = $("#birthday-value-inp").val();
@@ -290,6 +290,15 @@
                 cropper.zoomOut();
             })
         });
+
+        //设置会员头像
+        function set_avatar(img_url){
+            if(!img_url){
+                return false;
+            }
+            $('#avatar_img_url').attr('src',img_url);
+            return true;
+        }
 </script>
 </body>
 </html>

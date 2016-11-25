@@ -61,13 +61,11 @@ class member_indexControl extends mobileMemberControl {
         $nickname = $_POST['nickname'];
         $sex = $_POST['sex'];
         $birthday = $_POST['birthday'];
-        $avatar_img = $_POST['avatar_img'];
 
         $data = array();
         if($nickname) $data['member_nickname'] = $nickname;
         if($sex) $data['member_sex'] = $sex;
         if($birthday) $data['member_birthday'] = $birthday;
-        if($avatar_img) $data['member_avatar'] = $avatar_img;
 
         if(!empty($data)){
             $model_member = Model('member');
@@ -108,10 +106,13 @@ class member_indexControl extends mobileMemberControl {
             $upload_file = $new_file.$avatar_name;
 
             if (file_put_contents($upload_file, base64_decode(str_replace($result[1], '', $base64_image_content)))){
+                $avatar_url = BASE_SITE_URL.DS.$upload_dir.$avatar_name;
+                $member_array['member_avatar'] = $avatar_url;
+                Model('member')->editMember(array('member_id'=>$this->member_info['member_id']),$member_array);
 
                 $return['status'] = 1;
                 $return['msg'] = '头像上传成功';
-                $return['data'] = array('img_url'=>BASE_SITE_URL.DS.$upload_dir.$avatar_name,'img_name'=>$avatar_name);
+                $return['data'] = array('img_url'=>$avatar_url,'img_name'=>$avatar_name);
             }else{
                 $return['msg'] = '头像上传失败';
             }
