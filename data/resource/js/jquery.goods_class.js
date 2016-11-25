@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	//列表下拉
+	console.log(5555555);
 	$('img[nc_type="flex"]').click(function(){
 		var status = $(this).attr('status');
 		if(status == 'open'){
@@ -52,6 +53,8 @@ $(document).ready(function(){
 							src += "<a href='JavaScript:void(0);' class='tooltip enabled' fieldvalue='1' fieldid='"+data[i].gc_id+"' ajax_branch='goods_class_show' fieldname='gc_show' nc_type='inline_edit'><img src='"+ADMIN_TEMPLATES_URL+"/images/transparent.gif'></a>";
 						}
 						src += "</td>";
+						//编号
+						src += "<td>"+data[i].gc_id+"</td>";console.log(11111)
 						//类型
 						src += "<td>"+data[i].type_name+"</td>";
 						//分佣

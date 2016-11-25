@@ -138,6 +138,7 @@ function buildUrl(type, data) {
         case 'url':
             return data;
     }
+    return 'javascript:void(0);';
     return WapSiteUrl;
 }
 

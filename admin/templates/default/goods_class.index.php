@@ -33,6 +33,7 @@
           <th><?php echo $lang['nc_sort'];?></th>
           <th><?php echo $lang['goods_class_index_name'];?></th>
           <th>是否显示</th>
+          <th>编号</th>
           <th><?php echo $lang['goods_class_add_type'];?></th>
           <th><?php echo $lang['goods_class_add_commis_rate'];?></th>
           <th></th>
@@ -50,6 +51,7 @@
             <img fieldid="<?php echo $v['gc_id'];?>" status="close" nc_type="flex" src="<?php echo ADMIN_TEMPLATES_URL;?>/images/tv-item.gif">
             <?php } ?></td>
           <td class="w48 sort"><span title="<?php echo $lang['nc_editable'];?>" ajax_branch="goods_class_sort" datatype="number" fieldid="<?php echo $v['gc_id'];?>" fieldname="gc_sort" nc_type="inline_edit" class="editable "><?php echo $v['gc_sort'];?></span></td>
+
           <td class="w50pre name">
           <span title="<?php echo $lang['nc_editable'];?>" required="1" fieldid="<?php echo $v['gc_id'];?>" ajax_branch="goods_class_name" fieldname="gc_name" nc_type="inline_edit" class="editable "><?php echo $v['gc_name'];?></span>
           <a class="btn-add-nofloat marginleft" href="index.php?act=goods_class&op=goods_class_add&gc_parent_id=<?php echo $v['gc_id'];?>"><span><?php echo $lang['nc_add_sub_class'];?></span></a>
@@ -59,6 +61,7 @@
             <?php }else{ ?>
             <a href="JavaScript:void(0);" class="tooltip enabled" fieldvalue="1" fieldid="<?php echo $v['gc_id'];?>" ajax_branch="goods_class_show" fieldname="gc_show" nc_type="inline_edit" title="<?php echo $lang['nc_editable'];?>"><img src="<?php echo ADMIN_TEMPLATES_URL;?>/images/transparent.gif"></a>
             <?php } ?></td>
+          <td><?php echo $v['gc_id'];?></td>
           <td><?php echo $v['type_name'];?></td>
           <td><?php echo $v['commis_rate'];?> %</td>
           <td><?php if ($v['gc_virtual'] == 1) {?>虚拟<?php }?></td>

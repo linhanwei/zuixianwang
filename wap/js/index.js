@@ -140,7 +140,7 @@ $(document).ready(function () {
                             break;
 
                     }
-                    //console.log(kk, vv);
+                    console.log(kk, vv);
                     html += template.render(kk, vv);
                     return false;
                 });

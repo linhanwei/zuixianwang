@@ -21,7 +21,7 @@ class member_favoritesControl extends mobileMemberControl {
      */
     public function favorites_listOp() {
 		$model_favorites = Model('favorites');
-
+        $this->page = 30;
         $favorites_list = $model_favorites->getGoodsFavoritesList(array('member_id'=>$this->member_info['member_id']), '*', $this->page);
         $page_count = $model_favorites->gettotalpage();
         $favorites_id = '';

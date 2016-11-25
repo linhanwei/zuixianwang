@@ -15,22 +15,20 @@ if (/iphone|ipad|ipod/.test(ua)) {
 function bind_openwebview(){
     if(client != 'wechat'){
         $('a').each(function(){
-            $(this).click(function(){
-                var $this = $(this);
-                if($this.attr('href') != undefined && $this.attr('href') != 'javascript:void(0);') {
+            var $this = $(this);
+            if( $this.attr('href') != undefined && $this.attr('href') != 'javascript:void(0);') {
+                $this.unbind('click').bind('click',function(){
                     if ($this.attr('href') != '' && $this.attr('href') != 'javascript:history.go(-1);') {
                         if ($this.attr('href').indexOf('http') == 0) {
                             app_interface.openWebView($this.attr('href'), 1); return false;
                         } else if ($this.attr('href').indexOf('tmpl') >= 0) {
                             app_interface.openWebView(WapSiteUrl + '/' + $this.attr('href'), 1); return false;
                         }
-
                     } else if ($this.attr('href') == 'javascript:history.go(-1);') {
                         app_interface.closeWebView(2); return false;
                     }
-
-                }
-            });
+                });
+            }
         })
 
     }else{
@@ -43,3 +41,5 @@ function bind_login(){
         app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',8);
     });
 }
+
+bind_openwebview();
