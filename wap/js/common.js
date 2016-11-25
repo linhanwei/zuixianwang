@@ -126,7 +126,7 @@ function contains(arr, str) {
 function buildUrl(type, data) {
     switch (type) {
         case 'keyword':
-            return WapSiteUrl + '/tmpl/product_list.html?keyword=' + encodeURIComponent(data);
+            return WapSiteUrl + '/tmpl/search_list.html?keyword=' + encodeURIComponent(data);
         case 'cate':
             return WapSiteUrl + '/tmpl/search_list.html?gc_id=' + data;
         case 'special':
