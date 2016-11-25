@@ -76,7 +76,7 @@ $(function () {
     $.ajax({
         url: ApiUrl + "/index.php?act=goods&op=goods_detail",
         type: "get",
-        data: {goods_id: goods_id},
+        data: {goods_id: goods_id,key:key},
         dataType: "json",
         success: function (result) {
             var data = result.datas;
@@ -197,6 +197,7 @@ $(function () {
                             success: function (fData) {
                                 if (checklogin(fData.login)) {
                                     if (!fData.datas.error) {
+                                        $('.pd-collect img').attr('src','../images/ico/shoucang.png');
                                         layer.msg("收藏成功!");
                                     } else {
                                         layer.msg(fData.datas.error);
@@ -244,7 +245,7 @@ $(function () {
                     $(".buy-now").click(function () {
                         var key = getcookie('key');//登录标记
                         if (key == '') {
-                            if(app_interface){
+                            if(typeof(app_interface) == 'object'){
                                 app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html', 1);
                             }else{
                                 window.location.href = WapSiteUrl + '/tmpl/member/login.html';
@@ -284,7 +285,7 @@ $(function () {
                                 if (result.datas.error) {
                                     layer.msg(result.datas.error);
                                 } else {
-                                    if(app_interface){
+                                    if(typeof(app_interface) == 'object'){
                                         app_interface.openWebView(WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum, 1);
                                     }else{
                                         window.location.href = WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum;
@@ -298,7 +299,7 @@ $(function () {
                         var key = getcookie('key');//登录标记
                         if (key == '') {
 
-                            if(app_interface){
+                            if(typeof(app_interface) == 'object'){
                                 app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html', 1);
                             }else{
                                 window.location.href = WapSiteUrl + '/tmpl/member/login.html';
@@ -330,7 +331,7 @@ $(function () {
                                         layer.msg(result.datas.error);
                                     } else {
 
-                                        if(app_interface){
+                                        if(typeof(app_interface) == 'object'){
                                             app_interface.openWebView(WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum, 1);
                                         }else{
                                             location.href = WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum;
