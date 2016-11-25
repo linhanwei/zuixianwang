@@ -34,7 +34,7 @@ body.bg-white{ background:#FFF}
 .swiper-slide img{ width:100%}
 
 .swiper-pagination{ width:100%;height:0.2rem; line-height:0.2rem; bottom:0; left:0}
-.swiper-pagination-bullet { vertical-align:middle; background:#FFF; opacity:1}
+.swiper-pagination-bullet { vertical-align:top; background:#FFF; opacity:1; margin-left:0.05rem}
 .swiper-pagination-bullet-active{ background: #DA251E}
 
 /**@首页分类模块开始**/
@@ -104,8 +104,12 @@ body.bg-white{ background:#FFF}
 .condition-box a{ color:#666; font-size:0.14rem; display:block; float:left; width:25%; padding:0.1rem 0; text-align:center}
 .condition-box a.action{ color:#D4342C; border-bottom:2px solid #D4342C}
 .condition-box a span{ display:block; width:100%; height:0.16rem; line-height:0.16rem; font-size:0.14rem; border-right:1px solid #DEDEDE}
-.condition-box a.price span{ background:url(../images/ico/price.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
+.condition-box a.price span{ background:url(../images/ico/price-1.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
+.condition-box a.price span.asc{ background:url(../images/ico/price_asc.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
+.condition-box a.price span.desc{ background:url(../images/ico/price_desc.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
 .condition-box a.seals span{ background:url(../images/ico/price-1.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
+.condition-box a.seals span.asc{ background:url(../images/ico/price_asc.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
+.condition-box a.seals span.desc{ background:url(../images/ico/price_desc.png) 90% center no-repeat; background-size:0.16rem 0.16rem}
 .siftings-box{ position:relative; transform:translateY(-100%); width:100%; float:left; display:none}
 .siftings-box.action{ display:block;transform:translateY(0); transition:all ease 0.3s}
 .siftings-box .cate-price-points-show a{display: block;
@@ -586,8 +590,13 @@ body.bg-white{ background:#FFF}
 .mf-item .mf-pic{ display:block; width:1rem; height:1rem; overflow:hidden; float:left; margin-right:0.12rem}
 .mf-item .mf-pic img{ width:100%}
 .mf-infor{ font-size:0.16rem}
-.mf-infor p{ height:0.3rem; line-height:0.3rem; font-size:0.14rem}
-.mf-infor .i-del{ border:1px solid #D21A25; border-radius:3px; position:absolute; bottom:0; right:0.12rem; padding:0.06rem 0.12rem; color:#F00}
+.mf-infor p{ height:0.3rem; line-height:0.3rem; font-size:0.14rem;overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	-webkit-text-overflow:ellipsis;
+	-moz-text-overflow:ellipsis;
+	white-space:nowrap;}
+.mf-infor .i-del{ border:1px solid #D21A25; border-radius:3px; position:absolute; bottom:0.05rem; right:0.12rem; padding:0.06rem 0.12rem; color:#F00}
 .no-record{ position:fixed; top:40%; left:50%; font-size:0.24rem; color:#F00; border:1px solid #DA251D; padding:0.2rem 0.5rem; transform:translate(-50%,-50%); border-radius:5px;}
 
 us:5px;}

@@ -178,10 +178,8 @@ $(function () {
                     dataType: "json",
                     data: {goods_id: goods_id, key: key},
                     success: function (result) {
-
                         if(result.datas == 1){
-
-                            $('.pd-collect img').attr('src','../images/ico/nosc.png');
+                            $('.pd-collect img').attr('src','../images/ico/shoucang.png');
                         }
                     }
                 });
@@ -246,7 +244,7 @@ $(function () {
                     $(".buy-now").click(function () {
                         var key = getcookie('key');//登录标记
                         if (key == '') {
-                            if(client != 'wechat'){
+                            if(app_interface){
                                 app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html', 1);
                             }else{
                                 window.location.href = WapSiteUrl + '/tmpl/member/login.html';
@@ -286,7 +284,7 @@ $(function () {
                                 if (result.datas.error) {
                                     layer.msg(result.datas.error);
                                 } else {
-                                    if(client != 'wechat'){
+                                    if(app_interface){
                                         app_interface.openWebView(WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum, 1);
                                     }else{
                                         window.location.href = WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum;
@@ -300,7 +298,7 @@ $(function () {
                         var key = getcookie('key');//登录标记
                         if (key == '') {
 
-                            if(client != 'wechat'){
+                            if(app_interface){
                                 app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html', 1);
                             }else{
                                 window.location.href = WapSiteUrl + '/tmpl/member/login.html';
@@ -332,7 +330,7 @@ $(function () {
                                         layer.msg(result.datas.error);
                                     } else {
 
-                                        if(client != 'wechat'){
+                                        if(app_interface){
                                             app_interface.openWebView(WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum, 1);
                                         }else{
                                             location.href = WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum;
