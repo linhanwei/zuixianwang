@@ -51,7 +51,7 @@ $(function(){
 	//商品滑动分页加载
 	window.page_scrolling = false;
 	window.page_hasmore = false;
-	window.curpage = 2;
+	window.curpage = 1;
 	$(window).scroll(function () {
 		var __current = $('.product-filter .current'),
 			key = parseInt(__current.attr('key')),

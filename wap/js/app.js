@@ -36,10 +36,29 @@ function bind_openwebview(){
     }
 }
 
-function bind_login(){
+function bind_login(func){
     $('#open_login').click(function(){
-        app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',8);
+        app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html?func='+func,8);
     });
+}
+
+function app_check_login(key){
+    if(key == ''){
+        if(typeof(app_interface) == 'object'){
+            app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',8);return;
+        }else{
+            window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+        }
+    }
+}
+
+window.toast = function(s){
+    if(typeof(app_interface) == 'object'){
+        app_interface.showToast(s,1);
+    }else{
+        alert(s);
+    }
+
 }
 
 bind_openwebview();
