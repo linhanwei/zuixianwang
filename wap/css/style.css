@@ -283,7 +283,7 @@ body.bg-white{ background:#FFF}
 .cart-shop-pro-item .col .left{ width:calc(100% - 0.6rem); float:left}
 .cart-shop-pro-item .col .left .num-col{ height:40px; line-height:40px; width:100%; display:table-row}
 .cart-shop-pro-item .col .left .num-col a{ display:inline-block; width:38px; height:38px; border:1px solid #E2E4E8; text-align:center; font-size:20px; float:left; display:table-cell}
-.cart-shop-pro-item .col .left .num-col input{ border:1px solid #E2E4E8; height:36px; width:calc(100% - 84px); line-height:36px; background:none; vertical-align:top;float:left; text-align:center; font-size:0.14rem;display:table-cell}
+.cart-shop-pro-item .col .left .num-col input{ border:1px solid #E2E4E8; height:36px; width:calc(100% - 120px); line-height:36px; background:none; vertical-align:top;float:left; text-align:center; font-size:0.14rem;display:table-cell}
 .cart-shop-pro-item .col .right{ width:0.6rem; height:0.8rem; line-height:0.8rem; background:#D4342C;  color:#FFF; font-size:0.12rem; float:left; text-align:center}
 .cart-shop-pro-item .col .right a{ color:#FFF; display:block; width:0.6rem; height:0.8rem; line-height:0.8rem}
 .spec-select{ font-size:0.14rem; margin-top:0.1rem}

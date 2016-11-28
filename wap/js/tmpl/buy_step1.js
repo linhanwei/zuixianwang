@@ -196,7 +196,7 @@ $(function() {
                 voucher = voucher_temp.join(",");
                 for (var t in e.datas.store_final_total_list) {
                     $("#storeTotal" + t).html(e.datas.store_final_total_list[t]);
-                    a += parseFloat(e.datas.store_final_total_list[t]);
+                    a += parseFloat(e.datas.store_final_total_list[t].replace(',', ""));
                     message[t] = "";
                     $("#storeMessage" + t).on("change",
                     function() {
@@ -227,12 +227,14 @@ $(function() {
                     if (i <= 0) {
                         i = 0
                     }
-                    $("#totalPrice,#onlineTotal").html(i.toFixed(2))
+                    console.log(i,111);
+                    $("#totalPrice,#onlineTotal").html(i.toFixed(2));
                 });
                 var r = a - s;
                 if (r <= 0) {
                     r = 0
                 }
+
                 $("#totalPrice,#onlineTotal").html(r.toFixed(2));
 
             }
