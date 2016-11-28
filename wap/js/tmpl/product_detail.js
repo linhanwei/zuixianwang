@@ -71,7 +71,8 @@ $(function () {
 
     var goods_cache_key = 'goods_'+goods_id;
     //渲染页面
-    $("#product_detail_wp").html(getCache(goods_cache_key));
+    var goods_html = getCache(goods_cache_key);
+    $("#product_detail_wp").html(goods_html);
 
     $.ajax({
         url: ApiUrl + "/index.php?act=goods&op=goods_detail",
@@ -134,9 +135,10 @@ $(function () {
 
                 //渲染模板
                 var html = template.render('product_detail', data);
-                console.log(1111111);
-                setCache(goods_cache_key,html);
-                $("#product_detail_wp").html(html);
+                if(goods_html != html){
+                    setCache(goods_cache_key,html);
+                    $("#product_detail_wp").html(html);
+                }
 
                 // @add 手机端详情
                 if (data.goods_info.mobile_body) {
@@ -179,14 +181,15 @@ $(function () {
 
                 //收藏
                 $(".pd-collect").unbind('click').bind('click',function () {
+                    key = getcookie('key');
                     app_check_login(key);
-                    $.ajax({
-                        url: ApiUrl + "/index.php?act=member_favorites&op=favorites_add",
-                        type: "post",
-                        dataType: "json",
-                        data: {goods_id: goods_id, key: key},
-                        success: function (fData) {
-                            if (checklogin(fData.login)) {
+                    if(key){
+                        $.ajax({
+                            url: ApiUrl + "/index.php?act=member_favorites&op=favorites_add",
+                            type: "post",
+                            dataType: "json",
+                            data: {goods_id: goods_id, key: key},
+                            success: function (fData) {
                                 if (!fData.datas.error) {
                                     if(fData.datas == 1){
                                         $('.pd-collect img').attr('src','../images/ico/shoucang.png');
@@ -197,20 +200,22 @@ $(function () {
                                     layer.msg(fData.datas.error);
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 });
                 //加入购物车
                 $(".add-to-cart").click(function () {
+                    key = getcookie('key');
                     app_check_login(key);
-                    var quantity = parseInt($(".buy-num").val());
-                    $.ajax({
-                        url: ApiUrl + "/index.php?act=member_cart&op=cart_add",
-                        data: {key: key, goods_id: goods_id, quantity: quantity},
-                        type: "post",
-                        success: function (result) {
-                            var rData = $.parseJSON(result);
-                            if (checklogin(rData.login)) {
+                    if(key) {
+                        var quantity = parseInt($(".buy-num").val());
+                        $.ajax({
+                            url: ApiUrl + "/index.php?act=member_cart&op=cart_add",
+                            data: {key: key, goods_id: goods_id, quantity: quantity},
+                            type: "post",
+                            success: function (result) {
+                                var rData = $.parseJSON(result);
                                 if (!rData.datas.error) {
                                     layer.confirm('添加购物车成功', {
                                         title: '提示信息',
@@ -220,98 +225,103 @@ $(function () {
                                     }, function () {
 
                                     });
-                                    $('.layui-layer').css('left',document.body.clientWidth/5);
+                                    $('.layui-layer').css('left', document.body.clientWidth / 5);
                                 } else {
                                     layer.msg(rData.datas.error);
                                 }
                             }
-                        }
-                    })
+                        })
+                    }
                 });
 
                 //立即购买
                 if (data.goods_info.is_virtual == '1') {
                     $(".buy-now").click(function () {
+                        key = getcookie('key');
                         app_check_login(key);
+                        if(key) {
+                            var buynum = parseInt($('.buy-num').val()) || 0;
 
-                        var buynum = parseInt($('.buy-num').val()) || 0;
+                            if (buynum < 1) {
+                                layer.msg('参数错误！');
+                                return;
+                            }
+                            //购买大于1时 提示库存不足
+                            if (parseInt(buynum) > data.goods_info.goods_storage) {
+                                layer.msg('库存不足！');
+                                return;
+                            }
 
-                        if (buynum < 1) {
-                            layer.msg('参数错误！');
-                            return;
-                        }
-                        //购买大于1时 提示库存不足
-                        if (parseInt(buynum) > data.goods_info.goods_storage) {
-                            layer.msg('库存不足！');
-                            return;
-                        }
+                            // 虚拟商品限购数量
+                            if (data.goods_info.buyLimitation > 0 && buynum > data.goods_info.buyLimitation) {
+                                layer.msg('超过限购数量！');
+                                return;
+                            }
 
-                        // 虚拟商品限购数量
-                        if (data.goods_info.buyLimitation > 0 && buynum > data.goods_info.buyLimitation) {
-                            layer.msg('超过限购数量！');
-                            return;
-                        }
-
-                        var json = {};
-                        json.key = key;
-                        json.cart_id = goods_id;
-                        json.quantity = buynum;
-                        $.ajax({
-                            type: 'post',
-                            url: ApiUrl + '/index.php?act=member_vr_buy&op=buy_step1',
-                            data: json,
-                            dataType: 'json',
-                            success: function (result) {
-                                if (result.datas.error) {
-                                    layer.msg(result.datas.error);
-                                } else {
-                                    if(typeof(app_interface) == 'object'){
-                                        app_interface.openWebView(WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum, 1);
-                                    }else{
-                                        window.location.href = WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum;
+                            var json = {};
+                            json.key = key;
+                            json.cart_id = goods_id;
+                            json.quantity = buynum;
+                            $.ajax({
+                                type: 'post',
+                                url: ApiUrl + '/index.php?act=member_vr_buy&op=buy_step1',
+                                data: json,
+                                dataType: 'json',
+                                success: function (result) {
+                                    if (result.datas.error) {
+                                        layer.msg(result.datas.error);
+                                    } else {
+                                        if (typeof(app_interface) == 'object') {
+                                            app_interface.openWebView(WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum, 1);
+                                        } else {
+                                            window.location.href = WapSiteUrl + '/tmpl/order/vr_buy_step1.html?goods_id=' + goods_id + '&quantity=' + buynum;
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
+                        }
                     });
                 } else {
                     $(".buy-now").click(function () {
+                        key = getcookie('key');
                         app_check_login(key);
-                        var buynum = $('.buy-num').val();
+                        if(key) {
+                            var buynum = $('.buy-num').val();
 
-                        if (buynum < 1) {
-                            layer.msg('参数错误！');
-                            return;
-                        }
-                        //修复
-                        if (parseInt(buynum) > data.goods_info.goods_storage) {
-                            layer.msg('库存不足！');
-                            return;
-                        }
-
-                        var json = {};
-                        json.key = key;
-                        json.cart_id = goods_id + '|' + buynum;
-                        $.ajax({
-                            type: 'post',
-                            url: ApiUrl + '/index.php?act=member_buy&op=buy_step1',
-                            data: json,
-                            dataType: 'json',
-                            success: function (result) {
-                                if (result.datas.error) {
-                                    layer.msg(result.datas.error);
-                                } else {
-
-                                    if(typeof(app_interface) == 'object'){
-                                        app_interface.openWebView(WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum, 1);
-                                    }else{
-                                        location.href = WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum;
-                                    }
-                                    return false;
-
-                                }
+                            if (buynum < 1) {
+                                layer.msg('参数错误！');
+                                return;
                             }
-                        });
+                            //修复
+                            if (parseInt(buynum) > data.goods_info.goods_storage) {
+                                layer.msg('库存不足！');
+                                return;
+                            }
+
+                            var json = {};
+                            json.key = key;
+                            json.cart_id = goods_id + '|' + buynum;
+                            $.ajax({
+                                type: 'post',
+                                url: ApiUrl + '/index.php?act=member_buy&op=buy_step1',
+                                data: json,
+                                dataType: 'json',
+                                success: function (result) {
+                                    if (result.datas.error) {
+                                        layer.msg(result.datas.error);
+                                    } else {
+
+                                        if (typeof(app_interface) == 'object') {
+                                            app_interface.openWebView(WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum, 1);
+                                        } else {
+                                            location.href = WapSiteUrl + '/tmpl/order/buy_step1.html?goods_id=' + goods_id + '&buynum=' + buynum;
+                                        }
+                                        return false;
+
+                                    }
+                                }
+                            });
+                        }
 
                     });
                 }

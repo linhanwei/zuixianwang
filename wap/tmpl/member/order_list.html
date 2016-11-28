@@ -97,11 +97,11 @@
 				<div class="pay">
 					<div class="spacing-div"><span>在线支付方式</span></div>
 					<div class="pay-sel">
-						<label style="display:none">
+						<label>
 							<input type="radio" name="payment_code" class="checkbox" id="alipay" autocomplete="off" />
 							<span class="alipay">支付宝</span></label>
-						<label style="display:none">
-							<input type="radio" name="payment_code" class="checkbox" id="wxpay_jsapi" autocomplete="off" />
+						<label>
+							<input type="radio" name="payment_code" class="checkbox" id="wxpay" autocomplete="off" />
 							<span class="wxpay">微信</span></label>
 					</div>
 				</div>
@@ -128,7 +128,7 @@
 				<%if (orderlist[j].ownshop){%>
 				<a class="store"><i class="icon"></i><%=orderlist[j].store_name%></a>
 				<%}else{%>
-				<a href="<%=WapSiteUrl%>/tmpl/store.html?store_id=<%=orderlist[j].store_id%>" class="store"><i class="icon"></i><%=orderlist[j].store_name%><i class="arrow-r"></i></a>
+				<a href="javascript:void(0);" class="store"><i class="icon"></i><%=orderlist[j].store_name%><i class="arrow-r"></i></a>
 				<%}%>
 						<span class="state">
 							<%

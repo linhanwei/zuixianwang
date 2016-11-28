@@ -1,10 +1,5 @@
 $(function(){
-	var data = {
-		reg_url:SiteUrl+'/invite/',
-		login_url:WapSiteUrl+'/tmpl/member/login.html'
-	};
-	var forget_html = template.render('forget_html', data);
-	$('#content_main').html(forget_html);
+
 
 	var timeoutFlag; //定时器标志
 	var countTokenNum = 0; //记录验证码错误次数
@@ -18,11 +13,11 @@ $(function(){
 		var phone = $("#username").val();
 
 		if(phone == ''){
-			showMsg("请输入手机号码!");
+			alert("请输入手机号码!");
 			return false;
 		}
 		if( !(/^1(3|4|5|7|8)\d{9}$/.test(phone))){
-			showMsg("请输入正确手机号码!");
+			alert("请输入正确手机号码!");
 			return false;
 		}
 
@@ -41,7 +36,7 @@ $(function(){
 				if(!result.datas.error){
 					$('#cache_key').val(result.datas.cache_key);
 				}else{
-					showMsg(result.datas.error);
+					alert(result.datas.error);
 				}
 			}
 		});
@@ -54,21 +49,21 @@ $(function(){
 		var cache_key = $('#cache_key').val();
 
 		if(phone == ''){
-			showMsg("请输入手机号码!");
+			alert("请输入手机号码!");
 			return false;
 		}
 		if( !(/^1(3|4|5|7|8)\d{9}$/.test(phone))){
-			showMsg("请输入正确手机号码!");
+			alert("请输入正确手机号码!");
 			return false;
 		}
 
 		if(code == ''){
-			showMsg("请输入手机验证码!");
+			alert("请输入手机验证码!");
 			return false;
 		}
 
 		if(getPassSucc){
-			showMsg("新密码已发送短信到您的手机上,请注意查收!!");
+			alert("新密码已发送短信到您的手机上,请注意查收!!");
 			return false;
 		}
 
@@ -81,9 +76,10 @@ $(function(){
 
 				if(!result.datas.error){
 					getPassSucc = true;
-					showMsg("新密码为:"+result.datas.new_password+",新密码已发送短信到您的手机上,请注意查收!");
+					alert("新密码已发送短信到您的手机上,请注意查收!");
+                    app_interface.closeWebView(2);
 				}else{
-					showMsg(result.datas.error);
+					alert(result.datas.error);
 				}
 			}
 		});
@@ -93,15 +89,6 @@ $(function(){
 		$(".msgbox").hide().remove();
 		$(".greybg").hide().remove();
 	});
-	//提示信息
-	function showMsg(msg){
-		var html ="<div class='greybg'><div class='msgbox' id='msgbox'>"+msg+"</div></div>";
-		$('body').append(html);
-		/*setTimeout(function(){
-			$(".msgbox").hide().remove();
-			$(".greybg").hide().remove();
-		},3000)*/
-	}
 
 	//倒计时60秒
 	function sendCountDown() {

@@ -32,7 +32,8 @@ $(function(){
 		if(sort_key == 6){
 		  $(".siftings-box").addClass("action");
 		}else{
-			var data = {gc_id:gc_id,sort_key:sort_key,order:order,keyword:keyword,is_ajax:1};
+			window.curpage = 1;
+			var data = {gc_id:gc_id,sort_key:sort_key,order:order,keyword:keyword,curpage:window.curpage,is_ajax:1};
 			ajax_data(data,true);
 
 		}
@@ -52,20 +53,20 @@ $(function(){
 	window.page_hasmore = false;
 	window.curpage = 1;
 	$(window).scroll(function () {
-		var __current = $('.product-filter .current'),
-			key = parseInt(__current.attr('key')),
+		var __current = $('.condition-box .action'),
+			sort_key = parseInt(__current.attr('sort_key')),
 			gc_id = GetQueryString('gc_id'),
 			keyword = GetQueryString('keyword'),
 			order = 0;
 
 		//价格按高低排序
-		if(key == 3 && __current.find('.fleft').hasClass("asc")){
+		if(sort_key == 3 && __current.find('.fleft').hasClass("asc")){
 			order = 1;
 		}
 		
 
 		var bot = 50,//bot是底部距离的高度
-			data = {gc_id:gc_id,key:key,order:order,keyword:keyword,curpage:window.curpage,is_ajax:1};
+			data = {gc_id:gc_id,sort_key:sort_key,order:order,keyword:keyword,curpage:window.curpage,is_ajax:1};
 		if ((bot + $(window).scrollTop()) >= ($(document).height() - $(window).height())) {
 			//正在请求当中或者没有更多数据的时候就不再请求数据
 			if(window.page_scrolling | window.page_hasmore | page_count == 1) return;
@@ -76,10 +77,10 @@ $(function(){
 });
 
 function ajax_data(data,is_add,is_first){
-	data.gc_id = data.gc_id ? data.gc_id : GetQueryString('gc_id');
-	data.keyword = data.keyword ? data.keyword : GetQueryString('keyword');
-	data.bug = GetQueryString('bug');
-	data.price = data.price ? data.price : GetQueryString('price');
+	data.gc_id = data.gc_id ? data.gc_id : (GetQueryString('gc_id') ? GetQueryString('gc_id') : '');
+	data.keyword = data.keyword ? data.keyword : (GetQueryString('keyword') ? GetQueryString('keyword') :  '');
+	data.bug = GetQueryString('bug') ? GetQueryString('bug') : '';
+	data.price = data.price ? data.price : (GetQueryString('price') ? GetQueryString('price') : '');
 
 	//加载进度
 	//var layer_index = layer.load(0, {shade:false});
@@ -120,7 +121,6 @@ function ajax_data(data,is_add,is_first){
 			if((data.goods_list.length == 0 && is_add) || (data.goods_list.length == 0 && exit_goods_count == 0)){
 				$('#good-list-show-box').html('<div style="height: 100px;width: 100%;line-height: 100px;text-align: center;font-size: 0.16rem;">暂时没有相关商品</div>');
 			}
-			$("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
 			layer.close(layer_index);
 			window.page_scrolling = false;
 			window.page_hasmore = !result.hasmore;

@@ -1,7 +1,7 @@
 $(function(){
 	var key = getcookie('key');
 	if(key==''){
-		location.href = 'login.html';
+		app_check_login(key);
 	}
 	//初始化页面
 	function initPage(){
@@ -18,6 +18,7 @@ $(function(){
 				$("#favorites_list").html(html);
 				//删除收藏
 				$('.i-del').click(delFavorites);
+                bind_openwebview();
 			}
 		});
 	}
@@ -39,5 +40,5 @@ $(function(){
 		});
 		return false;
 	}
-    bind_openwebview();
+
 });

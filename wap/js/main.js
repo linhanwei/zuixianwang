@@ -55,5 +55,12 @@ $(document).ready(function () {
 		$(".fixedloadingbg").remove();
 		$("#loadingcss3").remove();
 	}	
+	
+	function massageShow(msg){
+	   var html = "<div class='massage-box-tips' id='massage-box-tips'>"+msg+"</div>";
+	   alert(html);
+	   //$("body").append(html);	
+	   //$("#massage-box-tips").fadeIn(600).delay(2000).remove();
+	}
 
 })

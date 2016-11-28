@@ -489,15 +489,16 @@ img,span,small,label{ vertical-align:middle}
   line-height: 100px;
 }
 
-input::-webkit-input-placeholder { /* WebKit browsers */
-  color: #999;
-}
-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: #999;
-}
-input::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: #999;
-}
-input:-ms-input-placeholder { /* Internet Explorer 10+ */
-  color: #999;
+#loading {
+  background: url("../images/ico/loading.gif") no-repeat;
+  height: 80px;
+  width: 50%;
+  background-size: 20%;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  margin: -15% 0 0 -25%;
+  z-index: 10000;
 }

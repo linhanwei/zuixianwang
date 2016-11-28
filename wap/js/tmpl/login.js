@@ -65,11 +65,10 @@ $(function(){
                             }else{
                                 setCache('user_password','');
                             }
-
-                            if(typeof(app_interface) == 'undefined'){
-                                location.href = referurl;
+                            if(typeof(app_interface) == 'object'){
+                                app_interface.closeWebView(8,getQueryString('func') + '();');
                             }else{
-                                app_interface.closeWebView(8);return;
+                                location.href = referurl;
                             }
 						}
 						$(".error-tips").hide();

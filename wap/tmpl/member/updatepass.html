@@ -30,7 +30,7 @@
    <div class="btn-box"><button class="btn" id="subBtn">保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存</button></div>
  </section>
 </body>
-<script type="text/javascript" src="../../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
 <script type="text/javascript" src="../../js/config.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../js/app.js"></script>
@@ -41,31 +41,28 @@
 <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
 <script type="text/javascript">
     $(function(){
-//        bind_openwebview();
-        $('body').on('click','#subBtn',function(){
+        bind_openwebview();
+
+        $('#subBtn').click(function(){
             var key = getcookie('key');
             var old_pass = $('#old-pass').val();
             var new_pass = $('#new-pass').val();
             var confirm_pass = $('#confirm-pass').val();
-
+          
             if(old_pass == ''){
-                layer.alert('原密码不能为空!');
-                $('.layui-layer').css('left',document.body.clientWidth/5);
+                app_toast('原密码不能为空!');
                 return false;
             }
             if(new_pass == ''){
-                layer.alert('新密码不能为空!');
-                $('.layui-layer').css('left',document.body.clientWidth/5);
+                app_toast('新密码不能为空!');
                 return false;
             }
             if(new_pass != confirm_pass){
-                layer.alert('新密码与确认密码不一致!');
-                $('.layui-layer').css('left',document.body.clientWidth/5);
+                app_toast('新密码与确认密码不一致!');
                 return false;
             }
             if(new_pass.length < 6){
-                layer.alert('新密码长度不能少于6位!');
-                $('.layui-layer').css('left',document.body.clientWidth/5);
+                app_toast('新密码长度不能少于6位!');
                 return false;
             }
 
@@ -83,21 +80,13 @@
                     var data = result.datas;
 
                     if(data.status == 1){
-                        layer.confirm(data.msg, {
-                            title: '提示信息',
-                            btn: ['确定'] //按钮
-                        }, function () {
+                        app_confirm(data.msg,'', '确定',function () {
                             delCache('key');
                             window.location.href = WapSiteUrl + '/tmpl/member/login.html';
-                        }, function () {
-
                         });
-
                     }else{
-                        layer.alert(data.msg);
+                        app_toast(data.msg);
                     }
-
-                    $('.layui-layer').css('left',document.body.clientWidth/5);
 
                 }
             });

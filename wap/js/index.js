@@ -1,9 +1,8 @@
 function completed(){
     bind_openwebview();
     $("img.lazy").lazyload({effect: "fadeIn",threshold:200});
-    //轮播图
     var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination', //是否显示小圆点
+        //pagination: '.swiper-pagination',
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         paginationClickable: true,
@@ -58,6 +57,7 @@ $(document).ready(function () {
 
     if(index_content){
         $("#main-container").html(index_content);
+        index_content = null;
         completed();
     }
 
@@ -124,9 +124,14 @@ $(document).ready(function () {
 
                             break;
                         case 'home10':
-                            $.each(vv.item, function (ak, av) {
-                                vv.item[ak].url = buildUrl(av.type, av.data);
-                            });
+                            vv.rectangle1_url = buildUrl(vv.rectangle1_type, vv.rectangle1_data);
+                            vv.rectangle2_url = buildUrl(vv.rectangle2_type, vv.rectangle2_data);
+                            vv.rectangle3_url = buildUrl(vv.rectangle3_type, vv.rectangle3_data);
+                            vv.rectangle4_url = buildUrl(vv.rectangle4_type, vv.rectangle4_data);
+                            vv.rectangle5_url = buildUrl(vv.rectangle5_type, vv.rectangle5_data);
+                            vv.rectangle6_url = buildUrl(vv.rectangle6_type, vv.rectangle6_data);
+                            vv.rectangle7_url = buildUrl(vv.rectangle7_type, vv.rectangle7_data);
+                            vv.rectangle8_url = buildUrl(vv.rectangle8_type, vv.rectangle8_data);
                             break;
                         case 'home11':
                             $.each(vv.item, function (k11, v11) {
@@ -146,7 +151,6 @@ $(document).ready(function () {
                 });
             });
             if(index_content != html){
-
                 setCache(index_cache_key, html);
                 $("#main-container").html(html);
                 completed();

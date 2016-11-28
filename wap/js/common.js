@@ -1,3 +1,28 @@
+
+//搜索
+$('.search-btn').click(function(){
+    var cache_key = 'search_key_list';
+    var search_list = getCache(cache_key);
+    var keyword_val = $('#keyword').val();
+    var keyword = encodeURIComponent(keyword_val);
+    search_list = search_list ? search_list : [];
+
+    if(search_list.length > 0){
+        for (var f1 in search_list) {
+            if (search_list[f1].indexOf(keyword_val) == -1) {
+                search_list.push(keyword_val);
+                setCache(cache_key,search_list);
+            }
+        }
+    }else{
+        search_list.push(keyword_val);
+        setCache(cache_key,search_list);
+    }
+    var target = $(this).attr('target');
+    location.href = WapSiteUrl+'/tmpl/' + target + '.html?keyword='+keyword;
+});
+
+
 //设置本地缓存
 function setCache(k,v){
     if(window.localStorage) {
@@ -15,9 +40,12 @@ function setCache(k,v){
 function getCache(k){
     if(window.localStorage) {
         var localStorageVal = localStorage.getItem(k);
-        if(localStorageVal){
-            return JSON.parse(localStorageVal);
+        localStorageVal = JSON.parse(localStorageVal);
+
+        if(localStorageVal == undefined || localStorageVal == null){
+            localStorageVal = '';
         }
+        return localStorageVal;
     }
 }
 
@@ -55,7 +83,6 @@ function add_key(){
             }
 
             $(v).attr('href',new_href);
-            //console.log(key,key_index,k,a_href,111);
         }
     });
 }
@@ -63,20 +90,15 @@ function add_key(){
 function GetQueryString(name){
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
-    if (r!=null) return decodeURI(r[2]); return null;
+    if (r!=null) return decodeURI(r[2]); return '';
+}
+function getQueryString(name) {
+    return  GetQueryString(name);
 }
 
 function addcookie(name,value,expireHours){
     setCache(name,value);
     return false;
-   /* var cookieString=name+"="+escape(value)+"; path=/";
-    //判断是否设置过期时间
-    if(expireHours>0){
-        var date=new Date();
-        date.setTime(date.getTime+expireHours*3600*1000);
-        cookieString=cookieString+"; expire="+date.toGMTString();
-    }
-    document.cookie=cookieString;*/
 }
 
 function getcookie(name){
@@ -85,23 +107,10 @@ function getcookie(name){
         loginKey = '';
     }
     return loginKey;
-    /*
-    var strcookie=document.cookie;
-    var arrcookie=strcookie.split("; ");
-    for(var i=0;i<arrcookie.length;i++){
-        var arr=arrcookie[i].split("=");
-        if(arr[0]==name)return arr[1];
-    }
-    return "";*/
 }
 
 function delCookie(name){//删除cookie
     return delCache(name);
-/*
-    var exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    var cval=getcookie(name);
-    if(cval!=null) document.cookie= name + "="+cval+"; path=/;expires="+exp.toGMTString();*/
 }
 
 function checklogin(state){
@@ -141,52 +150,35 @@ function buildUrl(type, data) {
     return 'javascript:void(0);';
     return WapSiteUrl;
 }
-
-
 /**
- * 声明获取图片的方法
- * @param {Object} picUrl 图片的网络地址
- * @param {Object} defaultPic 默认图片
- * @param {Object} element 图片源元素
+ * 动态加载css文件
+ * @param css_filename css文件路径
  */
-function fetchImage(picUrl, defaultPic, element) {
-    if(typeof(plus)=='undefined'){
-        element.setAttribute("src", picUrl);
-    }else{
-        //将图片网络地址进行md5摘要。
-        var filename = hex_md5(picUrl);
-        element.setAttribute("src", defaultPic);
-        //尝试加载本地图片
-        plus.io.resolveLocalFileSystemURL("_downloads/" + filename, function(entry) {
-            // 加载本地图片成功
-            entry.file( function(file){
-                if(file.size==0){
-                    //console.log("2.1图片为空显示默认");
-                    element.setAttribute("src", defaultPic);
-                }else{
-                    var path = plus.io.convertLocalFileSystemURL("_downloads/" + filename);
-                    //console.log("2.1加载本地图片"+path);
-                    element.setAttribute("src", path);
-                }
-            });
-        }, function(e) {
-            //加载本地图片失败，本地没有该图片，尝试从网络下载图片并保存本地，保存文件名为url摘要md5值
-            var dtask = plus.downloader.createDownload(picUrl, {filename:filename}, function(d, status) {
-                // 下载完成
-                if (status == 200) {
-                    if(d.downloadedSize==0){
-                        //console.log("2.2图片为空显示默认");
-                        element.setAttribute("src", defaultPic);
-                    }else{
-                        //console.log("2.2下载网络文件成功"+d.url);
-                        element.setAttribute("src", d.url);
-                    }
-                }
-            });
-            dtask.start();
-        });
+function loadCss(css_filename) {
+    var link = document.createElement('link');
+    link.setAttribute('type', 'text/css');
+    link.setAttribute('href', css_filename);
+    link.setAttribute('href', css_filename);
+    link.setAttribute('rel', 'stylesheet');
+    css_id = document.getElementById('auto_css_id');
+    if (css_id) {
+        document.getElementsByTagName('head')[0].removeChild(css_id);
     }
-
-
+    document.getElementsByTagName('head')[0].appendChild(link);
+}
+/**
+ * 动态加载js文件
+ * @param script_filename js文件路径
+ */
+function loadJs(script_filename) {
+    var script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', script_filename);
+    script.setAttribute('id', 'auto_script_id');
+    script_id = document.getElementById('auto_script_id');
+    if (script_id) {
+        document.getElementsByTagName('head')[0].removeChild(script_id);
+    }
+    document.getElementsByTagName('head')[0].appendChild(script);
 }
 

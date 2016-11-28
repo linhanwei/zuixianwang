@@ -48,7 +48,7 @@ $(function(){
 
 function ajax_data(data,is_add){
     //加载进度
-    var layer_index = layer.load(0, {shade:false});
+    var layer_index = layer.load(2, {shade:false});
 
     $.ajax({
         url: SiteUrl + "/mall_m/index.php?act=goods_class&op=ajax_data",

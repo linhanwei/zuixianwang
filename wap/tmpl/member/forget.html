@@ -3,8 +3,6 @@
 <head>
 <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
-<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
-<meta content="no-cache" http-equiv="pragma">
 <meta content="0" http-equiv="expires">
 <meta content="telephone=no, address=no" name="format-detection">
 <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
@@ -22,47 +20,35 @@
         <img src="../../images/setup/arrow-left.png">
     </a>
 </header>
-<div id="content_main"></div>
-<script type="text/html" id="forget_html">
+<div id="content_main">
     <div class="login-logo"><img src="../../images/login/logo.jpg"></div>
     <div class="login-form login-box">
         <form action="" method ="">
             <div class="input-group username">
-              <i></i>  <input type="text" placeholder="请填写注册时的手机号码" class="input-40" name="username" id="username" maxlength="11" autocomplete="off"/>
+                <i></i>  <input type="text" placeholder="请填写注册时的手机号码" class="input-40" name="username" id="username" maxlength="11" autocomplete="off"/>
             </div>
             <div class="input-group getCodegroup">
-              <div class="cl-5"><input type="text" placeholder="手机验证码" maxlength="6" name="code" id="code" autocomplete="off"></div>
-              <div class="cl-5"><a id="getCode" class="getCode">获取手机验证码</a></div>
+                <div class="cl-5"><input type="text" placeholder="手机验证码" maxlength="6" name="code" id="code" autocomplete="off"></div>
+                <div class="cl-5"><a id="getCode" class="getCode">获取手机验证码</a></div>
             </div>
-            
+
             <div class="input-group getPassword">
-              <a class="getPasswordBtn">取回密码</a>
+                <a class="getPasswordBtn">取回密码</a>
             </div>
             <input type="hidden" name="cache_key" id="cache_key" value="">
-         
+
 
             <div class="error-tips mt10"></div>
-            <div class="login-btn-box">
-            <a href="<%=login_url%>" class="login-btn" id="loginbtn">
-                登录
-            </a>
-            <a href="<%=reg_url%>" class="register-btn" id="registerbtn">
-                注册
-            </a>
-            </div>
         </form>
     </div>
-    </script>
-    <footer class="footer footer-nav" style="display: none;"></footer>
+</div>
     <input type="hidden" name="referurl">
     <script type="text/javascript" src="../../js/zepto.min.js"></script>
     <script type="text/javascript" src="../../js/config.js"></script>
     <script type="text/javascript" src="../../js/template.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="../../js/app.js"></script>
-    <script type="text/javascript" src="../../js/tmpl/common-top.js"></script>
     <script type="text/javascript" src="../../js/simple-plugin.js"></script>
     <script type="text/javascript" src="../../js/tmpl/forget.js"></script>
-    <script type="text/javascript" src="../../js/tmpl/footer.js"></script>
 </body>
 </html>
