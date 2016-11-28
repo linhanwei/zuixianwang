@@ -120,14 +120,13 @@ class mb_specialModel extends Model{
      *
      */
     public function getMbSpecialItemUsableListByID($special_id) {
-        $prefix = 'mb_special';
+        $cache_key = 'mb_special_'.$special_id;
 
-//        $item_list = rcache($special_id, $prefix);
+        $item_list = rkcache($cache_key);
         //缓存有效
         if(!empty($item_list)) {
-            return unserialize($item_list['special']);
+            return $item_list;
         }
-
         //缓存无效查库并缓存
         $condition = array();
         $condition['special_id'] = $special_id;
@@ -145,8 +144,8 @@ class mb_specialModel extends Model{
 
             $item_list = $new_item_list;
         }
-        $cache = array('special' => serialize($item_list));
-        wcache($special_id, $cache, $prefix);
+
+        wkcache($cache_key,$item_list);
         return $item_list;
     }
 
@@ -506,7 +505,8 @@ class mb_specialModel extends Model{
      */
     private function _delMbSpecialCache($special_id) {
         //清理缓存
-        dcache($special_id, 'mb_special');
+        $cache_key = 'mb_special_'.$special_id;
+        dkcache($cache_key);
 
         //删除静态文件
         $html_path = $this->getMbSpecialHtmlPath($special_id);

@@ -29,8 +29,6 @@ class mobileControl
         if($key){
             $_SESSION['login_key'] = $key;
         }
-        if($_GET['bug'])
-        dump($_SESSION['login_key']);
 
         Language::read('mobile');
 
