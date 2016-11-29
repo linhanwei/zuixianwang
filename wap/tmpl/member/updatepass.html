@@ -66,10 +66,7 @@
                 return false;
             }
 
-            if (key == '') {
-                window.location.href = WapSiteUrl + '/tmpl/member/login.html';
-                return false;
-            }
+            app_check_login(key);
 
             $.ajax({
                 url: SiteUrl + "/m/index.php?act=member_info&op=edit_password",
@@ -82,8 +79,8 @@
                     if(data.status == 1){
                         app_confirm(data.msg,'', '确定',function () {
                             delCache('key');
-                            window.location.href = WapSiteUrl + '/tmpl/member/login.html';
-                        });
+                            app_check_login('');
+                        },'取消');
                     }else{
                         app_toast(data.msg);
                     }

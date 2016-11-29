@@ -75,13 +75,12 @@
      var data = {updatepass_url:WapSiteUrl+'/tmpl/member/updatepass.html'};
      var setup_html = template.render('setup_html', data);
      $('#content_main').html(setup_html);
+
      bind_openwebview();
      var  cache_key = 'member_info';
      var member_info = getCache(cache_key);
      var key = getcookie('key');
-     if(key==''){
-         location.href = 'login.html';
-     }
+     app_check_login(key);
 
     if(member_info){
         $('#avatar_img_url').attr('src',member_info.avator);
@@ -130,12 +129,14 @@
                      delCookie('username');
                      delCookie('key');
                      delCache(cache_key);
-                     location.href = WapSiteUrl+'/tmpl/member/login.html';
+
+                     app_check_login('');
                  }
              }
          });
      });
 
+     //设置头像
      $("#avatar").click(function(){
          if(typeof(app_interface) == 'object'){
              app_interface.changeAvatar(getcookie('key'));
@@ -149,7 +150,14 @@
                $("#avatar-uploads-box").addClass("action");
                $("#avatar-uploads-box").removeClass("remove-action");
           }
-      })
+      });
+     //设置生日
+     $(".birthday").click(function(){
+         if(typeof(app_interface) == 'object'){
+             app_interface.pickTime();
+             return false;
+         }
+     });
   
   $("#avatar-hide").click(function(){
 	  if($("#avatar-uploads-box").hasClass("action")){
@@ -198,7 +206,7 @@
           });
       }
   });
-
+     //保存资料
   $("#edit_submit").click(function(){
 
         var nickname = $('.setup-item .nickname-value').text();
@@ -212,9 +220,7 @@
             birthday = '';
         }
 
-        if(key==''){
-          location.href = WapSiteUrl + '/tmpl/member/login.html';
-        }
+        app_check_login(key);
 
         $.ajax({
           type:'post',
@@ -252,9 +258,8 @@
             $('#btnCrop').click(function () {
                 var img = cropper.getDataURL();
                 var key = getcookie('key');
-                if(key==''){
-                    location.href = 'login.html';
-                }
+
+                app_check_login(key);
 
                 $.ajax({
                     type:'post',
@@ -293,6 +298,16 @@
        $('#avatar_img_url').attr('src',img_url);
        return true;
    }
+
+    //设置会员生日
+     function set_birthday(birth){
+         if(!birth){
+             return false;
+         }
+         $('.birthday-value').text(birth);
+         return true;
+     }
+
 </script>
 </body>
 </html>
