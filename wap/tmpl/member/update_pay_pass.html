@@ -9,7 +9,7 @@
 <meta content="telephone=no, address=no" name="format-detection">
 <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<title>修改登录密码</title>
+<title>修改支付密码</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link rel="stylesheet" type="text/css" href="../../plug-ins/swiper/swiper-3.4.0.min.css" media="all" />
@@ -20,7 +20,7 @@
 
 <body class="set-news-pass-body">
  <header class="head">
-   <a href="javascript:history.go(-1);" class="arrow-left"><img src="../../images/setup/arrow-left.png"></a> <span>修改登录密码</span>
+   <a href="javascript:history.go(-1);" class="arrow-left"><img src="../../images/setup/arrow-left.png"></a> <span>修改支付密码</span>
  </header>
  <section class="main  set-news-pass">
    <div class="input-group"><input type="password" name="old-pass" id="old-pass" placeholder="请输入原密码"></div>
@@ -44,7 +44,8 @@
             var old_pass = $('#old-pass').val();
             var new_pass = $('#new-pass').val();
             var confirm_pass = $('#confirm-pass').val();
-          
+            app_check_login(key);
+
             if(old_pass == ''){
                 app_toast('原密码不能为空!');
                 return false;
@@ -62,12 +63,10 @@
                 return false;
             }
 
-            app_check_login(key);
-
             $.ajax({
                 url: SiteUrl + "/m/index.php?act=member_info&op=edit_password",
                 type: 'post',
-                data: {key:key,password_type: 'mp',old_password:old_pass,new_password:new_pass,confirm_password:confirm_pass},
+                data: {key:key,password_type: 'pp',old_password:old_pass,new_password:new_pass,confirm_password:confirm_pass},
                 dataType: 'json',
                 success: function (result) {
                     var data = result.datas;
@@ -75,7 +74,7 @@
                         data.msg = data.error;
                     }
                     if(data.status == 1){
-                        app_confirm(data.msg,'', '确定','logout()','取消');
+                        app_toast(data.msg);
                     }else{
                         app_toast(data.msg);
                     }
