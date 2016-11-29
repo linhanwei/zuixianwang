@@ -83,8 +83,7 @@ function ajax_data(data,is_add,is_first){
 	data.price = data.price ? data.price : (GetQueryString('price') ? GetQueryString('price') : '');
 
 	//加载进度
-	//var layer_index = layer.load(0, {shade:false});
-	var layer_index = layer.load(2);
+	loading();
 
 	if(is_first == 1) {
 		$('#good-list-show-box').html(getCache('goods_list'));
@@ -121,7 +120,7 @@ function ajax_data(data,is_add,is_first){
 			if((data.goods_list.length == 0 && is_add) || (data.goods_list.length == 0 && exit_goods_count == 0)){
 				$('#good-list-show-box').html('<div style="height: 100px;width: 100%;line-height: 100px;text-align: center;font-size: 0.16rem;">暂时没有相关商品</div>');
 			}
-			layer.close(layer_index);
+			loading(1);
 			window.page_scrolling = false;
 			window.page_hasmore = !result.hasmore;
 			window.curpage++;

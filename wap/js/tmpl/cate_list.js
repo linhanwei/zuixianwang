@@ -48,7 +48,7 @@ $(function(){
 
 function ajax_data(data,is_add){
     //加载进度
-    var layer_index = layer.load(2, {shade:false});
+    loading();
 
     $.ajax({
         url: SiteUrl + "/mall_m/index.php?act=goods_class&op=ajax_data",
@@ -78,7 +78,7 @@ function ajax_data(data,is_add){
                 $('#cate-second').html('<div style="height: 100px;width: 100%;line-height: 100px;text-align: center;font-size: 0.16rem;">暂时没有相关分类</div>');
             }
             $("img.lazy").lazyload({effect: "fadeIn",threshold:"400"});
-            layer.close(layer_index);
+            loading(1);
             bind_openwebview();
         }
     });
