@@ -55,11 +55,12 @@ function app_check_login(key){
     }
 }
 window.app_alert = function(s,t){
+    console.log(t,1111222);
     if(is_app()){
-        if(t == ''){
+        if(t == '' || t == undefined){
             t = '醉仙网';
         }
-        app_interface.showAlert(t,s);
+        app_interface.showAlert(t,s,'确定');
     }else{
         alert(s);
     }
@@ -75,7 +76,7 @@ window.app_toast = function(s){
 
 window.app_confirm = function(s,t,confirm_word,confirm_callback,cancel_word,cancel__callback){
     if(is_app()){
-        if(t == ''){
+        if(t == '' || t == undefined){
             t = '醉仙网';
         }
         app_interface.showAlert(t,s,confirm_word,confirm_callback,cancel_word,cancel__callback);
