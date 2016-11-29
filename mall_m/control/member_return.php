@@ -184,6 +184,7 @@ class member_returnControl extends mobileMemberControl {
      *
      */
     public function get_return_infoOp(){
+
         $model_refund = Model('refund_return');
         $member_id = $this->member_info['member_id'];
         $condition = array();
@@ -240,8 +241,8 @@ class member_returnControl extends mobileMemberControl {
                     }
                 }
             }
-            
-            $detail_info = $model_refund->getDetailInfo(array('refund_id'=> $refund_info['refund_id']));
+
+           /* $detail_info = $model_refund->getDetailInfo(array('refund_id'=> $refund_info['refund_id']));
             $detail_array = array();
             if(!empty($detail_info) && $detail_info['refund_state'] == 2) {
                 $detail_array['refund_code'] = orderPaymentName($detail_info['refund_code']);
@@ -249,7 +250,8 @@ class member_returnControl extends mobileMemberControl {
                 $detail_array['pd_amount'] = ncPriceFormat($detail_info['pd_amount']);
                 $detail_array['rcb_amount'] = ncPriceFormat($detail_info['rcb_amount']);
             }
-            output_data(array('return_info' => $refund,'pic_list' => $pic_list,'detail_array' => $detail_array));
+            output_data(array('return_info' => $refund,'pic_list' => $pic_list,'detail_array' => $detail_array));*/
+            output_data(array('return_info' => $refund,'pic_list' => $pic_list));
         } else {
             output_error('参数错误');
         }
