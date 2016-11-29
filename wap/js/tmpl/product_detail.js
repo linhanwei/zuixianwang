@@ -2,11 +2,6 @@ var key = getcookie('key');//登录标记
 var goods_id = GetQueryString("goods_id");
 $(function () {
 
-    //优惠卷
-    $(".mb_coupon").click(function () {
-        app_toast('敬请期待');
-    });
-
     var unixTimeToDateString = function (ts, ex) {
         ts = parseFloat(ts) || 0;
         if (ts < 1) {
@@ -121,6 +116,11 @@ $(function () {
                         $("#product_detail_wp").html(html);
                     }
                 }
+
+                //优惠卷
+                $(".mb_coupon").click(function () {
+                    app_toast('敬请期待');
+                });
 
                 // @add 手机端详情
                 if (data.goods_info.mobile_body) {

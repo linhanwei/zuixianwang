@@ -116,28 +116,29 @@ function cartAdd(id) {
 
 //删除购物车的商品
 function cartItemDel(cart_id) {
-    app_confirm('您确定要删除该商品吗?','', '',function () {
-        loading();
-        var key = getcookie('key');
-        $.ajax({
-            url: ApiUrl + "/index.php?act=member_cart&op=cart_del",
-            type: "post",
-            data: {key: key, cart_id: cart_id},
-            dataType: "json",
-            success: function (res) {
-                if (checklogin(res.login)) {
-                    if (!res.datas.error && res.datas == "1") {
-                        $("#pro-item-" + cart_id).remove();
-                        countTotal();
-                        loading(1);
-                    } else {
-                        app_alert(res.datas.error);
-                    }
-                }
-            }
-        });
-    });
+    app_confirm('您确定要删除该商品吗?','', '确定','del_item('+cart_id+')','取消');
 
+}
+
+function  del_item(cart_id){
+    loading();
+    var key = getcookie('key');
+    app_check_login(key);
+    $.ajax({
+        url: ApiUrl + "/index.php?act=member_cart&op=cart_del",
+        type: "post",
+        data: {key: key, cart_id: cart_id},
+        dataType: "json",
+        success: function (res) {
+            if (!res.datas.error && res.datas == "1") {
+                $("#pro-item-" + cart_id).remove();
+                countTotal();
+                loading(1);
+            } else {
+                app_alert(res.datas.error);
+            }
+        }
+    });
 }
 
 function cartSelectItem(id) {

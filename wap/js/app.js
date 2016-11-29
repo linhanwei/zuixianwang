@@ -81,13 +81,9 @@ window.app_confirm = function(s,t,confirm_word,confirm_callback,cancel_word,canc
         app_interface.showAlert(t,s,confirm_word,confirm_callback,cancel_word,cancel__callback);
     }else{
         if(confirm(s)){
-            if (typeof confirm_callback === "function"){
-                confirm_callback();
-            }
+            eval(confirm_callback);
         }else{
-            if (typeof cancel__callback === "function"){
-                cancel__callback();
-            }
+            eval(cancel__callback);
         }
     }
 }
