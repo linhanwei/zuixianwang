@@ -1,4 +1,4 @@
-var key = getCookie("key");
+var key = getcookie("key");
 var password, rcb_pay, pd_pay, payment_code,pay_amount;
 function toPay(a, e, p) {
     $.ajax({

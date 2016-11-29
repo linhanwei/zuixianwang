@@ -4,7 +4,7 @@ var hasMore = true;
 var reset = true;
 var orderKey = "";
 $(function() {
-    var e = getCookie("key");
+    var e = getcookie("key");
     if (!e) {
         window.location.href = WapSiteUrl + "/tmpl/member/login.html"
     }
@@ -46,14 +46,14 @@ $(function() {
             },
             dataType: "json",
             success: function(e) {
-                checkLogin(e.login);
+                checklogin(e.login);
                 curpage++;
                 hasMore = e.hasmore;
 
                 var t = e;
                 t.WapSiteUrl = WapSiteUrl;
                 t.ApiUrl = ApiUrl;
-                t.key = getCookie("key");
+                t.key = getcookie("key");
                 template.helper("$getLocalTime",
                 function(e) {
                     var t = new Date(parseInt(e) * 1e3);
