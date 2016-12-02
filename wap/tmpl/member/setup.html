@@ -24,7 +24,8 @@
    <a class="setup-item sex"><span>性别</span> <div class="sex-set-box"><i class="action man" data-value="1"></i><i class="woman" data-value="2"></i></div></div>
    <a class="setup-item birthday"><span>生日</span> <span class="birthday-value"></span> <i class="arrow-right"></i></a>
    <a href="<%=updatepass_url%>" class="setup-item updatepass" style="border-bottom:0;"><span>修改登录密码</span> <i class="arrow-right"></i></a>
-   <a href="<%=updatepass_pay_url%>" class="setup-item updatepass"><span>修改支付密码</span> <i class="arrow-right"></i></a>
+   <a href="<%=updatepass_pay_url%>" class="setup-item updatepass" style="border-bottom:0;"><span>修改支付密码</span> <i class="arrow-right"></i></a>
+   <a href="<%=forgetpass_pay_url%>" class="setup-item updatepass"><span>忘记支付密码</span> <i class="arrow-right"></i></a>
    <a class="setup-item login-out" id="logoutbtn"><span>退出</span></a>
    <input type="hidden" id="avatar_img" name="avatar_img" value="">
  </section>
@@ -75,7 +76,8 @@
  <script>
      var data = {
             updatepass_url:WapSiteUrl+'/tmpl/member/updatepass.html',
-            updatepass_pay_url:WapSiteUrl+'/tmpl/member/update_pay_pass.html'
+            updatepass_pay_url:WapSiteUrl+'/tmpl/member/update_pay_pass.html',
+            forgetpass_pay_url:WapSiteUrl+'/tmpl/member/forget_pay.html'
         };
      var setup_html = template.render('setup_html', data);
      $('#content_main').html(setup_html);

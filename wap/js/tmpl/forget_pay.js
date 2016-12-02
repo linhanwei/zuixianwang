@@ -69,7 +69,7 @@ $(function(){
 
 		$.ajax({
 			type:'post',
-			url:SiteUrl+"/m/index.php?act=login&op=getpasswd",
+			url:SiteUrl+"/m/index.php?act=login&op=getpaywd",
 			data:{mobile_phone:phone,client:'wap',identifying_code:code,cache_key:cache_key},
 			dataType:'json',
 			success:function(result){
