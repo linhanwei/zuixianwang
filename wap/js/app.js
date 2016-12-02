@@ -25,7 +25,7 @@ function bind_openwebview(){
                             app_interface.openWebView(WapSiteUrl + '/' + $this.attr('href'), 1); return false;
                         }
                     } else if ($this.attr('href') == 'javascript:history.go(-1);') {
-                        app_interface.closeWebView(2); return false;
+                        app_interface.closeWebView(0); return false;
                     }
                 });
             }
@@ -41,14 +41,14 @@ function is_app(){
 }
 function bind_login(func){
     $('#open_login').click(function(){
-        app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html?func='+func,8);
+        app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html?func='+func,1);
     });
 }
 
 function app_check_login(key){
     if(key == ''){
         if(is_app()){
-            app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',8);return;
+            app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',1);return false;
         }else{
             window.location.href = WapSiteUrl + '/tmpl/member/login.html';
         }
@@ -60,7 +60,7 @@ window.app_alert = function(s,t){
         if(t == '' || t == undefined){
             t = '醉仙网';
         }
-        app_interface.showAlert(t,s,'确定');
+        app_interface.showAlert(t,s,'确定','','','');
     }else{
         alert(s);
     }
@@ -74,17 +74,17 @@ window.app_toast = function(s){
 
 }
 
-window.app_confirm = function(s,t,confirm_word,confirm_callback,cancel_word,cancel__callback){
+window.app_confirm = function(s,t,confirm_word,confirm_callback,cancel_word,cancel_callback){
     if(is_app()){
         if(t == '' || t == undefined){
             t = '醉仙网';
         }
-        app_interface.showAlert(t,s,confirm_word,confirm_callback,cancel_word,cancel__callback);
+        app_interface.showAlert(t,s,confirm_word,confirm_callback,cancel_word,cancel_callback);
     }else{
         if(confirm(s)){
             eval(confirm_callback);
         }else{
-            eval(cancel__callback);
+            eval(cancel_callback);
         }
     }
 }

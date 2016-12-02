@@ -40,10 +40,10 @@ function setCache(k,v){
 function getCache(k){
     if(window.localStorage) {
         var localStorageVal = localStorage.getItem(k);
-        localStorageVal = JSON.parse(localStorageVal);
-
-        if(localStorageVal == undefined || localStorageVal == null){
+        if(localStorageVal == undefined || localStorageVal == null || localStorageVal == 'undefined'){
             localStorageVal = '';
+        }else{
+            localStorageVal = JSON.parse(localStorageVal);
         }
         return localStorageVal;
     }
