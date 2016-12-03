@@ -161,7 +161,7 @@
      //设置生日
      $(".birthday").click(function(){
          if(typeof(app_interface) == 'object'){
-             app_interface.pickTime();
+             app_interface.pickTime("set_birthday('%s')");
              return false;
          }
      });

@@ -313,6 +313,7 @@ body.bg-white{ background:#FFF}
 .member-head-avatar img{ width:100%;}
 .go-history{ width:0.4rem; height:0.4rem; position:absolute; left:0.2rem; top:0.2rem; z-index:3; }
 .go-history img{ width:100%}
+.member-head .avatar_tit{position: relative; top: 78%;z-index: 4;font-size: 0.16rem;width: 100%;text-align: center;color: red;}
 
 .member-collect{ width:100%; background:#FFF; padding-top:0.2rem; padding-bottom:0.1rem; margin-bottom:0.1rem;overflow:hidden}
 .mc-item{ width:33.33333333%; float:left}
