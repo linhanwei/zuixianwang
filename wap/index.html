@@ -2,8 +2,12 @@
 <html  manifest="app.manifest">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta content="True" name="HandheldFriendly" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" contect="Mon,12 May 2020 00:20:00 GMT">
     <title>醉仙酒商城</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
@@ -11,6 +15,79 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="plug-ins/swiper/swiper-3.4.0.min.css" rel="stylesheet">
 
+    <style>
+        h4 {
+            display: block;
+            -webkit-margin-before: 0px;
+            -webkit-margin-after:0px;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+            font-weight: 100;
+        }
+        dd {
+            display: block;
+            -webkit-margin-start: 0px;
+        }
+        .goods { border: none;}
+        .goods .title { background-color: transparent; padding: 8px;}
+        .goods .content { font-size: 0; *word-spacing: -1px/*IE6、7*/;}
+        .goods-item { background-color: #FFF; letter-spacing: normal; vertical-align: top; display: inline-block; *display: inline/*IE7*/; width: 48%; margin: 0.8%; border-radius: 5px; *zoom:1/*IE7*/;}
+        .goods-item a { display: block;}
+        .goods-item-pic { display: block; max-width: 240px; min-width: 120px; max-height: 240px; min-height: 120px; margin: 8px auto 0 auto;}
+        .goods-item-pic img { width: 100%;}
+        .goods-item-name { font-size: 0.8em; line-height: 20px; color: #777; height: 50px; padding: 8px 8px 0 8px; margin-bottom: 8px; overflow:hidden;}
+        .goods-item-price { font-size: 1em; color: #F30;  padding: 8px 0; margin: 0 8px; border-top: dotted 1px #D1D1D1;}
+
+        /*大图模式*/
+        .grid .goods-secrch-list { font-size: 0; display: block;}
+        .grid .goods-secrch-list .goods-item { background-color: #FFF; vertical-align: top; display: inline-block; box-shadow: 0 1px 0 rgba(0,0,0,0.05); position: relative; z-index: 1; overflow: hidden;}
+        .grid .goods-secrch-list .goods-item:nth-of-type(even) { margin-left: 1.5%;}
+        /*商品图片*/
+        .grid .goods-secrch-list .goods-pic { display: block; width: 100%; height: 100%;}
+        .grid .goods-secrch-list .goods-pic a { display: block; width: 100%; height: 100%;}
+        .grid .goods-secrch-list .goods-pic img { width: 100%; }
+        /*下方商品介绍*/
+        .grid .goods-secrch-list .goods-info { display: block; padding: 0 10px;margin-bottom:10px;}
+        /*商品名称*/
+        .grid .goods-secrch-list .goods-name { display: block; overflow: hidden; }
+        .grid .goods-secrch-list a { display: block; color: #111;}
+        .grid .goods-secrch-list .goods-name h4 { font-size: 14px; line-height: 20px;font-weight:100; height: 20px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+        .fav-list .goods-name h4 { height: 1.8rem !important; text-overflow: clip !important; white-space: pre-wrap !important;}
+        .grid .goods-secrch-list .goods-name h6 { display: none;}
+        /*商品价格与促销*/
+        .grid .goods-secrch-list .goods-sale { width:100%;display: inline-block;  overflow: hidden;}
+        .grid .goods-secrch-list .goods-price { color: #EC5464; font-size: 12px; line-height: 24px; display: block; float: left;}
+        .grid .goods-secrch-list .goods-price em { font-size: 14px;  vertical-align: top; display: inline-block;}
+        .grid .goods-secrch-list .goods-price .phone-sale { font-size: 0; vertical-align: top; display: inline-block; width: 0.6rem; height: 0.6rem; border: solid #EC5464 0.02rem; }
+        .grid .goods-secrch-list .goods-price .phone-sale i { display: block; width: 100%; height: 100%; background: #ED5564 url(images/mobile_w.png) no-repeat 50% 50%; background-size: 80%;}
+        .grid .goods-secrch-list .sale-type { display: none;}
+        /*商品相关信息*/
+        .grid .goods-secrch-list .goods-assist { display: block; height: 1rem; padding-bottom: 0.2rem; overflow: hidden;}
+        .grid .goods-secrch-list .goods-sold { font-size: 12px; color: #999; display: block; float: right;}
+        .grid .goods-secrch-list .goods-sold em { color: #000; vertical-align: middle; font-weight: 600;}
+        .grid .goods-secrch-list .goods-store { float: right; font-size: 0.55rem; line-height: 1rem;}
+        .grid .goods-secrch-list .goods-store .mall { display: inline-block; padding: 0 0.1rem; font-size: 0.45rem; line-height: 0.7rem; color: #FFF; background-color: #EC5464;}
+        .grid .goods-secrch-list .goods-store a { font-size: 0; color: #888;}
+        .grid .goods-secrch-list .store-credit { display: none;}
+        .grid .goods-secrch-list .sotre-creidt-layout { position: absolute; z-index: 2; top: 0; right: 0; left: 0; bottom: 0;}
+        .grid .goods-secrch-list .sotre-creidt-layout dl { filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#F2EEEEEE', endColorstr='#F2EEEEEE');background:rgba(238,238,238,0.95); width: 90%; height: 4.2rem; padding: 5%; position: absolute; z-index: inherit; bottom: 0;}
+        /*商品收藏列表删除*/
+        .grid .goods-secrch-list .fav-del { position: absolute; z-index: 1; bottom: 0.2rem; right: 0.2rem; width: 1rem; height: 1rem; background-image: url(images/del_b.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 65%;}
+        .goods-secrch-list .sotre-creidt-layout dt { text-align: left; display: block; line-height: 1rem; height: 1rem; padding-bottom: 0.2rem; margin-bottom: 0.4rem; border-bottom: solid 1px #EEE; position: relative; z-index: 1;}
+        .goods-secrch-list .sotre-creidt-layout dt a { font-size: 0.6rem !important; color: #333 !important; position: absolute; z-index: 1; top: 0; left: 0; bottom: 0; right: 0;}
+        .goods-secrch-list .sotre-creidt-layout dt a span { position: absolute; z-index: 1; top: 0; right: 0; width: 1rem; height: 1rem; background-image: url(images/arrow_right_b.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 50%; opacity: 0.6; }
+        .goods-secrch-list .sotre-creidt-layout dd { font-size: 0.45rem; color: #555; line-height: 0.9rem; text-align: left; height: 0.9rem;}
+        .goods-secrch-list .sotre-creidt-layout dd em { font-size: 0.55rem; font-weight: 600;}
+        .goods-secrch-list .sotre-creidt-layout dd.high em { color: #ED5564;}
+        .goods-secrch-list .sotre-creidt-layout dd.equal em { color: #ED5564;}
+        .goods-secrch-list .sotre-creidt-layout dd.low em { color: #48CFAE;}
+        .goods-secrch-list .sotre-creidt-layout dd i { vertical-align: top; display: inline-block; width: 0.55rem; height: 0.55rem; margin: 0.15rem; border-radius: 2px;}
+        .goods-secrch-list .sotre-creidt-layout dd.high i { background: #ED5564 url(images/creidt_high.png); background-size: cover;}
+        .goods-secrch-list .sotre-creidt-layout dd.equal i { background: #ED5564 url(images/creidt_equal.png); background-size: cover;}
+        .goods-secrch-list .sotre-creidt-layout dd.low i { background: #48CFAE url(images/creidt_low.png); background-size: cover;}
+
+
+    </style>
 </head>
 <body id="home">
 <!--@头部 start-->
@@ -21,9 +98,9 @@
     </a>
 </section>
 <!--@头部 end-->
-
-<div id="main-container"></div>
-
+<div id="scroll" style="overflow: hidden;">
+    <div id="main-container"></div>
+</div>
 <div class="go-top" id="go-top" style="display: none;;">
     <img src="./images/go-top.png">
 </div>
@@ -66,15 +143,15 @@
         <% } %>
         <div class="content">
             <div class="item home2_1">
-                <a href="<%= square_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= square_image %>" alt=""></a>
+                <a href="<%= square_url %>"><img   src="<%= square_image %>" alt=""></a>
             </div>
             <div class="item home2_2">
                 <div class="border-left">
                     <div class="border-bottom">
-                        <a href="<%= rectangle1_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle1_image %>" alt=""></a>
+                        <a href="<%= rectangle1_url %>"><img   src="<%= rectangle1_image %>" alt=""></a>
                     </div>
                     <div>
-                        <a href="<%= rectangle2_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle2_image %>" alt=""></a>
+                        <a href="<%= rectangle2_url %>"><img   src="<%= rectangle2_image %>" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -86,7 +163,7 @@
         <div class="home-mrjx-list">
             <% for (var i in item) { %>
             <a class="item" href="<%= item[i].url %>">
-                <img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].image %>">
+                <img   src="<%= item[i].image %>">
             </a>
             <% } %>
         </div>
@@ -101,15 +178,15 @@
             <div class="item home2_2">
                 <div class="border-right">
                     <div class="border-bottom">
-                        <a href="<%= rectangle1_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle1_image %>" alt=""></a>
+                        <a href="<%= rectangle1_url %>"><img   src="<%= rectangle1_image %>" alt=""></a>
                     </div>
                     <div>
-                        <a href="<%= rectangle2_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle2_image %>" alt=""></a>
+                        <a href="<%= rectangle2_url %>"><img   src="<%= rectangle2_image %>" alt=""></a>
                     </div>
                 </div>
             </div>
             <div class="item home2_1">
-                <a href="<%= square_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= square_image %>" alt=""></a>
+                <a href="<%= square_url %>"><img   src="<%= square_image %>" alt=""></a>
             </div>
         </div>
     </div>
@@ -118,7 +195,7 @@
     <section class="home-chanle-box">
         <div class="home-chanle-list">
             <% for (var i in item) { %>
-            <a href="<%= item[i].url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].image %>" alt=""></a>
+            <a href="<%= item[i].url %>"><img   src="<%= item[i].image %>" alt=""></a>
             <% } %>
         </div>
     </section>
@@ -128,10 +205,10 @@
         <div class="title">
             <% if (url) { %>
             <a href="<%= url %>">
-                <img class="lazy" src="images/ico/load.png"  data-original="<%= image %>" alt="">
+                <img   src="<%= image %>" alt="">
             </a>
             <% }else{ %>
-            <img class="lazy" src="images/ico/load.png"  data-original="<%= image %>">
+            <img   src="<%= image %>">
             <% } %>
         </div>
     </section>
@@ -144,12 +221,12 @@
                     <div class="cybg-top">
                         <div class="left">
                             <a href="<%= rectangle1_url %>">
-                                <img class="pro lazy"  data-original="<%= rectangle1_image %>">
+                                <img class="pro lazy"  src="<%= rectangle1_image %>">
                             </a>
                         </div>
                         <div class="right">
                             <a href="<%= rectangle4_url %>">
-                                <img class="pro lazy"  data-original="<%= rectangle4_image %>">
+                                <img class="pro lazy"  src="<%= rectangle4_image %>">
                             </a>
                         </div>
                     </div>
@@ -157,28 +234,28 @@
                         <div class="item">
                             <div class="pro">
                                 <a href="<%= rectangle3_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle3_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle3_image %>">
                                 </a>
                             </div>
                         </div>
                         <div class="item">
                             <div class="pro">
                                 <a href="<%= rectangle2_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle2_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle2_image %>">
                                 </a>
                             </div>
                         </div>
                         <div class="item">
                             <div class="pro">
                                 <a href="<%= rectangle5_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle5_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle5_image %>">
                                 </a>
                             </div>
                         </div>
                         <div class="item">
                             <div class="pro">
                                 <a href="<%= rectangle6_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle6_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle6_image %>">
                                 </a>
                             </div>
                         </div>
@@ -197,21 +274,21 @@
                         <div class="item-one item">
                             <div class="pro">
                                 <a href="<%= rectangle1_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle1_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle1_image %>">
                                 </a>
                             </div>
                         </div>
                         <div class="item-two item">
                             <div class="pro">
                                 <a href="<%= rectangle3_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle3_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle3_image %>">
                                 </a>
                             </div>
                         </div>
                         <div class="item-three item">
                             <div class="pro">
                                 <a href="<%= rectangle5_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle5_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle5_image %>">
                                 </a>
                             </div>
                         </div>
@@ -220,21 +297,21 @@
                         <div class="item-one item">
                             <div class="pro">
                                 <a href="<%= rectangle2_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle2_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle2_image %>">
                                 </a>
                             </div>
                         </div>
                         <div class="item-two item">
                             <div class="pro">
                                 <a href="<%= rectangle4_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle4_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle4_image %>">
                                 </a>
                             </div>
                         </div>
                         <div class="item-three item">
                             <div class="pro">
                                 <a href="<%= rectangle6_url %>">
-                                    <img class="pro lazy"  data-original="<%= rectangle6_image %>">
+                                    <img class="pro lazy"  src="<%= rectangle6_image %>">
                                 </a>
                             </div>
                         </div>
@@ -248,18 +325,18 @@
     <section class="lyt-content">
         <div class="lyt-main">
             <div class="left">
-                <a href="<%= rectangle1_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle1_image %>"></a>
+                <a href="<%= rectangle1_url %>"><img   src="<%= rectangle1_image %>"></a>
             </div>
             <div class="right">
                 <div class="top">
-                    <a href="<%= rectangle2_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle2_image %>"></a>
+                    <a href="<%= rectangle2_url %>"><img   src="<%= rectangle2_image %>"></a>
                 </div>
                 <div class="bottom">
                     <div class="bottom-left">
-                        <a href="<%= rectangle3_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle3_image %>"></a>
+                        <a href="<%= rectangle3_url %>"><img   src="<%= rectangle3_image %>"></a>
                     </div>
                     <div class="bottom-right">
-                        <a href="<%= rectangle4_url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= rectangle4_image %>"></a>
+                        <a href="<%= rectangle4_url %>"><img   src="<%= rectangle4_image %>"></a>
                     </div>
                 </div>
             </div>
@@ -272,7 +349,7 @@
             <div class="cuxiao-list-box">
                 <% for (var i in item) { %>
                     <div class="item">
-                        <a href="<%= item[i].url %>"><img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].image %>"></a>
+                        <a href="<%= item[i].url %>"><img   src="<%= item[i].image %>"></a>
                     </div>
                 <% } %>
             </div>
@@ -288,7 +365,7 @@
             <div class="list">
                 <% for (var i in item) { %>
                 <a href="<%= item[i].url %>">
-                    <img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].image %>" alt="">
+                    <img   src="<%= item[i].image %>" alt="">
                 </a>
                 <% } %>
             </div>
@@ -303,7 +380,7 @@
             <% for (var i in item) { %>
                 <a class="item" href="tmpl/product_detail.html?goods_id=<%= item[i].goods_id %>">
                     <div class="pro-box">
-                        <img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].goods_image %>">
+                        <img   src="<%= item[i].goods_image %>">
                         <p class="title"><%= item[i].goods_name %></p>
                         <p class="price">￥<%= item[i].goods_promotion_price %></p>
                         <span class="ico tejia-ico"><img src="./images/ico/teija-ico.png"></span>
@@ -316,12 +393,12 @@
 </script>
 <script type="text/html" id="recommend_goods">
     <section class="tuijian">
-        <div class="title"><img class="lazy" src="images/ico/load.png"  data-original="./images/index/tuijian-title.jpg"></div>
+        <div class="title"><img   src="./images/index/tuijian-title.jpg"></div>
         <div class="tuijian-list">
             <% for (var i in item) { %>
             <a href="<%= item[i].url %>" class="tuijian-item">
                 <div class="goods_img">
-                    <img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].goods_image_url %>">
+                    <img   src="<%= item[i].goods_image_url %>">
                 </div>
                 <p class="title"><%= item[i].goods_name %></p>
                 <p class="price">￥ <%= item[i].goods_price %></p>
@@ -336,7 +413,7 @@
             <% for (var i in item) { %>
             <a href="tmpl/product_detail.html?goods_id=<%= item[i].goods_id %>" class="tuijian-item">
                 <div class="goods_img">
-                    <img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].goods_image %>">
+                    <img   src="<%= item[i].goods_image %>">
                 </div>
                 <p class="title"><%= item[i].goods_name %></p>
                 <p class="price">￥<%= item[i].goods_promotion_price %></p>
@@ -354,7 +431,7 @@
             <% for (var i in item) { %>
             <div class="goods-item">
                 <a href="tmpl/product_detail.html?goods_id=<%= item[i].goods_id %>">
-                    <div class="goods-item-pic"><img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].goods_image %>" alt=""></div>
+                    <div class="goods-item-pic"><img   src="<%= item[i].goods_image %>" alt=""></div>
                     <div class="goods-item-name"><%= item[i].goods_name %></div>
                     <div class="goods-item-price">限时价：￥<%= item[i].goods_promotion_price %></div>
                 </a>
@@ -372,7 +449,7 @@
             <% for (var i in item) { %>
             <div class="goods-item">
                 <a href="tmpl/product_detail.html?goods_id=<%= item[i].goods_id %>">
-                    <div class="goods-item-pic"><img class="lazy" src="images/ico/load.png"  data-original="<%= item[i].goods_image %>" alt=""></div>
+                    <div class="goods-item-pic"><img   src="<%= item[i].goods_image %>" alt=""></div>
                     <div class="goods-item-name"><%= item[i].goods_name %></div>
                     <div class="goods-item-price">团购价：￥<%= item[i].goods_promotion_price %><span></span></div>
                 </a>
@@ -381,6 +458,61 @@
         </div>
     </div>
 </script>
+<script type="text/html" id="home_body">
+    <% var goods_list = datas.goods_list; %>
+    <% if(goods_list.length >0){%>
+    <%for(i=0;i<goods_list.length;i++){%>
+    <li class="goods-item" goods_id="<%=goods_list[i].goods_id;%>">
+				<span class="goods-pic">
+					<a href="tmpl/product_detail.html?goods_id=<%=goods_list[i].goods_id;%>">
+                        <img src="<%=goods_list[i].goods_image_url;%>"/>
+                    </a>
+				</span>
+        <dl class="goods-info">
+            <dt class="goods-name">
+                <a href="tmpl/product_detail.html?goods_id=<%=goods_list[i].goods_id;%>">
+                    <h4><%=goods_list[i].goods_name;%></h4>
+                    <h6><%=goods_list[i].goods_jingle;%></h6>
+                </a>
+            </dt>
+            <dd class="goods-sale">
+                <a href="tmpl/product_detail.html?goods_id=<%=goods_list[i].goods_id;%>">
+							<span class="goods-price">￥<em><%=goods_list[i].goods_price;%></em>
+								<%
+									if (goods_list[i].sole_flag) {
+								%>
+									<span class="phone-sale"><i></i>手机专享</span>
+								<%
+									}
+								%>
+
+							</span>
+                    <span class="goods-sold">销量
+									<em><%=goods_list[i].goods_salenum;%></em>
+								</span>
+                </a>
+            </dd>
+        </dl>
+    </li>
+    <%}%>
+    <% if (hasmore) {%>
+    <li class="loading"><div class="spinner"><i></i></div>商品数据读取中...</li>
+    <% } %>
+    <%
+    }else {
+    %>
+    <div class="norecord search">
+        <div class="norecord-ico"><i></i></div>
+        <dl>
+            <dt>暂无商品</dt>
+            <dd>选择或搜索其它商品分类/名称...</dd>
+        </dl>
+        <a href="javascript:history.go(-1)" class="btn">重新选择</a>
+    </div>
+    <%
+    }
+    %>
+</script>
 
 </body>
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -388,7 +520,207 @@
 <script type="text/javascript" src="js/config.js"></script>
 <script type="text/javascript" src="js/template.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="js/iscroll.js"></script>
 <script type="text/javascript" src="plug-ins/swiper/swiper-3.4.0.jquery.min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+
+<script>
+    var indexScroll = null;
+
+    function completed(){
+        bind_openwebview();
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true
+        });
+
+        //左右转动
+        $(".tejia-box").width( (($(window).width()-30)/3 + 10) *$(".tejia-box").find(".item").length  );
+        $(".tejia-box").find(".item").width(($(window).width()-30)/3);
+        $("#index-tj-arrow-left").hide();
+        $("#index-tj-arrow-left").on('click',function(){
+            var tjl = $(".tejia-box").offset().left;
+            var il  = $(".tejia-box").find(".item").length;
+            var iw  = $(".tejia-box").find(".item").width();
+
+            if(tjl < 0 )
+                $(".tejia-box").animate({marginLeft:(iw+10+tjl)+'px'});
+
+            if(tjl > -1*(iw+10)){
+                $("#index-tj-arrow-left").hide();
+            }
+
+            if(tjl > -1*(iw+10)*(il-1)){
+                $("#index-tj-arrow-right").show();
+            }
+        });
+        $("#index-tj-arrow-right").on('click',function(){
+            var tjl = $(".tejia-box").offset().left;
+            var il  = $(".tejia-box").find(".item").length;
+            var iw  = $(".tejia-box").find(".item").width();
+            if(tjl > -1*(iw+10)*(il-3))
+                $(".tejia-box").animate({marginLeft:(-1*(iw+10)+tjl)+'px'});
+
+            if(tjl == 0){
+                $("#index-tj-arrow-left").show();
+            }
+
+            if(tjl == -1*(iw+10)*(il-4)){
+                $("#index-tj-arrow-right").hide();
+            }
+        });
+        $("#main-container").append('<div class="main-layout mt40 mb20"><div id="product_list" class="grid"> <ul class="goods-secrch-list"> </ul> </div></div>');
+
+        indexScroll = new IScroll("#scroll", {
+            mouseWheel: true,
+            click: true
+        })
+
+        indexScroll.on('scrollEnd', function () {
+            if ( this.y < -300 ) {
+                get_list();
+
+            }
+            indexScroll.refresh();
+        });
+    }
+
+    function get_index(){
+        var html = '';
+        $.ajax({
+            url: ApiUrl + "/index.php?act=index",
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                var data = result.datas;
+
+                $.each(data, function (k, v) {
+                    $.each(v, function (kk, vv) {
+                        switch (kk) {
+                            case 'adv_list':
+                                $.each(vv.item, function (ak, av) {
+                                    vv.item[ak].url = buildUrl(av.type, av.data);
+                                });
+                                break;
+                            case 'home1':
+                                vv.url = buildUrl(vv.type, vv.data);
+                                break;
+                            case 'home2':
+                            case 'home3':
+                                $.each(vv.item, function (k3, v3) {
+                                    vv.item[k3].url = buildUrl(v3.type, v3.data);
+                                });
+                                break;
+                            case 'home4':
+                                vv.square_url = buildUrl(vv.square_type, vv.square_data);
+                                vv.rectangle1_url = buildUrl(vv.rectangle1_type, vv.rectangle1_data);
+                                vv.rectangle2_url = buildUrl(vv.rectangle2_type, vv.rectangle2_data);
+                                break;
+                            case 'home5':
+                                $.each(vv.item, function (k5, v5) {
+                                    vv.item[k5].url = buildUrl(v5.type, v5.data);
+                                });
+                                break;
+                            case 'home6'://标题
+                                vv.url = buildUrl(vv.type, vv.data);
+                                break;
+                            case 'home7':
+                                vv.rectangle1_url = buildUrl(vv.rectangle1_type, vv.rectangle1_data);
+                                vv.rectangle2_url = buildUrl(vv.rectangle2_type, vv.rectangle2_data);
+                                vv.rectangle3_url = buildUrl(vv.rectangle3_type, vv.rectangle3_data);
+                                vv.rectangle4_url = buildUrl(vv.rectangle4_type, vv.rectangle4_data);
+                                vv.rectangle5_url = buildUrl(vv.rectangle5_type, vv.rectangle5_data);
+                                vv.rectangle6_url = buildUrl(vv.rectangle6_type, vv.rectangle6_data);
+                                break;
+                            case 'home8':
+                                vv.rectangle1_url = buildUrl(vv.rectangle1_type, vv.rectangle1_data);
+                                vv.rectangle2_url = buildUrl(vv.rectangle2_type, vv.rectangle2_data);
+                                vv.rectangle3_url = buildUrl(vv.rectangle3_type, vv.rectangle3_data);
+                                vv.rectangle4_url = buildUrl(vv.rectangle4_type, vv.rectangle4_data);
+                                vv.rectangle5_url = buildUrl(vv.rectangle5_type, vv.rectangle5_data);
+                                vv.rectangle6_url = buildUrl(vv.rectangle6_type, vv.rectangle6_data);
+                                break;
+                            case 'home9':
+                                vv.rectangle1_url = buildUrl(vv.rectangle1_type, vv.rectangle1_data);
+                                vv.rectangle2_url = buildUrl(vv.rectangle2_type, vv.rectangle2_data);
+                                vv.rectangle3_url = buildUrl(vv.rectangle3_type, vv.rectangle3_data);
+                                vv.rectangle4_url = buildUrl(vv.rectangle4_type, vv.rectangle4_data);
+
+                                break;
+                            case 'home10':
+                                $.each(vv.item, function (k10, v10) {
+                                    vv.item[k10].url = buildUrl(v10.type, v10.data);
+                                });
+                                break;
+                            case 'home11':
+                                $.each(vv.item, function (k11, v11) {
+                                    vv.item[k11].url = buildUrl(v11.type, v11.data);
+                                });
+                                break;
+                            case 'recommend_goods':
+                                $.each(vv.item, function (gck, gcv) {
+                                    vv.item[gck].url = buildUrl('goods', gcv.goods_id);
+                                });
+                                break;
+
+                        }
+                        //console.log(kk, vv);
+                        html += template.render(kk, vv);
+                        return false;
+                    });
+                });
+                $("#main-container").html(html);
+                completed();
+                setCache('index_content', html);
+
+                html = null;
+
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('#scroll').height($(window).height()-45);
+
+        var index_content = getCache('index_content');
+
+        if(false){
+            $("#main-container").html(index_content);
+            completed();
+        }else{
+            get_index();
+        }
+        index_content = null;
+    });
+
+    var page = 6;
+    var curpage = 1;
+    var hasmore = true;
+    function get_list() {
+        if(curpage>4) {$('.loading').html('到底了~~~');hasmore = false;return false;}
+        if (!hasmore) {
+            return false
+        }
+        hasmore = false;
+        param = {};
+        param.page = page;
+        param.curpage = curpage;
+        param.index = 1;
+        $.getJSON(ApiUrl + "/index.php?act=goods&op=goods_list", param, function(e) {
+            if (!e) {
+                e = [];
+                e.datas = [];
+                e.datas.goods_list = []
+            }
+            $(".loading").remove();
+            curpage++;
+            var r = template.render("home_body", e);
+            $("#product_list .goods-secrch-list").append(r);
+            hasmore = e.hasmore;
+            indexScroll.refresh();
+            bind_openwebview();
+            $(".loading").remove();
+        })
+    }
+
+</script>
 </html>

@@ -124,14 +124,9 @@ $(document).ready(function () {
 
                             break;
                         case 'home10':
-                            vv.rectangle1_url = buildUrl(vv.rectangle1_type, vv.rectangle1_data);
-                            vv.rectangle2_url = buildUrl(vv.rectangle2_type, vv.rectangle2_data);
-                            vv.rectangle3_url = buildUrl(vv.rectangle3_type, vv.rectangle3_data);
-                            vv.rectangle4_url = buildUrl(vv.rectangle4_type, vv.rectangle4_data);
-                            vv.rectangle5_url = buildUrl(vv.rectangle5_type, vv.rectangle5_data);
-                            vv.rectangle6_url = buildUrl(vv.rectangle6_type, vv.rectangle6_data);
-                            vv.rectangle7_url = buildUrl(vv.rectangle7_type, vv.rectangle7_data);
-                            vv.rectangle8_url = buildUrl(vv.rectangle8_type, vv.rectangle8_data);
+                            $.each(vv.item, function (k10, v10) {
+                                vv.item[k10].url = buildUrl(v10.type, v10.data);
+                            });
                             break;
                         case 'home11':
                             $.each(vv.item, function (k11, v11) {
@@ -145,7 +140,7 @@ $(document).ready(function () {
                             break;
 
                     }
-                    //console.log(kk, vv);
+                    //console.log(kk, vv,11);
                     html += template.render(kk, vv);
                     return false;
                 });

@@ -45,12 +45,20 @@ function bind_login(func){
     });
 }
 
-function app_check_login(key){
+function app_check_login(key,is_to_root){
     if(key == ''){
-        if(is_app()){
-            app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',1);return false;
+        if(is_to_root){
+            if(is_app()){
+                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html?to_root=1',1);return false;
+            }else{
+                window.location.href = WapSiteUrl + '/tmpl/member/login.html?to_root=1';
+            }
         }else{
-            window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+            if(is_app()){
+                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',1);return false;
+            }else{
+                window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+            }
         }
     }
 }

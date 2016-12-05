@@ -22,6 +22,8 @@ $(function(){
     $('#username').val(getCache('user_name')?getCache('user_name'):'');
     $('#userpwd').val(getCache('user_password')?getCache('user_password'):'');
 	$('#loginbtn').click(function(){//会员登陆
+        //alert(getQueryString('to_root'));
+        //alert(getQueryString('func'));
         var username = $('#username').val();
         var pwd = $('#userpwd').val();
         var client = 'wap';
@@ -46,7 +48,11 @@ $(function(){
                             setCache('user_password','');
                         }
                         if(typeof(app_interface) == 'object'){
-                            app_interface.closeWebView(8,getQueryString('func') + '();');
+                            if(getQueryString('to_root')){
+                                app_interface.closeToRootWebView(8,getQueryString('func') + '();');
+                            }else{
+                                app_interface.closeWebView(8,getQueryString('func') + '();');
+                            }
                         }else{
                             location.href = referurl;
                         }

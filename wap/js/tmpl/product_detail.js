@@ -117,10 +117,7 @@ $(function () {
                     }
                 }
 
-                //优惠卷
-                $(".mb_coupon").click(function () {
-                    app_toast('敬请期待');
-                });
+
 
                 // @add 手机端详情
                 if (data.goods_info.mobile_body) {
@@ -170,7 +167,10 @@ $(function () {
                     $("#spec-box").hide();
                 });
 
-
+                //优惠卷
+                $(".mb_coupon").click(function () {
+                    app_toast('敬请期待');
+                });
                 //收藏
                 $(".pd-collect").click(function () {
                     key = getcookie('key');
