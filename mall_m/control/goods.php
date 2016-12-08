@@ -531,8 +531,9 @@ class goodsControl extends mobileHomeControl{
         }
         $html .= '</div>';
         $goods_common_info['mobile_body'] = $html;
-      
-        Tpl::output('goods_common_info',$goods_common_info);
-        Tpl::showpage('mobile_body');
+
+        output_data($goods_common_info);
+//        Tpl::output('goods_common_info',$goods_common_info);
+//        Tpl::showpage('mobile_body');
     }
 }

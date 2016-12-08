@@ -201,7 +201,7 @@ body.bg-white{ background:#FFF}
 .detail-content-box .cont_tit .rate_num{position: absolute; right: 0.25rem;}
 .detail-content-box .cont_tit .rate{color: #ED5564;}
 .detail-content-box .cont_tit .tit_item{display: inline-block;height: 0.45rem;line-height: 0.45rem;}
-.cont_tit  .item-more {position: absolute;z-index: 1;top: 0.12rem;right: 0.1rem;display: inline-block;width: 0.18rem;height: 0.2rem;background-image: url(../images/arrow_right_b.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: 80%;opacity: 0.8;}
+.cont_tit  .item-more {position: absolute;top: 0.12rem;right: 0.1rem;display: inline-block;width: 0.18rem;height: 0.2rem;background-image: url(../images/arrow_right_b.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: 80%;opacity: 0.8;}
 .detail-content-box .evaluate_info{font-size: 0.14rem;border-top: solid 1px #e2e2e2;}
 .evaluate_info .info_tit{height: 0.3rem;line-height: 0.3rem;}
 .info_tit .info_star{display: block;float: left;width:3rem;height: 0.15rem;font-size: 0;margin-top: 0.09rem;}
