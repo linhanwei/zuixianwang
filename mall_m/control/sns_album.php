@@ -36,7 +36,7 @@ class sns_albumControl extends mobileMemberControl {
          * 上传图片
          */
         $upload = new UploadFile();
-        $upload_dir = ATTACH_MALBUM.DS.$member_id.DS;
+        $upload_dir = ATTACH_MEMBER.DS.$member_id.DS;
     
         $upload->set('default_dir',$upload_dir.$upload->getSysSetPath());
         $thumb_width    = '240,1024';
@@ -53,7 +53,7 @@ class sns_albumControl extends mobileMemberControl {
         }
 
         $img_path = $upload->getSysSetPath().$upload->file_name;
-        list($width, $height, $type, $attr) = getimagesize(BASE_UPLOAD_PATH.DS.ATTACH_MALBUM.DS.$member_id.DS.$img_path);
+        list($width, $height, $type, $attr) = getimagesize(BASE_UPLOAD_PATH.DS.ATTACH_MEMBER.DS.$member_id.DS.$img_path);
     
         $image = explode('.', $_FILES["file"]["name"]);
 

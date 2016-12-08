@@ -22,6 +22,20 @@ class evaluate_goodsModel extends Model {
 	 */
     public function getEvaluateGoodsList($condition, $page = null, $order = 'geval_id desc', $field = '*') {
         $list = $this->field($field)->where($condition)->page($page)->order($order)->select();
+        if($list){
+            foreach($list as $k=>$v){
+                $geval_image_list = unserialize($v['geval_image']);
+                $list[$k]['geval_image'] = $geval_image_list;
+                $list[$k]['geval_addtime_date'] = date('Y-m-d',$v['geval_addtime']);
+                $list[$k]['geval_frommembername'] = substr($v['geval_frommembername'],0,1).'****'.substr($v['geval_frommembername'],-1,1);
+                $list[$k]['geval_image_url'] = array();
+                if($geval_image_list){
+                    foreach($geval_image_list as $egv){
+                        $list[$k]['geval_image_url'][] = getEvaluateImg($egv,$v['geval_frommemberid'],240);
+                    }
+                }
+            }
+        }
         return $list;
     }
 

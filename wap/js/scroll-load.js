@@ -45,7 +45,7 @@ function scrollLoad() {
         param.page = page;
         param.curpage = curpage;
         $.getJSON(options.url, param, function(result){
-            checkLogin(result.login);
+            checklogin(result.login);
             $('.loading').remove();
             curpage++;
             var data = result.datas;

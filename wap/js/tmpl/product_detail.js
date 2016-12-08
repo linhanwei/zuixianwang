@@ -109,6 +109,7 @@ $(function () {
                 }
 
                 //渲染模板
+                data.WapSiteUrl = WapSiteUrl;
                 var html = template.render('product_detail', data);
                 if(goods_html != html){
                     setCache(goods_cache_key,html);
@@ -116,8 +117,6 @@ $(function () {
                         $("#product_detail_wp").html(html);
                     }
                 }
-
-
 
                 // @add 手机端详情
                 if (data.goods_info.mobile_body) {

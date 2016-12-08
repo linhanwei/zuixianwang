@@ -192,9 +192,30 @@ body.bg-white{ background:#FFF}
 .detail-attribute span{ padding:0 0.1rem; word-wrap:break-all; float:left}
 
 .detail-content-box{ background:#FFF; overflow:hidden; margin-top:0.1rem}
+.mt2{margin-bottom: 0.2rem;}
 .detail-content{ width:96%;font-size:0.14rem; margin:0.1rem auto}
 .detail-content img{ max-width:100%}
 .detail-content p{ line-height:0.2rem; font-size:0.14rem}
+.detail-content-box .cont_tit{font-size:0.14rem;position: relative;}
+.detail-content-box .cont_tit .rate_tit{min-width: 100px;padding-left: 10px;}
+.detail-content-box .cont_tit .rate_num{position: absolute; right: 0.25rem;}
+.detail-content-box .cont_tit .rate{color: #ED5564;}
+.detail-content-box .cont_tit .tit_item{display: inline-block;height: 0.45rem;line-height: 0.45rem;}
+.cont_tit  .item-more {position: absolute;z-index: 1;top: 0.12rem;right: 0.1rem;display: inline-block;width: 0.18rem;height: 0.2rem;background-image: url(../images/arrow_right_b.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: 80%;opacity: 0.8;}
+.detail-content-box .evaluate_info{font-size: 0.14rem;border-top: solid 1px #e2e2e2;}
+.evaluate_info .info_tit{height: 0.3rem;line-height: 0.3rem;}
+.info_tit .info_star{display: block;float: left;width:3rem;height: 0.15rem;font-size: 0;margin-top: 0.09rem;}
+.evaluate_info .info_cont{height: 0.3rem; line-height: 0.3rem;}
+.detail-content-box .evaluate_info{width: 97%;margin: 0 auto;}
+.evaluate_info .info_time{font-size: 9px;color: #848689;text-align: right;margin: 11px 10px 10px 0;}
+.evaluate_info .info_img{}
+.evaluate_info .info_img img{display: inline-block;width: 19%;}
+.info_tit i{display: inline-block;height: 0.15rem;background-image: url(../images/star_r.png);background-repeat: repeat-x;background-position: 0 0;background-size: contain;}
+.info_tit .info_star i.star1 {width: 0.15rem;}
+.info_tit .info_star i.star2 {width: 0.30rem;}
+.info_tit .info_star i.star3 {width: 0.45rem;}
+.info_tit .info_star i.star4 {width: 0.60rem;}
+.info_tit .info_star i.star5 {width: 0.75rem;}
 
 .detail-btn-box{ width:100%; height:0.6rem; line-height:0.6rem; background:#FFF; position:fixed; bottom:0; left:0; border-top:1px solid #F5F5F5; text-align:center}
 .detail-btn-box-inside{ width:60%; margin:0.05rem auto; height:0.5rem; overflow:hidden}

@@ -83,7 +83,9 @@
         <% for(var i =0;i
         <attr_list.length
         ;i++){　%>
-        <span><%=attr_list[i].name%>：<%=attr_list[i].value%></span>
+            <% if(attr_list[i].value){　%>
+                <span><%=attr_list[i].name%>：<%=attr_list[i].value%></span>
+            <%}%>
         <%}%>
         <%}else{%>
         <span>没有属性</span>
@@ -91,9 +93,42 @@
     </section>
 
     <section class="detail-content-box">
-        <div class="detail-content" id="mobile_body">
-
-        </div>
+        <a href="<%=WapSiteUrl%>/tmpl/product_eval_list.html?goods_id=<%=goods_info.goods_id%>">
+            <div class="cont_tit">
+                <span class="tit_item rate_tit">商品评价</span>
+                <span class="tit_item rate">好评率<%=goods_evaluate_info.good_percent%>%</span>
+                <span class="tit_item rate_num">(<%=goods_info.evaluation_count%>人评价)</span>
+                <span class="item-more"></span>
+            </div>
+        </a>
+        <% if (goods_eval_list.length > 0) { %>
+            <% for (var i=0; i<goods_eval_list.length; i++) { %>
+                <div class="evaluate_info">
+                    <div class="info_tit">
+                        <span class="info_star"><i class="star<%=goods_eval_list[i].geval_scores%>"></i></span>
+                        <span class="info_author"><%=goods_eval_list[i].geval_frommembername%></span>
+                    </div>
+                    <div class="info_cont"><%=goods_eval_list[i].geval_content%></div>
+                    <div class="info_img">
+                        <% if (goods_eval_list[i].geval_image_url.length > 0) { %>
+                            <% for (var j=0; j<goods_eval_list[i].geval_image_url.length; j++) { %>
+                                <img src="<%=goods_eval_list[i].geval_image_url[j]%>" alt="">
+                            <% } %>
+                        <% }%>
+                    </div>
+                    <div class="info_time"><%=goods_eval_list[i].geval_addtime_date%></div>
+                </div>
+        <% }} %>
+      <!--  <div class="detail-content" id="mobile_body">
+        </div>-->
+    </section>
+    <section class="detail-content-box mt2">
+        <a href="<%=WapSiteUrl%>/tmpl/product_info.html?goods_id=<%=goods_info.goods_id%>">
+            <div class="cont_tit">
+                <span class="tit_item rate_tit">商品详情</span>
+                <span class="item-more"></span>
+            </div>
+        </a>
     </section>
 
     <!--规格选择部分-->

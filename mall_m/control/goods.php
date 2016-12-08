@@ -118,6 +118,7 @@ class goodsControl extends mobileHomeControl{
         } else {
             $goods_list = $model_goods->getGoodsListByColorDistinct($condition, $fieldstr, $order, $this->page);
         }
+
         $page_count = $model_goods->gettotalpage();
 
         //处理商品列表(抢购、限时折扣、商品图片)
@@ -349,7 +350,17 @@ class goodsControl extends mobileHomeControl{
         $goods_detail['spec_val_list'] = $goods_detail['goods_info']['goods_spec'] ? array_values($goods_detail['goods_info']['goods_spec']) : array();
         $goods_detail["goods_info"]["spec_value"] = $goods_detail["goods_info"]["spec_value"] ? $goods_detail["goods_info"]["spec_value"] :array();
 
-		$goods_info=$goods_detail['goods_info'];
+        // 评价列表
+        $evaluate_con['geval_goodsid'] = $goods_id;
+        $evaluate_con['geval_state'] = 0;
+        $goods_eval_list = Model("evaluate_goods")->getEvaluateGoodsList($evaluate_con, null, '3');
+        $goods_detail['goods_eval_list'] = $goods_eval_list;
+
+        //评价信息
+        $goods_evaluate_info = Model('evaluate_goods')->getEvaluateGoodsInfoByGoodsID($goods_id);
+        $goods_detail['goods_evaluate_info'] = $goods_evaluate_info;
+
+        $goods_info=$goods_detail['goods_info'];
 		//print_r($goods_info);
 		$IsHaveBuy=0;
 		if(!empty($_COOKIE['username'])){
@@ -391,6 +402,43 @@ class goodsControl extends mobileHomeControl{
 		$goods_detail['IsHaveBuy']=$IsHaveBuy;
 
         output_data($goods_detail);
+    }
+
+    /**
+     * 评论列表
+     */
+    public function goods_evaluateOp() {
+        $goods_id = intval($_GET['goods_id']);
+        $type = intval($_GET['type']);
+
+        $condition = array();
+        $condition['geval_goodsid'] = $goods_id;
+        switch ($type) {
+            case '1':
+                $condition['geval_scores'] = array('in', '5,4');
+                break;
+            case '2':
+                $condition['geval_scores'] = array('in', '3,2');
+                break;
+            case '3':
+                $condition['geval_scores'] = array('in', '1');
+                break;
+            case '4':
+                $condition['geval_image'] = array('neq', '');
+                break;
+            case '5':
+                $condition['geval_content_again'] = array('neq', '');
+                break;
+        }
+
+        //查询商品评分信息
+        $model_evaluate_goods = Model("evaluate_goods");
+        $condition['geval_state'] = 0;
+        $goods_eval_list = $model_evaluate_goods->getEvaluateGoodsList($condition, 10);
+        $goods_eval_list = Logic('member_evaluate')->evaluateListDity($goods_eval_list);
+
+        $page_count = $model_evaluate_goods->gettotalpage();
+        output_data(array('goods_eval_list' => $goods_eval_list), mobile_page($page_count));
     }
 
     /**
