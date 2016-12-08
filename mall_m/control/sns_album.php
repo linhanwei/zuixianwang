@@ -31,7 +31,7 @@ class sns_albumControl extends mobileMemberControl {
         if(C('malbum_max_sum') != 0 && $count >= C('malbum_max_sum')){
             output_error('已经超出允许上传图片数量，不能在上传图片！');
         }
-    
+
         /**
          * 上传图片
          */
@@ -51,7 +51,7 @@ class sns_albumControl extends mobileMemberControl {
         if (!$result){
             output_error($upload->error);
         }
-    
+
         $img_path = $upload->getSysSetPath().$upload->file_name;
         list($width, $height, $type, $attr) = getimagesize(BASE_UPLOAD_PATH.DS.ATTACH_MALBUM.DS.$member_id.DS.$img_path);
     
@@ -59,6 +59,17 @@ class sns_albumControl extends mobileMemberControl {
 
         $model_sns_alumb = Model('sns_album');
         $ac_id = $model_sns_alumb->getSnsAlbumClassDefault($member_id);
+        if(empty($ac_id)){
+            $insert_albumclass['ac_name'] = '买家秀';
+            $insert_albumclass['member_id'] = $member_id;
+            $insert_albumclass['ac_des'] = '买家秀默认相册';
+            $insert_albumclass['ac_sort'] = 1;
+            $insert_albumclass['ac_cover'] = '';
+            $insert_albumclass['upload_time'] = time();
+            $insert_albumclass['is_default'] = 1;
+            $ac_id = $model->table('sns_albumclass')->insert($insert_albumclass);
+        }
+
         $insert = array();
         $insert['ap_name']      = $image['0'];
         $insert['ac_id']        = $ac_id;
@@ -67,8 +78,9 @@ class sns_albumControl extends mobileMemberControl {
         $insert['ap_spec']      = $width.'x'.$height;
         $insert['upload_time']  = time();
         $insert['member_id']    = $member_id;
+
         $result = $model->table('sns_albumpic')->insert($insert);
-    
+
         $data = array();
         $data['file_id'] = $result;
         $data['file_name'] = $img_path;

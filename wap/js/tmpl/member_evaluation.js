@@ -10,12 +10,8 @@ $(function() {
 		order_id: a
 	}, function(r) {
 		if (r.datas.error) {
-			$.sDialog({
-				skin: "red",
-				content: r.datas.error,
-				okBtn: false,
-				cancelBtn: false
-			});
+
+			app_alert(r.datas.error);
 			return false
 		}
 		var l = template.render("member-evaluation-script", r.datas);
@@ -30,15 +26,11 @@ $(function() {
 				e.parent().siblings(".pic-thumb").remove()
 			},
 			success: function(e, a) {
-				checkLogin(a.login);
+				checklogin(a.login);
 				if (a.datas.error) {
 					e.parent().siblings(".upload-loading").remove();
-					$.sDialog({
-						skin: "red",
-						content: "图片尺寸过大！",
-						okBtn: false,
-						cancelBtn: false
-					});
+
+					app_alert("图片尺寸过大！");
 					return false
 				}
 				e.parent().after('<div class="pic-thumb"><img src="' + a.datas.file_url + '"/></div>');
@@ -64,7 +56,12 @@ $(function() {
 			l.key = e;
 			l.order_id = a;
 			for (var t = 0; t < r.length; t++) {
-				l[r[t].name] = r[t].value
+				l[r[t].name] = r[t].value;
+				if(t == 1 && r[t].value == ''){
+					app_toast('评价内容不能为空');
+					return false
+				}
+
 			}
 			$.ajax({
 				type: "post",
@@ -73,14 +70,9 @@ $(function() {
 				dataType: "json",
 				async: false,
 				success: function(e) {
-					checkLogin(e.login);
+					checklogin(e.login);
 					if (e.datas.error) {
-						$.sDialog({
-							skin: "red",
-							content: e.datas.error,
-							okBtn: false,
-							cancelBtn: false
-						});
+						app_alert(e.datas.error);
 						return false
 					}
 					window.location.href = WapSiteUrl + "/tmpl/member/order_list.html"

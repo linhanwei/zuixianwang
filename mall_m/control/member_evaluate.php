@@ -42,6 +42,7 @@ class member_evaluateControl extends mobileMemberControl {
             output_error($return['msg']);
         }
         extract($return['data']);
+
         $return = Logic('member_evaluate')->save($_POST, $order_info, $store_info, $order_goods, $this->member_info['member_id'], $this->member_info['member_name']);
 
         if(!$return['state']) {

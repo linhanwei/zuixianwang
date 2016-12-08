@@ -11,8 +11,8 @@
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1" />
 <title>评价订单</title>
-<link rel="stylesheet" type="text/css" href="../../css/base.css">
-<link rel="stylesheet" type="text/css" href="../../css/nctouch_member.css">
+	<link rel="stylesheet" type="text/css" href="../../css/touch/base.css">
+	<link rel="stylesheet" type="text/css" href="../../css/touch/member.css">
 </head>
 <body>
 <header id="header">
@@ -23,7 +23,7 @@
     </div>
   </div>
 </header>
-<div class="nctouch-main-layout" id="member-evaluation-div"> </div>
+<div class="main-layout" id="member-evaluation-div"> </div>
 <footer id="footer" class="posr"></footer>
 <script type="text/html" id="member-evaluation-script">
 	<div class="special-tips">
@@ -31,7 +31,7 @@
 	</div>
 <%if(order_goods.length > 0){%>
 	<form>
-	<ul class="nctouch-evaluation-goods">
+	<ul class="evaluation-goods">
 		<%for(var i=0; i<order_goods.length; i++){%>
 		<li>
 			<div class="evaluation-info">
@@ -60,35 +60,35 @@
 			</div>
 			<div class="evaluation-upload-block">
 				<div class="tit"><i></i><p>晒&nbsp;图</p></div>
-				<div class="nctouch-upload">
+				<div class="upload">
 					<a href="javascript:void(0);">
 						<span><input type="file" hidefocus="true" size="1" class="input-file" name="file" id=""></span>
 						<p><i class="icon-upload"></i></p>
               		</a>
 					<input type="hidden" name="goods[<%=order_goods[i].goods_id%>][evaluate_image][0]" value="" />
 				</div>
-				<div class="nctouch-upload">
+				<div class="upload">
 					<a href="javascript:void(0);">
 						<span><input type="file" hidefocus="true" size="1" class="input-file" name="file" id=""></span>
 						<p><i class="icon-upload"></i></p>
               		</a>
 					<input type="hidden" name="goods[<%=order_goods[i].goods_id%>][evaluate_image][1]" value="" />
 				</div>
-				<div class="nctouch-upload">
+				<div class="upload">
 					<a href="javascript:void(0);">
 						<span><input type="file" hidefocus="true" size="1" class="input-file" name="file" id=""></span>
 						<p><i class="icon-upload"></i></p>
               		</a>
 					<input type="hidden" name="goods[<%=order_goods[i].goods_id%>][evaluate_image][2]" value="" />
 				</div>
-				<div class="nctouch-upload">
+				<div class="upload">
 					<a href="javascript:void(0);">
 						<span><input type="file" hidefocus="true" size="1" class="input-file" name="file" id=""></span>
 						<p><i class="icon-upload"></i></p>
               		</a>
 					<input type="hidden" name="goods[<%=order_goods[i].goods_id%>][evaluate_image][3]" value="" />
 				</div>
-				<div class="nctouch-upload">
+				<div class="upload">
 					<a href="javascript:void(0);">
 						<span><input type="file" hidefocus="true" size="1" class="input-file" name="file" id=""></span>
 						<p><i class="icon-upload"></i></p>
@@ -100,7 +100,7 @@
 		<%}%>
 	</ul>
 	<%if(store_info.is_own_shop == 0){%>
-	<div class="nctouch-evaluation-store">
+	<div class="evaluation-store">
 		<dl>
 			<dt>描述相符</dt>
 			<dd>

@@ -4,7 +4,6 @@
  *
  */
 defined('InSystem') or exit('Access Invalid!');
-
 class member_evaluateLogic
 {
 
@@ -188,13 +187,13 @@ class member_evaluateLogic
         }
 
         //添加会员积分
-        if (C('points_isuse') == 1) {
-            $points_model = Model('points');
-            $points_model->savePointsLog('comments', array('pl_memberid' => $member_id, 'pl_membername' => $member_name));
-        }
+//        if (C('points_isuse') == 1) {
+//            $points_model = Model('points');
+//            $points_model->savePointsLog('comments', array('pl_memberid' => $member_id, 'pl_membername' => $member_name));
+//        }
 
         //添加会员经验值
-        Model('exppoints')->saveExppointsLog('comments', array('exp_memberid' => $member_id, 'exp_membername' => $member_name));;
+//        Model('exppoints')->saveExppointsLog('comments', array('exp_memberid' => $member_id, 'exp_membername' => $member_name));
 
         $result['state'] = 1;
         return $result;
