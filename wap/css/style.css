@@ -210,7 +210,7 @@ body.bg-white{ background:#FFF}
 .detail-content-box .evaluate_info{width: 97%;margin: 0 auto;}
 .evaluate_info .info_time{font-size: 9px;color: #848689;text-align: right;margin: 11px 10px 10px 0;}
 .evaluate_info .info_img{}
-.evaluate_info .info_img img{display: inline-block;width: 19%;}
+.evaluate_info .info_img img{display: inline-block;width: 19%;max-height: 100px;}
 .info_tit i{display: inline-block;height: 0.15rem;background-image: url(../images/star_r.png);background-repeat: repeat-x;background-position: 0 0;background-size: contain;}
 .info_tit .info_star i.star1 {width: 0.15rem;}
 .info_tit .info_star i.star2 {width: 0.30rem;}
