@@ -121,10 +121,10 @@ $arr = array(
             'text' => $lang['nc_trade'],
             'list' => array(
                 array('args' => 'index,order,trade', 'text' => $lang['nc_order_manage']),
-                array('args' => 'index,vr_order,trade', 'text' => '虚拟订单'),
+//                array('args' => 'index,vr_order,trade', 'text' => '虚拟订单'),
                 array('args' => 'refund_manage,refund,trade', 'text' => '退款管理'),
                 array('args' => 'return_manage,return,trade', 'text' => '退货管理'),
-                array('args' => 'refund_manage,vr_refund,trade', 'text' => '虚拟订单退款'),
+//                array('args' => 'refund_manage,vr_refund,trade', 'text' => '虚拟订单退款'),
                 array('args' => 'consulting,consulting,trade', 'text' => $lang['nc_consult_manage']),
                 array('args' => 'inform_list,inform,trade', 'text' => $lang['nc_inform_config']),
                 array('args' => 'evalgoods_list,evaluate,trade', 'text' => $lang['nc_goods_evaluate']),
@@ -136,8 +136,8 @@ $arr = array(
             'text' => $lang['nc_operation'],
             'list' => array(
                 array('args' => 'setting,operation,operation', 'text' => $lang['nc_operation_set']),
-                array('args' => 'setting,coupons,operation', 'text' => '电子消费券'),
-                array('args' => 'index,fund,operation', 'text' => '公益慈善')
+//                array('args' => 'setting,coupons,operation', 'text' => '电子消费券'),
+//                array('args' => 'index,fund,operation', 'text' => '公益慈善')
             )
         ),
         8 => array(
@@ -171,7 +171,7 @@ $arr['left'][] = array(
     'text' => $lang['nc_mobile'],
     'list' => array(
         array('args' => 'index_edit,mb_special,mobile', 'text' => '首页编辑'),
-        array('args' => 'index,banner,mobile', 'text' => 'banner管理'),
+//        array('args' => 'index,banner,mobile', 'text' => 'banner管理'),
 //     array('args'=>'special_list,mb_special,mobile',				'text'=>'专题设置'),
      array('args'=>'upload_apk,mb_index,mobile',				'text'=>'apk上传'),
         /* array('args'=>'mb_category_list,mb_category,mobile',	'text'=>$lang['nc_mobile_catepic']),

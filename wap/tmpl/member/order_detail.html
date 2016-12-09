@@ -11,8 +11,8 @@
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1" />
 <title>订单详情</title>
-<link rel="stylesheet" type="text/css" href="../../css/base.css">
-<link rel="stylesheet" type="text/css" href="../../css/nctouch_member.css">
+	<link rel="stylesheet" type="text/css" href="../../css/touch/base.css">
+	<link rel="stylesheet" type="text/css" href="../../css/touch/member.css">
 </head>
 <body>
 <header id="header" class="fixed">
@@ -23,8 +23,8 @@
     </div>
     <div class="header-r" style="display: none;"> <a id="header-nav" href="javascript:void(0);"><i class="more"></i><sup></sup></a> </div>
   </div>
-  <div class="nctouch-nav-layout">
-    <div class="nctouch-nav-menu"> <span class="arrow"></span>
+  <div class="nav-layout">
+    <div class="nav-menu"> <span class="arrow"></span>
       <ul>
         <li><a href="../../index.html"><i class="home"></i>首页</a></li>
         <li><a href="../search.html"><i class="search"></i>搜索</a></li>
@@ -36,21 +36,21 @@
     </div>
   </div>
 </header>
-<div class="nctouch-main-layout mb20">
-  <div class="nctouch-order-list" id="order-info-container">
+<div class="main-layout mb20">
+  <div class="order-list" id="order-info-container">
     <ul>
     </ul>
   </div>
 </div>
 <footer id="footer"></footer>
 <script type="text/html" id="order-info-tmpl">
-	<div class="nctouch-oredr-detail-block">
+	<div class="oredr-detail-block">
 		<h3><i class="orders"></i>交易状态</h3>
 		<div class="order-state"><%=state_desc%></div>
 		<%if (order_tips != ''){%><div class="info"><%=order_tips%></div><%}%>
 	</div>
 	<%if(if_deliver){%>
-	<div class="nctouch-oredr-detail-delivery">
+	<div class="oredr-detail-delivery">
 		<a href="<%=WapSiteUrl%>/tmpl/member/order_delivery.html?order_id=<%=order_id%>">
 			<span class="time-line">
 				<i></i>
@@ -63,8 +63,8 @@
 		</a>
 	</div>
 	<%}%>
-	<div class="nctouch-oredr-detail-block mt5">
-		<div class="nctouch-oredr-detail-add">
+	<div class="oredr-detail-block mt5">
+		<div class="oredr-detail-add">
 			<i class="icon-add"></i>
 			<dl>
         		<dt>收货人：<span><%=reciver_name%></span><span><%=reciver_phone%></span></dt>
@@ -73,32 +73,32 @@
 		</div>
 	</div>
 	<%if (order_message != ''){%>
-	<div class="nctouch-oredr-detail-block">
+	<div class="oredr-detail-block">
 		<h3><i class="msg"></i>买家留言</h3>
 		<div class="info"><%=order_message%></div>
 	</div>
 	<%}%>
 	<%if (invoice != ''){%>
-	<div class="nctouch-oredr-detail-block">
+	<div class="oredr-detail-block">
 		<h3><i class="invoice"></i>发票信息</h3>
 		<div class="info"><%=invoice%></div>
 	</div>
 	<%}%>
 	<%if (payment_name != ''){%>
-	<div class="nctouch-oredr-detail-block">
+	<div class="oredr-detail-block">
 		<h3><i class="pay"></i>付款方式</h3>
 		<div class="info"><%=payment_name%></div>
 	</div>
 	<%}%>
-	<div class="nctouch-order-item mt5">
-		<div class="nctouch-order-item-head">
+	<div class="order-item mt5">
+		<div class="order-item-head">
 			<%if (ownshop){%>
 			<a class="store"><i class="icon"></i><%=store_name%></a>
 			<%}else{%>
 				<a href="<%=WapSiteUrl%>/tmpl/store.html?store_id=<%=store_id%>" class="store"><i class="icon"></i><%=store_name%><i class="arrow-r"></i></a>
 			<%}%>
 		</div>
-		<div class="nctouch-order-item-con">
+		<div class="order-item-con">
 			<%for(i=0; i<goods_list.length; i++){%>
 			<div class="goods-block detail">
 				<a href="<%=WapSiteUrl%>/tmpl/product_detail.html?goods_id=<%=goods_list[i].goods_id%>">
@@ -145,12 +145,12 @@
 				</dl>
 			</div>
 		</div>
-		<div class="nctouch-order-item-bottom" style="display: none;">
+		<div class="order-item-bottom" style="display: none;">
 			<span><a href="chat_info.html?t_id=<%=store_member_id%>"><i class="im"></i>联系客服</a></span>
 			<span><a tel="<%=store_phone%>"><i class="tel"></i>拨打电话</a></span>
 		</div>
 	</div>
-	<div class="nctouch-oredr-detail-block mt5">
+	<div class="oredr-detail-block mt5">
 		<ul class="order-log">
 			<li>订单编号：<%=order_sn%></li>
 			<li>创建时间：<%=add_time%></li>
@@ -165,7 +165,7 @@
 			<%}%>
 		</ul>
 	</div>
-	<div class="nctouch-oredr-detail-bottom">
+	<div class="oredr-detail-bottom">
 	<% if (if_lock) {%>
 	<p>退款/退货中...</p>
 	<% } %>
