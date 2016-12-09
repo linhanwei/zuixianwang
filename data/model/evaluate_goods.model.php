@@ -21,13 +21,28 @@ class evaluate_goodsModel extends Model {
      * @return array
 	 */
     public function getEvaluateGoodsList($condition, $page = null, $order = 'geval_id desc', $field = '*') {
+        $isanonymous = $condition['isanonymous'];
+        if($isanonymous) unset($condition['isanonymous']);
         $list = $this->field($field)->where($condition)->page($page)->order($order)->select();
         if($list){
+            $model_member = Model('member');
+
             foreach($list as $k=>$v){
                 $geval_image_list = unserialize($v['geval_image']);
                 $list[$k]['geval_image'] = $geval_image_list;
                 $list[$k]['geval_addtime_date'] = date('Y-m-d',$v['geval_addtime']);
-                $list[$k]['geval_frommembername'] = substr($v['geval_frommembername'],0,1).'****'.substr($v['geval_frommembername'],-1,1);
+                $geval_frommembername = $v['geval_frommembername'];
+                $member_info = $model_member->getMemberInfoByName($geval_frommembername);
+
+                $geval_frommembername = $member_info['member_nickname'] ? $member_info['member_nickname'] : $geval_frommembername;
+
+                //你们评价
+                if($isanonymous && ($v['geval_isanonymous'] == 1 || empty($member_info['member_nickname']))){
+                    $list[$k]['geval_frommembername'] = $this->msubstr($geval_frommembername,0,1,true).$this->msubstr($geval_frommembername,-1,1,false);
+                }else{
+                    $list[$k]['geval_frommembername'] = $geval_frommembername;
+                }
+
                 $list[$k]['geval_image_url'] = array();
                 if($geval_image_list){
                     foreach($geval_image_list as $egv){
@@ -37,6 +52,22 @@ class evaluate_goodsModel extends Model {
             }
         }
         return $list;
+    }
+
+    protected function msubstr($str, $start=0, $length, $suffix=true, $charset="utf-8") {
+        if(function_exists("mb_substr"))
+            $slice = mb_substr($str, $start, $length, $charset);
+        elseif(function_exists('iconv_substr')) {
+            $slice = iconv_substr($str,$start,$length,$charset);
+        }else{
+            $re['utf-8']   = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xff][\x80-\xbf]{3}/";
+            $re['gb2312'] = "/[\x01-\x7f]|[\xb0-\xf7][\xa0-\xfe]/";
+            $re['gbk']    = "/[\x01-\x7f]|[\x81-\xfe][\x40-\xfe]/";
+            $re['big5']   = "/[\x01-\x7f]|[\x81-\xfe]([\x40-\x7e]|\xa1-\xfe])/";
+            preg_match_all($re[$charset], $str, $match);
+            $slice = join("",array_slice($match[0], $start, $length));
+        }
+        return $suffix ? $slice.'***' : $slice;
     }
 
     /**

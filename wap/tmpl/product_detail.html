@@ -109,6 +109,11 @@
                         <span class="info_author"><%=goods_eval_list[i].geval_frommembername%></span>
                     </div>
                     <div class="info_cont"><%=goods_eval_list[i].geval_content%></div>
+                    <%if(goods_eval_list[i].geval_explain && goods_eval_list[i].geval_explain != '') {%>
+                        <div class="info_explain">
+                            解释：<%=goods_eval_list[i].geval_explain%>
+                        </div>
+                    <%}%>
                     <div class="info_img">
                         <% if (goods_eval_list[i].geval_image_url.length > 0) { %>
                             <% for (var j=0; j<goods_eval_list[i].geval_image_url.length; j++) { %>
@@ -117,6 +122,7 @@
                         <% }%>
                     </div>
                     <div class="info_time"><%=goods_eval_list[i].geval_addtime_date%></div>
+
                 </div>
         <% }} %>
       <!--  <div class="detail-content" id="mobile_body">

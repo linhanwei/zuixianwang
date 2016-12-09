@@ -353,6 +353,7 @@ class goodsControl extends mobileHomeControl{
         // 评价列表
         $evaluate_con['geval_goodsid'] = $goods_id;
         $evaluate_con['geval_state'] = 0;
+        $evaluate_con['isanonymous'] = true;
         $goods_eval_list = Model("evaluate_goods")->getEvaluateGoodsList($evaluate_con, null, '3');
         $goods_detail['goods_eval_list'] = $goods_eval_list;
 
@@ -434,6 +435,7 @@ class goodsControl extends mobileHomeControl{
         //查询商品评分信息
         $model_evaluate_goods = Model("evaluate_goods");
         $condition['geval_state'] = 0;
+        $condition['isanonymous'] = true;
         $goods_eval_list = $model_evaluate_goods->getEvaluateGoodsList($condition, 10);
         $goods_eval_list = Logic('member_evaluate')->evaluateListDity($goods_eval_list);
 
