@@ -59,7 +59,7 @@
     <?php if(!empty($output['evalgoods_list'])){?>
       <?php foreach($output['evalgoods_list'] as $v){?>
       <tr class="hover">
-        <td><a href="<?php echo urlShop('goods','index',array('goods_id'=>$v['geval_goodsid']));?>" target="_blank"><?php echo $v['geval_goodsname'];?></a></td>
+        <td><a <!--href="--><?php /*echo urlShop('goods','index',array('goods_id'=>$v['geval_goodsid']));*/?>" target="_blank"><?php echo $v['geval_goodsname'];?></a></td>
         <td class="evaluation"><div>商品评分：<span class="raty" data-score="<?php echo $v['geval_scores'];?>"></span><time>[<?php echo @date('Y-m-d',$v['geval_addtime']);?>]</time></div>
           <div>评价内容：<?php echo $v['geval_content'];?></div>
           
