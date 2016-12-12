@@ -104,17 +104,9 @@
     					dataType:'json',
     					success:function(result){
     						if(result){
-								if(is_app()){
-									app_interface.openWebView(WapSiteUrl+'/tmpl/member/address_list.html',1);
-								}else{
-									location.href = WapSiteUrl+'/tmpl/member/address_list.html';
-								}
+								location.href = WapSiteUrl+'/tmpl/member/address_list.html';
     						}else{
-								if(is_app()){
-									app_interface.openWebView(WapSiteUrl,1);
-								}else{
-									location.href = WapSiteUrl;
-								}
+								location.href = WapSiteUrl;
     						}
     					}
     				});

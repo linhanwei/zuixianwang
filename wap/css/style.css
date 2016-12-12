@@ -349,7 +349,7 @@ body.bg-white{ background:#FFF}
 .member-order-head span{ float:left; font-size:0.20rem; margin-left:0.1rem}
 .member-order-head a{ float:right; font-size:0.20rem; margin-right:0.1rem}
 .member-order-itemlist{ width:100%; padding:0.15rem 0; overflow:hidden}
-.member-order-itemlist .item{ display:block; width:25%; float:left}
+.member-order-itemlist .item{ display:block; width:20%; float:left}
 .member-order-itemlist .item img{ width:50%; margin:auto}
 .member-order-itemlist .item p{ height:0.2rem; line-height:0.2rem; font-size:0.16rem; color:#7C7C7C; margin-top:0.05rem; text-align:center}
 
@@ -657,7 +657,7 @@ body.bg-white{ background:#FFF}
 .norecord dl dt {
     display: block;
     height: 0.25rem;
-    margin-bottom: 0.07rem;
+    margin-bottom: 0.0rem;
     font-size: 0.16rem;
     line-height: 0.25rem;
 }

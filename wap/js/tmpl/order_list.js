@@ -6,8 +6,8 @@ var orderKey = "";
 $(function() {
     var e = getcookie("key");
     app_check_login(e);
-    if (getQueryString("data-state") != "") {
-        $("#filtrate_ul").find("li").has('a[data-state="' + getQueryString("data-state") + '"]').addClass("selected").siblings().removeClass("selected")
+    if (getQueryString("state_type") != "") {
+        $("#filtrate_ul").find("li").has('a[data-state="' + getQueryString("state_type") + '"]').addClass("selected").siblings().removeClass("selected")
     }
     $("#search_btn").click(function() {
         reset = true;
@@ -30,8 +30,8 @@ $(function() {
             return false
         }
         hasMore = false;
-        //var t = $("#filtrate_ul").find(".selected").find("a").attr("data-state");
-        var t = getQueryString('state_type');
+        var t = $("#filtrate_ul").find(".selected").find("a").attr("data-state");
+        //var t = getQueryString('state_type');
         var r = $("#order_key").val();
         $.ajax({
             type: "post",

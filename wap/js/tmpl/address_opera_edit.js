@@ -1,7 +1,7 @@
     	$(function() {
     	    var address_id = GetQueryString('address_id');
     	    var key = getcookie('key');
-
+			app_check_login(key);
     	    $.ajax({
     	        type: 'post',
     	        url: ApiUrl + '/index.php?act=member_address&op=address_info',
@@ -11,7 +11,6 @@
     	        },
     	        dataType: 'json',
     	        success: function(result) {
-    	            checklogin(result.login);
 
     	            var addrstr = result.datas.address_info.area_info;
     	            $('#detailaddr').html(addrstr);
@@ -35,7 +34,7 @@
     	        },
     	        dataType: 'json',
     	        success: function(result) {
-    	            checklogin(result.login);
+
     	            var data = result.datas;
     	            var prov_html = '';
     	            for (var i = 0; i < data.area_list.length; i++) {
@@ -56,7 +55,7 @@
     	            },
     	            dataType: 'json',
     	            success: function(result) {
-    	                checklogin(result.login);
+
     	                var data = result.datas;
     	                var city_html = '<option value="">请选择...</option>';
     	                for (var i = 0; i < data.area_list.length; i++) {
@@ -79,7 +78,7 @@
     	            },
     	            dataType: 'json',
     	            success: function(result) {
-    	                checklogin(result.login);
+
     	                var data = result.datas;
     	                var region_html = '<option value="">请选择...</option>';
     	                for (var i = 0; i < data.area_list.length; i++) {
@@ -119,13 +118,10 @@
                 },
                 callback:function (eId,eMsg,eRules){
                     if(eId.length >0){
-                        var errorHtml = "";
-                        $.map(eMsg,function (idx,item){
-                            errorHtml += "<p>"+idx+"</p>";
-                        });
-                        $(".error-tips").html(errorHtml).show();
-                    }else{
-                         $(".error-tips").html("").hide();
+						for(var i in eMsg){
+							app_toast(eMsg[i]);
+							return false;
+						}
                     }
                 }  
             });
@@ -171,11 +167,11 @@
         	            },
         	            dataType: 'json',
         	            success: function(result) {
-        	                if (result) {
-        	                    location.href = WapSiteUrl + '/tmpl/member/address_list.html';
-        	                } else {
-        	                    location.href = WapSiteUrl;
-        	                }
+							if(result){
+								location.href = WapSiteUrl+'/tmpl/member/address_list.html';
+							}else{
+								location.href = WapSiteUrl;
+							}
         	            }
         	        });
                 }
