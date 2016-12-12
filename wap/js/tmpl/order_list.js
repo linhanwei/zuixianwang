@@ -4,7 +4,7 @@ var hasMore = true;
 var reset = true;
 var orderKey = "";
 $(function() {
-    var e = getCookie("key");
+    var e = getcookie("key");
     app_check_login(e);
     if (getQueryString("data-state") != "") {
         $("#filtrate_ul").find("li").has('a[data-state="' + getQueryString("data-state") + '"]').addClass("selected").siblings().removeClass("selected")
@@ -44,14 +44,14 @@ $(function() {
             },
             dataType: "json",
             success: function(e) {
-                checkLogin(e.login);
+
                 curpage++;
                 hasMore = e.hasmore;
 
                 var t = e;
                 t.WapSiteUrl = WapSiteUrl;
                 t.ApiUrl = ApiUrl;
-                t.key = getCookie("key");
+                t.key = getcookie("key");
                 template.helper("$getLocalTime",
                 function(e) {
                     var t = new Date(parseInt(e) * 1e3);
@@ -72,7 +72,7 @@ $(function() {
                     return parseInt(e)
                 });
 
-                t.datas.order_group_list = [];
+                //t.datas.order_group_list = [];
                 var r = template.render("order-list-tmpl", t);
 
                 if (reset) {
