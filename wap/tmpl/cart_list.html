@@ -57,7 +57,7 @@
                 <div class="left">
                     <div class="num-col">
                         <a class="minus" id="minus-<%=cart_list[i][k].cart_id%>" onClick="cartMinus(<%=cart_list[i][k].cart_id%>);">-</a>
-                        <input name="num" id="num-<%=cart_list[i][k].cart_id%>" value="<%=cart_list[i][k].goods_num%>">
+                        <input name="num" id="num-<%=cart_list[i][k].cart_id%>" value="<%=cart_list[i][k].goods_num%>" readonly>
                         <a class="add" id="add-<%=cart_list[i][k].cart_id%>" onClick="cartAdd(<%=cart_list[i][k].cart_id%>);">+</a>
                     </div>
                 </div>
