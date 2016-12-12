@@ -4,10 +4,8 @@ var hasMore = true;
 var reset = true;
 var orderKey = "";
 $(function() {
-    var e = getcookie("key");
-    if (!e) {
-        window.location.href = WapSiteUrl + "/tmpl/member/login.html"
-    }
+    var e = getCookie("key");
+    app_check_login(e);
     if (getQueryString("data-state") != "") {
         $("#filtrate_ul").find("li").has('a[data-state="' + getQueryString("data-state") + '"]').addClass("selected").siblings().removeClass("selected")
     }
@@ -46,14 +44,14 @@ $(function() {
             },
             dataType: "json",
             success: function(e) {
-                checklogin(e.login);
+                checkLogin(e.login);
                 curpage++;
                 hasMore = e.hasmore;
 
                 var t = e;
                 t.WapSiteUrl = WapSiteUrl;
                 t.ApiUrl = ApiUrl;
-                t.key = getcookie("key");
+                t.key = getCookie("key");
                 template.helper("$getLocalTime",
                 function(e) {
                     var t = new Date(parseInt(e) * 1e3);
@@ -74,7 +72,7 @@ $(function() {
                     return parseInt(e)
                 });
 
-                //t.datas.order_group_list = [];
+                t.datas.order_group_list = [];
                 var r = template.render("order-list-tmpl", t);
 
                 if (reset) {

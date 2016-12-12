@@ -13,7 +13,7 @@
 </head>
 <body>
     <header class="head">
-      <a class="arrow-left" href="javascript:history.go(-1);"><img src="../../images/setup/arrow-left.png"></a> <span>地址列表</span> <a class="arrow-right txt"></a>
+      <a class="arrow-left" href="javascript:history.go(-1);"><img src="../../images/setup/arrow-left.png"></a> <span>地址列表</span> <a href="address_opera.html" class="arrow-right txt">添加</a>
     </header>
     <div class="address-list" id="address_list"></div>
     <footer id="footer"></footer>
@@ -39,11 +39,14 @@
 		<%}%>
         </ul>
         <%}else{%>
-            <div class="no-record">
-                暂无记录
-            </div>
+             <div class="norecord">
+                 <div class="norecord-ico"><i></i></div>
+                 <dl>
+                     <dt>您还没有相关的记录</dt>
+                 </dl>
+             </div>
         <%}%>
-		<a class="add_address mt10" href="address_opera.html">添加新地址</a>
+		<!--<a class="add_address mt10" href="address_opera.html">添加新地址</a>-->
 	</script>
 
     <script type="text/javascript" src="../../js/zepto.min.js"></script>
