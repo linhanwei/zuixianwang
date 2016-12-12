@@ -1,8 +1,7 @@
-$(function(){bind_openwebview();
+$(function(){
+		bind_openwebview();
 		var key = getcookie('key');
-		if(key==''){
-			location.href = 'login.html';
-		}
+		app_check_login(key);
 		//初始化列表
 		function initPage(){
 			$.ajax({
@@ -11,7 +10,6 @@ $(function(){bind_openwebview();
 				data:{key:key},
 				dataType:'json',
 				success:function(result){
-					checklogin(result.login);
 					if(result.datas.address_list==null){
 						return false;
 					}
@@ -34,7 +32,6 @@ $(function(){bind_openwebview();
 				data:{address_id:address_id,key:key},
 				dataType:'json',
 				success:function(result){
-					checklogin(result.login);
 					if(result){
 						initPage();
 					}
