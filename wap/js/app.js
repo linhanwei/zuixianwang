@@ -47,17 +47,22 @@ function bind_login(func){
 
 function app_check_login(key,is_to_root){
     if(key == ''){
+        var func_parma = getQueryString('func');
+        if(location.href.indexOf('/member/member.html') > 0){
+            func_parma='load_member_info';
+        }
+        //alert(location.href);
         if(is_to_root){
             if(is_app()){
-                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html?to_root=1',1);return false;
+                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html?to_root=1&func='+func_parma,1);return false;
             }else{
-                window.location.href = WapSiteUrl + '/tmpl/member/login.html?to_root=1';
+                window.location.href = WapSiteUrl + '/tmpl/member/login.html?to_root=1&func='+func_parma;
             }
         }else{
             if(is_app()){
-                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html',1);return false;
+                app_interface.openWebView(WapSiteUrl + '/tmpl/member/login.html?func='+func_parma,1);return false;
             }else{
-                window.location.href = WapSiteUrl + '/tmpl/member/login.html';
+                window.location.href = WapSiteUrl + '/tmpl/member/login.html?func='+func_parma;
             }
         }
     }
