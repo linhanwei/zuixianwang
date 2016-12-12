@@ -310,6 +310,33 @@ $(function () {
 
                     });
                 }
+
+                //浏览评论图片
+                $('.evaluate_info .info_img').click(function(){
+
+                    var eval_info = {};
+                    var img_url_list = {};
+                    var eval_cont = '';
+                    var img_length = $(this).find('img').length;
+                    eval_info.img_list = img_url_list;
+                    eval_info.eval_cont = eval_cont;
+
+                    if(img_length > 0){
+                        eval_cont = $(this).siblings('.info_cont').text();
+                        for(var i=0;i<img_length;i++){
+                            img_url_list[i] = $(this).children('a').eq(i).find('img').attr('src');
+
+                        }
+
+                        eval_info.img_list = img_url_list;
+                        eval_info.eval_cont = eval_cont;
+                    }
+
+                    if(is_app()){
+                        app_interface.showEvaluateInfo(eval_info);
+                    }
+                    console.log(eval_info);
+                });
             } else {
                 app_toast(data.error);
             }

@@ -117,7 +117,9 @@
                     <div class="info_img">
                         <% if (goods_eval_list[i].geval_image_url.length > 0) { %>
                             <% for (var j=0; j<goods_eval_list[i].geval_image_url.length; j++) { %>
-                                <img src="<%=goods_eval_list[i].geval_image_url[j]%>" alt="">
+                                <a href="javascript:void(0);">
+                                    <img src="<%=goods_eval_list[i].geval_image_url[j]%>" alt="">
+                                </a>
                             <% } %>
                         <% }%>
                     </div>

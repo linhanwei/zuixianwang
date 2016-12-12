@@ -28,7 +28,33 @@ $(function () {
     })
 });
 function callback() {
-    $(".goods_geval").on("click", "a", function () {
+    //浏览评论图片
+    $('.eval-con .goods_geval').click(function(){
+
+        var eval_info = {};
+        var img_url_list = {};
+        var eval_cont = '';
+        var img_length = $(this).find('img').length;
+        eval_info.img_list = img_url_list;
+        eval_info.eval_cont = eval_cont;
+
+        if(img_length > 0){
+            eval_cont = $(this).parent().siblings('.eval-con').find('dt').text();
+            for(var i=0;i<img_length;i++){
+                img_url_list[i] = $(this).children('a').eq(i).find('img').attr('src');
+
+            }
+
+            eval_info.img_list = img_url_list;
+            eval_info.eval_cont = eval_cont;
+        }
+
+        if(is_app()){
+            app_interface.showEvaluateInfo(eval_info);
+        }
+        //console.log(eval_info);
+    });
+    /*$(".goods_geval a").click(function () {
         var o = $(this).parents(".goods_geval");
         o.find(".bigimg-layout").removeClass("hide");
         var i = o.find(".pic-box");
@@ -38,6 +64,7 @@ function callback() {
         if (i.find("li").length < 2) {
             return
         }
+
         Swipe(i[0], {
             speed: 400,
             auto: 3e3,
@@ -50,5 +77,5 @@ function callback() {
             transitionEnd: function (o, i) {
             }
         })
-    })
+    })*/
 }
