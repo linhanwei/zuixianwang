@@ -1,9 +1,6 @@
 $(function() {
     var key = getcookie('key');
-    if (key=='') {
-        window.location.href = WapSiteUrl + '/tmpl/member/login.html';
-        return;
-    }
+    app_check_login(key);
 
     var order_id = GetQueryString("order_id");
 
@@ -13,11 +10,8 @@ $(function() {
         data:{key:key,order_id:order_id},
         dataType:'json',
         success:function(result) {
-            //检测是否登录了
-            checklogin(result.login);
-
             var data = result && result.datas;
-            if (!data) {
+            if (!data || data.error) {
                 data = {};
                 data.err = '暂无物流信息';
             }

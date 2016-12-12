@@ -30,7 +30,12 @@
 <footer id="footer"></footer>
 <script type="text/html" id="order-delivery-tmpl">
 <% if (err) { %>
-	<div class="no-record m10"><%= err %></div>
+	<div class="norecord order">
+		<div class="norecord-ico"><i></i></div>
+		<dl>
+			<dt><%= err %></dt>
+		</dl>
+	</div>
 <% } else { %>
 <div class="order-deivery-info">
 	<i class="icon"></i>
