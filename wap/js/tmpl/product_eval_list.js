@@ -29,30 +29,41 @@ $(function () {
 });
 function callback() {
     //浏览评论图片
-    $('.eval-con .goods_geval').click(function(){
+    $('.eval-con .goods_geval a').click(function(){
 
         var eval_info = {};
-        var img_url_list = {};
+        var img_url_list = [];
         var eval_cont = '';
-        var img_length = $(this).find('img').length;
-        eval_info.img_list = img_url_list;
+        var select_num = 0;
+        var select_img = '';
+        var img_length = $(this).parent().find('img').length;
         eval_info.eval_cont = eval_cont;
+        eval_info.select_num = select_num;
+        eval_info.select_img = select_img;
+        eval_info.img_list = img_url_list;
 
         if(img_length > 0){
-            eval_cont = $(this).parent().siblings('.eval-con').find('dt').text();
+            eval_cont = $(this).parent().parent().siblings('.eval-con').find('dt').text();
             for(var i=0;i<img_length;i++){
-                img_url_list[i] = $(this).children('a').eq(i).find('img').attr('src');
-
+                var img_url = $(this).parent().children('a').eq(i).find('img').attr('src');
+                img_url = img_url.replace("_240", "");
+                img_url_list.push(img_url);
             }
 
-            eval_info.img_list = img_url_list;
+            select_num = $(this).index();
+            select_img = $(this).find('img').attr('src');
+
             eval_info.eval_cont = eval_cont;
+            eval_info.select_num = select_num;
+            eval_info.select_img = select_img;
+            eval_info.img_list = img_url_list;
+
         }
 
         if(is_app()){
-            app_interface.showEvaluateInfo(eval_info);
+            app_interface.showEvaluateInfo(select_num,img_url_list,eval_cont);
         }
-        //console.log(eval_info);
+        console.log(eval_info);
     });
     /*$(".goods_geval a").click(function () {
         var o = $(this).parents(".goods_geval");

@@ -81,6 +81,7 @@ $(function() {
                 } else {
                     $("#order-list").append(r)
                 }
+                bind_openwebview();
             }
         })
     }
