@@ -103,6 +103,9 @@ function load_cart_list(){
             }
         }
     });
+
+    //推荐商品
+    ajax_data();
 }
 load_cart_list()
 //新页面
@@ -242,6 +245,32 @@ function edit_cart_num(cart_id, type) {
 
             loading(1);
             return false;
+        }
+    });
+}
+
+
+function ajax_data(){
+
+    $('#recommend_goods').html(getCache('cart_recom_goods_list'));
+
+    $.ajax({
+        url: SiteUrl + "/mall_m/index.php?act=goods&op=recommend_goods_list",
+        type: 'get',
+        data:{},
+        dataType: 'json',
+        beforeSend:function(){
+
+        },
+        success: function(result) {
+            var data = result.datas;
+            data.SiteUrl = SiteUrl;
+            if(data.goods_list.length > 0){
+                var goods_list_html = template.render('goods-list', data);
+                setCache('cart_recom_goods_list',goods_list_html);
+                $('#recommend_goods').html(goods_list_html);
+            }
+            bind_openwebview();
         }
     });
 }

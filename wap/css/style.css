@@ -326,6 +326,32 @@ body.bg-white{ background:#FFF}
 .cart-statement-total-info .total-box .total small{ color:#D4342C; font-size:14px}
 .cart-statement-total-info  .freight{ height:20px; line-height:20px; margin-top:-5px}
 .cart-statement-box .cart-statement-info .cart-statement-btn{ width:100px; float:left; text-align:center; background:#D4342C; color:#FFF}
+
+.recommend_goods .recommend_tit{
+    font-size: 0.18rem;
+    position: relative;
+    display: -webkit-box;
+    margin: 14px 5px;
+    color: #848689;
+    -webkit-box-pack: center;
+}
+.recommend_goods .recommend_tit .tit_content{
+    padding: 0 10px;
+    background-color: #f0f2f5;
+    position: relative;
+    display: block;
+}
+.recommend_goods .recommend_tit:after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: -1;
+    background-color: #cbcbcb;
+    -webkit-transform: scaleY(0.5);
+}
 /**@购物车模块样式 结束**/
 
 /**@个人中心 开始**/
@@ -661,4 +687,16 @@ body.bg-white{ background:#FFF}
     font-size: 0.16rem;
     line-height: 0.25rem;
 }
-
+.cart_norecord{
+    font-size: 0.16rem;
+    text-align: center;
+    margin-top: 0.3rem;
+}
+.cart_norecord .cart_norecord-ico{
+    margin: 0 auto;
+    background-color: #DDD;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 100%;
+    padding: 0.1rem;
+}

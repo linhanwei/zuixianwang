@@ -128,6 +128,35 @@ class goodsControl extends mobileHomeControl{
     }
 
     /**
+     * 推荐商品列表
+     */
+    public function recommend_goods_listOp() {
+        $model_goods = Model('goods');
+        $this->page = 10;
+
+        //查询条件
+        $condition = array();
+        $condition['goods_commend'] = 1;
+
+        //所需字段
+        $fieldstr = "goods_id,goods_commonid,store_id,goods_name,goods_price,goods_marketprice,goods_image,goods_salenum,evaluation_good_star,evaluation_count";
+
+        // 添加3个状态字段
+        $fieldstr .= ',is_virtual,is_presell,is_fcode,have_gift';
+
+        //排序方式
+        $order = $this->_goods_list_order($_GET['sort_key'], $_GET['order']);
+
+        $goods_list = $model_goods->getGoodsListByColorDistinct($condition, $fieldstr, $order, $this->page);
+        $page_count = $model_goods->gettotalpage();
+
+        //处理商品列表(抢购、限时折扣、商品图片)
+        $goods_list = $this->_goods_list_extend($goods_list);
+
+        output_data(array('goods_list' => $goods_list), mobile_page($page_count));
+    }
+
+    /**
      * 商品列表排序方式
      */
     private function _goods_list_order($key, $order) {

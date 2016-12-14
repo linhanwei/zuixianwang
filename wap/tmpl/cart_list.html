@@ -22,6 +22,8 @@
     <a href="#" class="info-btn"><img src="../images/cart/ico-1464645.png"></a>
 </section>
 <div id="cart-list-wp"></div>
+<div id="recommend_goods"></div>
+
 <script type="text/html" id="cart-list">
 <section class="cart-shop-item">
     <% if(cart_list.length >0){%>
@@ -84,13 +86,38 @@
     </div>
 </section>
 <%}else{%>
-<div class="norecord">
-    <div class="norecord-ico"><i></i></div>
+<div class="cart_norecord">
+    <div class="cart_norecord-ico"><img src="../images/order_w.png" alt=""></div>
     <dl>
         <dt>您还没有相关的商品</dt>
     </dl>
 </div>
 <%}%>
+</script>
+<script type="text/html" id="goods-list">
+    <section class="recommend_goods">
+        <div class="recommend_tit">
+            <span class="tit_content">推荐商品</span>
+        </div>
+        <div class="good-list-show-box" id="good-list-show-box">
+            <% if(goods_list.length >0){%>
+                <%for(i=0;i<goods_list.length;i++){%>
+                <a href="<%= SiteUrl %>/wap/tmpl/product_detail.html?goods_id=<%=goods_list[i].goods_id;%>" class="item">
+                    <div class="img">
+                        <img src="<%=goods_list[i].goods_image_url;%>">
+                    </div>
+                    <div class="title">
+                        <%=goods_list[i].goods_name;%>
+                    </div>
+                    <div class="price">
+                        <span class="now">￥<%=goods_list[i].goods_price;%></span>
+                        <span class="market">￥<%=goods_list[i].goods_marketprice;%></span>
+                    </div>
+                </a>
+                <% }%>
+            <% }%>
+        </div>
+    </section>
 </script>
 
 </body>
