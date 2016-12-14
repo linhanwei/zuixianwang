@@ -1,8 +1,7 @@
 $(function() {
     var r = getcookie("key");
-    if (!r) {
-        window.location.href = WapSiteUrl + "/tmpl/member/login.html"
-    }
+    app_check_login(r);
+
     $.getJSON(ApiUrl + "/index.php?act=member_order&op=order_info", {
         key: r,
         order_id: GetQueryString("order_id")
@@ -81,7 +80,8 @@ $(function() {
             dataType: "json",
             success: function(r) {
                 if (r.datas && r.datas == 1) {
-                    window.location.reload()
+                    //window.location.reload()
+                    location.href = WapSiteUrl + "/tmpl/member/trade_complete.html?order_id=" + e;
                 }
             }
         })

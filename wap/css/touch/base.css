@@ -79,6 +79,8 @@ sub { vertical-align: text-bottom }
 .pl5 { padding-left: 0.5rem;}
 .pb5 { padding-bottom: 0.5rem;}
 .bgc-t { background-color: transparent !important;}
+.fl{float: left;}
+.fr{float: right;}
 
 .opera-tips { color: #D9434E; font-size: 14px; }
 .error-tips { display: none; background-color: rgba(255,255,255,0.95); border: solid 0.05rem #CCC; padding: 0.8rem 0.6rem; text-align: center; border-radius: 0.2rem; position: fixed; z-index: 9999; top: 40%; left: 25%; right: 25%; color: #333; font-size: 0.7rem; line-height: 1rem; box-shadow: 0 0 1rem rgba(0,0,0,0.15);}
@@ -226,8 +228,12 @@ footer.bottom .nav-pic { display: none; }
 footer.bottom .footer-wrap { background-color: transparent; border: none; }
 
 /*默认内容区域*/
-.main-layout { display: block; margin-top: 2rem; background-color: #F5F5F5; }
+.main-layout { display: block; margin-top: 2rem; background-color: #F5F5F5;}
 .main-layout-a { display: block; position: absolute; top: 4rem; right: 0; left: 0; bottom: 0; overflow: hidden; z-index: 1;}
+
+.main_top {height: 6.92rem;background: #d72926;margin-top: 1.95rem; color: #fcf8f2;}
+.main_top .trade_tit{ font-size: 1.6rem;margin-left: 2.4rem;padding-top: 2.4rem;font-weight: bolder;}
+.main_top .trade_desc{margin-left: 2.4rem;font-size: 0.72rem; }
 
 /*特别提示*/
 .special-tips { display: block; padding: 0.4rem 5%;}

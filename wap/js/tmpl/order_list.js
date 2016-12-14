@@ -184,7 +184,8 @@ $(function() {
             success: function(e) {
                 if (e.datas && e.datas == 1) {
                     reset = true;
-                    t()
+                    //t()
+                    location.href = WapSiteUrl + "/tmpl/member/trade_complete.html?order_id=" + r;
                 } else {
                     $.sDialog({
                         skin: "red",

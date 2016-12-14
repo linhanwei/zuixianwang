@@ -267,12 +267,18 @@ i.cc-10 { background-image: url(../../images/mcc_10_b.png); background-size: cov
 .oredr-detail-block .msg-phone { display: inline-block; vertical-align: top; font-size: 0.6rem; font-weight: 600; line-height: 1rem; color: #000; height: 1rem; margin-left: 0.2rem;}
 .oredr-detail-block .msg-again { position: absolute; z-index: 1; top: 0.2rem; right: 0.5rem; background: #F5F5F5; font-size: 0.6rem; line-height: 1rem; padding: 0.2rem 0.3rem; color: #333; border: solid #EEE 0.05rem; border-radius: 0.2rem;}
 .oredr-detail-block .info { margin-left: 1.6rem; font-size: 0.55rem; line-height: 0.9rem;}
+.oredr-detail-block .info_item {width: 80%;margin: 0 auto;}
+.oredr-detail-block .info_btn {display: inline-block;border: 1px solid #c65a52;border-radius: 0.2rem;}
+.oredr-detail-block .info_btn a{display:block;color: #1d1d1d;padding: 0.4rem 1.2rem;font-size: 0.72rem;}
 .oredr-detail-block i.icon-arrow { position: absolute; z-index: 1; top: 50%; right: 0.5rem; display: block; width: 0.5rem; height: 0.5rem; margin-top: -0.25rem; background-image: url(../../images/arrow_right_b.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 100%; opacity: 0.5; }
 .oredr-detail-add { position: relative; z-index: 1; width: 100%;}
 .oredr-detail-add i.icon-add { position: absolute; z-index: 1; top: 0rem; left: 0.4rem; display: block; width: 1rem; height: 1rem; background-image: url(../../images/location_b.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 80%; }
+.oredr-detail-add i.icon-add { position: absolute; z-index: 1; top: 0rem; left: 0.4rem; display: block; width: 1rem; height: 1rem; background-image: url(../../images/location_c.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 80%; }
 .oredr-detail-add dl { margin: 0 0 0 1.6rem; padding: 0 0.5rem 0 0;}
 .oredr-detail-add dt { display: block; height: 1rem; font-size: 0.7rem; line-height: 1rem;}
 .oredr-detail-add dt span { margin-left: 0.3rem; font-weight: 600;}
+.oredr-detail-add dt span.order_phone{ margin-left: 2.4rem; color: #878787;}
+.oredr-detail-add dd.order_addr{color: #878787;}
 .oredr-detail-add dd { display: block; min-height: 0.9rem; max-height: 1.6rem; font-size: 0.6rem; line-height: 0.9rem;}
 
 /*虚拟订单码列表*/
