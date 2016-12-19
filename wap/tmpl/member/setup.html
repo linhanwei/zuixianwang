@@ -22,11 +22,12 @@
  <section class="main">
    <a class="setup-item avatar" id="avatar"><span>头像</span> <i class="arrow-right"></i> <img id="avatar_img_url" src="../../images/setup/avatar-default-ico.png"> </a>
    <a class="setup-item nickname"><span>昵称</span> <span class="nickname-value">请输入昵称</span></a>
-   <a class="setup-item sex"><span>性别</span> <div class="sex-set-box"><i class="action man" data-value="1"></i><i class="woman" data-value="2"></i></div></div>
+   <a class="setup-item sex"><span>性别</span> <div class="sex-set-box"><i class="action man" data-value="1"></i><i class="woman" data-value="2"></i></div></div></a>
    <a class="setup-item birthday"><span>生日</span> <span class="birthday-value"></span> <i class="arrow-right"></i></a>
    <a href="<%=updatepass_url%>" class="setup-item updatepass" style="border-bottom:0;"><span>修改登录密码</span> <i class="arrow-right"></i></a>
    <a href="<%=updatepass_pay_url%>" class="setup-item updatepass" style="border-bottom:0;"><span>修改支付密码</span> <i class="arrow-right"></i></a>
-   <a href="<%=forgetpass_pay_url%>" class="setup-item updatepass"><span>忘记支付密码</span> <i class="arrow-right"></i></a>
+   <a href="<%=forgetpass_pay_url%>" class="setup-item updatepass" style="border-bottom:0;"><span>忘记支付密码</span> <i class="arrow-right"></i></a>
+   <a onclick="clearAppCache();" class="setup-item updatepass" ><span>清除缓存</span> <i class=""></i></a>
    <a class="setup-item login-out" id="logoutbtn"><span>退出</span></a>
    <input type="hidden" id="avatar_img" name="avatar_img" value="">
  </section>

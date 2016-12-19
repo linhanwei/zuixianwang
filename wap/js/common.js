@@ -63,6 +63,13 @@ function clearCache(){
     }
 }
 
+//删除App所有缓存值
+function clearAppCache(){
+    if(is_app()) {
+        app_interface.clearCache();
+    }
+}
+
 //修改a链接增加key值
 function add_key(){
     $('a').each(function(k,v){
