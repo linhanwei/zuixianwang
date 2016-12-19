@@ -14,6 +14,9 @@ var freight_hash, city_id, area_id;
 var area_info;
 var goods_id;
 $(function() {
+    $('.full-mask .back').click(function(){
+        $(this).parents('.full-mask').addClass('hide');
+    });
     $("#list-address-valve").click(function() {
         $.ajax({
             type: "post",
@@ -45,7 +48,8 @@ $(function() {
         $(this).addClass("selected").siblings().removeClass("selected");
         eval("address_info = " + $(this).attr("data-param"));
         _init(address_info.address_id);
-        $("#list-address-wrapper").find(".header-l > a").click()
+        $("#list-address-wrapper").find(".header-l > a").click();
+        $(this).parents('.full-mask').addClass('hide');
     });
     $.animationLeft({
         valve: "#new-address-valve",

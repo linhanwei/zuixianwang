@@ -1,4 +1,4 @@
-var key = getcookie("key");
+var key = typeof(getCookie) === 'function' ? getCookie("key") : getcookie("key");
 var password, rcb_pay, pd_pay, payment_code,pay_amount;
 function toPay(a, e, p) {
     $.ajax({
@@ -172,8 +172,9 @@ function toPay(a, e, p) {
 function goToPayment(a, e) {
     //处理app支付
     if(typeof(app_interface) == 'object'){
-        app_interface.pay(ApiUrl + "/index.php?act=member_payment&op=app_order_pay",payment_code,"{'key':'" + key + "','pay_sn':'" + a + "','payment_code':'" + payment_code + "'}");
+        app_interface.pay(ApiUrl + "/index.php?act=member_payment&op=app_order_pay",payment_code,"{'key':'" + key + "','pay_sn':'" + a + "','payment_code':'" + payment_code + "','password':'" + password + "','pd_pay':'" + pd_pay + "','rcb_pay':'" + rcb_pay + "'}");
     }else{
         location.href = ApiUrl + "/index.php?act=member_payment&op=" + e + "&key=" + key + "&pay_sn=" + a + "&password=" + password + "&rcb_pay=" + rcb_pay + "&pd_pay=" + pd_pay + "&payment_code=" + payment_code
     }
+
 }
