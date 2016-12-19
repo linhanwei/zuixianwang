@@ -31,6 +31,8 @@ $(function() {
                 if (e.deliver_info) {
                     $("#delivery_content").html(e.deliver_info.context);
                     $("#delivery_time").html(e.deliver_info.time)
+                }else{
+                    $("#delivery_content").html('<div class="deliv_empty">暂时没有物流信息!</div>');
                 }
             }
         })

@@ -185,6 +185,8 @@ i.cc-10 { background-image: url(../../images/mcc_10_b.png); background-size: cov
 
 /*订单列表*/
 .order-list { display: block; clear: both; width: 100%;margin-top: 4.3rem;}
+.trade_content {margin-top: 0rem;}
+.order_detail_content {margin-top: 0rem;}
 .order-list ul {}
 .order-item { width: 95%; padding: 0 2.5%; background-color: #FFF; border-bottom: solid 0.05rem #EEE; margin-bottom: 0.275rem;}
 .order-item-head { height: 0.9rem; padding: 0.5rem 0; border-bottom: solid 0.05rem #EEE; line-height: 0.9rem;}
@@ -273,11 +275,11 @@ i.cc-10 { background-image: url(../../images/mcc_10_b.png); background-size: cov
 .oredr-detail-block i.icon-arrow { position: absolute; z-index: 1; top: 50%; right: 0.5rem; display: block; width: 0.5rem; height: 0.5rem; margin-top: -0.25rem; background-image: url(../../images/arrow_right_b.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 100%; opacity: 0.5; }
 .oredr-detail-add { position: relative; z-index: 1; width: 100%;}
 .oredr-detail-add i.icon-add { position: absolute; z-index: 1; top: 0rem; left: 0.4rem; display: block; width: 1rem; height: 1rem; background-image: url(../../images/location_b.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 80%; }
-.oredr-detail-add i.icon-add { position: absolute; z-index: 1; top: 0rem; left: 0.4rem; display: block; width: 1rem; height: 1rem; background-image: url(../../images/location_c.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 80%; }
+.oredr-detail-add i.icon-add { position: absolute; z-index: 1; top: 0.5rem; left: 0.4rem; display: block; width: 1rem; height: 1rem; background-image: url(../../images/location_c.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 100%; }
 .oredr-detail-add dl { margin: 0 0 0 1.6rem; padding: 0 0.5rem 0 0;}
 .oredr-detail-add dt { display: block; height: 1rem; font-size: 0.7rem; line-height: 1rem;}
 .oredr-detail-add dt span { margin-left: 0.3rem; font-weight: 600;}
-.oredr-detail-add dt span.order_phone{ margin-left: 2.4rem; color: #878787;}
+.oredr-detail-add dt span.order_phone{position: absolute; right: 1rem; color: #878787;}
 .oredr-detail-add dd.order_addr{color: #878787;}
 .oredr-detail-add dd { display: block; min-height: 0.9rem; max-height: 1.6rem; font-size: 0.6rem; line-height: 0.9rem;}
 
@@ -327,8 +329,10 @@ i.cc-10 { background-image: url(../../images/mcc_10_b.png); background-size: cov
 .oredr-detail-delivery { position: relative; z-index: 1; display: block; padding: 0.4rem; background-color: #FAFAFA; border-bottom: solid 0.025rem #DDD;}
 .oredr-detail-delivery .time-line { position: absolute; top: 0.6rem; left: 0.8rem; bottom: 0.4rem; z-index: auto; border-left: dotted #36BC9B 1px;}
 .oredr-detail-delivery .time-line i { position: absolute; top: -0.16rem; left: -0.38rem; display: block; width: 0.34rem; height: 0.34rem; background-color: #36BC9B; border: solid 0.2rem #A3E7D6; border-radius: 100%;}
+.oredr-detail-delivery .trade_time i{position: absolute;z-index: 1;top: 0.5rem;left: 0.4rem;display: block; width: 1.5rem;height: 1.5rem;background-image: url(../../images/send_icon.png);background-repeat: no-repeat;background-position: 50% 50%;background-size: 100%;}
 .oredr-detail-delivery .info { margin: 0 1rem 0 1.2rem; min-height: 1.6rem;}
 .oredr-detail-delivery .info p { font-size: 0.7rem; line-height: 0.9rem; color: #000;}
+.oredr-detail-delivery .deliv_empty{width: 100%;text-align: center;height: 100%;line-height: 1.9rem;}
 .oredr-detail-delivery .info time { font-size: 0.6rem; line-height: 0.9rem; color: #777;}
 .oredr-detail-delivery .arrow-r { position: absolute; z-index: 1; top: 0.9rem; right: 0.5rem; display: block; width: 0.8rem; height: 0.9rem; background-image: url(../../images/arrow_right_b.png); background-repeat: no-repeat; background-position: 50% 50%; background-size: 65%; opacity: 0.65;}
 

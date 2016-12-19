@@ -231,8 +231,8 @@ footer.bottom .footer-wrap { background-color: transparent; border: none; }
 .main-layout { display: block; margin-top: 2rem; background-color: #F5F5F5;}
 .main-layout-a { display: block; position: absolute; top: 4rem; right: 0; left: 0; bottom: 0; overflow: hidden; z-index: 1;}
 
-.main_top {height: 6.92rem;background: #d72926;margin-top: 1.95rem; color: #fcf8f2;}
-.main_top .trade_tit{ font-size: 1.6rem;margin-left: 2.4rem;padding-top: 2.4rem;font-weight: bolder;}
+.main_top {height: 5.92rem;background: #d72926;margin-top: 1.95rem; color: #fcf8f2;}
+.main_top .trade_tit{ font-size: 1.6rem;margin-left: 2.4rem;padding-top: 1.4rem;font-weight: bolder;}
 .main_top .trade_desc{margin-left: 2.4rem;font-size: 0.72rem; }
 
 /*特别提示*/
