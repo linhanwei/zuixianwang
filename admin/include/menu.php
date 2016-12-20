@@ -112,6 +112,7 @@ $arr = array(
                 array('args' => 'index,invite,member', 'text' => '推荐人统计'),
                 array('args' => 'predeposit,predeposit,member', 'text' => $lang['nc_member_predepositmanage']),
                 array('args' => 'feedback,agent,member', 'text' => '加盟申请'),
+                array('args' => 'index,complain_suggest,member', 'text' => '投诉建议'),
 //                array('args' => 'card_list,oil,member', 'text' => '油卡管理'),
 //                array('args' => 'recharge,oil,member', 'text' => '油卡充值')
             )
