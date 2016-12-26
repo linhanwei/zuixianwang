@@ -64,16 +64,15 @@ class complain_suggestControl extends mobileMemberControl {
         $upload->set('default_dir',$dir);
         $upload->set('allow_type',array('jpg','jpeg','gif','png'));
         $result = 0;
-        if (!empty($_FILES['complain_pic']['name'])){
-            $result = $upload->upfile('complain_pic');
+        if (!empty($_FILES['avatar']['name'])){
+            $result = $upload->upfile('avatar');
         }
         if ($result){
             $file_name = $upload->file_name;
-            $pic = UPLOAD_SITE_URL.'/'.ATTACH_PATH.'/complain_suggest/'.$file_name;
+            $pic = UPLOAD_SITE_URL.DS.ATTACH_PATH.'/complain_suggest/'.$file_name;
             output_data(array('file_name' => $file_name,'pic' => $pic));
         } else {
             output_error('图片上传失败');
         }
     }
-
 }
