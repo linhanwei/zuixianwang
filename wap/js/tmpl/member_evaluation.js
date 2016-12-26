@@ -1,9 +1,7 @@
 $(function() {
 	var e = getcookie("key");
-	if (!e) {
-		window.location.href = WapSiteUrl + "/tmpl/member/login.html";
-		return
-	}
+	app_check_login(e);
+
 	var a = GetQueryString("order_id");
 	$.getJSON(ApiUrl + "/index.php?act=member_evaluate&op=index", {
 		key: e,
@@ -16,28 +14,41 @@ $(function() {
 		}
 		var l = template.render("member-evaluation-script", r.datas);
 		$("#member-evaluation-div").html(l);
-		$('input[name="file"]').ajaxUploadImage({
-			url: ApiUrl + "/index.php?act=sns_album&op=file_upload",
-			data: {
-				key: e
-			},
-			start: function(e) {
-				e.parent().after('<div class="upload-loading"><i></i></div>');
-				e.parent().siblings(".pic-thumb").remove()
-			},
-			success: function(e, a) {
-				checklogin(a.login);
-				if (a.datas.error) {
-					e.parent().siblings(".upload-loading").remove();
 
-					app_alert("图片尺寸过大！");
-					return false
-				}
-				e.parent().after('<div class="pic-thumb"><img src="' + a.datas.file_url + '"/></div>');
-				e.parent().siblings(".upload-loading").remove();
-				e.parents("a").next().val(a.datas.file_name)
+		$('.evaluation-upload-block .upload').click(function(){
+			if(is_app()){
+				var index_key = $(this).index();
+				var upload_url = ApiUrl + "/index.php?act=sns_album&op=file_upload";
+				$('input[name="file"]').css('display','none');
+				app_interface.picUpload(e,upload_url,index_key);
+				return false;
 			}
 		});
+		if(!is_app()) {
+			$('input[name="file"]').ajaxUploadImage({
+				url: ApiUrl + "/index.php?act=sns_album&op=file_upload",
+				data: {
+					key: e
+				},
+				start: function (e) {
+					e.parent().after('<div class="upload-loading"><i></i></div>');
+					e.parent().siblings(".pic-thumb").remove()
+				},
+				success: function (e, a) {
+					checklogin(a.login);
+					if (a.datas.error) {
+						e.parent().siblings(".upload-loading").remove();
+
+						app_alert("图片尺寸过大！");
+						return false
+					}
+					e.parent().after('<div class="pic-thumb"><img src="' + a.datas.file_url + '"/></div>');
+					e.parent().siblings(".upload-loading").remove();
+					e.parents("a").next().val(a.datas.file_name)
+				}
+			});
+		}
+
 		$(".star-level").find("i").click(function() {
 			var e = $(this).index();
 			for (var a = 0; a < 5; a++) {
@@ -81,3 +92,13 @@ $(function() {
 		})
 	})
 });
+
+
+//app图片上传完成调用函数
+function picAddVal(index_key,data){
+
+	data = JSON.parse(data);
+	var __this = $('.evaluation-upload-block .upload').eq(parseInt(index_key)-1);
+	__this.find('a').append('<div class="pic-thumb"><img src="' + data.pic + '"/></div>');
+	__this.find('input[type="hidden"]').val(data.file_name);
+}

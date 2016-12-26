@@ -279,8 +279,8 @@ class member_refundControl extends mobileMemberControl {
         $upload->set('default_dir',$dir);
         $upload->set('allow_type',array('jpg','jpeg','gif','png'));
         $result = 0;
-        if (!empty($_FILES['refund_pic']['name'])){
-            $result = $upload->upfile('refund_pic');
+        if (!empty($_FILES['avatar']['name'])){
+            $result = $upload->upfile('avatar');
         }
         if ($result){
             $file_name = $upload->file_name;

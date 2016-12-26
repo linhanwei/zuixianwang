@@ -47,7 +47,7 @@ class sns_albumControl extends mobileMemberControl {
         $upload->set('thumb_height',$thumb_height);
         $upload->set('fprefix',$member_id);
         $upload->set('thumb_ext', '_240,_1024');
-        $result = $upload->upfile('file');
+        $result = $upload->upfile('avatar');
         if (!$result){
             output_error($upload->error);
         }
@@ -55,7 +55,7 @@ class sns_albumControl extends mobileMemberControl {
         $img_path = $upload->getSysSetPath().$upload->file_name;
         list($width, $height, $type, $attr) = getimagesize(BASE_UPLOAD_PATH.DS.ATTACH_MEMBER.DS.$member_id.DS.$img_path);
     
-        $image = explode('.', $_FILES["file"]["name"]);
+        $image = explode('.', $_FILES["avatar"]["name"]);
 
         $model_sns_alumb = Model('sns_album');
         $ac_id = $model_sns_alumb->getSnsAlbumClassDefault($member_id);
@@ -74,7 +74,7 @@ class sns_albumControl extends mobileMemberControl {
         $insert['ap_name']      = $image['0'];
         $insert['ac_id']        = $ac_id;
         $insert['ap_cover']     = $img_path;
-        $insert['ap_size']      = intval($_FILES['file']['size']);
+        $insert['ap_size']      = intval($_FILES['avatar']['size']);
         $insert['ap_spec']      = $width.'x'.$height;
         $insert['upload_time']  = time();
         $insert['member_id']    = $member_id;
@@ -84,8 +84,8 @@ class sns_albumControl extends mobileMemberControl {
         $data = array();
         $data['file_id'] = $result;
         $data['file_name'] = $img_path;
-        $data['origin_file_name'] = $_FILES["file"]["name"];
-        $data['file_url'] = snsThumb($img_path, 240);
+        $data['origin_file_name'] = $_FILES["avatar"]["name"];
+        $data['pic'] = snsThumb($img_path, 240);
         output_data($data);
     }
 
