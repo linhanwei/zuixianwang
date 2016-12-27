@@ -31,9 +31,9 @@ function load_member_info(){
     }
 
     //积分
-    $('body').on('click','#member_integrate',function(){
-        app_toast('敬请期待');
-    });
+    //$('body').on('click','#member_integrate',function(){
+    //    app_toast('敬请期待');
+    //});
 
     //优惠卷
     $('body').on('click','#member_coupons',function(){

@@ -51,6 +51,7 @@ class member_pointsControl extends mobileMemberControl {
             $model_member = Model('member');
             foreach($points_list as $key=>$val){
                 $points_list[$key]['pl_addtime'] = date('Y-m-d H:i:s',$val['pl_addtime']);
+                $points_list[$key]['pl_points'] = number_format($val['pl_points'],2);
                 $member = $model_member->getMemberInfo(array('member_id'=>$val['pl_memberid']));
 
                 if($member['member_truename']){
