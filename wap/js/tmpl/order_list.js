@@ -44,7 +44,7 @@ $(function() {
             },
             dataType: "json",
             success: function(e) {
-
+                app_check_login(e);
                 curpage++;
                 hasMore = e.hasmore;
 

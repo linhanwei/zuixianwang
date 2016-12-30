@@ -48,11 +48,13 @@ $(function(){
                             setCache('user_password','');
                         }
                         if(typeof(app_interface) == 'object'){
-                            if(getQueryString('to_root')){
-                                app_interface.closeToRootWebView(8,getQueryString('func') + '();');
-                            }else{
-                                app_interface.closeWebView(8,getQueryString('func') + '();');
-                            }
+                            app_interface.updateLoginKey(result.datas.key);
+                            //if(getQueryString('to_root')){
+                            //    app_interface.closeToRootWebView(8,getQueryString('func') + '();');
+                            //}else{
+                            //    app_interface.closeWebView(8,getQueryString('func') + '();');
+                            //}
+                            app_interface.closeWebView(8,getQueryString('func') + '();');
                         }else{
                             location.href = referurl;
                         }

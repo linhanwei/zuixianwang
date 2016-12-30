@@ -144,6 +144,10 @@
                      delCache(cache_key);
 
                      app_check_login('',1);
+
+                     if(typeof(app_interface) == 'object') {
+                         app_interface.updateLoginKey('');
+                     }
                  }
              }
          });
@@ -152,7 +156,10 @@
      //设置头像
      $("#avatar").click(function(){
          if(is_app()){
-             app_interface.changeAvatar(getcookie('key'));
+             var index_key = '0';
+             var upload_url = SiteUrl + "/m/index.php?act=member_info&op=upload_avatar";
+             app_interface.picUpload(key,upload_url,index_key);
+//             app_interface.changeAvatar(getcookie('key'));
              return false;
          }
 
@@ -308,6 +315,13 @@
            return false;
        }
        $('#avatar_img_url').attr('src',img_url);
+       return true;
+   }
+
+   function picAddVal(index_key,data){
+       data = JSON.parse(data);
+       var img_url = data.avatar+'?id='+ Math.random();
+       $('#avatar_img_url').prop('src',img_url);
        return true;
    }
 
