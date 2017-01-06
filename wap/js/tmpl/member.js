@@ -28,6 +28,13 @@ function load_member_info(){
                  return false;
              }
          });
+    }else{
+        var datas = {
+            member_info:{avator:WapSiteUrl+'/images/member-avatar-default2.png'}
+        };
+        var html = template.render('member_center', datas);
+        $('#content_main').html(html);
+        bind_openwebview();
     }
 
     //积分

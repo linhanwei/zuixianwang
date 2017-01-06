@@ -143,11 +143,12 @@
                      delCookie('key');
                      delCache(cache_key);
 
-                     app_check_login('',1);
-
                      if(typeof(app_interface) == 'object') {
+//                         app_interface.closeWebView(0);
                          app_interface.updateLoginKey('');
                      }
+                     app_check_login('',1);
+
                  }
              }
          });

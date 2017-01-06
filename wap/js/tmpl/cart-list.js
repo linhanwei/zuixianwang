@@ -105,7 +105,7 @@ function load_cart_list(){
     });
 
     //推荐商品
-    ajax_data();
+    //ajax_data();
 }
 load_cart_list()
 //新页面
