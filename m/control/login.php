@@ -166,7 +166,7 @@ class loginControl extends mobileHomeControl {
             if($token) {
                 $sms = new Sms();
                 $data = array($register_info['password']);
-                $sms->send($register_info['member_mobile'],$data,100149);
+                $sms->send($register_info['member_mobile'],$data,147200);
                 wkcache($cache_key,array(),0);
 
                 $this->outCheckTimes($register_times_key);
@@ -205,7 +205,7 @@ class loginControl extends mobileHomeControl {
             $new_password = $this->demo_msg ? '888888' : mt_rand(100000,999999);
             $sms = new Sms();
             $data = array($new_password);
-            $sms->send($_POST['mobile_phone'],$data,100146);
+            $sms->send($_POST['mobile_phone'],$data,147192);
 
             $member_array['member_passwd'] = md5($new_password);
             $model_member->editMember(array('member_id'=>$pinfo['member_id']),$member_array);
@@ -247,7 +247,7 @@ class loginControl extends mobileHomeControl {
 
             $sms = new Sms();
             $data = array($new_password);
-            $sms->send($_POST['mobile_phone'],$data,100147);
+            $sms->send($_POST['mobile_phone'],$data,147193);
             $member_array['member_paypwd'] = md5($new_password);
             $model_member->editMember(array('member_id'=>$pinfo['member_id']),$member_array);
 
@@ -289,7 +289,7 @@ class loginControl extends mobileHomeControl {
                     //$ret['identifying_code'] = $rand_code;
                     $sms = new Sms();
                     $data = array($rand_code,2);
-                    $result = $sms->send($phone,$data,100145);
+                    $result = $sms->send($phone,$data,147191);
 
                     $cache_key = $this->createAnonymous($phone);
                     wkcache($cache_key,$rand_code,300);
@@ -360,7 +360,7 @@ class loginControl extends mobileHomeControl {
         wkcache($cache_key,$rand_code,60);
         $data = array($rand_code,2);
         $sms = new Sms();
-        $sms->send($mobile,$data,100148);
+        $sms->send($mobile,$data,147195);
         output_data(array('cache_key' =>$cache_key));
     }
 

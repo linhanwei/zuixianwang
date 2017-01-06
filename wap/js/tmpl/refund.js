@@ -97,7 +97,7 @@ function picAddVal(index_key,data){
     if(data.error){
         app_toast(data.error);
     }
-
+   
     var __this = $('.form-box .input-box .upload').eq(parseInt(index_key));
     __this.find('a').append('<div class="pic-thumb"><img src="' + data.pic + '"/></div>');
     __this.find('input[type="hidden"]').val(data.file_name);

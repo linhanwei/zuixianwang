@@ -114,7 +114,6 @@ class predepositControl extends mobileMemberControl {
                     $data['member_name'] = $this->member_info['member_name'];
                     $data['amount'] = $grade_info['price'];
                     $data['pu_sn'] = $pu_sn;
-
                     try{
                         if($model_pd->changePd('upgrade',$data)){
                             $update = array();
@@ -173,9 +172,9 @@ class predepositControl extends mobileMemberControl {
      * 充值添加
      */
     public function recharge_addOp(){
-        $pdr_amount = ceil($_POST['pdr_amount']);
-
-        if ($pdr_amount < 1) {
+        //$pdr_amount = ceil($_POST['pdr_amount']);
+        $pdr_amount = $_POST['pdr_amount'];
+        if ($pdr_amount < 0.01) {
             output_error('输入正确的充值金额');
         }
         $payment_code = $_POST['payment_code'];
@@ -205,10 +204,10 @@ class predepositControl extends mobileMemberControl {
                     case 'wxpay':
                         $params = "&pdr_sn={$pay_sn}&key={$_REQUEST['key']}&payment_code={$payment_code}&client=app";
 
-                        output_data(array('prepay_url'=>MOBILE_SITE_URL . '/' . $pay_url . $params));
+                        output_data(array('title'=>'充值','pdr_sn'=>'p' . $data['pdr_sn'],'payment_info'=>$payment_info['payment_config'],'notify_url'=>MOBILE_SITE_URL . '/api/payment/wxpay/notify_url.php'));
                         break;
                     case 'alipay':
-                        output_data(array('pdr_sn'=>'p' . $data['pdr_sn'],'payment_info'=>$payment_info['payment_config'],'notify_url'=>MOBILE_SITE_URL . '/api/payment/alipay/notify_url.php'));
+                        output_data(array('title'=>'充值','pdr_sn'=>'p' . $data['pdr_sn'],'payment_info'=>$payment_info['payment_config'],'notify_url'=>MOBILE_SITE_URL . '/api/payment/alipay/notify_url.php'));
                         break;
                 }
 
@@ -309,100 +308,11 @@ class predepositControl extends mobileMemberControl {
             }
         }
 
-        $model_pd = Model('predeposit');
-        $transfer_info = array();
-        $transfer_info['pdt_sn'] = $pay_sn = $model_pd->makeSn();
-        $transfer_info['pdt_from_member_id'] = $this->member_info['member_id'];
-        $transfer_info['pdt_from_member_name'] = $this->member_info['member_name'];
-        $transfer_info['pdt_to_member_id'] = $member['member_id'];
-        $transfer_info['pdt_to_member_name'] = $member['member_name'];
-
-        //消费计算手续费
-        //15％手续费
-        if($member['is_store'] == 1){
-            $transfer_info['pdt_amount_rate'] = 0.15;
-            $transfer_info['pdt_amount_out'] = $pdt_amount * $transfer_info['pdt_amount_rate'];
-            $transfer_info['pdt_amount_get'] = round($pdt_amount - $transfer_info['pdt_amount_out'],2);
+        $amount = Logic('consume')->consume($this->member_info['member_id'],$this->member_info['member_name'],$member['member_id'],$member['member_name'],$pdt_amount,$pdt_remark,$member['is_store']);
+        if($amount>0){
+            output_data(array('pdt_amount'=>$amount));
         }
-
-        $transfer_info['pdt_amount'] = $pdt_amount;
-        $transfer_info['pdt_add_time'] = TIMESTAMP;
-        $transfer_info['pdt_remark'] = $pdt_remark;
-
-        $model_pd->beginTransaction();
-        try {
-            $insert = $model_pd->addPdTransfer($transfer_info);
-            if($insert){
-                //转出变更
-                $data = array();
-                $data['member_id'] = $transfer_info['pdt_from_member_id'];
-                $data['member_name'] = $transfer_info['pdt_from_member_name'];
-
-                $data['amount'] = -1 * $transfer_info['pdt_amount'];
-
-                $data['pdt_sn'] = $transfer_info['pdt_sn'];
-                $data['lg_desc'] = '向[' . $transfer_info['pdt_to_member_name'] . '] 转帐,单号:'.$data['pdt_sn'];
-                if($member['is_store'] == '1'){
-                    $data['lg_desc'] = '向[' . $transfer_info['pdt_to_member_name'] . ']消费,单号:'.$data['pdt_sn'];
-                }
-
-                if(abs($data['amount'])>0){
-                    $model_pd->changePd('transfer',$data);
-                }else{
-                    $model_pd->rollback();
-                    throw new Exception('转帐出错');
-                }
-
-                //商户返会员积分，推荐提成
-                //收入变更
-                if($member['is_store'] == '1'){
-                    //消费者上级佣金
-                    Logic('inviter')->buyerCommis($transfer_info['pdt_from_member_id'],$transfer_info['pdt_from_member_name'],$pdt_amount,$transfer_info['pdt_sn']);
-
-                    //商户收入代理佣金
-                    Logic('inviter')->sellerCommis($transfer_info['pdt_to_member_id'],$transfer_info['pdt_to_member_name'],$pdt_amount,$transfer_info['pdt_sn']);
-
-                    //变更家商帐户余额
-                    //收款85%
-                    $data = array();
-                    $data['member_id'] = $transfer_info['pdt_to_member_id'];
-                    $data['member_name'] = $transfer_info['pdt_to_member_name'];
-                    $data['amount'] = $transfer_info['pdt_amount_get'];                 //实际获得85%
-                    $data['pdt_sn'] = $transfer_info['pdt_sn'];
-                    $data['lg_desc'] = '收到[' . $transfer_info['pdt_from_member_name'] . ' 付款,单号:'.$data['pdt_sn'];
-                    $data['lg_desc'] .= ',金额:' . $pdt_amount . ',手续费:' . $transfer_info['pdt_amount_rate'] * 100 . '%';
-                    $model_pd->changePd('transfer',$data);
-
-                    //会员获得消费会员积分
-                    $pointsArray = array(
-                        'pl_desc'=>'消费获得会员积分,单号:'.$data['pdt_sn'],
-                        'pl_memberid'=>$this->member_info['member_id'],
-                        'pl_membername'=>$this->member_info['member_name'],
-                        'pl_sn'=>$data['pdt_sn'],
-                        'transfer_amount'=>$pdt_amount
-                    );
-                    Model('points')->savePointsLog('transfer',$pointsArray,true);
-
-                    //商家上级佣金
-                    //Logic('inviter')->sellerCommis($transfer_info['pdt_to_member_id'],$transfer_info['pdt_to_member_name'],$transfer_info['pdt_amount'],'');
-                }else{  //一般会员更变
-                    $data = array();
-                    $data['member_id'] = $transfer_info['pdt_to_member_id'];
-                    $data['member_name'] = $transfer_info['pdt_to_member_name'];
-                    $data['amount'] = floatval($transfer_info['pdt_amount']);
-                    $data['pdt_sn'] = $transfer_info['pdt_sn'];
-                    $data['lg_desc'] = '收到[' . $transfer_info['pdt_from_member_name'] . ' 转帐,单号:'.$data['pdt_sn'];
-                    $model_pd->changePd('transfer',$data);
-                }
-
-                $model_pd->commit();
-
-                output_data(array('pdt_amount'=>$data['amount']));
-            }
-        } catch (Exception $e) {
-            $model_pd->rollback();
-            output_error($e->getMessage() ? $e->getMessage() : '网络出错');
-        }
+        output_error('转帐失败');
     }
 
 
@@ -462,7 +372,10 @@ class predepositControl extends mobileMemberControl {
         }
 
         try {
+            $day = date('d',time());
             $pdc_amount_rate = 0.03;
+            if($day>=1 && $day<=3)
+                $pdc_amount_rate = 0;
             if($this->member_info['is_store']){
                 $pdc_amount_rate = 0;
             }
@@ -541,6 +454,13 @@ class predepositControl extends mobileMemberControl {
                         break;
                     case 'transfer':
                         $lg_type_name = '转帐';
+                        if($val['lg_av_amount'] < 0){
+                            $list[$key]['color'] = 'green';
+                            $list[$key]['title'] = '出帐金额';
+                        }
+                        break;
+                    case 'order':
+                        $lg_type_name = '货款结算';
                         if($val['lg_av_amount'] < 0){
                             $list[$key]['color'] = 'green';
                             $list[$key]['title'] = '出帐金额';

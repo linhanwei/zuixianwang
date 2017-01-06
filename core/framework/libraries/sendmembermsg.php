@@ -97,7 +97,7 @@ class sendMemberMsg {
         if($param['av_amount']<500) return;
         //容联云
         switch($message){
-            case 101767:
+            case 147207:
                 $data = array($param['time'],$param['desc'],$param['av_amount'],$param['freeze_amount'],$param['available_predeposit']);
                 break;
 

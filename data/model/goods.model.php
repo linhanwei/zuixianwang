@@ -95,14 +95,13 @@ class goodsModel extends Model
         $condition['goods_state'] = self::STATE1;
         $condition['goods_verify'] = self::VERIFY1;
         $condition = $this->_getRecursiveClass($condition);
-        //去掉多规格颜色显示 好商城V3-B11
-        //$field = "CONCAT(goods_commonid,',',color_id) as nc_distinct ," . $field;
-        //$count = $this->getGoodsOnlineCount($condition,"distinct CONCAT(goods_commonid,',',color_id)");
-        $field = "CONCAT(goods_commonid) as nc_distinct ," . $field;
+
+        $field = "CONCAT(goods_commonid) as f_distinct ," . $field;
         $count = $this->getGoodsOnlineCount($condition, "distinct CONCAT(goods_commonid)");
+
         $goods_list = array();
         if ($count != 0) {
-            $goods_list = $this->getGoodsOnlineList($condition, $field, $page, $order, 0, 'nc_distinct', false, $count);
+            $goods_list = $this->getGoodsOnlineList($condition, $field, $page, $order, 0, 'f_distinct', false, $count);
         }
         return $goods_list;
     }
@@ -1015,6 +1014,7 @@ class goodsModel extends Model
     public function getGoodsInfoByID($goods_id, $fields = '*')
     {
         $goods_info = $this->_rGoodsCache($goods_id, $fields);
+
         if (empty($goods_info)) {
             $goods_info = $this->getGoodsInfo(array('goods_id' => $goods_id));
             $this->_wGoodsCache($goods_id, $goods_info);
@@ -1097,9 +1097,9 @@ class goodsModel extends Model
      * @param string $fields
      * @return array
      */
-    private function _rGoodsCache($goods_id, $fields)
+    private function _rGoodsCache($goods_id, $fields = '*')
     {
-        return rcache($goods_id, 'goods', $fields);
+        return rkcache(md5('goods_detail_' . $goods_id));
     }
 
     /**
@@ -1110,7 +1110,7 @@ class goodsModel extends Model
      */
     private function _wGoodsCache($goods_id, $goods_info)
     {
-        return wcache($goods_id, $goods_info, 'goods');
+        return wkcache(md5('goods_detail_' . $goods_id ), $goods_info);
     }
 
     /**
@@ -1120,7 +1120,7 @@ class goodsModel extends Model
      */
     private function _dGoodsCache($goods_id)
     {
-        return dcache($goods_id, 'goods');
+        return dkcache(md5('goods_detail_' . $goods_id ));
     }
 
     /**

@@ -10,7 +10,7 @@ $(function(){
 	ajax_data(data,true,1);
 
 	//商品排序
-	$('.condition-box .condit').click(function(e){
+	$('body').on('click','.condition-box .condit',function(e){
 		$(this).siblings().find('.fleft').removeClass('desc').removeClass('asc');
 
 		var sort_key = parseInt($(this).attr('sort_key')),
@@ -41,7 +41,7 @@ $(function(){
 	});
 
 	//价格搜索
-	$('.cate-price-points-show a').click(function(e){
+	$('body').on('click','.cate-price-points-show a',function(e){
 			$(this).addClass('action').siblings().removeClass('action');
 			var search_price = $(this).text();
 			var data = {price:search_price};

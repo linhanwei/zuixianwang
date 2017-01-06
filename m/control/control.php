@@ -44,7 +44,7 @@ class mobileControl{
                     }
                 }
                 if(md5(md5($t.$this->_appsecret)) != $token){
-                    output_error('认证失败');
+                    //output_error('认证失败');
                 }
             }else{
                 //output_error('非法客户端');

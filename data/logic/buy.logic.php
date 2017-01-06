@@ -172,7 +172,7 @@ class buyLogic {
         $result['need_calc_sid_list'] = $need_calc_sid_list;
         $result['cancel_calc_sid_list'] = $cancel_calc_sid_list;
 
-        //将商品ID、数量、运费模板、运费序列化，加密，输出到模板，选择地区AJAX计算运费时作为参数使用
+        //将商品ID、数量、售卖区域、运费序列化，加密，输出到模板，选择地区AJAX计算运费时作为参数使用
         $freight_list = $this->_logic_buy_1->getStoreFreightList($goods_list,array_keys($cancel_calc_sid_list));
         $result['freight_list'] = $this->buyEncrypt($freight_list, $member_id);
 
@@ -191,9 +191,9 @@ class buyLogic {
 
         //发票 :只有所有商品都支持增值税发票才提供增值税发票
         foreach ($goods_list as $goods) {
-        	if (!intval($goods['goods_vat'])) {
-        	    $vat_deny = true;break;
-        	}
+            if (!intval($goods['goods_vat'])) {
+                $vat_deny = true;break;
+            }
         }
         //不提供增值税发票时抛出true(模板使用)
         $result['vat_deny'] = $vat_deny;
@@ -235,7 +235,7 @@ class buyLogic {
      * @return array
      */
     public function buyStep2($post, $member_id, $member_name, $member_email) {
-       
+
         $this->_member_info['member_id'] = $member_id;
         $this->_member_info['member_name'] = $member_name;
         $this->_member_info['member_email'] = $member_email;
@@ -251,7 +251,8 @@ class buyLogic {
 
             //第2步 得到购买商品信息
             $this->_createOrderStep2();
-    
+
+
             //第3步 得到购买相关金额计算等信息
             $this->_createOrderStep3();
 
@@ -260,14 +261,9 @@ class buyLogic {
 
             //第5步 处理预存款
             $this->_createOrderStep5();
-
             $model->commit();
-
             //第6步 订单后续处理
             $this->_createOrderStep6();
-
-            //第七步, 清除会员缓存
-            dkcache(md5('member' . $member_id ));
 
             return callback(true,'',$this->_order_data);
 
@@ -290,55 +286,57 @@ class buyLogic {
             QueueClient::push('delCart', array('buyer_id'=>$member_id,'cart_ids'=>$cart_ids));
         }
     }
-    
+
     /**
      * 选择不同地区时，异步处理并返回每个店铺总运费以及本地区是否能使用货到付款
-     * 如果店铺统一设置了满免运费规则，则运费模板无效
-     * 如果店铺未设置满免规则，且使用运费模板，按运费模板计算，如果其中有商品使用相同的运费模板，则两种商品数量相加后再应用该运费模板计算（即作为一种商品算运费）
-     * 如果未找到运费模板，按免运费处理
-     * 如果没有使用运费模板，商品运费按快递价格计算，运费不随购买数量增加
+     * 如果店铺统一设置了满免运费规则，则售卖区域无效
+     * 如果店铺未设置满免规则，且使用售卖区域，按售卖区域计算，如果其中有商品使用相同的售卖区域，则两种商品数量相加后再应用该售卖区域计算（即作为一种商品算运费）
+     * 如果未找到售卖区域，按免运费处理
+     * 如果没有使用售卖区域，商品运费按快递价格计算，运费不随购买数量增加
      */
     public function changeAddr($freight_hash, $city_id, $area_id, $member_id) {
-        //$city_id计算运费模板,$area_id计算货到付款
+        //$city_id计算售卖区域,$area_id计算货到付款
         $city_id = intval($city_id);
         $area_id = intval($area_id);
         if ($city_id <= 0 || $area_id <= 0) return null;
-    
-        //将hash解密，得到运费信息(店铺ID，运费,运费模板ID,购买数量),hash内容有效期为1小时
+
+        //将hash解密，得到运费信息(店铺ID，运费,售卖区域ID,购买数量),hash内容有效期为1小时
         $freight_list = $this->buyDecrypt($freight_hash, $member_id);
-    
+
         //算运费
         $store_freight_list = $this->_logic_buy_1->calcStoreFreight($freight_list, $city_id);
         $data = array();
         $data['state'] = empty($store_freight_list) ? 'fail' : 'success';
         $data['content'] = $store_freight_list;
-    
+
         //是否能使用货到付款(只有包含平台店铺的商品才会判断)
         //$if_include_platform_store = array_key_exists(DEFAULT_PLATFORM_STORE_ID,$freight_list['iscalced']) || array_key_exists(DEFAULT_PLATFORM_STORE_ID,$freight_list['nocalced']);
-    
+
         //$offline_store_id_array = Model('store')->getOwnShopIds();
         $order_platform_store_ids = array();
-    
-        if (is_array($freight_list['iscalced']))
-        foreach (array_keys($freight_list['iscalced']) as $k)
-        //if (in_array($k, $offline_store_id_array))
-            $order_platform_store_ids[$k] = null;
-    
-        if (is_array($freight_list['nocalced']))
-        foreach (array_keys($freight_list['nocalced']) as $k)
-        //if (in_array($k, $offline_store_id_array))
-            $order_platform_store_ids[$k] = null;
-    
+
+        //if (is_array($freight_list['iscalced']))
+        if (!empty($freight_list['iscalced'])&&is_array($freight_list['iscalced']))
+            foreach (array_keys($freight_list['iscalced']) as $k)
+                //if (in_array($k, $offline_store_id_array))
+                $order_platform_store_ids[$k] = null;
+
+        //if (is_array($freight_list['nocalced']))
+        if (!empty($freight_list['nocalced'])&&is_array($freight_list['nocalced']))
+            foreach (array_keys($freight_list['nocalced']) as $k)
+                //if (in_array($k, $offline_store_id_array))
+                $order_platform_store_ids[$k] = null;
+
         //if ($order_platform_store_ids) {
-            $allow_offpay_batch = Model('offpay_area')->checkSupportOffpayBatch($area_id, array_keys($order_platform_store_ids));
-    /*
-            //JS验证使用
-            $data['allow_offpay'] = array_filter($allow_offpay_batch) ? '1' : '0';
-            $data['allow_offpay_batch'] = $allow_offpay_batch;
-        } else {*/
-            //JS验证使用
-            $data['allow_offpay'] = array_filter($allow_offpay_batch) ? '1' : '0';
-            $data['allow_offpay_batch'] = $allow_offpay_batch;
+        $allow_offpay_batch = Model('offpay_area')->checkSupportOffpayBatch($area_id, array_keys($order_platform_store_ids));
+        /*
+                //JS验证使用
+                $data['allow_offpay'] = array_filter($allow_offpay_batch) ? '1' : '0';
+                $data['allow_offpay_batch'] = $allow_offpay_batch;
+            } else {*/
+        //JS验证使用
+        $data['allow_offpay'] = array_filter($allow_offpay_batch) ? '1' : '0';
+        $data['allow_offpay_batch'] = $allow_offpay_batch;
         //}
 
         //PHP验证使用
@@ -347,7 +345,7 @@ class buyLogic {
 
         return $data;
     }
-    
+
     /**
      * 验证F码
      * @param int $goods_commonid
@@ -398,7 +396,7 @@ class buyLogic {
         $input_if_vat = ($input_if_vat == 'allow_vat') ? true : false;
 
         //是否支持货到付款
-        /*$input_if_offpay = $this->buyDecrypt($post['offpay_hash'], $this->_member_info['member_id']);
+        $input_if_offpay = $this->buyDecrypt($post['offpay_hash'], $this->_member_info['member_id']);
         if (!in_array($input_if_offpay,array('allow_offpay','deny_offpay'))) {
             throw new Exception('订单保存出现异常[货到付款验证错误]，请重试');
         }
@@ -408,9 +406,7 @@ class buyLogic {
         $input_if_offpay_batch = $this->buyDecrypt($post['offpay_hash_batch'], $this->_member_info['member_id']);
         if (!is_array($input_if_offpay_batch)) {
             throw new Exception('订单保存出现异常[部分店铺付款方式出现异常]，请重试');
-        }*/
-        $input_if_offpay = false;
-        $input_if_offpay_batch = false;
+        }
 
         //付款方式:在线支付/货到付款(online/offline)
         if (!in_array($post['pay_name'],array('online','offline'))) {
@@ -548,7 +544,8 @@ class buyLogic {
         $store_final_order_total = $this->_logic_buy_1->reCalcGoodsTotal($store_final_goods_total,$store_freight_total,'freight');
 
         //计算店铺分类佣金[改由任务计划]
-         $store_gc_id_commis_rate_list = Model('store_bind_class')->getStoreGcidCommisRateList($goods_list);
+        // 33hao
+        $store_gc_id_commis_rate_list = Model('store_bind_class')->getStoreGcidCommisRateList($goods_list);
 
         //将赠品追加到购买列表(如果库存0，则不送赠品)
         $append_premiums_to_cart_list = $this->_logic_buy_1->appendPremiumsToCartList($store_cart_list,$store_premiums_list,$store_mansong_rule_list,$this->_member_info['member_id']);
@@ -563,8 +560,8 @@ class buyLogic {
         $this->_order_data['store_final_order_total'] = $store_final_order_total;
         $this->_order_data['store_freight_total'] = $store_freight_total;
         $this->_order_data['store_promotion_total'] = $store_promotion_total;
-	// 33hao 
-         $this->_order_data['store_gc_id_commis_rate_list'] = $store_gc_id_commis_rate_list;
+        // 33hao
+        $this->_order_data['store_gc_id_commis_rate_list'] = $store_gc_id_commis_rate_list;
         $this->_order_data['store_mansong_rule_list'] = $store_mansong_rule_list;
         $this->_order_data['store_cart_list'] = $store_cart_list;
         $this->_order_data['goods_buy_quantity'] = $goods_buy_quantity;
@@ -584,17 +581,7 @@ class buyLogic {
 
         $member_id = $this->_member_info['member_id'];
         $member_name = $this->_member_info['member_name'];
-        $member_email = $this->_member_info['member_email'];
-        $store_cart_list = $this->_order_data['store_cart_list'];
-        $input_address_info = $this->_order_data['input_address_info'];
-        $store_final_order_total = $this->_order_data['store_final_order_total'];
-        $store_freight_total = $this->_order_data['store_freight_total'];
-        $input_pay_message = $this->_order_data['input_pay_message'];
-        $store_mansong_rule_list = $this->_order_data['store_mansong_rule_list'];
-        $input_city_id = $this->_order_data['input_city_id'];
-        $input_invoice_info = $this->_order_data['input_invoice_info'];
-        $order_from = $this->_order_data['order_from'];
-        $store_gc_id_commis_rate_list = $this->_order_data['store_gc_id_commis_rate_list'];
+        $member_email = $this->_member_info['member_email'] ? $this->_member_info['member_email'] : $member_name . '@139.com';
 
         $model_order = Model('order');
 
@@ -604,7 +591,7 @@ class buyLogic {
         $notice_list = array();
 
         //每个店铺订单是货到付款还是线上支付,店铺ID=>付款方式[在线支付/货到付款]
-        $store_pay_type_list    = $this->_logic_buy_1->getStorePayTypeList(array_keys($store_cart_list), $this->_order_data['input_if_offpay'], $this->_order_data['input_pay_name']);
+        $store_pay_type_list    = $this->_logic_buy_1->getStorePayTypeList(array_keys($store_cart_list), $input_if_offpay, $input_pay_name);
 
         foreach ($store_pay_type_list as $k => & $v) {
             if (empty($input_if_offpay_batch[$k]))
@@ -635,10 +622,10 @@ class buyLogic {
             } else {
                 $promotion_rate = 0;
             }
-    
+
             //每种商品的优惠金额累加保存入 $promotion_sum
             $promotion_sum = 0;
-    
+
             $order = array();
             $order_common = array();
             $order_goods = array();
@@ -649,7 +636,7 @@ class buyLogic {
             $order['store_name'] = $goods_list[0]['store_name'];
             $order['buyer_id'] = $member_id;
             $order['buyer_name'] = $member_name;
-            $order['buyer_email'] = $member_email ? $member_email : '';
+            $order['buyer_email'] = $member_email;
             $order['add_time'] = TIMESTAMP;
             $order['payment_code'] = $store_pay_type_list[$store_id];
             $order['order_state'] = $store_pay_type_list[$store_id] == 'online' ? ORDER_STATE_NEW : ORDER_STATE_PAY;
@@ -657,14 +644,13 @@ class buyLogic {
             $order['shipping_fee'] = $store_freight_total[$store_id];
             $order['goods_amount'] = $order['order_amount'] - $order['shipping_fee'];
             $order['order_from'] = $order_from;
-			//如果支持方式为空时，默认为货到付款 33hao
-			if( $order['payment_code']=="")
-			{
-				$order['payment_code']="offline";
-			}
+            //如果支持方式为空时，默认为货到付款
+            if( $order['payment_code']=="")
+            {
+                $order['payment_code']="offline";
+            }
 
             $order_id = $model_order->addOrder($order);
-
             if (!$order_id) {
                 throw new Exception('订单保存失败[未生成订单数据]');
             }
@@ -674,7 +660,7 @@ class buyLogic {
             $order_common['order_id'] = $order_id;
             $order_common['store_id'] = $store_id;
             $order_common['order_message'] = $input_pay_message[$store_id];
-    
+
             //代金券
             if (isset($input_voucher_list[$store_id])){
                 $order_common['voucher_price'] = $input_voucher_list[$store_id]['voucher_price'];
@@ -687,12 +673,12 @@ class buyLogic {
 
             //发票信息
             $order_common['invoice_info'] = $this->_logic_buy_1->createInvoiceData($input_invoice_info);
-    
+
             //保存促销信息
             if(is_array($store_mansong_rule_list[$store_id])) {
                 $order_common['promotion_info'] = addslashes($store_mansong_rule_list[$store_id]['desc']);
             }
-    
+
             $order_id = $model_order->addOrderCommon($order_common);
             if (!$order_id) {
                 throw new Exception('订单保存失败[未生成订单扩展数据]');
@@ -725,7 +711,7 @@ class buyLogic {
                         $order_goods[$i]['goods_type'] = 1;
                     }
                     $order_goods[$i]['promotions_id'] = $goods_info['promotions_id'] ? $goods_info['promotions_id'] : 0;
-		   //33hao
+                    //33hao
                     $order_goods[$i]['commis_rate'] =floatval($store_gc_id_commis_rate_list[$store_id][$goods_info['gc_id']]);
 
                     $order_goods[$i]['gc_id'] = $goods_info['gc_id'];
@@ -759,10 +745,9 @@ class buyLogic {
                         $order_goods[$i]['buyer_id'] = $member_id;
                         $order_goods[$i]['goods_type'] = 4;
                         $order_goods[$i]['promotions_id'] = $bl_goods_info['bl_id'];
-                        // 33hao 
-			$order_goods[$i]['commis_rate'] = floatval($store_gc_id_commis_rate_list[$store_id][$goods_info['gc_id']]);
+                        $order_goods[$i]['commis_rate'] = floatval($store_gc_id_commis_rate_list[$store_id][$goods_info['gc_id']]);
                         $order_goods[$i]['gc_id'] = $bl_goods_info['gc_id'];
-    
+
                         //计算商品实际支付金额(goods_price减去分摊优惠金额后的值)
                         $goods_total = $bl_goods_info['bl_goods_price'] * $goods_info['goods_num'];
                         //计算本件商品优惠金额
@@ -770,7 +755,7 @@ class buyLogic {
                         $order_goods[$i]['goods_pay_price'] = $goods_total - $promotion_value;
                         $promotion_sum += $promotion_value;
                         $i++;
-    
+
                         //存储库存报警数据
                         if ($bl_goods_info['goods_storage_alarm'] >= ($bl_goods_info['goods_storage'] - $goods_info['goods_num'])) {
                             $param = array();
@@ -796,7 +781,7 @@ class buyLogic {
             if (!$insert) {
                 throw new Exception('订单保存失败[未生成商品数据]');
             }
-    
+
             //存储商家发货提醒数据
             if ($store_pay_type_list[$store_id] == 'offline') {
                 $notice_list['new_order'][$order['store_id']] = array('order_sn' => $order['order_sn']);
@@ -823,7 +808,7 @@ class buyLogic {
         if (!empty($this->_post_data['rcb_pay'])) {
             $order_list = $this->_logic_buy_1->rcbPay($this->_order_data['order_list'], $this->_post_data, $buyer_info);
         }
-        
+
         //使用预存款支付
         if (!empty($this->_post_data['pd_pay'])) {
             $this->_logic_buy_1->pdPay($order_list ? $order_list :$this->_order_data['order_list'], $this->_post_data, $buyer_info);
@@ -878,7 +863,7 @@ class buyLogic {
         @setMyCookie('cart_goods_num','',-3600);
 
         //保存订单自提点信息
-        if (C('delivery_isuse') && intval($input_address_info['dlyp_id'])) {
+       /* if (C('delivery_isuse') && intval($input_address_info['dlyp_id'])) {
             $data = array();
             $data['mob_phone'] = $input_address_info['mob_phone'];
             $data['tel_phone'] = $input_address_info['tel_phone'];
@@ -890,7 +875,7 @@ class buyLogic {
             }
             QueueClient::push('saveDeliveryOrder', $data);
         }
-
+*/
         //发送提醒类信息
         if (!empty($notice_list)) {
             foreach ($notice_list as $code => $value) {

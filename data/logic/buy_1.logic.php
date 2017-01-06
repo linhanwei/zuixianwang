@@ -15,19 +15,68 @@ class buy_1Logic {
         $cart_list = $this->_getOnlineCartList($cart_list);
 
         //优惠套装
-       // $this->_getBundlingCartList($cart_list);
+        $this->_getBundlingCartList($cart_list);
 
         //抢购
-       // $this->getGroupbuyCartList($cart_list);
+        $this->getGroupbuyCartList($cart_list);
 
         //限时折扣
-      //  $this->getXianshiCartList($cart_list);
+        $this->getXianshiCartList($cart_list);
 
         //赠品
-      //  $this->_getGiftCartList($cart_list);
+        $this->_getGiftCartList($cart_list);
 
         return $cart_list;
 
+    }
+
+    /**
+     * 特殊订单站内支付处理
+     */
+    public function extendInPay($order_list) {
+        //处理预定订单
+        if ($order_list[0]['order_type'] == 2) {
+            $model_order_book = Model('order_book');
+            $order_info = $order_list[0];
+            $data = array();
+            if (!empty($order_info['rcb_amount'])) {
+                $data['book_rcb_amount'] = $order_info['rcb_amount'];
+            }
+            if (!empty($order_info['pd_amount'])) {
+                $data['book_pd_amount'] = $order_info['pd_amount'];
+            }
+
+            //如果未使用站内余额，返回
+            if (empty($order_info['rcb_amount']) && empty($order_info['pd_amount'])) {
+                return callback(true);
+            }
+
+            if ($order_info['order_state'] == ORDER_STATE_PAY) {
+                //使用站内余额即可全部支付，说明支付完成，记录支付时间和支付方式
+                $data['book_pay_time'] = TIMESTAMP;
+                $data['book_pay_name'] = '站内余额支付';
+                //更新预定人数
+                $order_goods_info = Model('order')->getOrderGoodsInfo(array('order_id'=>$order_info['order_id']),'goods_id','rec_id asc');
+                $update = Model('goods')->editGoods(array('book_buyers'=>array('exp','book_buyers+1')),array('goods_id'=>$order_goods_info['goods_id']));
+                if (!$update) {
+                    throw new Exception('更新商品预定人数失败');
+                }
+            }
+            $condition = array();
+            $condition['book_order_id'] = $order_info['order_id'];
+            if (empty($order_info['book_list'][0]['book_pay_time'])) {
+                //付定金或全款
+                $condition['book_id'] = $order_info['book_list'][0]['book_id'];
+            } else {
+                //付尾款
+                $condition['book_id'] = $order_info['book_list'][1]['book_id'];
+            }
+            $update = $model_order_book->editOrderBook($data,$condition);
+            if (!$update) {
+                throw new Exception('更新站内余额失败');
+            }
+        }
+        return callback(true);
     }
 
     /**
@@ -63,7 +112,7 @@ class buy_1Logic {
         $store_goods_total = array();
         //存放本次下单所有店铺商品总金额
         $order_goods_total = 0;
-    
+
         foreach ($store_cart_list as $store_id => $store_cart) {
             $tmp_amount = 0;
             foreach ($store_cart as $key => $cart_info) {
@@ -71,10 +120,11 @@ class buy_1Logic {
                 $store_cart[$key]['goods_image_url'] = cthumb($store_cart[$key]['goods_image']);
                 $tmp_amount += $cart_info['goods_price'] * $cart_info['goods_num'];
             }
+
             $store_cart_list[$store_id] = $store_cart;
-//            $store_goods_total[$store_id] = ncPriceFormat($tmp_amount);
             $store_goods_total[$store_id] = $tmp_amount;
         }
+
         return array($store_cart_list,$store_goods_total);
     }
 
@@ -83,8 +133,8 @@ class buy_1Logic {
      * @param unknown $store_goods_total 每个店铺的商品金额小计，以店铺ID为下标
      * @return array($premiums_list,$mansong_rule_list) 分别为赠品列表[下标自增]，店铺满送规则列表[店铺ID为下标]
      */
-	public function getMansongRuleCartListByTotal($store_goods_total) {
-	    if (!C('promotion_allow') || empty($store_goods_total) || !is_array($store_goods_total)) return array(array(),array());
+    public function getMansongRuleCartListByTotal($store_goods_total) {
+        if (!C('promotion_allow') || empty($store_goods_total) || !is_array($store_goods_total)) return array(array(),array());
 
         $model_mansong = Model('p_mansong');
         $model_goods = Model('goods');
@@ -119,87 +169,174 @@ class buy_1Logic {
             }
         }
         return array($premiums_list,$mansong_rule_list);
-	}
+    }
 
-	/**
-	 * 重新计算每个店铺最终商品总金额(最初计算金额减去各种优惠/加运费)
-	 * @param array $store_goods_total 店铺商品总金额
-	 * @param array $preferential_array 店铺优惠活动内容
-	 * @param string $preferential_type 优惠类型，目前只有一个 'mansong'
-	 * @return array 返回扣除优惠后的店铺商品总金额
-	 */
-	public function reCalcGoodsTotal($store_goods_total, $preferential_array, $preferential_type) {
+    /**
+     * 重新计算每个店铺最终商品总金额(最初计算金额减去各种优惠/加运费)
+     * @param array $store_goods_total 店铺商品总金额
+     * @param array $preferential_array 店铺优惠活动内容
+     * @param string $preferential_type 优惠类型，目前只有一个 'mansong'
+     * @return array 返回扣除优惠后的店铺商品总金额
+     */
+    public function reCalcGoodsTotal($store_goods_total, $preferential_array, $preferential_type) {
+        $deny = empty($store_goods_total) || !is_array($store_goods_total) || empty($preferential_array) || !is_array($preferential_array);
+        if ($deny) return $store_goods_total;
 
-	    $deny = empty($store_goods_total) || !is_array($store_goods_total) || empty($preferential_array) || !is_array($preferential_array);
+        switch ($preferential_type) {
+            case 'mansong':
+                if (!C('promotion_allow')) return $store_goods_total;
+                foreach ($preferential_array as $store_id => $rule_info) {
+                    if (is_array($rule_info) && $rule_info['discount'] > 0) {
+                        $store_goods_total[$store_id] -= $rule_info['discount'];
+                    }
+                }
+                break;
 
-	    if ($deny) return $store_goods_total;
-	
-	    switch ($preferential_type) {
-	    	case 'mansong':
-	    	    if (!C('promotion_allow')) return $store_goods_total;
-	    	    foreach ($preferential_array as $store_id => $rule_info) {
-	    	        if (is_array($rule_info) && $rule_info['discount'] > 0) {
-	    	            $store_goods_total[$store_id] -= $rule_info['discount'];
-	    	        }
-	    	    }
-	    	    break;
-	
-	    	case 'voucher':
-	    	    if (!C('voucher_allow')) return $store_goods_total;
-	    	    foreach ($preferential_array as $store_id => $voucher_info) {
-	    	        $store_goods_total[$store_id] -= $voucher_info['voucher_price'];
-	    	    }
-	    	    break;
-	
-	    	case 'freight':
+            case 'voucher':
+                if (!C('voucher_allow')) return $store_goods_total;
+                foreach ($preferential_array as $store_id => $voucher_info) {
+                    $store_goods_total[$store_id] -= $voucher_info['voucher_price'];
+                }
+                break;
 
-	    	    foreach ($preferential_array as $store_id => $freight_total) {
-	    	        $store_goods_total[$store_id] += $freight_total;
-	    	    }
-	    	    break;
-	    }
-	    return $store_goods_total;
-	}
+            case 'freight':
+                foreach ($preferential_array as $store_id => $freight_total) {
+                    $store_goods_total[$store_id] += $freight_total;
+                }
+                break;
+        }
+        return $store_goods_total;
+    }
 
-	/**
-	 * 取得店铺可用的代金券
-	 * @param array $store_goods_total array(店铺ID=>商品总金额)
-	 * @return array
-	 */
-	public function getStoreAvailableVoucherList($store_goods_total, $member_id) {
-	    if (!C('voucher_allow')) return $store_goods_total;
-	    $voucher_list = array();
-	    $model_voucher = Model('voucher');
-	    foreach ($store_goods_total as $store_id => $goods_total) {
-	        $condition = array();
-	        $condition['voucher_store_id'] = $store_id;
-	        $condition['voucher_owner_id'] = $member_id;
-	        $voucher_list[$store_id] = $model_voucher->getCurrentAvailableVoucher($condition,$goods_total);
-	    }
-	    return $voucher_list;
-	}
+    /**
+     * 取得店铺可用的代金券
+     * @param array $store_goods_total array(店铺ID=>商品总金额)
+     * @return array
+     */
+    public function getStoreAvailableVoucherList($store_goods_total, $member_id) {
+        if (!C('voucher_allow')) return $store_goods_total;
+        $voucher_list = array();
+        $model_voucher = Model('voucher');
+        foreach ($store_goods_total as $store_id => $goods_total) {
+            $condition = array();
+            $condition['voucher_store_id'] = $store_id;
+            $condition['voucher_owner_id'] = $member_id;
+            $voucher_list[$store_id] = $model_voucher->getCurrentAvailableVoucher($condition,$goods_total);
+        }
+        return $voucher_list;
+    }
 
-	/**
-	 * 验证传过来的代金券是否可用有效，如果无效，直接删除
-	 * @param array $input_voucher_list 代金券列表
-	 * @param array $store_goods_total (店铺ID=>商品总金额)
-	 * @return array
-	 */
-	public function reParseVoucherList($input_voucher_list = array(), $store_goods_total = array(), $member_id) {
-	    if (empty($input_voucher_list) || !is_array($input_voucher_list)) return array();
-	    $store_voucher_list = $this->getStoreAvailableVoucherList($store_goods_total, $member_id);
-	    foreach ($input_voucher_list as $store_id => $voucher) {
-	        $tmp = $store_voucher_list[$store_id];
-	        if (is_array($tmp) && isset($tmp[$voucher['voucher_t_id']])) {
-	            $input_voucher_list[$store_id]['voucher_id'] = $tmp[$voucher['voucher_t_id']]['voucher_id'];
-	            $input_voucher_list[$store_id]['voucher_code'] = $tmp[$voucher['voucher_t_id']]['voucher_code'];
-	            $input_voucher_list[$store_id]['voucher_owner_id'] = $tmp[$voucher['voucher_t_id']]['voucher_owner_id'];
-	        } else {
-	            unset($input_voucher_list[$store_id]);
-	        }
-	    }
-	    return $input_voucher_list;
-	}
+    /**
+     * 取得可用的平台红包
+     * @param floot $goods_total 总金额
+     * @return array
+     */
+    public function getStoreAvailableRptList($member_id,$goods_total = 0) {
+        if (!C('redpacket_allow')) return array();
+        $condition = array();
+        $condition['rpacket_owner_id'] = $member_id;
+        return Model('redpacket')->getCurrentAvailableRpt($condition,$goods_total);
+    }
+
+    /**
+     * 验证平台红包有效性
+     * @param floot $goods_total 总金额
+     * @return array
+     */
+    public function reParseRptInfo($input_rpt_info,$order_total,$member_id) {
+        if (empty($input_rpt_info)) return array();
+        $condition = array();
+        $condition['rpacket_owner_id'] = $member_id;
+        $condition['rpacket_t_id'] = $input_rpt_info['rpacket_t_id'];
+        $info = Model('redpacket')->getCurrentAvailableRpt($condition,$order_total);
+        if ($info) {
+            return $info[$input_rpt_info['rpacket_t_id']];
+        } else {
+            return array();
+        }
+    }
+
+    /**
+     *
+     * @param array $store_order_total 每个店铺应付总金额(含运费)
+     * @param number $rpt_total 红包金额
+     * @return array array(每个订单减去红包后的总金额,每个订单使用的红包值)
+     */
+    public function parseOrderRpt($store_order_total = array(), $rpt_total = 0) {
+        if (empty($store_order_total) || $rpt_total <= 0) return array($store_order_total,array());
+
+        //总的红包优惠比例,保留3位小数
+        $all_order_total = array_sum($store_order_total);
+        $rpt_rate = abs(number_format($rpt_total/$all_order_total,5));
+        if ($rpt_rate <= 1) {
+            $rpt_rate = floatval(substr($rpt_rate,0,5));
+        } else {
+            $rpt_rate = 0;
+        }
+        //每个订单的优惠金额累加保存入 $rpt_sum
+        $rpt_sum = 0;
+        //存放每个订单使用了多少红包
+        $store_rpt_total = array();
+
+        foreach ($store_order_total as $store_id => $order_total) {
+            //计算本订单优惠红包金额
+            $rpt_value = floor($order_total*$rpt_rate);
+            $store_order_total[$store_id] -= $rpt_value;
+            $store_rpt_total[$store_id] = $rpt_value;
+            $rpt_sum += $rpt_value;
+        }
+        //将因舍出小数部分出现的差值补到其中一个订单的实际成交价中
+        if ($rpt_total > $rpt_sum) {
+            foreach ($store_order_total as $store_id => $order_total) {
+                if ($order_total > 0) {
+                    $store_order_total[$store_id] -= $rpt_total - $rpt_sum;
+                    $store_rpt_total[$store_id] += $rpt_total - $rpt_sum;
+                    break;
+                }
+            }
+        }
+        return array($store_order_total,$store_rpt_total);
+    }
+
+    /**
+     * 将店铺红包减去运费的余额追加到店铺总优惠里
+     * @param unknown $store_promotion_total
+     * @param unknown $store_freight_total
+     * @param unknown $store_rpt_total
+     */
+    public function reCalcStorePromotionTotal($store_promotion_total,$store_freight_total,$store_rpt_total) {
+        if (!is_array($store_rpt_total) || empty($store_rpt_total)) return $store_promotion_total;
+        foreach ($store_rpt_total as $store_id => $rpt_total) {
+            $ptotal = $rpt_total - $store_freight_total[$store_id];
+            if ($ptotal > 0) {
+                $store_promotion_total[$store_id] += $ptotal;
+            }
+        }
+        return $store_promotion_total;
+    }
+
+    /**
+     * 验证传过来的代金券是否可用有效，如果无效，直接删除
+     * @param array $input_voucher_list 代金券列表
+     * @param array $store_goods_total (店铺ID=>商品总金额)
+     * @return array
+     */
+    public function reParseVoucherList($input_voucher_list = array(), $store_goods_total = array(), $member_id) {
+        if (empty($input_voucher_list) || !is_array($input_voucher_list)) return array();
+        $store_voucher_list = $this->getStoreAvailableVoucherList($store_goods_total, $member_id);
+
+        foreach ($input_voucher_list as $store_id => $voucher) {
+            $tmp = $store_voucher_list[$store_id];
+            if (is_array($tmp) && isset($tmp[$voucher['voucher_t_id']])) {
+                $input_voucher_list[$store_id]['voucher_id'] = $tmp[$voucher['voucher_t_id']]['voucher_id'];
+                $input_voucher_list[$store_id]['voucher_code'] = $tmp[$voucher['voucher_t_id']]['voucher_code'];
+                $input_voucher_list[$store_id]['voucher_owner_id'] = $tmp[$voucher['voucher_t_id']]['voucher_owner_id'];
+            } else {
+                unset($input_voucher_list[$store_id]);
+            }
+        }
+        return $input_voucher_list;
+    }
 
     /**
      * 判断商品是不是限时折扣中，如果购买数量若>=规定的下限，按折扣价格计算,否则按原价计算
@@ -231,7 +368,7 @@ class buy_1Logic {
             $offline_store_id_array = model('store')->getOwnShopIds();
             foreach ($buy_list as $value) {
                 //if (in_array($value['store_id'],$offline_store_id_array)) {
-                    $buy_goods_list['offline'][] = $value;
+                $buy_goods_list['offline'][] = $value;
                 //} else {
                 //    $buy_goods_list['online'][] = $value;
                 //}
@@ -352,33 +489,36 @@ class buy_1Logic {
      * @return array 返回店铺ID=>运费
      */
     public function calcStoreFreight($freight_list, $city_id) {
-		if (!is_array($freight_list) || empty($freight_list) || empty($city_id)) return;
+        if (!is_array($freight_list) || empty($freight_list) || empty($city_id)) return;
+        //免费和固定运费计算结果
+        $return_list = $freight_list['iscalced'];
 
-		//免费和固定运费计算结果
-		$return_list = $freight_list['iscalced'];
+        //使用运费模板的信息(array(店铺ID=>array(运费模板ID=>购买数量))
+        $nocalced_list = $freight_list['nocalced'];
 
-		//使用运费模板的信息(array(店铺ID=>array(运费模板ID=>购买数量))
-		$nocalced_list = $freight_list['nocalced'];
-
-		//然后计算使用运费运费模板的在该$city_id时的运费值
-		if (!empty($nocalced_list) && is_array($nocalced_list)) {
-		    //如果有商品使用的运费模板，先计算这些商品的运费总金额
+        //然后计算使用运费运费模板的在该$city_id时的运费值
+        if (!empty($nocalced_list) && is_array($nocalced_list)) {
+            //如果有商品使用的运费模板，先计算这些商品的运费总金额
             $model_transport = Model('transport');
             foreach ($nocalced_list as $store_id => $value) {
                 if (is_array($value)) {
                     foreach ($value as $transport_id => $buy_num) {
-                        $freight_total = $model_transport->calc_transport($transport_id,$buy_num, $city_id);
-                        if (empty($return_list[$store_id])) {
-                            $return_list[$store_id] = $freight_total;
-                        } else {
-                            $return_list[$store_id] += $freight_total;
+                        $freight_total = $model_transport->calc_transport($transport_id, $city_id);
+                        if ($freight_total === false) {
+                            $return_list[$store_id] = !($freight_total) ? $freight_total : '0';
+                        }
+                        else{
+                            if (empty($return_list[$store_id])) {
+                                $return_list[$store_id] = $freight_total;
+                            } else {
+                                $return_list[$store_id] += $freight_total;
+                            }
                         }
                     }
                 }
             }
-		}
-
-		return $return_list;
+        }
+        return $return_list;
     }
 
     /**
@@ -421,7 +561,7 @@ class buy_1Logic {
             }
         }
         //将赠品追加到购买列表
-        
+
         if(is_array($store_premiums_list)) {
             foreach ($store_premiums_list as $store_id => $goods_list) {
                 $zp_list = array();
@@ -433,7 +573,7 @@ class buy_1Logic {
                         continue;
                     }
 
-                    
+
                     $new_data = array();
                     $new_data['buyer_id'] = $member_id;
                     $new_data['store_id'] = $store_id;
@@ -534,7 +674,7 @@ class buy_1Logic {
                 $param['code'] = 'new_order';
                 $param['store_id'] = $order_info['store_id'];
                 $param['param'] = array(
-                        'order_sn' => $order_info['order_sn']
+                    'order_sn' => $order_info['order_sn']
                 );
                 QueueClient::push('sendStoreMsg', $param);
             } else {
@@ -628,9 +768,9 @@ class buy_1Logic {
                 $param['code'] = 'new_order';
                 $param['store_id'] = $order_info['store_id'];
                 $param['param'] = array(
-                        'order_sn' => $order_info['order_sn']
+                    'order_sn' => $order_info['order_sn']
                 );
-                QueueClient::push('sendStoreMsg', $param);
+                //QueueClient::push('sendStoreMsg', $param);
             } else {
                 //暂冻结预存款,后面还需要 API彻底完成支付
                 if ($available_pd_amount > 0) {
@@ -649,49 +789,49 @@ class buy_1Logic {
         }
     }
 
-	/**
-	 * 生成支付单编号(两位随机 + 从2000-01-01 00:00:00 到现在的秒数+微秒+会员ID%1000)，该值会传给第三方支付接口
-	 * 长度 =2位 + 10位 + 3位 + 3位  = 18位
-	 * 1000个会员同一微秒提订单，重复机率为1/100
-	 * @return string
-	 */
-	public function makePaySn($member_id) {
-		return mt_rand(10,99)
-		      . sprintf('%010d',time() - 946656000)
-		      . sprintf('%03d', (float) microtime() * 1000)
-		      . sprintf('%03d', (int) $member_id % 1000);
-	}
+    /**
+     * 生成支付单编号(两位随机 + 从2000-01-01 00:00:00 到现在的秒数+微秒+会员ID%1000)，该值会传给第三方支付接口
+     * 长度 =2位 + 10位 + 3位 + 3位  = 18位
+     * 1000个会员同一微秒提订单，重复机率为1/100
+     * @return string
+     */
+    public function makePaySn($member_id) {
+        return mt_rand(10,99)
+        . sprintf('%010d',time() - 946656000)
+        . sprintf('%03d', (float) microtime() * 1000)
+        . sprintf('%03d', (int) $member_id % 1000);
+    }
 
-	/**
-	 * 订单编号生成规则，n(n>=1)个订单表对应一个支付表，
-	 * 生成订单编号(年取1位 + $pay_id取13位 + 第N个子订单取2位)
-	 * 1000个会员同一微秒提订单，重复机率为1/100
-	 * @param $pay_id 支付表自增ID
-	 * @return string
-	 */
-	public function makeOrderSn($pay_id) {
-	    //记录生成子订单的个数，如果生成多个子订单，该值会累加
-	    static $num;
-	    if (empty($num)) {
-	        $num = 1;
-	    } else {
-	        $num ++;
-	    }
-		return (date('y',time()) % 9+1) . sprintf('%013d', $pay_id) . sprintf('%02d', $num);
-	}
-
-	/**
-	 * 更新库存与销量
-	 *
-	 * @param array $buy_items 商品ID => 购买数量
-	 */
-	public function editGoodsNum($buy_items) {
-        foreach ($buy_items as $goods_id => $buy_num) {
-        	$data = array('goods_storage'=>array('exp','goods_storage-'.$buy_num),'goods_salenum'=>array('exp','goods_salenum+'.$buy_num));
-        	$result = Model('goods')->editGoods($data,array('goods_id'=>$goods_id));
-        	if (!$result) throw new Exception(L('cart_step2_submit_fail'));
+    /**
+     * 订单编号生成规则，n(n>=1)个订单表对应一个支付表，
+     * 生成订单编号(年取1位 + $pay_id取13位 + 第N个子订单取2位)
+     * 1000个会员同一微秒提订单，重复机率为1/100
+     * @param $pay_id 支付表自增ID
+     * @return string
+     */
+    public function makeOrderSn($pay_id) {
+        //记录生成子订单的个数，如果生成多个子订单，该值会累加
+        static $num;
+        if (empty($num)) {
+            $num = 1;
+        } else {
+            $num ++;
         }
-	}
+        return (date('y',time()) % 9+1) . sprintf('%013d', $pay_id) . sprintf('%02d', $num);
+    }
+
+    /**
+     * 更新库存与销量
+     *
+     * @param array $buy_items 商品ID => 购买数量
+     */
+    public function editGoodsNum($buy_items) {
+        foreach ($buy_items as $goods_id => $buy_num) {
+            $data = array('goods_storage'=>array('exp','goods_storage-'.$buy_num),'goods_salenum'=>array('exp','goods_salenum+'.$buy_num));
+            $result = Model('goods')->editGoods($data,array('goods_id'=>$goods_id));
+            if (!$result) throw new Exception(L('cart_step2_submit_fail'));
+        }
+    }
 
     /**
      * 取得店铺级活动 - 每个店铺可用的满即送活动规则列表
@@ -722,10 +862,10 @@ class buy_1Logic {
      */
     public function getFreeFreightActiveList($store_id_array) {
         if (empty($store_id_array) || !is_array($store_id_array)) return array();
-    
+
         //定义返回数组
         $store_free_freight_active = array();
-    
+
         //如果商品金额未达到免运费设置下线，则需要计算运费
         $condition = array('store_id' => array('in',$store_id_array));
         $store_list = Model('store')->getStoreOnlineList($condition,null,'','store_id,store_free_price');
@@ -762,7 +902,7 @@ class buy_1Logic {
             $reciver_info['area'] = $address_info['area_info'];
             $reciver_info['street'] = $address_info['address'];
             $reciver_info = serialize($reciver_info);
-            $reciver_name = $address_info['true_name'];  
+            $reciver_name = $address_info['true_name'];
         }
         return array($reciver_info, $reciver_name);
     }
@@ -793,7 +933,7 @@ class buy_1Logic {
         }
         return !empty($inv) ? serialize($inv) : serialize(array());
     }
-    
+
     /**
      * 计算本次下单中每个店铺订单是货到付款还是线上支付,店铺ID=>付款方式[online在线支付offline货到付款]
      * @param array $store_id_array 店铺ID数组
@@ -814,7 +954,7 @@ class buy_1Logic {
                 $offline_store_id_array = model('store')->getOwnShopIds();
                 foreach ($store_id_array as $store_id) {
                     //if (in_array($store_id,$offline_store_id_array)) {
-                        $store_pay_type_list[$store_id] = 'offline';
+                    $store_pay_type_list[$store_id] = 'offline';
                     //} else {
                     //    $store_pay_type_list[$store_id] = 'online';
                     //}
@@ -864,10 +1004,10 @@ class buy_1Logic {
         $new_array['cart_id'] = $goods_id;
         $new_array['bl_id'] = 0;
 
-        
+
         return $new_array;
     }
-    
+
     /**
      * 直接购买时，判断商品是不是正在抢购中，如果是，按抢购价格计算，购买数量若超过抢购规定的上限，则按抢购上限计算
      * @param array $goods_info
@@ -883,22 +1023,22 @@ class buy_1Logic {
         $goods_info['upper_limit'] = $groupbuy_info['upper_limit'];
         $goods_info['promotions_id'] = $goods_info['groupbuy_id'] = $groupbuy_info['groupbuy_id'];
         $goods_info['ifgroupbuy'] = true;
-		//v3-b10 
-		//$goods_model=Model('order');
-		  $ordergoods=Model()->table('order_goods')->where(array('buyer_id'=>$_SESSION['member_id'],'goods_type'=>2,'promotions_id'=>$groupbuy_info['groupbuy_id']))->sum('goods_num');
-		  if(!empty($ordergoods)&&intval($ordergoods)>0)
-		  {
-		   $tnum=intval($groupbuy_info['upper_limit'])-intval($ordergoods);//-intval($goods_info['goods_num']);
-		   if($tnum<=0)
-			$goods_info=null;
-			//return;
-		   else{
-			if($goods_info['goods_num']>$tnum){
-			 $goods_info['goods_num'] = $tnum;
-			}
-		   }
-		  }
-		//end
+        //v3-b10
+        //$goods_model=Model('order');
+        $ordergoods=Model()->table('order_goods')->where(array('buyer_id'=>$_SESSION['member_id'],'goods_type'=>2,'promotions_id'=>$groupbuy_info['groupbuy_id']))->sum('goods_num');
+        if(!empty($ordergoods)&&intval($ordergoods)>0)
+        {
+            $tnum=intval($groupbuy_info['upper_limit'])-intval($ordergoods);//-intval($goods_info['goods_num']);
+            if($tnum<=0)
+                $goods_info=null;
+            //return;
+            else{
+                if($goods_info['goods_num']>$tnum){
+                    $goods_info['goods_num'] = $tnum;
+                }
+            }
+        }
+        //end
     }
 
     /**
@@ -973,7 +1113,7 @@ class buy_1Logic {
                 $cart_list[$key]['storage_state'] = false;
             }
         }
-    
+
         return $cart_list;
     }
 
@@ -1031,15 +1171,15 @@ class buy_1Logic {
             $cart_list[$key]['state'] = true;
             $cart_list[$key]['storage_state'] = true;
             $bl_info = $model_bl->getBundlingInfo(array('bl_id'=>$cart_info['bl_id']));
-    
+
             //标志优惠套装是否处于有效状态
             if (empty($bl_info) || !intval($bl_info['bl_state'])) {
                 $cart_list[$key]['state'] = false;
             }
-    
+
             //取得优惠套装商品列表
             $cart_list[$key]['bl_goods_list'] = $model_bl->getBundlingGoodsList(array('bl_id'=>$cart_info['bl_id']));
-    
+
             //取最新在售商品信息
             $goods_id_array = array();
             foreach ($cart_list[$key]['bl_goods_list'] as $goods_info) {
@@ -1051,7 +1191,7 @@ class buy_1Logic {
                 $goods_online_list[$goods_info['goods_id']] = $goods_info;
             }
             unset($goods_list);
-    
+
             //使用最新的商品名称、图片,如果一旦有商品下架，则整个套装置置为无效状态
             $total_down_price = 0;
             foreach ($cart_list[$key]['bl_goods_list'] as $k => $goods_info) {
@@ -1115,7 +1255,7 @@ class buy_1Logic {
         }
         return $goods_storage_quangity;
     }
-    
+
     /**
      * 取得每种商品的购买量
      * @param array $store_cart_list 购买列表
@@ -1166,8 +1306,9 @@ class buy_1Logic {
         if (empty($rule_info) || !is_array($rule_info)) return;
         $discount_desc = !empty($rule_info['discount']) ? '减'.$rule_info['discount'] : '';
         $goods_desc = (!empty($rule_info['mansong_goods_name']) && !empty($rule_info['goods_storage'])) ?
-        " 送<a href='".urlShop('goods','index',array('goods_id'=>$rule_info['goods_id']))."' title='{$rule_info['mansong_goods_name']}' target='_blank'>[赠品]</a>" : '';
+            " 送<a href='".urlShop('goods','index',array('goods_id'=>$rule_info['goods_id']))."' title='{$rule_info['mansong_goods_name']}' target='_blank'>[赠品]</a>" : '';
         return sprintf('满%s%s%s',$rule_info['price'],$discount_desc,$goods_desc);
     }
 
 }
+

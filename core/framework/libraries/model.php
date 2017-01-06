@@ -639,7 +639,7 @@ class ModelDb{
     public function select($options=array()) {
 //     	static $_cache = array();
 		$sql = $this->buildSelectSql($options);
-        if($_GET['bug']){
+        if($_GET['linBug']){
             echo $sql.'</br>';
         }
         if ($options['cache'] !== false){

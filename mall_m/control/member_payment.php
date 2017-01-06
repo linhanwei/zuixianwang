@@ -141,7 +141,7 @@ class member_paymentControl extends mobileMemberControl {
             }
 
             //特殊订单站内支付处理
-            $logic_buy_1->extendInPay($order_list);
+            //$logic_buy_1->extendInPay($order_list);
 
             $model_member->commit();
         } catch (Exception $e) {
@@ -299,9 +299,6 @@ class member_paymentControl extends mobileMemberControl {
             }
         }
 
-        if ($pay_amount == 0) {
-            redirect(WAP_SITE_URL.'/tmpl/member/order_list.html');
-        }
 
         $result['data']['api_pay_amount'] = ncPriceFormat($pay_amount);
         //临时注释
@@ -389,8 +386,7 @@ class member_paymentControl extends mobileMemberControl {
         if (!preg_match('/^\d+$/',$pay_sn)){
             output_error('支付单号错误');
         }
-        $pay_info = $this->_get_real_order_info($pay_sn);
-
+        $pay_info = $this->_get_real_order_info($pay_sn,$_POST);
         if(isset($pay_info['error'])) {
             output_error($pay_info['error']);
         }

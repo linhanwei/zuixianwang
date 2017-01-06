@@ -1,12 +1,10 @@
 var order_id;
 $(function() {
-	var e = getcookie("key");
-	if (!e) {
-		window.location.href = WapSiteUrl + "/tmpl/member/login.html"
-	}
+	var e = getCookie("key");
+	app_check_login(e);
 	$.getJSON(ApiUrl + "/index.php?act=member_refund&op=refund_all_form", {
 		key: e,
-		order_id: GetQueryString("order_id")
+		order_id: getQueryString("order_id")
 	}, function(a) {
 		a.datas.WapSiteUrl = WapSiteUrl;
 		$("#order-info-container").html(template.render("order-info-tmpl", a.datas));
@@ -22,7 +20,7 @@ $(function() {
 				e.parent().siblings(".pic-thumb").remove()
 			},
 			success: function(e, a) {
-				checklogin(a.login);
+				checkLogin(a.login);
 				if (a.datas.error) {
 					e.parent().siblings(".upload-loading").remove();
 					$.sDialog({
@@ -62,7 +60,7 @@ $(function() {
 				dataType: "json",
 				async: false,
 				success: function(e) {
-					checklogin(e.login);
+					checkLogin(e.login);
 					if (e.datas.error) {
 						$.sDialog({
 							skin: "red",

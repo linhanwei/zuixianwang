@@ -48,7 +48,7 @@ class typeModel extends Model {
             $spec_list = $this->typeRelatedJoinList(array('type_id' => $type_id), 'spec', 'spec.sp_id as sp_id, spec.sp_name as sp_name');
             $attr_list = $this->typeRelatedJoinList(array('attribute.type_id' => $type_id), 'attr', 'attribute.attr_id as attr_id, attribute.attr_name as attr_name, attribute_value.attr_value_id as attr_value_id, attribute_value.attr_value_name as attr_value_name');
             $brand_list = $this->typeRelatedJoinList(array('type_id' => $type_id), 'brand', 'brand.brand_id as brand_id,brand.brand_name as brand_name,brand.brand_initial as brand_initial');
-
+            
             // 整理数组
             $spec_json = array();
             if (is_array($spec_list) && !empty($spec_list)) {

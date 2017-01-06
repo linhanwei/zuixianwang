@@ -1238,11 +1238,11 @@ class BaseSellerControl extends Control {
 //                array('name' => '实物佣金结算', 'act'=>'store_bill_commis', 'op'=>'index'),
 //                array('name' => '虚拟佣金结算', 'act'=>'store_vr_bill_commis', 'op'=>'index'),
             )),
-//            'message' => array('name' => '客服消息', 'child' => array(
-//                array('name' => '客服设置', 'act'=>'store_callcenter', 'op'=>'index'),
-//                array('name' => '系统消息', 'act'=>'store_msg', 'op'=>'index'),
-//                array('name' => '聊天记录查询', 'act'=>'store_im', 'op'=>'index'),
-//            )),
+            'message' => array('name' => '客服消息', 'child' => array(
+                //array('name' => '客服设置', 'act'=>'store_callcenter', 'op'=>'index'),
+                //array('name' => '系统消息', 'act'=>'store_msg', 'op'=>'index'),
+                array('name' => '聊天记录查询', 'act'=>'store_im', 'op'=>'index'),
+            )),
             'account' => array('name' => '账号', 'child' => array(
                 array('name' => '账号列表', 'act'=>'store_account', 'op'=>'account_list'),
                 array('name' => '账号组', 'act'=>'store_account_group', 'op'=>'group_list'),

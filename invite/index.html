@@ -197,9 +197,9 @@
         font-size:14px;
     }
     .u-form-group .col-mb-offset-half{
-        width: 80%;
+        width: 100%;
         margin: 0px auto;
-        margin-top: 80px;
+        margin-top:10px;
         text-align: center;
         font-size:20px;
         overflow: hidden;
@@ -243,29 +243,28 @@
         <img src="../wap/images/setup/arrow-left.png">
     </a>
 </header>
-<div id="content_main"></div>
-<script type="text/html" id="invite_html">
+<div id="content_main">
     <div class="" id="show" onclick="hideTip();"></div>
-	<div class="pop_box clearfix" id="clear" style="display:none">
-			<div class="pop_cont clearfix" style="display:none" id="show1">
-			<h1>温馨提示</h1>
-					<ul class="tip_list">
-							<li class="list_one">
-									<em class="one"></em>
-									<span>点击右上角</span>
-							</li>
-							<li  class="list_two">
-									<em class="" id="a"></em>
-									<span>在浏览器中打开</span>
-							</li>
-							<li class="list_three">
-									<em class="four"></em>
-									<span>即可下载</span>
-							</li>
+    <div class="pop_box clearfix" id="clear" style="display:none">
+        <div class="pop_cont clearfix" style="display:none" id="show1">
+            <h1>温馨提示</h1>
+            <ul class="tip_list">
+                <li class="list_one">
+                    <em class="one"></em>
+                    <span>点击右上角</span>
+                </li>
+                <li  class="list_two">
+                    <em class="" id="a"></em>
+                    <span>在浏览器中打开</span>
+                </li>
+                <li class="list_three">
+                    <em class="four"></em>
+                    <span>即可下载</span>
+                </li>
 
-					</ul>
-			</div>
-	</div>
+            </ul>
+        </div>
+    </div>
     <div class="waitLoading" id="loadingId"></div>
     <div class="skip-top"><img src="../wap/images/login/logo.jpg" alt=""></div>
     <section class="skip-section">
@@ -276,7 +275,7 @@
                         <input type="number" class="u-form-control" id="phoneNumId" placeholder="请输入您的手机号">
                     </div>
                 </div>
-				 <div class="u-form-group f-clearfix">
+                <div class="u-form-group f-clearfix">
                     <div class="col-mb-8">
                         <input type="password" class="u-form-control" id="passwordId" placeholder="请输入密码" value="">
                     </div>
@@ -298,9 +297,6 @@
                     <div class="commit col-mb-offset-half">
                         <a href="javascript:void(0);" id="goBtnId" class="u-btn skip-btn unUsed">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</a>
                     </div>
-					<div class="login-btn col-mb-offset-half">
-						 <a href="<%=login_url%>" class="u-btn skip-btn login">登录</a>
-					</div>
                 </div>
             </div>
             <div id="form2Id" class="disnone">
@@ -332,7 +328,8 @@
             </div>-->
         </form>
     </section>
-    </script>
+</div>
+
     <script type="text/javascript" src="js/slot_zepto.min.js"></script>
     <script type="text/javascript" src="../wap/js/config.js"></script>
     <script type="text/javascript" src="../wap/js/template.js"></script>
@@ -342,11 +339,7 @@
     <script type="text/javascript" src="js/insurevalidate.js"></script>
     <script type="text/javascript" src="js/address.js"></script>
     <script type="text/javascript">
-        var data = {
-            login_url:WapSiteUrl+'/tmpl/member/login.html'
-        };
-        var invite_html = template.render('invite_html', data);
-        $('#content_main').html(invite_html);
+
     var pubEndflag = false; //倒计时结束
     var countTokenNum = 0; //记录验证码错误次数
     var bindFlag = true; //记录绑定
@@ -520,13 +513,15 @@
 					var tResult = dResult;
                     if (tResult.datas.error) {
 						haoJs.Toast.show(tResult.datas.error);
-						$('#formId').removeClass('disnone');
+						$('#formId').removeapp_interfaceClass('disnone');
                       }else{
 					    if(typeof(tResult.datas.username) != 'undefine'){
 							haoJs.Toast.show('注册成功');
-
-							$('#form3Id').removeClass('disnone');
-							$('#form2Id').removeClass('disnone');
+                            if(typeof(app_interface) == 'object'){
+                                app_interface.closeWebView(2);
+                            }else{
+                                document.location.href='../wap';
+                            }
 						}else{
 							haoJs.Toast.show('注册失败');
 							$('#formId').removeClass('disnone');
@@ -625,7 +620,7 @@
             });
     })
     </script>
-    <script type="text/javascript" src="../wap/js/app.js"></script>
 </body>
 
+<script type="text/javascript" src="../wap/js/app.js"></script>
 </html>
