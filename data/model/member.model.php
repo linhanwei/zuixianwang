@@ -440,7 +440,7 @@ class memberModel extends Model {
                 $member_info['member_areainfo'] = $province_info['area_name'] . '-' . $city_info['area_name'] .'-'. $area_info['area_name'];
             }
 
-            $member_info['member_nickname'] = $param['member_nickname'] ? $param['member_nickname'] : '车族宝会员';
+            $member_info['member_nickname'] = $param['member_nickname'] ? $param['member_nickname'] : '醉仙网会员';
 
             $member_info['is_store'] = $member_info['grade_id'] = $member_info['is_agent'] = 0;
 

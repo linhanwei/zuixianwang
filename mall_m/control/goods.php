@@ -378,6 +378,7 @@ class goodsControl extends mobileHomeControl{
         //商品规格值处理
         $goods_detail['spec_val_list'] = $goods_detail['goods_info']['goods_spec'] ? array_values($goods_detail['goods_info']['goods_spec']) : array();
         $goods_detail["goods_info"]["spec_value"] = $goods_detail["goods_info"]["spec_value"] ? $goods_detail["goods_info"]["spec_value"] :array();
+        $goods_detail['goods_info']['goods_spec'] = $goods_detail['goods_info']['goods_spec'] ? $goods_detail['goods_info']['goods_spec'] : array();
 
         // 评价列表
         $evaluate_con['geval_goodsid'] = $goods_id;

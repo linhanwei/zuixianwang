@@ -96,7 +96,7 @@ $(function () {
                 } else {
                     data.goods_map_spec = [];
                 }
-
+               // console.log('goods_map_spec',goods_map_spec);
                 // 虚拟商品限购时间和数量
                 if (data.goods_info.is_virtual == '1') {
                     data.goods_info.virtual_indate_str = unixTimeToDateString(data.goods_info.virtual_indate, true);
