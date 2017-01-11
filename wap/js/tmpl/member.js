@@ -25,6 +25,7 @@ function load_member_info(){
                  //$('#available_rc_balance').html(result.datas.member_info.available_rc_balance);
                  //$('#avatar').attr("src",result.datas.member_info.avator);
                  //$('#member_server').attr("href",'tel:'+result.datas.web_config.site_tel400);
+                 $('#member_server').attr("phone",result.datas.web_config.site_tel400);
                  return false;
              }
          });
@@ -41,6 +42,14 @@ function load_member_info(){
     //$('body').on('click','#member_integrate',function(){
     //    app_toast('敬请期待');
     //});
+
+    //拨打本地号码
+    $('body').on('click','#member_server',function(){
+        if(is_app()){
+            app_interface.phoneCall($('#member_server').attr("phone"));
+            ; return false;
+        }
+    });
 
     //优惠卷
     $('body').on('click','#member_coupons',function(){
